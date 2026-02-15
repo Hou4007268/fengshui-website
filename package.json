@@ -1,9 +1,12 @@
 {
   "name": "fengshui-website",
   "version": "1.0.0",
-  "scripts": {
-    "build": "echo 'Static site'",
-    "dev": "vercel dev",
-    "start": "vercel dev"
-  }
+  "files": [
+    "index.html",
+    "admin.html",
+    "login.html",
+    "api",
+    "images",
+    "videos"
+  ]
 }
