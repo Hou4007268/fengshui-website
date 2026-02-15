@@ -1,9 +1,10 @@
 {
-  "buildCommand": null,
-  "devCommand": null,
   "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
+    "api/chat.js": {
+      "runtime": "nodejs@18"
+    },
+    "api/stats.js": {
+      "runtime": "nodejs@18"
     }
   }
 }
