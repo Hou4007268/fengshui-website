@@ -1,8 +1,4 @@
 {
-  "name": "fengshui-website",
-  "version": "1.0.0",
-  "build": "npm run build",
-  "install": "npm install",
   "buildCommand": null,
   "devCommand": null,
   "functions": {
