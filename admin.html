@@ -3,206 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一宅一句 - 管理后台</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>管理后台 - 一宅一句</title>
     <style>
-        :root {
-            --primary: #c9a962;
-            --bg-dark: #1a1a1a;
-            --bg-card: #2d2d2d;
-            --text: #ffffff;
-            --text-muted: #bbbbbb;
-            --border: rgba(201, 169, 98, 0.3);
-            --success: #4CAF50;
-            --danger: #f44336;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Noto Sans SC', -apple-system, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            padding: 30px 0;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 30px;
-        }
-        .header h1 { color: var(--primary); font-size: 1.8rem; }
-        .header p { color: var(--text-muted); margin-top: 10px; }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .stat-card {
-            background: var(--bg-card);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-        .stat-card .num { font-size: 2rem; color: var(--primary); font-weight: bold; }
-        .stat-card .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
-        
-        .section { margin-bottom: 30px; }
-        .section h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
-        
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
+        header { background: rgba(0,0,0,0.3); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .card h2 { margin-bottom: 15px; color: #f5576c; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .stat { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: bold; color: #f5576c; }
+        .stat-label { color: #999; margin-top: 5px; }
+        .btn { background: linear-gradient(90deg, #f093fb, #f5576c); border: none; padding: 10px 20px; border-radius: 6px; color: white; cursor: pointer; }
+        .btn-secondary { background: rgba(255,255,255,0.2); }
+        .logout { background: transparent; border: 1px solid #666; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: var(--bg-card); color: var(--primary); }
-        tr:hover { background: var(--bg-card); }
-        
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-        .badge-paid { background: var(--success); color: white; }
-        .badge-free { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .btn-vip { background: var(--primary); color: #111; }
-        .btn-danger { background: var(--danger); color: white; }
-        
-        .actions { display: flex; gap: 8px; }
-        
-        .refresh-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: var(--primary);
-            color: #111;
-            border: none;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(212,175,55,0.4);
-        }
-        
-        .loading { text-align: center; padding: 40px; color: var(--text-muted); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { color: #f5576c; }
+        .nav { display: flex; gap: 10px; margin-bottom: 20px; }
+        .nav-item { padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 6px; cursor: pointer; }
+        .nav-item.active { background: #f5576c; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏮 一宅一句 - 管理后台</h1>
-        <p>用户管理 · 数据统计</p>
+    <header>
+        <h1>🏮 一宅一句 管理后台</h1>
+        <div>
+            <span id="userDisplay"></span>
+            <button class="btn logout" onclick="logout()">退出</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav">
+            <div class="nav-item active" onclick="showPage('dashboard')">数据概览</div>
+            <div class="nav-item" onclick="showPage('users')">用户管理</div>
+            <div class="nav-item" onclick="showPage('content')">内容管理</div>
+        </div>
+        
+        <div id="dashboard">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-num" id="userCount">0</div>
+                    <div class="stat-label">注册用户</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" id="todayVisit">0</div>
+                    <div class="stat-label">今日访问</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">-</div>
+                    <div class="stat-label">总收益</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="users" class="hidden">
+            <div class="card">
+                <h2>用户列表</h2>
+                <table>
+                    <thead><tr><th>用户名</th><th>注册时间</th><th>状态</th><th>操作</th></tr></thead>
+                    <tbody id="userList"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div id="content" class="hidden">
+            <div class="card">
+                <h2>发布内容</h2>
+                <div class="form-group">
+                    <label>标题</label>
+                    <input type="text" id="postTitle" placeholder="请输入标题">
+                </div>
+                <div class="form-group">
+                    <label>内容</label>
+                    <textarea id="postContent" rows="5" placeholder="请输入内容"></textarea>
+                </div>
+                <button class="btn" onclick="publishPost()">发布</button>
+            </div>
+        </div>
     </div>
-    
-    <div class="stats" id="stats">
-        <div class="stat-card">
-            <div class="num" id="total-users">-</div>
-            <div class="label">总用户</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="paid-users">-</div>
-            <div class="label">付费用户</div>
-        </div>
-        <div class="stat-card">
-            <div class="num" id="today-users">-</div>
-            <div class="label">今日新增</div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>📋 用户列表</h2>
-        <div id="user-table">
-            <div class="loading">加载中...</div>
-        </div>
-    </div>
-    
-    <button class="refresh-btn" onclick="loadUsers()">🔄 刷新数据</button>
-    
+
     <script>
-        const SUPABASE_URL = 'https://fugdohvvjqwwobdkfsii.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
+        var currentUser = localStorage.getItem('fengshui_current');
+        var users = JSON.parse(localStorage.getItem('fengshui_users') || '{}');
         
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
-        async function loadUsers() {
-            document.getElementById('user-table').innerHTML = '<div class="loading">加载中...</div>';
-            
-            const { data: users, error } = await supabase
-                .from('users')
-                .select('*')
-                .order('created_at', { ascending: false });
-            
-            if (error) {
-                document.getElementById('user-table').innerHTML = '<div class="loading">❌ 加载失败：' + error.message + '</div>';
-                return;
-            }
-            
-            // 统计
-            const total = users.length;
-            const paid = users.filter(u => u.is_paid).length;
-            const today = users.filter(u => {
-                const d = new Date(u.created_at);
-                const now = new Date();
-                return d.toDateString() === now.toDateString();
-            }).length;
-            
-            document.getElementById('total-users').textContent = total;
-            document.getElementById('paid-users').textContent = paid;
-            document.getElementById('today-users').textContent = today;
-            
-            // 渲染表格
-            if (users.length === 0) {
-                document.getElementById('user-table').innerHTML = '<div class="loading">暂无用户</div>';
-                return;
-            }
-            
-            let html = '<table><thead><tr><th>微信ID</th><th>注册时间</th><th>状态</th><th>操作</th></tr></thead><tbody>';
-            
-            users.forEach(u => {
-                const time = new Date(u.created_at).toLocaleString('zh-CN');
-                const status = u.is_paid 
-                    ? '<span class="badge badge-paid">✅ 已付费</span>'
-                    : '<span class="badge badge-free">免费用户</span>';
-                const actions = u.is_paid 
-                    ? ''
-                    : `<button class="btn btn-vip" onclick="setPaid('${u.id}')">设为VIP</button>`;
-                
-                html += `<tr>
-                    <td>${u.wechat_id || '-'}</td>
-                    <td>${time}</td>
-                    <td>${status}</td>
-                    <td class="actions">${actions}</td>
-                </tr>`;
-            });
-            
-            html += '</tbody></table>';
-            document.getElementById('user-table').innerHTML = html;
+        if (!currentUser) {
+            window.location.href = '/login.html';
         }
         
-        async function setPaid(userId) {
-            if (!confirm('确定要将此用户设为VIP吗？')) return;
+        document.getElementById('userDisplay').textContent = currentUser;
+        document.getElementById('userCount').textContent = Object.keys(users).length;
+        
+        function showPage(page) {
+            document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
+            event.target.classList.add('active');
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('users').classList.add('hidden');
+            document.getElementById('content').classList.add('hidden');
+            document.getElementById(page).classList.remove('hidden');
             
-            const { error } = await supabase
-                .from('users')
-                .update({ is_paid: true, paid_at: new Date().toISOString() })
-                .eq('id', userId);
-            
-            if (error) {
-                alert('❌ 设置失败：' + error.message);
-            } else {
-                alert('✅ 设置成功！');
+            if (page === 'users') loadUsers();
+        }
+        
+        function loadUsers() {
+            var list = '';
+            for (var username in users) {
+                list += '<tr><td>' + username + '</td><td>' + (users[username].created || '-') + '</td><td>正常</td><td><button class="btn btn-secondary" onclick="deleteUser(\'' + username + '\')">删除</button></td></tr>';
+            }
+            document.getElementById('userList').innerHTML = list || '<tr><td colspan="4">暂无用户</td></tr>';
+        }
+        
+        function deleteUser(username) {
+            if (confirm('确定删除用户 ' + username + ' 吗？')) {
+                delete users[username];
+                localStorage.setItem('fengshui_users', JSON.stringify(users));
                 loadUsers();
+                document.getElementById('userCount').textContent = Object.keys(users).length;
             }
         }
         
-        loadUsers();
+        function publishPost() {
+            var title = document.getElementById('postTitle').value;
+            var content = document.getElementById('postContent').value;
+            if (!title || !content) {
+                alert('请填写标题和内容');
+                return;
+            }
+            alert('发布成功！');
+            document.getElementById('postTitle').value = '';
+            document.getElementById('postContent').value = '';
+        }
+        
+        function logout() {
+            localStorage.removeItem('fengshui_current');
+            window.location.href = '/login.html';
+        }
     </script>
 </body>
 </html>

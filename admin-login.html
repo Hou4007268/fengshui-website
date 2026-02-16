@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员登录 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+        .login-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: #999; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #ccc; }
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .btn {
+            width: 100%;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .tips { text-align: center; margin-top: 20px; color: #666; font-size: 0.8rem; }
+        .back { text-align: center; margin-top: 15px; }
+        .back a { color: #f5576c; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>👑 管理后台</h1>
+        <p class="subtitle">仅限管理员访问</p>
+        
+        <div class="form-group">
+            <label>管理员账号</label>
+            <input type="text" id="username" placeholder="请输入管理员账号">
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" id="password" placeholder="请输入密码">
+        </div>
+        <button class="btn" onclick="doLogin()">登录</button>
+        
+        <p class="tips">管理员账号：admin<br>密码：admin123</p>
+        
+        <p class="back">
+            <a href="/">返回首页</a> | <a href="/login.html">用户登录</a>
+        </p>
+    </div>
+
+    <script>
+        function doLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'admin123') {
+                localStorage.setItem('fengshui_admin', 'true');
+                localStorage.setItem('fengshui_admin_time', new Date().toISOString());
+                window.location.href = '/admin.html';
+            } else {
+                alert('账号或密码错误');
+            }
+        }
+    </script>
+</body>
+</html>

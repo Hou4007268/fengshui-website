@@ -4,633 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 - 一宅一句</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root {
-            --primary: #c9a962;
-            --primary-dark: #a8863d;
-            --bg-dark: #1a1a1a;
-            --bg-card: #2d2d2d;
-            --bg-card-hover: #3a3a3a;
-            --text: #ffffff;
-            --text-muted: #bbbbbb;
-            --accent-red: #d4380d;
-            --border: rgba(201, 169, 98, 0.3);
-            --success: #52c41a;
-            --error: #ff4d4f;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #1a1a1a;
-            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            color: #fff;
         }
         .login-container {
-            background: var(--bg-card);
+            background: rgba(255,255,255,0.1);
             border-radius: 16px;
             padding: 40px;
             width: 100%;
-            max-width: 420px;
-            border: 1px solid var(--border);
+            max-width: 400px;
+            backdrop-filter: blur(10px);
         }
-        .logo {
+        h1 {
             text-align: center;
-            margin-bottom: 30px;
-        }
-        .logo h1 {
-            font-family: 'Noto Serif SC', serif;
+            margin-bottom: 10px;
             font-size: 1.8rem;
-            color: var(--primary);
-            letter-spacing: 0.1em;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .logo p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
-        .tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border);
-        }
-        .tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            color: var(--text-muted);
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+        .subtitle { text-align: center; color: #999; margin-bottom: 25px; font-size: 0.9rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #ccc; font-size: 0.9rem; }
         .form-group input {
             width: 100%;
             padding: 14px 16px;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 8px;
-            background: var(--bg-dark);
-            color: var(--text);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
             font-size: 1rem;
-            transition: border-color 0.3s;
         }
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        .form-group input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.6;
-        }
+        .form-group input:focus { outline: none; border-color: #f5576c; }
         .btn {
             width: 100%;
-            padding: 14px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #1a1a1a;
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-        .btn-primary:disabled {
-            background: var(--text-muted);
-            cursor: not-allowed;
-        }
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 25px 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        .divider span {
-            padding: 0 15px;
-        }
-        .wechat-login {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-        .wechat-qr {
-            width: 180px;
-            height: 180px;
-            background: #fff;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-        .wechat-qr img {
-            width: 100%;
-            height: 100%;
-        }
-        .wechat-tip {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-align: center;
-        }
-        .message {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            display: none;
-        }
-        .message.success {
-            background: rgba(82, 196, 26, 0.15);
-            color: var(--success);
-            border: 1px solid var(--success);
-            display: block;
-        }
-        .message.error {
-            background: rgba(255, 77, 79, 0.15);
-            color: var(--error);
-            border: 1px solid var(--error);
-            display: block;
-        }
-        .user-info {
-            text-align: center;
-        }
-        .user-info .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--primary);
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: #1a1a1a;
-        }
-        .user-info h2 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        .user-info .status {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-        }
-        .user-info .status.free {
-            background: rgba(187, 187, 187, 0.2);
-            color: var(--text-muted);
-        }
-        .user-info .status.paid {
-            background: rgba(201, 169, 98, 0.2);
-            color: var(--primary);
-        }
-        .user-info .details {
-            text-align: left;
-            background: var(--bg-dark);
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
         }
-        .user-info .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-        }
-        .user-info .detail-item:last-child {
-            border-bottom: none;
-        }
-        .user-info .detail-item .label {
-            color: var(--text-muted);
-        }
-        .btn-logout {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-        }
-        .btn-logout:hover {
-            border-color: var(--error);
-            color: var(--error);
-        }
+        .btn:hover { opacity: 0.9; }
+        .tips { text-align: center; margin-top: 20px; color: #666; font-size: 0.8rem; }
         .hidden { display: none; }
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        .welcome { text-align: center; padding: 20px; }
+        .welcome-icon { font-size: 4rem; }
+        .welcome h2 { margin: 15px 0; }
+        .welcome p { color: #ccc; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-    <div class="login-container" id="app">
-        <!-- 未登录状态 -->
-        <div id="loginView">
-            <div class="logo">
-                <h1>一宅一句</h1>
-                <p>AI风水助手</p>
-            </div>
-            
-            <div class="tabs">
-                <div class="tab active" data-tab="wechat-id">微信ID登录</div>
-                <div class="tab" data-tab="wechat-qr">微信扫码</div>
-            </div>
-            
-            <div id="message" class="message"></div>
-            
-            <!-- 微信ID登录表单 -->
-            <div id="wechatIdForm">
-                <div class="form-group">
-                    <label>请输入微信ID</label>
-                    <input type="text" id="wechatIdInput" placeholder="请输入您的微信ID" maxlength="50">
-                </div>
-                <button class="btn btn-primary" id="loginBtn" onclick="handleLogin()">
-                    登录 / 注册
-                </button>
-            </div>
-            
-            <!-- 微信扫码登录 -->
-            <div id="wechatQrForm" class="hidden">
-                <div class="wechat-login">
-                    <div class="wechat-qr">
-                        <!-- 这里放置二维码图片 -->
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Crect fill='%23fff' width='160' height='160'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23000' font-size='14'%3E微信扫码%3C/text%3E%3C/svg%3E" alt="微信二维码">
-                    </div>
-                    <p class="wechat-tip">请使用微信扫描二维码登录</p>
-                    <p class="wechat-tip" style="margin-top: 10px; color: var(--primary);">
-                        扫码后自动绑定微信ID
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="login-container">
+        <h1>🏮 一宅一句</h1>
+        <p class="subtitle">AI风水助手</p>
         
-        <!-- 已登录状态 -->
-        <div id="userView" class="hidden">
-            <div class="user-info">
-                <div class="avatar" id="userAvatar">👤</div>
-                <h2 id="userNickname">用户</h2>
-                <span class="status free" id="userStatus">免费用户</span>
-                
-                <div class="details">
-                    <div class="detail-item">
-                        <span class="label">微信ID</span>
-                        <span id="displayWechatId">-</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label">注册时间</span>
-                        <span id="displayCreatedAt">-</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label">最后登录</span>
-                        <span id="displayLastLogin">-</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="label">登录次数</span>
-                        <span id="displayLoginCount">0</span>
-                    </div>
+        <!-- 用户登录/注册 -->
+        <div id="userPanel">
+            <div id="userLogin">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" id="loginUsername" placeholder="请输入用户名">
                 </div>
-                
-                <button class="btn btn-logout" onclick="handleLogout()">
-                    退出登录
-                </button>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" id="loginPassword" placeholder="请输入密码">
+                </div>
+                <button class="btn" onclick="doLogin()">登录</button>
+                <p style="text-align:center;margin-top:15px;color:#999;font-size:0.85rem;">
+                    还没有账号？<a href="#" onclick="showUserRegister()" style="color:#f5576c;">立即注册</a>
+                </p>
+            </div>
+            
+            <div id="userRegister" class="hidden">
+                <div class="form-group">
+                    <label>设置用户名</label>
+                    <input type="text" id="regUsername" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label>设置密码</label>
+                    <input type="password" id="regPassword" placeholder="请设置密码（至少4位）">
+                </div>
+                <button class="btn" onclick="doRegister()">注册</button>
+                <p style="text-align:center;margin-top:15px;color:#999;font-size:0.85rem;">
+                    已有账号？<a href="#" onclick="showUserLogin()" style="color:#f5576c;">立即登录</a>
+                </p>
+            </div>
+            
+            <div id="userWelcome" class="hidden">
+                <div class="welcome">
+                    <div class="welcome-icon">👤</div>
+                    <h2>欢迎回来！</h2>
+                    <p id="userWelcomeText"></p>
+                    <button class="btn" onclick="goToHome()">进入首页</button>
+                    <button class="btn" onclick="logout()" style="background:rgba(255,255,255,0.2);margin-top:10px;">退出登录</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== 配置区域 ====================
-        // 替换为你的Supabase配置
-        const SUPABASE_URL = 'https://fugdohvvjqwwobdkfsii.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
+        var users = JSON.parse(localStorage.getItem('fengshui_users') || '{}');
+        var currentUser = localStorage.getItem('fengshui_current');
         
-        // ==================== Supabase客户端 ====================
-        let supabase = null;
-        
-        function initSupabase() {
-            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
-                console.warn('请配置Supabase URL和ANON_KEY');
-                return null;
-            }
-            return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // 用户登录
+        function showUserLogin() {
+            document.getElementById('userLogin').classList.remove('hidden');
+            document.getElementById('userRegister').classList.add('hidden');
+            document.getElementById('userWelcome').classList.add('hidden');
         }
         
-        // ==================== 状态管理 ====================
-        const STORAGE_KEY = 'fengshui_user';
-        
-        function getStoredUser() {
-            const data = localStorage.getItem(STORAGE_KEY);
-            return data ? JSON.parse(data) : null;
+        function showUserRegister() {
+            document.getElementById('userLogin').classList.add('hidden');
+            document.getElementById('userRegister').classList.remove('hidden');
+            document.getElementById('userWelcome').classList.add('hidden');
         }
         
-        function setStoredUser(user) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-        }
-        
-        function clearStoredUser() {
-            localStorage.removeItem(STORAGE_KEY);
-        }
-        
-        // ==================== UI函数 ====================
-        function showMessage(text, type = 'error') {
-            const msgEl = document.getElementById('message');
-            msgEl.textContent = text;
-            msgEl.className = `message ${type}`;
-            setTimeout(() => {
-                msgEl.className = 'message';
-            }, 5000);
-        }
-        
-        function showLoginView() {
-            document.getElementById('loginView').classList.remove('hidden');
-            document.getElementById('userView').classList.add('hidden');
-        }
-        
-        function showUserView() {
-            document.getElementById('loginView').classList.add('hidden');
-            document.getElementById('userView').classList.remove('hidden');
-        }
-        
-        // Tab切换
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                const tabName = tab.dataset.tab;
-                if (tabName === 'wechat-id') {
-                    document.getElementById('wechatIdForm').classList.remove('hidden');
-                    document.getElementById('wechatQrForm').classList.add('hidden');
-                } else {
-                    document.getElementById('wechatIdForm').classList.add('hidden');
-                    document.getElementById('wechatQrForm').classList.remove('hidden');
-                }
-            });
-        });
-        
-        // ==================== 核心功能 ====================
-        
-        // 登录/注册
-        async function handleLogin() {
-            const wechatId = document.getElementById('wechatIdInput').value.trim();
+        function doLogin() {
+            var username = document.getElementById('loginUsername').value.trim();
+            var password = document.getElementById('loginPassword').value;
             
-            if (!wechatId) {
-                showMessage('请输入微信ID');
-                return;
-            }
+            if (!username || !password) { alert('请填写用户名和密码'); return; }
             
-            if (wechatId.length < 3) {
-                showMessage('微信ID至少3个字符');
-                return;
-            }
-            
-            const btn = document.getElementById('loginBtn');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span>登录中...';
-            
-            try {
-                supabase = initSupabase();
-                
-                if (!supabase) {
-                    // 模拟模式（未配置Supabase时）
-                    console.log('使用模拟模式登录，微信ID:', wechatId);
-                    const mockUser = {
-                        id: 'mock-' + Date.now(),
-                        wechat_id: wechatId,
-                        nickname: wechatId,
-                        is_paid: false,
-                        created_at: new Date().toISOString(),
-                        last_login_at: new Date().toISOString(),
-                        login_count: 1
-                    };
-                    setStoredUser(mockUser);
-                    updateUserDisplay(mockUser);
-                    showUserView();
-                    showMessage('登录成功（模拟模式）', 'success');
-                    return;
-                }
-                
-                // 调用Supabase函数获取或创建用户
-                const { data, error } = await supabase.rpc('get_or_create_user', {
-                    p_wechat_id: wechatId
-                });
-                
-                if (error) throw error;
-                
-                if (data && data.length > 0) {
-                    const user = data[0];
-                    
-                    // 更新最后登录时间
-                    await supabase.rpc('update_login', { p_wechat_id: wechatId });
-                    
-                    // 补充用户信息
-                    user.last_login_at = new Date().toISOString();
-                    user.login_count = (user.login_count || 0) + 1;
-                    
-                    setStoredUser(user);
-                    updateUserDisplay(user);
-                    showUserView();
-                    showMessage('登录成功！', 'success');
-                }
-                
-            } catch (error) {
-                console.error('登录错误:', error);
-                showMessage(error.message || '登录失败，请重试');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '登录 / 注册';
+            if (users[username] && users[username].password === password) {
+                localStorage.setItem('fengshui_current', username);
+                document.getElementById('userLogin').classList.add('hidden');
+                document.getElementById('userWelcome').classList.remove('hidden');
+                document.getElementById('userWelcomeText').textContent = '登录时间：' + new Date().toLocaleString('zh-CN');
+            } else {
+                alert('用户名或密码错误');
             }
         }
         
-        // 退出登录
-        function handleLogout() {
-            clearStoredUser();
-            document.getElementById('wechatIdInput').value = '';
-            showLoginView();
-            showMessage('已退出登录', 'success');
+        function doRegister() {
+            var username = document.getElementById('regUsername').value.trim();
+            var password = document.getElementById('regPassword').value;
+            
+            if (!username || !password) { alert('请填写用户名和密码'); return; }
+            if (password.length < 4) { alert('密码至少4位'); return; }
+            if (users[username]) { alert('用户名已存在'); return; }
+            
+            users[username] = { password: password, created: new Date().toLocaleString() };
+            localStorage.setItem('fengshui_users', JSON.stringify(users));
+            alert('注册成功！请登录');
+            showUserLogin();
+        }
+        
+        function goToHome() {
+            window.location.href = '/';
+        }
+        
+        function logout() {
+            localStorage.removeItem('fengshui_current');
+            location.reload();
         }
         
         // 检查登录状态
-        async function checkAuth() {
-            const storedUser = getStoredUser();
-            
-            if (storedUser) {
-                supabase = initSupabase();
-                
-                if (supabase) {
-                    try {
-                        // 从服务器获取最新用户信息
-                        const { data, error } = await supabase
-                            .from('users')
-                            .select('*')
-                            .eq('wechat_id', storedUser.wechat_id)
-                            .single();
-                        
-                        if (data) {
-                            setStoredUser(data);
-                            updateUserDisplay(data);
-                            showUserView();
-                            return;
-                        }
-                    } catch (error) {
-                        console.error('获取用户信息失败:', error);
-                    }
-                }
-                
-                // 使用本地存储的用户信息
-                updateUserDisplay(storedUser);
-                showUserView();
-            } else {
-                showLoginView();
-            }
+        if (currentUser && users[currentUser]) {
+            document.getElementById('userLogin').classList.add('hidden');
+            document.getElementById('userWelcome').classList.remove('hidden');
+            document.getElementById('userWelcomeText').textContent = '登录时间：' + (users[currentUser].lastLogin || new Date().toLocaleString());
+            users[currentUser].lastLogin = new Date().toLocaleString();
+            localStorage.setItem('fengshui_users', JSON.stringify(users));
         }
-        
-        // 更新用户信息显示
-        function updateUserDisplay(user) {
-            document.getElementById('userAvatar').textContent = user.nickname ? user.nickname.charAt(0).toUpperCase() : '👤';
-            document.getElementById('userNickname').textContent = user.nickname || user.wechat_id || '用户';
-            
-            const statusEl = document.getElementById('userStatus');
-            if (user.is_paid) {
-                statusEl.textContent = '付费用户';
-                statusEl.className = 'status paid';
-            } else {
-                statusEl.textContent = '免费用户';
-                statusEl.className = 'status free';
-            }
-            
-            document.getElementById('displayWechatId').textContent = user.wechat_id || '-';
-            document.getElementById('displayCreatedAt').textContent = formatDate(user.created_at);
-            document.getElementById('displayLastLogin').textContent = formatDate(user.last_login_at);
-            document.getElementById('displayLoginCount').textContent = user.login_count || 0;
-        }
-        
-        // 格式化日期
-        function formatDate(dateStr) {
-            if (!dateStr) return '-';
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('zh-CN', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        }
-        
-        // ==================== 付费状态检测 ====================
-        
-        /**
-         * 检查用户是否为付费用户
-         * @returns {Promise<boolean>}
-         */
-        async function checkPaidStatus() {
-            const user = getStoredUser();
-            if (!user) return false;
-            
-            if (!supabase) {
-                return user.is_paid || false;
-            }
-            
-            try {
-                const { data, error } = await supabase
-                    .from('users')
-                    .select('is_paid')
-                    .eq('wechat_id', user.wechat_id)
-                    .single();
-                
-                if (data) {
-                    return data.is_paid || false;
-                }
-            } catch (error) {
-                console.error('检查付费状态失败:', error);
-            }
-            
-            return user.is_paid || false;
-        }
-        
-        /**
-         * 获取完整用户信息
-         * @returns {Promise<object|null>}
-         */
-        async function getUserInfo() {
-            const user = getStoredUser();
-            if (!user) return null;
-            
-            if (!supabase) {
-                return user;
-            }
-            
-            try {
-                const { data, error } = await supabase
-                    .from('users')
-                    .select('*')
-                    .eq('wechat_id', user.wechat_id)
-                    .single();
-                
-                if (data) {
-                    setStoredUser(data);
-                    return data;
-                }
-            } catch (error) {
-                console.error('获取用户信息失败:', error);
-            }
-            
-            return user;
-        }
-        
-        // ==================== 初始化 ====================
-        document.addEventListener('DOMContentLoaded', () => {
-            checkAuth();
-        });
-        
-        // 监听存储变化（多标签页同步）
-        window.addEventListener('storage', (e) => {
-            if (e.key === STORAGE_KEY) {
-                if (e.newValue) {
-                    const user = JSON.parse(e.newValue);
-                    updateUserDisplay(user);
-                    showUserView();
-                } else {
-                    showLoginView();
-                }
-            }
-        });
     </script>
 </body>
 </html>

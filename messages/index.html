@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 一宅一句</title>
+    <meta name="description" content="用户留言交流">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .form-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .form-card h2 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f5576c;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .btn {
+            width: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { opacity: 0.9; }
+        
+        .message-list h2 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .message-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f5576c;
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .message-name {
+            color: #f093fb;
+            font-weight: 500;
+        }
+        .message-time {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .message-content {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .message-contact {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .reply {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(240,147,251,0.1);
+            border-radius: 8px;
+            border-left: 3px solid #f093fb;
+        }
+        .reply-label {
+            color: #f093fb;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .reply-text {
+            color: #ccc;
+            line-height: 1.5;
+        }
+        
+        .empty {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 12px;
+            display: none;
+            z-index: 1000;
+        }
+        
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+        }
+        nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        nav a.active { color: #f5576c; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏮 留言板</h1>
+    </header>
+    
+    <div class="container">
+        <div class="form-card">
+            <h2>💬 我要留言</h2>
+            <div class="form-group">
+                <label>昵称</label>
+                <input type="text" id="name" placeholder="请输入昵称">
+            </div>
+            <div class="form-group">
+                <label>留言内容</label>
+                <textarea id="content" placeholder="请输入您的留言..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>联系方式（选填）</label>
+                <input type="text" id="contact" placeholder="微信或电话">
+            </div>
+            <button class="btn" onclick="submitMessage()">提交留言</button>
+        </div>
+        
+        <div class="message-list">
+            <h2>📋 全部留言 <span id="count">(0)</span></h2>
+            <div id="messages">
+                <div class="empty">暂无留言，快来抢沙发~</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">提交成功！</div>
+    
+    <nav>
+        <a href="/">🏠 首页</a>
+        <a href="/fortune/">🔮 运势</a>
+        <a href="/messages/" class="active">💬 留言</a>
+        <a href="/login.html">👤 我的</a>
+    </nav>
+
+    <script>
+        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
+        
+        // Demo messages if empty
+        if (messages.length === 0) {
+            messages = [
+                {name: "风水小白", content: "老师说的财位布局真的管用！我家客厅东南角放了植物，这周工作顺利多了！", time: "2026-02-15 14:30", contact: "", reply: "👍 恭喜！财位旺运，继续保持"},
+                {name: "小明", content: "请问大门正对阳台怎么化解？", time: "2026-02-14 09:20", contact: "wx: xm123", reply: "建议放玄关柜或屏风阻隔"},
+                {name: "紫微星", content: "关注很久了，确实是真实案例，不是网上那些骗人的。", time: "2026-02-13 18:45", contact: "", reply: "谢谢支持！只讲见过的事"},
+                {name: "财源滚滚", content: "去年找老师看的店铺，今年生意明显好转，谢谢老师！", time: "2026-02-12 10:15", contact: "", reply: "恭喜发财！继续保持"},
+                {name: "迷茫的打工人", content: "工作一直不顺，想问一下事业方向，老师能帮忙看看吗？", time: "2026-02-11 16:40", contact: "wx: ml123", reply: "可以预约详细分析"},
+                {name: "新房主", content: "刚买了新房，想请老师帮忙看看风水布局，收费怎么算？", time: "2026-02-10 11:20", contact: "wx: newhouse", reply: "详情可加微信了解"},
+                {name: "传统文化爱好者", content: "文章写得真好，风水确实有道理，支持！", time: "2026-02-09 08:30", contact: "", reply: "感谢支持！"},
+                {name: "周易研究者", content: "老师讲的内容很专业，不是那种坑蒙拐骗的，赞！", time: "2026-02-08 19:50", contact: "", reply: "共同学习！"},
+                {name: "换了新工作", content: "听老师建议调整了办公室座位，这几天心情好多了！", time: "2026-02-07 14:00", contact: "", reply: "👍 好的开始"},
+                {name: "孩子妈", content: "想给孩子起个好名字，老师有什么建议吗？", time: "2026-02-06 09:30", contact: "wx: mom88", reply: "可预约起名服务"}
+            ];
+        }
+        
+        function renderMessages() {
+            var html = '';
+            if (messages.length === 0) {
+                html = '<div class="empty">暂无留言，快来抢沙发~</div>';
+            } else {
+                for (var i = 0; i < messages.length; i++) {
+                    var m = messages[i];
+                    html += '<div class="message-card">';
+                    html += '<div class="message-header">';
+                    html += '<span class="message-name">' + m.name + '</span>';
+                    html += '<span class="message-time">' + m.time + '</span>';
+                    html += '</div>';
+                    html += '<div class="message-content">' + m.content + '</div>';
+                    if (m.contact) {
+                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
+                    }
+                    if (m.reply) {
+                        html += '<div class="reply">';
+                        html += '<div class="reply-label">✏️ 博主回复:</div>';
+                        html += '<div class="reply-text">' + m.reply + '</div>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                }
+            }
+            document.getElementById('messages').innerHTML = html;
+            document.getElementById('count').textContent = '(' + messages.length + ')';
+        }
+        
+        function submitMessage() {
+            var name = document.getElementById('name').value.trim();
+            var content = document.getElementById('content').value.trim();
+            var contact = document.getElementById('contact').value.trim();
+            
+            if (!name || !content) {
+                alert('请填写昵称和留言内容');
+                return;
+            }
+            
+            var msg = {
+                name: name,
+                content: content,
+                contact: contact,
+                time: new Date().toLocaleString('zh-CN'),
+                reply: ''
+            };
+            
+            messages.unshift(msg);
+            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+            
+            document.getElementById('name').value = '';
+            document.getElementById('content').value = '';
+            document.getElementById('contact').value = '';
+            
+            var toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+            
+            renderMessages();
+        }
+        
+        renderMessages();
+    </script>
+</body>
+</html>

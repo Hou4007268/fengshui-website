@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日黄历 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        
+        .date-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .date-main {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .date-sub { color: #888; margin-top: 5px; }
+        
+        .lunar {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f5576c;
+        }
+        .lunar-title { color: #f5576c; margin-bottom: 10px; font-size: 1rem; }
+        .lunar-info { display: flex; justify-content: space-around; }
+        .lunar-item { text-align: center; }
+        .lunar-label { color: #888; font-size: 0.8rem; }
+        .lunar-value { font-size: 1.2rem; margin-top: 5px; }
+        
+        .suit-avoid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .suit, .avoid {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .suit { border-left: 4px solid #52c41a; }
+        .avoid { border-left: 4px solid #ff4d4f; }
+        .sa-title { font-size: 0.9rem; margin-bottom: 10px; }
+        .suit .sa-title { color: #52c41a; }
+        .avoid .sa-title { color: #ff4d4f; }
+        .sa-list { color: #ccc; font-size: 0.9rem; line-height: 1.8; }
+        
+        .direction {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .direction h3 { color: #f093fb; margin-bottom: 15px; }
+        .dir-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .dir-item { text-align: center; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .dir-label { color: #888; font-size: 0.8rem; }
+        .dir-value { color: #f5576c; font-weight: bold; margin-top: 5px; }
+        
+        .fortune {
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .fortune h3 { color: #f5576c; margin-bottom: 15px; }
+        .fortune-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .fortune-item { text-align: center; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .fortune-label { color: #888; font-size: 0.8rem; }
+        .fortune-value { font-size: 1.1rem; margin-top: 5px; font-weight: bold; }
+        .fortune-value.good { color: #52c41a; }
+        .fortune-value.normal { color: #faad14; }
+        .fortune-value.bad { color: #ff4d4f; }
+        
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+        }
+        nav a { color: #888; text-decoration: none; font-size: 0.8rem; }
+        nav a.active { color: #f5576c; }
+    </style>
+</head>
+<body>
+    <header><h1>🏮 每日黄历</h1></header>
+    
+    <div class="container">
+        <div class="date-box">
+            <div class="date-main" id="gregorian"></div>
+            <div class="date-sub" id="lunarDate"></div>
+        </div>
+        
+        <div class="lunar">
+            <div class="lunar-title">📅 今日信息</div>
+            <div class="lunar-info">
+                <div class="lunar-item">
+                    <div class="lunar-label">生肖</div>
+                    <div class="lunar-value" id="zodiac">🐉</div>
+                </div>
+                <div class="lunar-item">
+                    <div class="lunar-label">星座</div>
+                    <div class="lunar-value" id="star">水瓶座</div>
+                </div>
+                <div class="lunar-item">
+                    <div class="lunar-label">星座</div>
+                    <div class="lunar-value" id="constellation">♒</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="suit-avoid">
+            <div class="suit">
+                <div class="sa-title">✅ 宜</div>
+                <div class="sa-list" id="yi"></div>
+            </div>
+            <div class="avoid">
+                <div class="sa-title">❌ 忌</div>
+                <div class="sa-list" id="ji"></div>
+            </div>
+        </div>
+        
+        <div class="direction">
+            <h3>🧭 今日方位</h3>
+            <div class="dir-grid">
+                <div class="dir-item">
+                    <div class="dir-label">财位</div>
+                    <div class="dir-value" id="caiwei">东南</div>
+                </div>
+                <div class="dir-item">
+                    <div class="dir-label">吉位</div>
+                    <div class="dir-value" id="jiwei">东</div>
+                </div>
+                <div class="dir-item">
+                    <div class="dir-label">桃花</div>
+                    <div class="dir-value" id="taohua">北</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="fortune">
+            <h3>⭐ 运势指数</h3>
+            <div class="fortune-grid">
+                <div class="fortune-item">
+                    <div class="fortune-label">整体</div>
+                    <div class="fortune-value good" id="overall">92</div>
+                </div>
+                <div class="fortune-item">
+                    <div class="fortune-label">财运</div>
+                    <div class="fortune-value good" id="money">88</div>
+                </div>
+                <div class="fortune-item">
+                    <div class="fortune-label">事业</div>
+                    <div class="fortune-value normal" id="career">75</div>
+                </div>
+                <div class="fortune-item">
+                    <div class="fortune-label">爱情</div>
+                    <div class="fortune-value good" id="love">85</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav>
+        <a href="/">🏠 首页</a>
+        <a href="/tools.html">🔧 工具</a>
+        <a href="/fortune/">🔮 运势</a>
+    </nav>
+
+    <script>
+        var lunarDays = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
+        var lunarMonths = ['正月','二月','三月','四月','五月','六月','七月','八月','九月','十月','冬月','腊月'];
+        var zodiacs = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];
+        var zodiacEmojis = ['🐭','🐮','🐯','🐰','�龙','🐍','🐴','🐐','🐒','🐔','🐕','🐷'];
+        
+        var yiList = ['开市','交易','祈福','求嗣','订盟','纳采','入学','修造','动土','竖柱','上梁','造屋','起基','定磉','开池','出货财','修置私家车','纳财','开仓','出货财','进人口','塑绘','经络','纳畜','牧养','开光','塑绘','会友','宴请'];
+        var jiList = ['动土','破土','安葬','启攒','修坟','开市','交易','立约','订盟','纳采','入宅','移徙','安床','解除','冠笄','出行','赴任','修造','动土','破土','安葬','启攒'];
+        
+        var directions = ['东','南','西','北','东南','西南','东北','西北'];
+        
+        function getDayOfYear(date) {
+            var start = new Date(date.getFullYear(), 0, 0);
+            var diff = date - start;
+            return Math.floor(diff / (1000 * 60 * 60 * 24));
+        }
+        
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = today.getMonth() + 1;
+        var day = today.getDate();
+        
+        // Gregorian date
+        document.getElementById('gregorian').textContent = year + '年' + month + '月' + day + '日';
+        
+        // Simple lunar calculation
+        var dayOfYear = getDayOfYear(today);
+        var lunarDay = lunarDays[dayOfYear % 30];
+        var lunarMonth = lunarMonths[Math.floor(dayOfYear / 30) % 12];
+        document.getElementById('lunarDate').textContent = lunarMonth + lunarDay;
+        
+        // Zodiac
+        var zodiacIndex = (year - 1900) % 12;
+        document.getElementById('zodiac').textContent = zodiacEmojis[zodiacIndex];
+        
+        // Constellation
+        var constellations = [
+            {name:'摩羯座', emoji:'♑', start:[12,22], end:[1,19]},
+            {name:'水瓶座', emoji:'♒', start:[1,20], end:[2,18]},
+            {name:'双鱼座', emoji:'♓', start:[2,19], end:[3,20]},
+            {name:'白羊座', emoji:'♈', start:[3,21], end:[4,19]},
+            {name:'金牛座', emoji:'♉', start:[4,20], end:[5,20]},
+            {name:'双子座', emoji:'♊', start:[5,21], end:[6,21]},
+            {name:'巨蟹座', emoji:'♋', start:[6,22], end:[7,22]},
+            {name:'狮子座', emoji:'♌', start:[7,23], end:[8,22]},
+            {name:'处女座', emoji:'♍', start:[8,23], end:[9,22]},
+            {name:'天秤座', emoji:'♎', start:[9,23], end:[10,23]},
+            {name:'天蝎座', emoji:'♏', start:[10,24], end:[11,22]},
+            {name:'射手座', emoji:'♐', start:[11,23], end:[12,21]}
+        ];
+        
+        var currentMonth = today.getMonth() + 1;
+        var currentDay = today.getDate();
+        for (var i = 0; i < constellations.length; i++) {
+            var c = constellations[i];
+            if ((currentMonth >= c.start[0] && currentDay >= c.start[1]) || 
+                (currentMonth <= c.end[0] && currentDay <= c.end[1])) {
+                document.getElementById('star').textContent = c.name;
+                document.getElementById('constellation').textContent = c.emoji;
+                break;
+            }
+        }
+        
+        // Random but consistent based on date
+        var seed = year * 10000 + month * 100 + day;
+        
+        // Yi and Ji
+        var yiCount = 4 + (seed % 4);
+        var jiCount = 3 + (seed % 3);
+        
+        var yiShuffled = yiList.slice().sort(function() { return (seed * 9301 + 49297) % 233280 / 233280 - 0.5; });
+        var jiShuffled = jiList.slice().sort(function() { return (seed * 9301 + 49297) % 233280 / 233280 - 0.5; });
+        
+        document.getElementById('yi').textContent = yiShuffled.slice(0, yiCount).join('、');
+        document.getElementById('ji').textContent = jiShuffled.slice(0, jiCount).join('、');
+        
+        // Directions
+        document.getElementById('caiwei').textContent = directions[seed % 8];
+        document.getElementById('jiwei').textContent = directions[(seed + 3) % 8];
+        document.getElementById('taohua').textContent = directions[(seed + 5) % 8];
+        
+        // Fortune scores
+        document.getElementById('overall').textContent = 80 + (seed % 20);
+        document.getElementById('money').textContent = 75 + (seed % 25);
+        document.getElementById('career').textContent = 70 + (seed % 25);
+        document.getElementById('love').textContent = 75 + (seed % 25);
+        
+        // Set colors
+        document.getElementById('overall').className = 'fortune-value ' + (parseInt(document.getElementById('overall').textContent) >= 85 ? 'good' : 'normal');
+        document.getElementById('money').className = 'fortune-value ' + (parseInt(document.getElementById('money').textContent) >= 85 ? 'good' : 'normal');
+        document.getElementById('career').className = 'fortune-value ' + (parseInt(document.getElementById('career').textContent) >= 85 ? 'good' : 'normal');
+        document.getElementById('love').className = 'fortune-value ' + (parseInt(document.getElementById('love').textContent) >= 85 ? 'good' : 'normal');
+    </script>
+</body>
+</html>

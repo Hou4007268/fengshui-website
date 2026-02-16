@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>起名改名 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header { padding: 20px; text-align: center; background: rgba(0,0,0,0.3); }
+        header h1 { font-size: 1.5rem; background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .info-card h3 { color: #f5576c; margin-bottom: 15px; font-size: 1rem; }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; color: #888; margin-bottom: 8px; font-size: 0.9rem; }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .input-group input:focus, .input-group select:focus { outline: none; border-color: #f5576c; }
+        
+        .row { display: flex; gap: 10px; }
+        .row .input-group { flex: 1; }
+        
+        .gender-toggle {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .gender-btn {
+            flex: 1;
+            padding: 15px;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        .gender-btn.selected { border-color: #f5576c; background: rgba(245,87,108,0.2); }
+        
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .result { display: none; }
+        .result.show { display: block; }
+        
+        .name-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f5576c;
+        }
+        .name-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .name-text { font-size: 1.5rem; font-weight: bold; }
+        .name-score { background: #52c41a; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; }
+        .name-meaning { color: #ccc; margin: 10px 0; line-height: 1.6; font-size: 0.95rem; }
+        .name-wuxing { color: #888; font-size: 0.85rem; }
+        
+        .tip {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        
+        .contact-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); display: flex; justify-content: space-around; padding: 15px; }
+        nav a { color: #888; text-decoration: none; font-size: 0.8rem; }
+        nav a.active { color: #f5576c; }
+    </style>
+</head>
+<body>
+    <header><h1>👶 起名改名</h1></header>
+    
+    <div class="container">
+        <div class="info-card">
+            <h3>📋 宝宝信息</h3>
+            
+            <div class="row">
+                <div class="input-group">
+                    <label>父亲姓氏</label>
+                    <input type="text" id="fatherName" placeholder="爸爸姓" maxlength="2">
+                </div>
+                <div class="input-group">
+                    <label>母亲姓氏</label>
+                    <input type="text" id="motherName" placeholder="妈妈姓" maxlength="2">
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>宝宝姓氏</label>
+                <input type="text" id="surname" placeholder="跟谁姓" maxlength="2">
+            </div>
+            
+            <div class="input-group">
+                <label>出生日期</label>
+                <input type="date" id="birthday">
+            </div>
+            
+            <div class="input-group">
+                <label>出生时辰</label>
+                <select id="birthTime">
+                    <option value="">请选择...</option>
+                    <option value="子">子时（23:00-01:00）</option>
+                    <option value="丑">丑时（01:00-03:00）</option>
+                    <option value="寅">寅时（03:00-05:00）</option>
+                    <option value="卯">卯时（05:00-07:00）</option>
+                    <option value="辰">辰时（07:00-09:00）</option>
+                    <option value="巳">巳时（09:00-11:00）</option>
+                    <option value="午">午时（11:00-13:00）</option>
+                    <option value="未">未时（13:00-15:00）</option>
+                    <option value="申">申时（15:00-17:00）</option>
+                    <option value="酉">酉时（17:00-19:00）</option>
+                    <option value="戌">戌时（19:00-21:00）</option>
+                    <option value="亥">亥时（21:00-23:00）</option>
+                </select>
+            </div>
+            
+            <label style="color:#888;display:block;margin-bottom:10px;font-size:0.9rem;">宝宝性别</label>
+            <div class="gender-toggle">
+                <div class="gender-btn selected" onclick="selectGender('男')" id="genderBoy">👦 男宝</div>
+                <div class="gender-btn" onclick="selectGender('女')" id="genderGirl">👧 女宝</div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h3>⭐ 期望偏好</h3>
+            
+            <div class="input-group">
+                <label>期望方向</label>
+                <select id="hope">
+                    <option value="">请选择...</option>
+                    <option value="聪明">聪明伶俐 - 智慧型</option>
+                    <option value="健康">健康平安 - 健康型</option>
+                    <option value="财运">财运亨通 - 财富型</option>
+                    <option value="事业">事业有成 - 事业型</option>
+                    <option value="吉祥">吉祥如意 - 吉祥型</option>
+                    <option value="儒雅">儒雅大气 - 气质型</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>名字风格</label>
+                <select id="style">
+                    <option value="">请选择...</option>
+                    <option value="古典">古典诗词</option>
+                    <option value="现代">现代简约</option>
+                    <option value="文艺">文艺清新</option>
+                    <option value="大气">大气磅礴</option>
+                    <option value="温柔">温柔典雅</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>名字字数</label>
+                <select id="nameLen">
+                    <option value="2">单字名（1字）</option>
+                    <option value="3" selected>双字名（2字）</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="generate-btn" onclick="generate()">生成名字方案</button>
+        
+        <div class="result" id="result">
+            <h3 style="color:#f5576c;margin:0 0 15px;">✨ 推荐名字</h3>
+            <div id="namesList"></div>
+            
+            <div class="tip">
+                💡 温馨提示：以上名字为系统初步推荐。真正的好名字需要结合宝宝的生辰八字、五行喜忌、父母姓氏笔画等综合分析。如需专业定制起名服务，欢迎添加微信详询。
+            </div>
+            
+            <a href="javascript:alert('请添加微信：yiyayiyayao 进行专业起名咨询')" class="contact-btn">📱 添加微信获取专业起名方案</a>
+        </div>
+    </div>
+    
+    <nav>
+        <a href="/">🏠 首页</a>
+        <a href="/tools.html">🔧 工具</a>
+    </nav>
+
+    <script>
+        var gender = '男';
+        var boyNames = [
+            {n:'宇轩', m:'宇指宇宙，轩为气宇轩昂，寓意胸怀宽广、前程远大', w:'土金'},
+            {n:'浩然', m:'浩然之气，正大刚直，寓意正直勇敢、气概不凡', w:'水金'},
+            {n:'子墨', m:'子为君子，墨为文墨，寓意文采出众、才华横溢', w:'水金'},
+            {n:'一鸣', m:'一鸣惊人，寓意将来必有作为、一举成名', w:'水金'},
+            {n:'思远', m:'思虑深远，寓意聪明睿智、志向高远', w:'金土'},
+            {n:'博文', m:'博学多才，寓意学识渊博、见多识广', w:'水水'},
+            {n:'明哲', m:'明智睿哲，寓意聪明智慧、通达事理', w:'火金'},
+            {n:'瑞霖', m:'瑞雪甘霖，寓意吉祥如意、恩泽深厚', w:'金水'},
+            {n:'哲瀚', m:'哲理广阔，寓意智慧深远、胸怀宽广', w:'火水'},
+            {n:'沐晨', m:'如沐春风，晨光初照，寓意温和善良、充满希望', w:'水金'},
+            {n:'锦程', m:'锦绣前程，寓意前途光明、事业发达', w:'金土'},
+            {n:'峻熙', m:'峻拔高大，光明兴盛，寓意事业有成、平安顺遂', w:'土水'},
+            {n:'奕辰', m:'奕奕神采，星辰闪耀，寓意精力充沛、光明磊落', w:'木土'},
+            {n:'禹泽', m:'禹为圣王，泽为恩泽，寓意尊贵非凡、福泽深厚', w:'土水'},
+            {n:'嘉树', m:'嘉树繁茂，寓意生机盎然、事业兴旺', w:'木木'}
+        ];
+        var girlNames = [
+            {n:'思妤', m:'思为聪明，妤为美好，寓意才智出众、美丽动人', w:'金水'},
+            {n:'诗涵', m:'诗情画意，涵养深厚，寓意文雅清新、气质不凡', w:'金水'},
+            {n:'雅琳', m:'高雅美玉，寓意高贵典雅、美丽聪慧', w:'木火'},
+            {n:'可馨', m:'可爱温馨，寓意活泼可爱、温暖人心', w:'木金'},
+            {n:'雨晴', m:'雨过天晴，寓意乐观积极、充满希望', w:'水火'},
+            {n:'语彤', m:'言语优美，红彤如火，寓意能言善辩、热情洋溢', w:'木火'},
+            {n:'欣怡', m:'欣喜怡然，寓意快乐幸福、乐观开朗', w:'金土'},
+            {n:'瑾萱', m:'美玉忘忧，寓意珍贵美好、快乐无忧', w:'金木'},
+            {n:'恩熙', m:'恩泽熙和，寓意感恩戴德、和蔼可亲', w:'土水'},
+            {n:'梓晴', m:'木之生机，阳光灿烂，寓意生机勃勃、乐观开朗', w:'木火'},
+            {n:'安然', m:'安然自若，寓意平安顺遂、淡泊从容', w:'土金'},
+            {n:'语汐', m:'言语如潮，汐为海潮，寓意能说会道、温柔如水', w:'木水'},
+            {n:'以萱', m:'以花忘忧，寓意美丽坚强、快乐无忧', w:'木木'},
+            {n:'佩宁', m:'佩戴安宁，寓意高贵优雅、平安吉祥', w:'水火'},
+            {n:'诗晴', m:'诗情画意，晴空万里，寓意文雅浪漫、乐观开朗', w:'金火'}
+        ];
+        
+        function selectGender(g) {
+            gender = g;
+            document.getElementById('genderBoy').classList.remove('selected');
+            document.getElementById('genderGirl').classList.remove('selected');
+            if (g === '男') document.getElementById('genderBoy').classList.add('selected');
+            else document.getElementById('genderGirl').classList.add('selected');
+        }
+        
+        function generate() {
+            var fatherName = document.getElementById('fatherName').value.trim();
+            var motherName = document.getElementById('motherName').value.trim();
+            var surname = document.getElementById('surname').value.trim();
+            var birthday = document.getElementById('birthday').value;
+            var birthTime = document.getElementById('birthTime').value;
+            var hope = document.getElementById('hope').value;
+            var style = document.getElementById('style').value;
+            
+            if (!surname) { alert('请输入宝宝姓氏'); return; }
+            if (!birthday) { alert('请选择出生日期'); return; }
+            
+            var names = gender === '男' ? boyNames : girlNames;
+            
+            // Shuffle and pick 6
+            var shuffled = names.slice().sort(function() { return Math.random() - 0.5; });
+            var selected = shuffled.slice(0, 6);
+            
+            var html = '';
+            for (var i = 0; i < selected.length; i++) {
+                var score = 85 + Math.floor(Math.random() * 15);
+                html += '<div class="name-card">';
+                html += '<div class="name-header">';
+                html += '<span class="name-text">' + surname + selected[i].n + '</span>';
+                html += '<span class="name-score">' + score + '分</span>';
+                html += '</div>';
+                html += '<div class="name-meaning">' + selected[i].m + '</div>';
+                html += '<div class="name-wuxing">五行：' + selected[i].w + '</div>';
+                html += '</div>';
+            }
+            
+            document.getElementById('namesList').innerHTML = html;
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

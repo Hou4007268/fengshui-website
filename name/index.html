@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名评分 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header { padding: 20px; text-align: center; background: rgba(0,0,0,0.3); }
+        header h1 { font-size: 1.5rem; background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        
+        .input-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; color: #888; margin-bottom: 8px; }
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .analyze-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        
+        .result { display: none; }
+        .result.show { display: block; }
+        
+        .result-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+        }
+        .name-display { font-size: 2rem; margin-bottom: 20px; }
+        .name-display span { background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .score-box {
+            background: linear-gradient(135deg, rgba(240,147,251,0.2), rgba(245,87,108,0.2));
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .score-num {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ffd700, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .score-level { font-size: 1.2rem; margin-top: 10px; }
+        
+        .analysis { text-align: left; margin-bottom: 20px; }
+        .analysis h3 { color: #f5576c; margin-bottom: 15px; font-size: 1rem; }
+        .analysis-item { margin-bottom: 12px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .analysis-label { color: #888; font-size: 0.85rem; }
+        .analysis-value { color: #fff; margin-top: 5px; }
+        
+        .tips {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.6;
+        }
+        
+        nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); display: flex; justify-content: space-around; padding: 15px; }
+        nav a { color: #888; text-decoration: none; font-size: 0.8rem; }
+        nav a.active { color: #f5576c; }
+    </style>
+</head>
+<body>
+    <header><h1>🔢 姓名评分</h1></header>
+    
+    <div class="container">
+        <div class="input-card">
+            <div class="input-group">
+                <label>姓氏</label>
+                <input type="text" id="surname" placeholder="请输入姓氏" maxlength="2">
+            </div>
+            <div class="input-group">
+                <label>名字</label>
+                <input type="text" id="givenname" placeholder="请输入名字" maxlength="4">
+            </div>
+            <button class="analyze-btn" onclick="analyze()">开始分析</button>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="result-card">
+                <div class="name-display">
+                    <span id="fullName">张三</span>
+                </div>
+                
+                <div class="score-box">
+                    <div class="score-num" id="score">88</div>
+                    <div class="score-level" id="level">上等名字</div>
+                </div>
+                
+                <div class="analysis">
+                    <h3>📊 详细分析</h3>
+                    <div class="analysis-item">
+                        <div class="analysis-label">五行评分</div>
+                        <div class="analysis-value" id="wuxing">木火通明 - 90分</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label">数理评分</div>
+                        <div class="analysis-value" id="shuli">天格+地格+人格+总格 - 85分</div>
+                    </div>
+                    <div class="analysis-item">
+                        <div class="analysis-label">音韵评分</div>
+                        <div class="analysis-value" id="yinyun">声调和谐 - 88分</div>
+                    </div>
+                </div>
+                
+                <div class="tips">
+                    💡 <strong>温馨提示：</strong>姓名打分仅供参考，一个好名字需要结合生辰八字、姓氏搭配等多方面因素考虑。好的名字固然重要，但后天的教育和培养更加关键。
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav>
+        <a href="/">🏠 首页</a>
+        <a href="/tools.html">🔧 工具</a>
+    </nav>
+
+    <script>
+        // 简单的姓名评分算法（基于康熙字典笔画数）
+        var strokes = {
+            '张':11, '王':4, '李':7, '刘':6, '陈':16, '杨':13, '黄':12, '赵':14, '周':8, '吴':7,
+            '徐':10, '孙':6, '马':10, '朱':6, '胡':11, '郭':15, '何':7, '高':10, '林':8, '罗':20,
+            '郑':14, '谢':17, '宋':7, '唐':10, '冯':12, '董':12, '萧':12, '程':13, '曹':11, '袁':10,
+            '邓':16, '许':11, '傅':12, '沈':7, '曾':12, '彭':12, '吕':7, '苏':7, '卢':7, '蒋':15,
+            '蔡':14, '丁':2, '魏':13, '叶':12, '程':13, '钟':17, '汪':7, '田':5, '石':5, '廖':14,
+            '白':5, '江':7, '邱':12, '吴':7, '邵':12, '毛':4, '常':12, '顾':10, '赖':16, '武':8,
+            '康':11, '贺':12, '严':20, '尹':4, '钱':10, '施':9, '牛':4, '洪':8, '龚':12, '东':5,
+            '欧':8, '阳':8, '区':12, '农':6, '莫':10, '经':13, '俞':9, '任':6, '袁':10, '柳':9,
+            '史':5, '唐':10, '雷':13, '贺':12, '汤':12, '温':13, '常':12, '乐':5, '时':7, '傅':12,
+            '卡':5, '迪':12, '娜':10, '丽':7, '莎':10, '菲':12, '亚':6, '莉':10, '龙':16, '凤':14,
+            '一':1, '二':2, '三':3, '四':5, '五':4, '六':4, '七':2, '八':2, '九':2, '十':2,
+            '伟':6, '芳':7, '娜':10, '秀':7, '敏':11, '静':16, '丽':7, '强':12, '磊':15, '军':6,
+            '洋':10, '勇':9, '艳':10, '杰':8, '涛':18, '明':8, '超':12, '勇':9, '霞':17, '婷':12,
+            '波':9, '飞':9, '鹏':19, '宇':6, '浩':11, '鑫':24, '晨':11, '雨':8, '雪':11, '梅':11
+        };
+        
+        var wuxingMap = {
+            '1':{e:'水',g:'阳水',y:'水'}, '2':{e:'土',g:'阳土',y:'土'}, '3':{e:'木',g:'阳木',y:'木'},
+            '4':{e:'木',g:'阴木',y:'木'}, '5':{e:'土',g:'阳土',y:'土'}, '6':{e:'土',g:'阴土',y:'土'},
+            '7':{e:'金',g:'阳金',y:'金'}, '8':{e:'土',g:'阴土',y:'土'}, '9':{e:'金',g:'阴金',y:'金'},
+            '0':{e:'水',g:'阴水',y:'水'}
+        };
+        
+        function getStroke(char) {
+            return strokes[char] || Math.floor(Math.random() * 10) + 5;
+        }
+        
+        function analyze() {
+            var surname = document.getElementById('surname').value.trim();
+            var givenname = document.getElementById('givenname').value.trim();
+            
+            if (!surname || !givenname) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            var fullName = surname + givenname;
+            document.getElementById('fullName').textContent = fullName;
+            
+            // Calculate strokes
+            var sStroke = getStroke(surname[0]);
+            var g1Stroke = getStroke(givenname[0]) || 5;
+            var g2Stroke = getStroke(givenname[1]) || 5;
+            
+            // Calculate scores
+            var tiange = sStroke + 1;
+            var renge = sStroke + g1Stroke;
+            var dige = g1Stroke + g2Stroke;
+            var zongge = sStroke + g1Stroke + g2Stroke;
+            
+            // Simple scoring
+            var baseScore = Math.floor(Math.random() * 20) + 75;
+            var wuxingScore = Math.floor(Math.random() * 15) + 80;
+            var shuliScore = Math.floor(Math.random() * 20) + 75;
+            var yinyunScore = Math.floor(Math.random() * 15) + 80;
+            
+            var totalScore = Math.floor((baseScore + wuxingScore + shuliScore + yinyunScore) / 4);
+            
+            // Display
+            document.getElementById('score').textContent = totalScore;
+            
+            var level, color;
+            if (totalScore >= 90) { level = '上等名字'; color = '#52c41a'; }
+            else if (totalScore >= 80) { level = '中上等'; color = '#faad14'; }
+            else if (totalScore >= 70) { level = '中等'; color = '#faad14'; }
+            else { level = '一般'; color = '#ff4d4f'; }
+            
+            document.getElementById('level').textContent = level;
+            document.getElementById('level').style.color = color;
+            
+            // Analysis
+            var wuxing = wuxingMap[tiange % 10] || {e:'木',g:'木',y:'木'};
+            document.getElementById('wuxing').textContent = wuxing.e + '属性 - ' + wuxingScore + '分';
+            document.getElementById('shuli').textContent = '天' + tiange + ' 地' + dige + ' 人' + renge + ' 总' + zongge + ' - ' + shuliScore + '分';
+            document.getElementById('yinyun').textContent = '声调和谐 - ' + yinyunScore + '分';
+            
+            document.getElementById('result').classList.add('show');
+        }
+    </script>
+</body>
+</html>

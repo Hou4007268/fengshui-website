@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言管理 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
+        header { background: rgba(0,0,0,0.3); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        header h1 { background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .card { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .message-card { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; margin-bottom: 15px; border-left: 3px solid #f5576c; }
+        .message-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .message-name { color: #f093fb; font-weight: bold; }
+        .message-time { color: #666; font-size: 0.85rem; }
+        .message-content { color: #ddd; line-height: 1.6; margin: 10px 0; }
+        .message-contact { color: #888; font-size: 0.85rem; }
+        .reply-box { margin-top: 15px; }
+        .reply-box textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff; min-height: 60px; }
+        .btn { background: linear-gradient(90deg, #f093fb, #f5576c); border: none; padding: 8px 16px; border-radius: 6px; color: white; cursor: pointer; margin-right: 10px; }
+        .btn-secondary { background: rgba(255,255,255,0.2); }
+        .btn-delete { background: #ff4d4f; }
+        .logout { background: transparent; border: 1px solid #666; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💬 留言管理</h1>
+        <div>
+            <span id="userDisplay"></span>
+            <button class="btn logout" onclick="logout()">退出</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <h2>用户留言 (<span id="count">0</span>)</h2>
+            <div id="messageList"></div>
+        </div>
+    </div>
+
+    <script>
+        var currentUser = localStorage.getItem('fengshui_current');
+        var isAdmin = localStorage.getItem('fengshui_admin');
+        
+        if (!isAdmin) {
+            alert('请先登录管理员');
+            window.location.href = '/login.html';
+        }
+        
+        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
+        
+        function render() {
+            var html = '';
+            if (messages.length === 0) {
+                html = '<p style="color:#666;text-align:center;padding:20px;">暂无留言</p>';
+            } else {
+                for (var i = 0; i < messages.length; i++) {
+                    var m = messages[i];
+                    html += '<div class="message-card">';
+                    html += '<div class="message-header">';
+                    html += '<span class="message-name">' + m.name + '</span>';
+                    html += '<span class="message-time">' + m.time + '</span>';
+                    html += '</div>';
+                    html += '<div class="message-content">' + m.content + '</div>';
+                    if (m.contact) {
+                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
+                    }
+                    html += '<div class="reply-box">';
+                    html += '<textarea id="reply' + i + '" placeholder="回复内容...">' + (m.reply || '') + '</textarea>';
+                    html += '<div style="margin-top:10px;">';
+                    html += '<button class="btn" onclick="saveReply(' + i + ')">保存回复</button>';
+                    html += '<button class="btn btn-delete" onclick="deleteMsg(' + i + ')">删除</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                }
+            }
+            document.getElementById('messageList').innerHTML = html;
+            document.getElementById('count').textContent = messages.length;
+        }
+        
+        function saveReply(index) {
+            var reply = document.getElementById('reply' + index).value;
+            messages[index].reply = reply;
+            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+            alert('回复已保存！');
+        }
+        
+        function deleteMsg(index) {
+            if (confirm('确定删除这条留言吗？')) {
+                messages.splice(index, 1);
+                localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+                render();
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('fengshui_admin');
+            window.location.href = '/login.html';
+        }
+        
+        render();
+    </script>
+</body>
+</html>
