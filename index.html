@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>今日运势 - 一宅一句</title>
-    <meta name="description" content="每日运势查询 - 风水吉凶">
+    <title>留言板 - 一宅一句</title>
+    <meta name="description" content="用户留言交流">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -25,100 +25,131 @@
             -webkit-text-fill-color: transparent;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
+            padding: 30px 20px;
         }
-        .date {
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-        }
-        .fortune-box {
+        
+        .form-card {
             background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px 0;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        .zodiac {
-            font-size: 5rem;
-            margin-bottom: 15px;
-        }
-        .fortune-label {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-        .luck-score {
-            font-size: 4rem;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        .luck-score.excellent { color: #ffd700; }
-        .luck-score.good { color: #52c41a; }
-        .luck-score.normal { color: #faad14; }
-        .luck-score.bad { color: #ff4d4f; }
-        
-        .fortune-details {
-            margin: 25px 0;
-            padding: 20px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 12px;
-        }
-        .fortune-details h3 {
+        .form-card h2 {
             color: #f5576c;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
             font-size: 1rem;
         }
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f5576c;
         }
-        .detail-item:last-child { border: none; }
-        .detail-label { color: #888; }
-        .detail-value { color: #f093fb; }
-        
-        .fortune-text {
-            color: #ccc;
-            line-height: 1.8;
-            margin: 20px 0;
-            text-align: left;
-            padding: 15px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 8px;
-            border-left: 3px solid #f5576c;
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
         }
-        
         .btn {
+            width: 100%;
             background: linear-gradient(90deg, #f093fb, #f5576c);
             border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 14px;
+            border-radius: 8px;
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            margin: 10px;
-            transition: transform 0.2s;
         }
-        .btn:hover { transform: scale(1.05); }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn:hover { opacity: 0.9; }
         
-        .tips {
-            margin-top: 30px;
+        .message-list h2 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .message-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 3px solid #f5576c;
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .message-name {
+            color: #f093fb;
+            font-weight: 500;
+        }
+        .message-time {
             color: #666;
             font-size: 0.8rem;
         }
-        
-        .action-buttons {
-            margin-top: 20px;
+        .message-content {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+        .message-contact {
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .reply {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(240,147,251,0.1);
+            border-radius: 8px;
+            border-left: 3px solid #f093fb;
+        }
+        .reply-label {
+            color: #f093fb;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .reply-text {
+            color: #ccc;
+            line-height: 1.5;
+        }
+        
+        .empty {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 12px;
+            display: none;
+            z-index: 1000;
         }
         
         nav {
@@ -141,208 +172,127 @@
 </head>
 <body>
     <header>
-        <h1>🏮 一宅一句</h1>
+        <h1>🏮 留言板</h1>
     </header>
     
     <div class="container">
-        <p class="date" id="todayDate"></p>
-        
-        <div id="result" style="display:none;">
-            <div class="fortune-box">
-                <div class="zodiac" id="zodiac">🐉</div>
-                <p class="fortune-label">今日运势</p>
-                <p class="luck-score" id="luckScore">85</p>
-                
-                <div class="fortune-details">
-                    <h3>📋 运势详情</h3>
-                    <div class="detail-item">
-                        <span class="detail-label">幸运数字</span>
-                        <span class="detail-value" id="luckyNum">2, 8, 9</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">幸运颜色</span>
-                        <span class="detail-value" id="luckyColor">金色、红色</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">吉方位</span>
-                        <span class="detail-value" id="luckyDir">东南</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">宜</span>
-                        <span class="detail-value" id="yi">开市、动土</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">忌</span>
-                        <span class="detail-value" id="ji">搬家、动土</span>
-                    </div>
-                </div>
-                
-                <div class="fortune-text" id="fortuneText">
-                    今日运势极佳！有意外惊喜，适合开展新项目。
-                </div>
+        <div class="form-card">
+            <h2>💬 我要留言</h2>
+            <div class="form-group">
+                <label>昵称</label>
+                <input type="text" id="name" placeholder="请输入昵称">
             </div>
-            
-            <div class="action-buttons">
-                <button class="btn btn-secondary" onclick="shareFortune()">📤 分享好友</button>
-                <button class="btn" onclick="resetFortune()">🔄 重新抽签</button>
+            <div class="form-group">
+                <label>留言内容</label>
+                <textarea id="content" placeholder="请输入您的留言..."></textarea>
             </div>
+            <div class="form-group">
+                <label>联系方式（选填）</label>
+                <input type="text" id="contact" placeholder="微信或电话">
+            </div>
+            <button class="btn" onclick="submitMessage()">提交留言</button>
         </div>
         
-        <div id="start">
-            <p style="color:#888;margin-bottom:30px;">
-                输入您的出生月份，获取今日运势
-            </p>
-            <div class="form-group" style="margin-bottom:20px;">
-                <input type="number" id="birthMonth" placeholder="出生月份（1-12月）" 
-                       style="padding:15px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);
-                              background:rgba(0,0,0,0.3);color:#fff;font-size:1rem;width:200px;text-align:center;">
+        <div class="message-list">
+            <h2>📋 全部留言 <span id="count">(0)</span></h2>
+            <div id="messages">
+                <div class="empty">暂无留言，快来抢沙发~</div>
             </div>
-            <button class="btn" onclick="getFortune()">开始抽签</button>
         </div>
-        
-        <p class="tips">每天限抽一次 · 仅供娱乐</p>
     </div>
+    
+    <div class="toast" id="toast">提交成功！</div>
     
     <nav>
         <a href="/">🏠 首页</a>
-        <a href="/tools.html">🔧 工具</a>
-        <a href="/fortune/" class="active">🔮 运势</a>
+        <a href="/fortune/">🔮 运势</a>
+        <a href="/messages/" class="active">💬 留言</a>
         <a href="/login.html">👤 我的</a>
     </nav>
 
     <script>
-        var zodiacs = [
-            { emoji: '🐉', name: '龙', excellent: 95, good: 88, normal: 78, bad: 65,
-              text: '今日大吉！万事皆宜，有意外惊喜。适合开展新项目、签订重要合同。',
-              num: '2, 8, 9', color: '金色、红色', dir: '东南', yi: '开市、动土、祈福', ji: '搬家、动土' },
-            { emoji: '🐯', name: '虎', excellent: 92, good: 85, normal: 75, bad: 60,
-              text: '运势不错！有贵人相助，适合社交应酬。财运亨通。',
-              num: '3, 7', color: '红色、橙色', dir: '东北', yi: '会友、签约', ji: '单独行动' },
-            { emoji: '🐴', name: '马', excellent: 90, good: 82, normal: 72, bad: 58,
-              text: '今日运势平稳。保持低调，循序渐进可成事。',
-              num: '2, 5, 6', color: '绿色、蓝色', dir: '正东', yi: '稳扎稳打', ji: '冒险投资' },
-            { emoji: '🐍', name: '蛇', excellent: 88, good: 80, normal: 70, bad: 55,
-              text: '运势一般，注意口舌。保持心平气和。',
-              num: '1, 5', color: '黑色、白色', dir: '西南', yi: '修身养性', ji: '争执' },
-            { emoji: '🐐', name: '羊', excellent: 85, good: 78, normal: 68, bad: 52,
-              text: '运势小低，需谨慎行事。注意身体健康。',
-              num: '4, 9', color: '白色、米色', dir: '正北', yi: '休息、学习', ji: '过度劳累' },
-            { emoji: '🐒', name: '猴', excellent: 82, good: 75, normal: 65, bad: 50,
-              text: '今日运势下滑，避免冲突。多做善事积德。',
-              num: '2, 7', color: '蓝色、灰色', dir: '西北', yi: '低调行事', ji: '强出头' },
-            { emoji: '🐔', name: '鸡', excellent: 80, good: 72, normal: 62, bad: 48,
-              text: '运势欠佳，但危机中蕴含机遇。',
-              num: '5, 8', color: '金色、黄色', dir: '西南', yi: '等待时机', ji: '激进' },
-            { emoji: '🐕', name: '狗', excellent: 78, good: 70, normal: 60, bad: 45,
-              text: '今日需特别注意人际关系，保持真诚。',
-              num: '3, 6', color: '红色', dir: '东南', yi: '真诚待人', ji: '撒谎' },
-            { emoji: '🐷', name: '猪', excellent: 75, good: 68, normal: 58, bad: 42,
-              text: '运势较低，建议静养为主，不要冒进。',
-              num: '1, 8', color: '粉色、金色', dir: '东北', yi: '居家休息', ji: '外出闯荡' },
-            { emoji: '🐭', name: '鼠', excellent: 92, good: 85, normal: 75, bad: 62,
-              text: '今日大吉！财运亨通，适合理财投资。',
-              num: '2, 3', color: '蓝色、金色', dir: '北', yi: '理财、投资', ji: '挥霍' },
-            { emoji: '🐮', name: '牛', excellent: 88, good: 80, normal: 70, bad: 55,
-              text: '运势稳定，工作顺利。注意休息。',
-              num: '1, 9', color: '黄色、棕色', dir: '东北', yi: '踏实工作', ji: '投机' },
-            { emoji: '🐰', name: '兔', excellent: 90, good: 83, normal: 73, bad: 58,
-              text: '今日运势极佳！桃花运旺盛，利交际。',
-              num: '3, 4, 9', color: '粉色、绿色', dir: '东', yi: '社交、表白', ji: '宅家' }
-        ];
+        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
         
-        var colors = ['excellent', 'good', 'normal', 'bad'];
-        
-        document.getElementById('todayDate').textContent = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
-        
-        function getFortune() {
-            var month = parseInt(document.getElementById("birthMonth").value);
-            if (!month || month < 1 || month > 12) {
-                alert('请输入正确的出生月份');
-                return;
-            }
-            
-            var btn = document.querySelector('.btn');
-            btn.disabled = true;
-            btn.textContent = '抽签中...';
-            
-            setTimeout(function() {
-                var seed = new Date().getFullYear() * 10000 + (new Date().getMonth() + 1) * 100 + new Date().getDate();
-                var index = (month + seed) % zodiacs.length;
-                var fortune = zodiacs[index];
-                
-                var scoreType = colors[Math.floor(Math.random() * 2)]; // excellent or good
-                var score = fortune[scoreType];
-                
-                document.getElementById('zodiac').textContent = fortune.emoji;
-                document.getElementById('luckScore').textContent = score;
-                document.getElementById('luckScore').className = 'luck-score ' + scoreType;
-                document.getElementById('luckyNum').textContent = fortune.num;
-                document.getElementById('luckyColor').textContent = fortune.color;
-                document.getElementById('luckyDir').textContent = fortune.dir;
-                document.getElementById('yi').textContent = fortune.yi;
-                document.getElementById('ji').textContent = fortune.ji;
-                document.getElementById('fortuneText').textContent = fortune.text;
-                
-                document.getElementById('start').style.display = 'none';
-                document.getElementById('result').style.display = 'block';
-                
-                // 保存记录
-                var today = new Date().toDateString();
-                localStorage.setItem('fortune_date', today);
-                localStorage.setItem('fortune_data', JSON.stringify(fortune));
-            }, 500);
+        // Demo messages if empty
+        if (messages.length === 0) {
+            messages = [
+                {name: "风水小白", content: "老师说的财位布局真的管用！我家客厅东南角放了植物，这周工作顺利多了！", time: "2026-02-15 14:30", contact: "", reply: "👍 恭喜！财位旺运，继续保持"},
+                {name: "小明", content: "请问大门正对阳台怎么化解？", time: "2026-02-14 09:20", contact: "wx: xm123", reply: "建议放玄关柜或屏风阻隔"},
+                {name: "紫微星", content: "关注很久了，确实是真实案例，不是网上那些骗人的。", time: "2026-02-13 18:45", contact: "", reply: "谢谢支持！只讲见过的事"},
+                {name: "财源滚滚", content: "去年找老师看的店铺，今年生意明显好转，谢谢老师！", time: "2026-02-12 10:15", contact: "", reply: "恭喜发财！继续保持"},
+                {name: "迷茫的打工人", content: "工作一直不顺，想问一下事业方向，老师能帮忙看看吗？", time: "2026-02-11 16:40", contact: "wx: ml123", reply: "可以预约详细分析"},
+                {name: "新房主", content: "刚买了新房，想请老师帮忙看看风水布局，收费怎么算？", time: "2026-02-10 11:20", contact: "wx: newhouse", reply: "详情可加微信了解"},
+                {name: "传统文化爱好者", content: "文章写得真好，风水确实有道理，支持！", time: "2026-02-09 08:30", contact: "", reply: "感谢支持！"},
+                {name: "周易研究者", content: "老师讲的内容很专业，不是那种坑蒙拐骗的，赞！", time: "2026-02-08 19:50", contact: "", reply: "共同学习！"},
+                {name: "换了新工作", content: "听老师建议调整了办公室座位，这几天心情好多了！", time: "2026-02-07 14:00", contact: "", reply: "👍 好的开始"},
+                {name: "孩子妈", content: "想给孩子起个好名字，老师有什么建议吗？", time: "2026-02-06 09:30", contact: "wx: mom88", reply: "可预约起名服务"}
+            ];
         }
         
-        function resetFortune() {
-            var today = new Date().toDateString();
-            var lastDate = localStorage.getItem('fortune_date');
-            if (lastDate === today) {
-                alert('每天只能抽一次签，明天再来吧！');
-                return;
-            }
-            localStorage.removeItem('fortune_date');
-            localStorage.removeItem('fortune_data');
-            location.reload();
-        }
-        
-        function shareFortune() {
-            var text = '🏮 我的今日运势：' + document.getElementById('zodiac').textContent + ' ' + 
-                       document.getElementById('luckScore').textContent + '分\n' +
-                       '🔢 幸运数字：' + document.getElementById('luckyNum').textContent + '\n' +
-                       '📕 运势解读：' + document.getElementById('fortuneText').textContent + '\n\n' +
-                       '一起来测测你的今日运势吧！🔮';
-            
-            if (navigator.share) {
-                navigator.share({ text: text });
+        function renderMessages() {
+            var html = '';
+            if (messages.length === 0) {
+                html = '<div class="empty">暂无留言，快来抢沙发~</div>';
             } else {
-                alert('请复制分享内容：\n\n' + text);
+                for (var i = 0; i < messages.length; i++) {
+                    var m = messages[i];
+                    html += '<div class="message-card">';
+                    html += '<div class="message-header">';
+                    html += '<span class="message-name">' + m.name + '</span>';
+                    html += '<span class="message-time">' + m.time + '</span>';
+                    html += '</div>';
+                    html += '<div class="message-content">' + m.content + '</div>';
+                    if (m.contact) {
+                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
+                    }
+                    if (m.reply) {
+                        html += '<div class="reply">';
+                        html += '<div class="reply-label">✏️ 博主回复:</div>';
+                        html += '<div class="reply-text">' + m.reply + '</div>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                }
             }
+            document.getElementById('messages').innerHTML = html;
+            document.getElementById('count').textContent = '(' + messages.length + ')';
         }
         
-        // 检查今天是否抽过
-        window.onload = function() {
-            var today = new Date().toDateString();
-            var lastDate = localStorage.getItem('fortune_date');
-            var data = localStorage.getItem('fortune_data');
+        function submitMessage() {
+            var name = document.getElementById('name').value.trim();
+            var content = document.getElementById('content').value.trim();
+            var contact = document.getElementById('contact').value.trim();
             
-            if (lastDate === today && data) {
-                var fortune = JSON.parse(data);
-                document.getElementById('zodiac').textContent = fortune.emoji;
-                document.getElementById('luckyNum').textContent = fortune.num;
-                document.getElementById('luckyColor').textContent = fortune.color;
-                document.getElementById('luckyDir').textContent = fortune.dir;
-                document.getElementById('yi').textContent = fortune.yi;
-                document.getElementById('ji').textContent = fortune.ji;
-                document.getElementById('fortuneText').textContent = fortune.text;
-                
-                var scoreType = fortune.text.length > 30 ? 'good' : 'excellent';
-                document.getElementById('luckScore').textContent = fortune[scoreType];
-                document.getElementById('luckScore').className = 'luck-score ' + scoreType;
-                
-                document.getElementById('start').style.display = 'none';
-                document.getElementById('result').style.display = 'block';
+            if (!name || !content) {
+                alert('请填写昵称和留言内容');
+                return;
             }
+            
+            var msg = {
+                name: name,
+                content: content,
+                contact: contact,
+                time: new Date().toLocaleString('zh-CN'),
+                reply: ''
+            };
+            
+            messages.unshift(msg);
+            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+            
+            document.getElementById('name').value = '';
+            document.getElementById('content').value = '';
+            document.getElementById('contact').value = '';
+            
+            var toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 2000);
+            
+            renderMessages();
         }
+        
+        renderMessages();
     </script>
 </body>
 </html>

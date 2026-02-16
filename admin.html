@@ -3,36 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理后台 - 一宅一句</title>
+    <title>留言管理 - 一宅一句</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
+        body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
         header { background: rgba(0,0,0,0.3); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
         header h1 { background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .card { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .card h2 { margin-bottom: 15px; color: #f5576c; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .stat { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; text-align: center; }
-        .stat-num { font-size: 2rem; font-weight: bold; color: #f5576c; }
-        .stat-label { color: #999; margin-top: 5px; }
-        .btn { background: linear-gradient(90deg, #f093fb, #f5576c); border: none; padding: 10px 20px; border-radius: 6px; color: white; cursor: pointer; }
+        .message-card { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; margin-bottom: 15px; border-left: 3px solid #f5576c; }
+        .message-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .message-name { color: #f093fb; font-weight: bold; }
+        .message-time { color: #666; font-size: 0.85rem; }
+        .message-content { color: #ddd; line-height: 1.6; margin: 10px 0; }
+        .message-contact { color: #888; font-size: 0.85rem; }
+        .reply-box { margin-top: 15px; }
+        .reply-box textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff; min-height: 60px; }
+        .btn { background: linear-gradient(90deg, #f093fb, #f5576c); border: none; padding: 8px 16px; border-radius: 6px; color: white; cursor: pointer; margin-right: 10px; }
         .btn-secondary { background: rgba(255,255,255,0.2); }
+        .btn-delete { background: #ff4d4f; }
         .logout { background: transparent; border: 1px solid #666; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        th { color: #f5576c; }
-        .nav { display: flex; gap: 10px; margin-bottom: 20px; }
-        .nav-item { padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 6px; cursor: pointer; }
-        .nav-item.active { background: #f5576c; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; color: #ccc; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; }
     </style>
 </head>
 <body>
     <header>
-        <h1>🏮 一宅一句 管理后台</h1>
+        <h1>💬 留言管理</h1>
         <div>
             <span id="userDisplay"></span>
             <button class="btn logout" onclick="logout()">退出</button>
@@ -40,110 +35,74 @@
     </header>
     
     <div class="container">
-        <div class="nav">
-            <div class="nav-item active" onclick="showPage('dashboard')">数据概览</div>
-            <div class="nav-item" onclick="showPage('users')">用户管理</div>
-            <div class="nav-item" onclick="showPage('content')">内容管理</div>
-        </div>
-        
-        <div id="dashboard">
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-num" id="userCount">0</div>
-                    <div class="stat-label">注册用户</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num" id="todayVisit">0</div>
-                    <div class="stat-label">今日访问</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-num">-</div>
-                    <div class="stat-label">总收益</div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="users" class="hidden">
-            <div class="card">
-                <h2>用户列表</h2>
-                <table>
-                    <thead><tr><th>用户名</th><th>注册时间</th><th>状态</th><th>操作</th></tr></thead>
-                    <tbody id="userList"></tbody>
-                </table>
-            </div>
-        </div>
-        
-        <div id="content" class="hidden">
-            <div class="card">
-                <h2>发布内容</h2>
-                <div class="form-group">
-                    <label>标题</label>
-                    <input type="text" id="postTitle" placeholder="请输入标题">
-                </div>
-                <div class="form-group">
-                    <label>内容</label>
-                    <textarea id="postContent" rows="5" placeholder="请输入内容"></textarea>
-                </div>
-                <button class="btn" onclick="publishPost()">发布</button>
-            </div>
+        <div class="card">
+            <h2>用户留言 (<span id="count">0</span>)</h2>
+            <div id="messageList"></div>
         </div>
     </div>
 
     <script>
         var currentUser = localStorage.getItem('fengshui_current');
-        var users = JSON.parse(localStorage.getItem('fengshui_users') || '{}');
+        var isAdmin = localStorage.getItem('fengshui_admin');
         
-        if (!currentUser) {
+        if (!isAdmin) {
+            alert('请先登录管理员');
             window.location.href = '/login.html';
         }
         
-        document.getElementById('userDisplay').textContent = currentUser;
-        document.getElementById('userCount').textContent = Object.keys(users).length;
+        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
         
-        function showPage(page) {
-            document.querySelectorAll('.nav-item').forEach(function(i) { i.classList.remove('active'); });
-            event.target.classList.add('active');
-            document.getElementById('dashboard').classList.add('hidden');
-            document.getElementById('users').classList.add('hidden');
-            document.getElementById('content').classList.add('hidden');
-            document.getElementById(page).classList.remove('hidden');
-            
-            if (page === 'users') loadUsers();
+        function render() {
+            var html = '';
+            if (messages.length === 0) {
+                html = '<p style="color:#666;text-align:center;padding:20px;">暂无留言</p>';
+            } else {
+                for (var i = 0; i < messages.length; i++) {
+                    var m = messages[i];
+                    html += '<div class="message-card">';
+                    html += '<div class="message-header">';
+                    html += '<span class="message-name">' + m.name + '</span>';
+                    html += '<span class="message-time">' + m.time + '</span>';
+                    html += '</div>';
+                    html += '<div class="message-content">' + m.content + '</div>';
+                    if (m.contact) {
+                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
+                    }
+                    html += '<div class="reply-box">';
+                    html += '<textarea id="reply' + i + '" placeholder="回复内容...">' + (m.reply || '') + '</textarea>';
+                    html += '<div style="margin-top:10px;">';
+                    html += '<button class="btn" onclick="saveReply(' + i + ')">保存回复</button>';
+                    html += '<button class="btn btn-delete" onclick="deleteMsg(' + i + ')">删除</button>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                }
+            }
+            document.getElementById('messageList').innerHTML = html;
+            document.getElementById('count').textContent = messages.length;
         }
         
-        function loadUsers() {
-            var list = '';
-            for (var username in users) {
-                list += '<tr><td>' + username + '</td><td>' + (users[username].created || '-') + '</td><td>正常</td><td><button class="btn btn-secondary" onclick="deleteUser(\'' + username + '\')">删除</button></td></tr>';
-            }
-            document.getElementById('userList').innerHTML = list || '<tr><td colspan="4">暂无用户</td></tr>';
+        function saveReply(index) {
+            var reply = document.getElementById('reply' + index).value;
+            messages[index].reply = reply;
+            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+            alert('回复已保存！');
         }
         
-        function deleteUser(username) {
-            if (confirm('确定删除用户 ' + username + ' 吗？')) {
-                delete users[username];
-                localStorage.setItem('fengshui_users', JSON.stringify(users));
-                loadUsers();
-                document.getElementById('userCount').textContent = Object.keys(users).length;
+        function deleteMsg(index) {
+            if (confirm('确定删除这条留言吗？')) {
+                messages.splice(index, 1);
+                localStorage.setItem('fengshui_messages', JSON.stringify(messages));
+                render();
             }
-        }
-        
-        function publishPost() {
-            var title = document.getElementById('postTitle').value;
-            var content = document.getElementById('postContent').value;
-            if (!title || !content) {
-                alert('请填写标题和内容');
-                return;
-            }
-            alert('发布成功！');
-            document.getElementById('postTitle').value = '';
-            document.getElementById('postContent').value = '';
         }
         
         function logout() {
-            localStorage.removeItem('fengshui_current');
+            localStorage.removeItem('fengshui_admin');
             window.location.href = '/login.html';
         }
+        
+        render();
     </script>
 </body>
 </html>
