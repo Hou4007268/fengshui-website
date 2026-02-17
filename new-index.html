@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一宅一句 - AI风水助手</title>
+    <meta name="description" content="一宅一句为您提供专业风水咨询服务。家居风水布局、装修风水禁忌、财运提升建议，帮您避开装修坑。科学看待风水传统文化。">
+    <meta name="keywords" content="风水,家居风水,装修风水,风水禁忌,财运,风水师,风水咨询,阳宅,阴宅,风水布局">
+    <meta name="author" content="一宅一句">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="一宅一句 - AI风水助手">
+    <meta property="og:description" content="专业风水咨询服务，帮您避开装修坑">
+    <meta property="og:type" content="website">
+    <title>一宅一句 | 专业风水咨询 - 家居风水布局 | 装修风水禁忌</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -822,5 +829,119 @@
     
     <!-- Floating Chat Button -->
     <div class="chat-float" onclick="alert('点击开始AI对话')">⛩️</div>
+    
+    <!-- WeChat Floating Button -->
+    <div class="wechat-float" onclick="showWechatModal()">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66L4 17l2.5-1.5c.89.31 1.87.5 2.91.5.34 0 .67-.02 1-.05-.1-.31-.16-.64-.16-1 0-2.76 2.69-5 6-5 .34 0 .67.03 1 .08A6.97 6.97 0 0 0 9.5 4zm8.28 5.5c-.15.45-.51.78-.99.78a1.1 1.1 0 0 1-.78-.34l-1.66.83.5-1.66c.27-.03.54-.05.82-.05 3.13 0 5.72 2.18 6.11 5h-1.05c-.38-1.82-1.91-3.22-3.95-3.56zM18.5 9c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zm2 4h-4v1h4v-1z"/>
+        </svg>
+    </div>
+    
+    <!-- WeChat Modal -->
+    <div class="wechat-modal" id="wechatModal" onclick="hideWechatModal()">
+        <div class="wechat-modal-content" onclick="event.stopPropagation()">
+            <span class="wechat-close" onclick="hideWechatModal()">×</span>
+            <h3>添加微信客服</h3>
+            <p>扫码添加微信，享1对1风水咨询</p>
+            <div class="wechat-qr-placeholder">
+                <!-- 请替换为你的微信二维码图片 -->
+                <img src="/images/wechat-qr.jpg" alt="微信二维码" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+                <div class="wechat-qr-placeholder-text" style="display:none">请添加微信：yiyayiyayao</div>
+            </div>
+            <p class="wechat-tip">工作时间：9:00-21:00</p>
+        </div>
+    </div>
+    
+    <style>
+    .wechat-float {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: #07C160;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(12, 193, 96, 0.4);
+        z-index: 9999;
+        transition: transform 0.3s;
+    }
+    .wechat-float:hover {
+        transform: scale(1.1);
+    }
+    .wechat-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+    }
+    .wechat-modal.show {
+        display: flex;
+    }
+    .wechat-modal-content {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        max-width: 350px;
+        position: relative;
+    }
+    .wechat-modal-content h3 {
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .wechat-modal-content p {
+        color: #666;
+        font-size: 14px;
+    }
+    .wechat-qr-placeholder {
+        margin: 20px auto;
+        width: 200px;
+        height: 200px;
+        background: #f5f5f5;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .wechat-qr-placeholder img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+    }
+    .wechat-qr-placeholder-text {
+        color: #999;
+        font-size: 14px;
+    }
+    .wechat-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        color: #999;
+        cursor: pointer;
+    }
+    .wechat-tip {
+        color: #07C160 !important;
+        font-size: 12px !important;
+    }
+    </style>
+    <script>
+    function showWechatModal() {
+        document.getElementById('wechatModal').classList.add('show');
+    }
+    function hideWechatModal() {
+        document.getElementById('wechatModal').classList.remove('show');
+    }
+    </script>
 </body>
 </html>
