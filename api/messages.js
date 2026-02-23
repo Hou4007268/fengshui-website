@@ -2,10 +2,15 @@
 // GET: 分页查询留言  POST: 提交留言
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-    process.env.SUPABASE_URL || 'https://fugdohvvjqwwobdkfsii.supabase.co',
-    process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM'
-);
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://fugdohvvjqwwobdkfsii.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
+
+let supabase;
+try {
+    supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch(e) {
+    supabase = null;
+}
 
 // 简单 IP hash 限流：同一 IP 60秒内只能发一条
 const ipTimestamps = new Map();
@@ -37,6 +42,11 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
+    // Check Supabase client
+    if (!supabase) {
+        return res.status(500).json({ error: 'Database not configured' });
+    }
+
     // GET: 分页查询
     if (req.method === 'GET') {
         try {
@@ -51,6 +61,11 @@ export default async function handler(req, res) {
                 .range(offset, offset + limit - 1);
 
             if (error) {
+                console.error('Supabase GET error:', error);
+                // Table might not exist yet
+                if (error.code === '42P01' || error.message?.includes('relation') || error.message?.includes('does not exist')) {
+                    return res.status(200).json({ messages: [], total: 0, has_more: false, notice: '留言表尚未创建，请先执行 supabase-setup.sql' });
+                }
                 return res.status(500).json({ error: error.message });
             }
 
@@ -60,7 +75,8 @@ export default async function handler(req, res) {
                 has_more: (offset + limit) < (count || 0)
             });
         } catch (e) {
-            return res.status(500).json({ error: e.message });
+            console.error('Messages GET exception:', e);
+            return res.status(500).json({ error: e.message || 'Internal server error' });
         }
     }
 
@@ -101,6 +117,7 @@ export default async function handler(req, res) {
                 .select();
 
             if (error) {
+                console.error('Supabase POST error:', error);
                 return res.status(500).json({ error: error.message });
             }
 
@@ -108,7 +125,8 @@ export default async function handler(req, res) {
 
             return res.status(200).json({ success: true, message: data?.[0] });
         } catch (e) {
-            return res.status(500).json({ error: e.message });
+            console.error('Messages POST exception:', e);
+            return res.status(500).json({ error: e.message || 'Internal server error' });
         }
     }
 
