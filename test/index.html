@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趣味测试合集 | 一宅一句 - 免费风水命理趣味测试</title>
+    <meta name="description" content="一宅一句趣味测试合集：10+款免费风水命理测试，包括今日运势、五行属性、面相气质、桃花运、财商、前世今生、幸运色等，好玩又有趣！">
+    <meta name="keywords" content="风水测试,运势测试,五行测试,面相测试,桃花运测试,财运测试,免费测试,趣味测试">
+    <link rel="canonical" href="https://12zn.com/test/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="趣味测试合集 | 一宅一句 - 免费风水命理趣味测试">
+    <meta property="og:description" content="10+款免费风水命理趣味测试，好玩又有趣，快来测一测！">
+    <meta property="og:url" content="https://12zn.com/test/">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+    <style>
+        .test-hub-hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            background: var(--white);
+            position: relative;
+        }
+        .test-hub-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 180px;
+            background: radial-gradient(ellipse, rgba(166,138,62,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .test-hub-hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ink);
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+        .test-hub-hero .hub-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+        .test-hub-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+        }
+        .test-hub-stat {
+            text-align: center;
+        }
+        .test-hub-stat .stat-num {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .test-hub-stat .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .test-category {
+            margin-bottom: 48px;
+        }
+        .test-category h2 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.15rem;
+            color: var(--ink);
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-category h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-soft);
+        }
+        .test-category-badge {
+            font-size: 0.72rem;
+            background: var(--vermilion);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .test-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+        .test-hub-card {
+            text-decoration: none;
+            color: inherit;
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 28px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+        }
+        .test-hub-card:hover {
+            border-color: var(--gold-soft);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .test-hub-card-icon {
+            font-size: 2.2rem;
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gold-bg);
+            border-radius: 12px;
+        }
+        .test-hub-card-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .test-hub-card-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        .test-hub-card-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .test-hub-card-tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--gold-bg);
+            color: var(--gold);
+        }
+        .test-hub-card--new .test-hub-card-icon {
+            background: rgba(181, 69, 42, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .test-hub-hero h1 { font-size: 1.4rem; }
+            .test-hub-grid { grid-template-columns: 1fr; }
+            .test-hub-stats { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            趣味测试合集
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="test-hub-hero">
+        <h1>趣味测试合集</h1>
+        <p class="hub-desc">
+            好玩又有趣的风水命理测试，每一个测试都精心设计。<br>
+            免费测一测，发现你的风水密码！
+        </p>
+        <div class="test-hub-stats">
+            <div class="test-hub-stat">
+                <div class="stat-num">10</div>
+                <div class="stat-label">款测试</div>
+            </div>
+            <div class="test-hub-stat">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">免费</div>
+            </div>
+            <div class="test-hub-stat">
+                <div class="stat-num">3分钟</div>
+                <div class="stat-label">即出结果</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 测试列表 -->
+    <div class="section">
+        <div class="container">
+
+            <!-- 经典测试 -->
+            <div class="test-category">
+                <h2>⭐ 经典热门</h2>
+                <div class="test-hub-grid">
+                    <a class="test-hub-card" href="../services/test-yunshi.html">
+                        <div class="test-hub-card-icon">🔮</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">今日运势速测</div>
+                            <div class="test-hub-card-desc">输入生肖，AI秒测今日运势吉凶、财运、感情运</div>
+                            <span class="test-hub-card-tag">最受欢迎</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card" href="../services/test-wuxing.html">
+                        <div class="test-hub-card-icon">🌊</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">五行属性测试</div>
+                            <div class="test-hub-card-desc">8道趣味题，揭秘你是金木水火土哪种性格</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card" href="../services/test-fengshui.html">
+                        <div class="test-hub-card-icon">🏠</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">家居风水评分</div>
+                            <div class="test-hub-card-desc">6道题，给你家风水打个分，看看哪里需要改善</div>
+                            <span class="test-hub-card-tag">6道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card" href="../services/test-xingming.html">
+                        <div class="test-hub-card-icon">✍️</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">姓名吉凶测试</div>
+                            <div class="test-hub-card-desc">输入姓名，分析五格数理吉凶，解读名字能量</div>
+                            <span class="test-hub-card-tag">输入即测</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 新上线测试 -->
+            <div class="test-category">
+                <h2>🆕 新上线 <span class="test-category-badge">NEW</span></h2>
+                <div class="test-hub-grid">
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-mianxiang.html">
+                        <div class="test-hub-card-icon">👤</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">面相气质测试</div>
+                            <div class="test-hub-card-desc">8道关于面部特征的问题，解读你的气质类型与运势</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-taohua.html">
+                        <div class="test-hub-card-icon">🌸</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">桃花运测试</div>
+                            <div class="test-hub-card-desc">测测你的桃花运类型，了解你的姻缘密码</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-caishang.html">
+                        <div class="test-hub-card-icon">💰</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">财商测试</div>
+                            <div class="test-hub-card-desc">测测你的财运密码，发现你的理财性格与财富潜力</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-qianshi.html">
+                        <div class="test-hub-card-icon">🕯️</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">前世今生测试</div>
+                            <div class="test-hub-card-desc">探索你的前世记忆，看看你前世是什么身份</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-lucky.html">
+                        <div class="test-hub-card-icon">🎨</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">幸运色测试</div>
+                            <div class="test-hub-card-desc">找到属于你的开运幸运色，用颜色提升运势</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                    <a class="test-hub-card test-hub-card--new" href="../services/test-xinli.html">
+                        <div class="test-hub-card-icon">🧠</div>
+                        <div class="test-hub-card-body">
+                            <div class="test-hub-card-title">心理年龄测试</div>
+                            <div class="test-hub-card-desc">测测你的心灵年龄是多少岁，是少年心还是老灵魂</div>
+                            <span class="test-hub-card-tag">8道题</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>想要更精准的运势分析？</h2>
+            <p class="wechat-sub">免费测试只是入门，深度分析需要专业风水师<br>扫码添加微信，获得一对一专属指导</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

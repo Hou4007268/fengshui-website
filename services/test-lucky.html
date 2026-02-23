@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸运色测试 | 一宅一句 - 找到属于你的幸运色</title>
+    <meta name="description" content="一宅一句幸运色测试：8道趣味题，发现你的风水幸运色。金色、绿色、蓝色、红色、紫色，哪种颜色能为你带来好运？免费测试，快来探索！">
+    <meta name="keywords" content="幸运色测试,风水颜色,幸运颜色,风水配色,颜色运势,免费测试">
+    <link rel="canonical" href="https://12zn.com/services/test-lucky.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="幸运色测试 | 一宅一句 - 找到属于你的幸运色">
+    <meta property="og:description" content="一宅一句幸运色测试：8道趣味题，发现你的风水幸运色。金色、绿色、蓝色、红色、紫色，哪种颜色能为你带来好运？免费测试，快来探索！">
+    <meta property="og:url" content="https://12zn.com/services/test-lucky.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+    <style>
+        /* === 幸运色测试专用样式 === */
+        .test-container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 进度条 */
+        .progress-wrap {
+            margin-bottom: 32px;
+        }
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .progress-text {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+        .progress-num {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border-soft);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+
+        /* 问题卡片 */
+        .question-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 32px 28px;
+            box-shadow: var(--shadow-md);
+            animation: fadeUp 0.4s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .question-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.15rem;
+            color: var(--ink);
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--parchment);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            font-family: inherit;
+            line-height: 1.6;
+        }
+        .option-btn:hover {
+            border-color: var(--gold);
+            background: var(--gold-bg);
+            color: var(--ink);
+            transform: translateX(4px);
+        }
+        .option-btn:active {
+            transform: translateX(4px) scale(0.98);
+        }
+
+        /* 分析中动画 */
+        .analyzing-screen {
+            text-align: center;
+            padding: 80px 24px;
+            display: none;
+        }
+        .analyzing-screen.active {
+            display: block;
+        }
+        .analyzing-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            border: 3px solid var(--border-soft);
+            border-top-color: var(--gold);
+            animation: spin 1s linear infinite;
+        }
+        .analyzing-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: var(--ink);
+            letter-spacing: 0.15em;
+        }
+        .analyzing-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* 结果页面 */
+        .result-screen {
+            display: none;
+            animation: fadeUp 0.6s ease;
+        }
+        .result-screen.active {
+            display: block;
+        }
+
+        .result-hero {
+            text-align: center;
+            padding: 40px 24px;
+            background: var(--white);
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .result-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 160px;
+            pointer-events: none;
+        }
+        .result-element-icon {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            position: relative;
+            animation: resultPop 0.6s ease;
+        }
+        @keyframes resultPop {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .result-element-name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+        .result-element-sub {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        /* 色彩条 */
+        .color-band {
+            height: 6px;
+            border-radius: 3px;
+            margin: 16px auto 0;
+            width: 120px;
+        }
+
+        /* 结果详情卡片 */
+        .result-detail-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 14px;
+        }
+        .result-detail-card h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .result-detail-card h3 .detail-icon {
+            font-size: 1.1rem;
+        }
+        .result-detail-card p {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.9;
+        }
+
+        /* 幸运物品网格 */
+        .lucky-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+        .lucky-item {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+        }
+        .lucky-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .lucky-value {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* 幸运物品列表 */
+        .lucky-items-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .lucky-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        /* CTA */
+        .result-cta {
+            background: var(--ink);
+            border-radius: 14px;
+            padding: 32px 24px;
+            text-align: center;
+            margin-top: 14px;
+        }
+        .result-cta h3 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--parchment);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+        .result-cta-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-cta-pay {
+            padding: 12px 28px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-family: inherit;
+        }
+        .btn-cta-pay:hover { opacity: 0.85; }
+        .btn-cta-wechat {
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--parchment);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-cta-wechat:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* 重新测试 */
+        .restart-wrap {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-restart {
+            display: inline-block;
+            padding: 10px 24px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-restart:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* 开始页面 */
+        .start-screen {
+            text-align: center;
+            padding: 40px 0;
+        }
+        .start-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .start-icon-item {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+        .start-icon-item:nth-child(1) { background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0s; }
+        .start-icon-item:nth-child(2) { background: rgba(76,153,76,0.12); color: #4c994c; animation-delay: 0.3s; }
+        .start-icon-item:nth-child(3) { background: rgba(70,130,180,0.12); color: #4682b4; animation-delay: 0.6s; }
+        .start-icon-item:nth-child(4) { background: rgba(200,50,50,0.12); color: #c83232; animation-delay: 0.9s; }
+        .start-icon-item:nth-child(5) { background: rgba(128,60,180,0.12); color: #803cb4; animation-delay: 1.2s; }
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .start-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.3rem;
+            color: var(--ink);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .start-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 28px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-start {
+            display: inline-block;
+            padding: 14px 40px;
+            background: var(--ink);
+            color: var(--parchment);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-family: inherit;
+            letter-spacing: 0.1em;
+        }
+        .btn-start:hover { opacity: 0.85; }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .question-card { padding: 24px 20px; }
+            .question-title { font-size: 1.05rem; }
+            .lucky-grid { grid-template-columns: 1fr 1fr; }
+            .result-cta-btns { flex-direction: column; }
+            .btn-cta-pay, .btn-cta-wechat { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html#messages">留言</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html#services">趣味测试</a><span>›</span>
+            幸运色测试
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="service-hero">
+        <div class="service-icon" style="background: linear-gradient(135deg, #c83232, #b8942e, #4c994c, #4682b4, #803cb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">彩</div>
+        <h1>幸运色测试</h1>
+        <p class="service-tagline">8道趣味问答，探索属于你的风水幸运色彩</p>
+    </section>
+
+    <!-- 测试主体 -->
+    <div class="section">
+        <div class="test-container">
+
+            <!-- 开始页面 -->
+            <div id="start-screen" class="start-screen">
+                <div class="start-icons">
+                    <div class="start-icon-item">&#9728;</div>
+                    <div class="start-icon-item">&#9752;</div>
+                    <div class="start-icon-item">&#9733;</div>
+                    <div class="start-icon-item">&#10084;</div>
+                    <div class="start-icon-item">&#9830;</div>
+                </div>
+                <div class="start-title">哪种颜色是你的幸运色？</div>
+                <p class="start-desc">
+                    色彩蕴含能量，每种颜色在风水中都有独特的寓意。你的性格、喜好和生活方式，都在指向一种与你最契合的幸运色。<br>
+                    回答8个简单的问题，找到属于你的幸运色彩。
+                </p>
+                <button class="btn-start" onclick="startTest()">开始测试</button>
+            </div>
+
+            <!-- 答题区域 -->
+            <div id="quiz-screen" style="display:none;">
+                <div class="progress-wrap">
+                    <div class="progress-info">
+                        <span class="progress-text">测试进度</span>
+                        <span class="progress-num" id="progress-num">1 / 8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+                    </div>
+                </div>
+                <div id="question-area"></div>
+            </div>
+
+            <!-- 分析中 -->
+            <div id="analyzing-screen" class="analyzing-screen">
+                <div class="analyzing-icon"></div>
+                <div class="analyzing-text">色彩解读中...</div>
+                <p class="analyzing-sub">正在结合风水色彩学分析你的幸运色</p>
+            </div>
+
+            <!-- 结果页面 -->
+            <div id="result-screen" class="result-screen"></div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <!-- 微信弹窗 -->
+    <div class="lead-popup" id="lead-popup">
+        <div class="lead-box">
+            <h3>添加微信咨询</h3>
+            <p class="lead-hint">扫码添加微信，获取专属色彩风水分析</p>
+            <img src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="qr-hint">长按识别二维码 · 添加微信</p>
+            <div class="lead-close" onclick="document.getElementById('lead-popup').classList.remove('active')">暂不需要</div>
+        </div>
+    </div>
+
+    <!-- 支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:12px;color:var(--bamboo);">支付成功</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;">感谢支持！请添加微信获取详细报告。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/shared.js"></script>
+    <script>
+    (function() {
+        // ========== 题目数据 ==========
+        const questions = [
+            {
+                q: '心情低落时，你最想做什么来恢复能量？',
+                options: [
+                    { text: '买一件精致的好物犒赏自己，享受品质感', color: '金' },
+                    { text: '去公园散步或阳台种花，亲近自然', color: '绿' },
+                    { text: '找一个安静的地方独处，听音乐或冥想', color: '蓝' },
+                    { text: '约朋友出去嗨，用热闹驱散阴霾', color: '红' },
+                    { text: '点一盏香薰，泡个澡，享受独特的仪式感', color: '紫' }
+                ]
+            },
+            {
+                q: '如果可以瞬移到一个地方度假，你会选择？',
+                options: [
+                    { text: '迪拜 —— 奢华璀璨的黄金之城', color: '金' },
+                    { text: '新西兰 —— 纯净辽阔的绿色牧场', color: '绿' },
+                    { text: '冰岛 —— 极光下的蓝色冰川', color: '蓝' },
+                    { text: '巴厘岛 —— 热情洋溢的阳光海滩', color: '红' },
+                    { text: '普罗旺斯 —— 浪漫神秘的薰衣草田', color: '紫' }
+                ]
+            },
+            {
+                q: '你理想中的家居风格更接近哪种？',
+                options: [
+                    { text: '轻奢风 —— 金属元素、大理石台面、精致陈设', color: '金' },
+                    { text: '自然风 —— 原木家具、绿植满屋、清新明亮', color: '绿' },
+                    { text: '极简风 —— 蓝灰色调、线条简洁、宁静舒适', color: '蓝' },
+                    { text: '中式风 —— 朱红漆器、暖色灯光、喜庆温馨', color: '红' },
+                    { text: '复古风 —— 丝绒质感、深色调、神秘优雅', color: '紫' }
+                ]
+            },
+            {
+                q: '选一种最打动你的自然景象：',
+                options: [
+                    { text: '黄昏时分，夕阳将天空染成一片金色', color: '金' },
+                    { text: '雨后初晴，远山近树一片翠绿欲滴', color: '绿' },
+                    { text: '深夜海边，月光洒在平静的海面上', color: '蓝' },
+                    { text: '满山红叶，漫天晚霞如火如荼', color: '红' },
+                    { text: '星空银河，浩瀚宇宙的深邃神秘', color: '紫' }
+                ]
+            },
+            {
+                q: '朋友会用哪个词来形容你？',
+                options: [
+                    { text: '有品味 —— 对美和品质有独到的眼光', color: '金' },
+                    { text: '温和亲切 —— 和你在一起很舒服放松', color: '绿' },
+                    { text: '睿智冷静 —— 总能给出理性的建议', color: '蓝' },
+                    { text: '热情大方 —— 自带阳光和感染力', color: '红' },
+                    { text: '独特神秘 —— 有一种说不出的魅力', color: '紫' }
+                ]
+            },
+            {
+                q: '面对一个重要决定，你通常会怎么做？',
+                options: [
+                    { text: '权衡利弊，选择回报最优的方案', color: '金' },
+                    { text: '顺其自然，相信时间会给出答案', color: '绿' },
+                    { text: '深入分析，收集信息后理性判断', color: '蓝' },
+                    { text: '跟着直觉走，相信自己的第一感觉', color: '红' },
+                    { text: '倾听内心，选择那个让灵魂共鸣的选项', color: '紫' }
+                ]
+            },
+            {
+                q: '你在生活中最看重什么？',
+                options: [
+                    { text: '事业成就与财富积累，让生活有保障', color: '金' },
+                    { text: '身心健康与家庭和睦，简单就是幸福', color: '绿' },
+                    { text: '知识智慧与内心平静，活得通透明白', color: '蓝' },
+                    { text: '热爱与激情，每天都要活得精彩', color: '红' },
+                    { text: '精神追求与自我成长，探索生命的深度', color: '紫' }
+                ]
+            },
+            {
+                q: '选一种最吸引你的饰品或小物件：',
+                options: [
+                    { text: '一枚精工打造的金属胸针', color: '金' },
+                    { text: '一盆生机盎然的小盆栽', color: '绿' },
+                    { text: '一串清透的蓝色水晶手链', color: '蓝' },
+                    { text: '一条鲜艳的红色丝巾', color: '红' },
+                    { text: '一瓶深邃的紫色香水', color: '紫' }
+                ]
+            }
+        ];
+
+        // ========== 幸运色结果数据 ==========
+        const colorData = {
+            '金': {
+                emoji: '&#9728;',
+                cssColor: '#D4AF37',
+                bgColor: 'rgba(212,175,55,0.12)',
+                borderColor: 'rgba(212,175,55,0.4)',
+                accentLight: 'rgba(212,175,55,0.06)',
+                gradientBg: 'radial-gradient(ellipse, rgba(212,175,55,0.1) 0%, transparent 70%)',
+                tagBg: 'rgba(212,175,55,0.1)',
+                tagColor: '#b8942e',
+                name: '金色系',
+                subtitle: '财富荣耀 · 尊贵成功',
+                meaning: '金色在风水中象征财富、权力与成功。它对应五行中的"金"，代表收获与圆满。金色是太阳的颜色，是丰收的麦穗，是古代帝王的尊贵之色。拥有金色幸运色的人，天生带有富贵气场，追求卓越品质，在事业和财运方面有着强大的吸引力。',
+                personality: '你是一个注重品质、追求卓越的人。你有敏锐的审美和商业嗅觉，善于把握机会。你为人处世讲究分寸，举止得体，给人一种可靠、值得信赖的感觉。你的气场沉稳大气，天生具有领导力，是团队中的核心人物。',
+                usage: '在生活中多使用金色、香槟色、土豪金等色调，可以增强你的财运和贵人运。穿着上可以选择金色配饰、米金色的衣物。家居装饰中，在客厅西方或入门玄关处添加金属材质的装饰品，如铜制摆件、金色相框等，能有效催旺财运。',
+                luckyItems: ['金色手表', '铜制摆件', '金色钱包', '琥珀饰品'],
+                placement: '在家中西方或西北方摆放金色调物品效果最佳。办公桌上放一个金色笔筒或金属名片夹，有助于事业运提升。钱包选用金色或棕金色，有助于聚财。',
+                luckyDir: '西方、西北方',
+                luckyNum: '4、9'
+            },
+            '绿': {
+                emoji: '&#9752;',
+                cssColor: '#4CAF50',
+                bgColor: 'rgba(76,175,80,0.12)',
+                borderColor: 'rgba(76,175,80,0.4)',
+                accentLight: 'rgba(76,175,80,0.06)',
+                gradientBg: 'radial-gradient(ellipse, rgba(76,175,80,0.1) 0%, transparent 70%)',
+                tagBg: 'rgba(76,175,80,0.1)',
+                tagColor: '#388E3C',
+                name: '绿色系',
+                subtitle: '生机勃勃 · 健康成长',
+                meaning: '绿色在风水中象征生命力、健康与希望。它对应五行中的"木"，代表生长与新生。绿色是春天的颜色，是万物复苏的信号，是生生不息的力量。拥有绿色幸运色的人，内心充满正能量，具有极强的自愈能力和成长潜力，在健康和人际关系方面有着天然的好运。',
+                personality: '你是一个温和亲切、充满生命力的人。你像春风一样让人舒适，善于倾听，富有同理心。你追求自然和谐的生活方式，不喜欢争执和冲突。你的适应能力很强，无论环境如何变化都能从容应对，像一棵大树一样稳稳扎根、向上生长。',
+                usage: '在日常生活中多使用翠绿、草绿、薄荷绿等色调，能提升你的健康运和人缘运。穿着上可以选择绿色系的围巾、上衣。家中多摆放绿色植物，特别是在客厅东方和阳台，不仅净化空气，还能催旺家庭和睦与个人成长运势。',
+                luckyItems: ['翡翠吊坠', '绿色盆栽', '抹茶色手帐', '绿松石手链'],
+                placement: '在家中东方或东南方摆放绿色植物效果最佳。书桌上放一盆小绿植，有助于工作学习时保持思路清晰。卧室窗台放一盆薄荷或绿萝，有助于睡眠和健康运。',
+                luckyDir: '东方、东南方',
+                luckyNum: '3、8'
+            },
+            '蓝': {
+                emoji: '&#9733;',
+                cssColor: '#2196F3',
+                bgColor: 'rgba(33,150,243,0.12)',
+                borderColor: 'rgba(33,150,243,0.4)',
+                accentLight: 'rgba(33,150,243,0.06)',
+                gradientBg: 'radial-gradient(ellipse, rgba(33,150,243,0.1) 0%, transparent 70%)',
+                tagBg: 'rgba(33,150,243,0.1)',
+                tagColor: '#1565C0',
+                name: '蓝色系',
+                subtitle: '智慧深邃 · 宁静致远',
+                meaning: '蓝色在风水中象征智慧、沟通与平静。它对应五行中的"水"，代表深邃与流动。蓝色是天空和大海的颜色，是冷静思考的力量，是广阔胸襟的象征。拥有蓝色幸运色的人，思维敏捷，洞察力极强，在学业、智慧和人际沟通方面有着独特的优势。',
+                personality: '你是一个睿智冷静、思维深邃的人。你善于观察和分析，能看到事物表面之下的本质。你内心丰富却不喜张扬，安静的外表下藏着一颗充满好奇的心。你重视精神世界的丰盈，喜欢阅读、思考和探索未知。你的建议总是中肯而有深度，是朋友们信赖的智囊。',
+                usage: '在日常生活中多使用天蓝、湖蓝、深蓝等色调，能增强你的智慧运和贵人运。穿着上可以选择蓝色衬衫、蓝色围巾。家居装饰中，在书房和办公区域使用蓝色系物品，如蓝色台灯、蓝色笔记本，有助于提升思维清晰度和工作效率。',
+                luckyItems: ['蓝色水晶', '青花瓷摆件', '蓝色日记本', '海蓝宝石饰品'],
+                placement: '在家中北方摆放蓝色调物品或小型水景效果最佳。书房宜用蓝色系窗帘或书架装饰，有助于集中注意力。办公桌上放一杯清水或蓝色水晶球，能提升工作运和学业运。',
+                luckyDir: '北方、西北方',
+                luckyNum: '1、6'
+            },
+            '红': {
+                emoji: '&#10084;',
+                cssColor: '#E53935',
+                bgColor: 'rgba(229,57,53,0.12)',
+                borderColor: 'rgba(229,57,53,0.4)',
+                accentLight: 'rgba(229,57,53,0.06)',
+                gradientBg: 'radial-gradient(ellipse, rgba(229,57,53,0.1) 0%, transparent 70%)',
+                tagBg: 'rgba(229,57,53,0.1)',
+                tagColor: '#C62828',
+                name: '红色系',
+                subtitle: '热情似火 · 鸿运当头',
+                meaning: '红色在风水中象征喜庆、热情与好运。它对应五行中的"火"，代表光明与力量。红色是中国最吉祥的颜色，是春节的灯笼、是婚礼的喜字、是生命力的极致表达。拥有红色幸运色的人，天生自带好运气，性格热情奔放，在社交、桃花和事业拓展方面有着强大的能量场。',
+                personality: '你是一个热情洋溢、充满活力的人。你像火焰一样温暖照亮身边的每个人，自带感染力和号召力。你做事果断、有魄力，敢想敢做。你的社交能力极强，走到哪里都是人群的焦点。你对生活充满热爱，相信行动的力量，喜欢用实际行动去追求想要的一切。',
+                usage: '在日常生活中多使用正红、酒红、珊瑚红等色调，能增强你的桃花运和事业运。穿着上可以选择红色系的小配饰，如红色领带、红色手绳。家中在南方和入户门处使用红色元素，如红色装饰画、中国结，能有效催旺家运和个人气场。',
+                luckyItems: ['红色手绳', '红玛瑙饰品', '中国结挂件', '朱砂手链'],
+                placement: '在家中南方摆放红色调装饰品效果最佳。大门口挂一个红色中国结或福字，有助于迎接好运。钱包里放一张红纸，随身佩戴红绳或红玛瑙，都能提升整体运势和正能量。',
+                luckyDir: '南方、东南方',
+                luckyNum: '2、7'
+            },
+            '紫': {
+                emoji: '&#9830;',
+                cssColor: '#7B1FA2',
+                bgColor: 'rgba(123,31,162,0.12)',
+                borderColor: 'rgba(123,31,162,0.4)',
+                accentLight: 'rgba(123,31,162,0.06)',
+                gradientBg: 'radial-gradient(ellipse, rgba(123,31,162,0.1) 0%, transparent 70%)',
+                tagBg: 'rgba(123,31,162,0.1)',
+                tagColor: '#6A1B9A',
+                name: '紫色系',
+                subtitle: '高贵神秘 · 灵性智慧',
+                meaning: '紫色在风水中象征尊贵、灵性与神秘。它是红色热情与蓝色沉静的融合，代表着超凡脱俗的力量。"紫气东来"是中国传统文化中最吉祥的意象之一，紫色自古就是帝王和修行者的专属色彩。拥有紫色幸运色的人，具有独特的个人魅力和精神力量，在创造力、直觉和贵人运方面有着非凡的天赋。',
+                personality: '你是一个独特而有深度的人，身上有一种说不出的神秘魅力。你的审美高于常人，对精神世界有着强烈的探索欲。你直觉敏锐，常常能感知到别人忽略的细节。你不随波逐流，有自己独立的价值观和生活哲学。你的创造力极强，无论在艺术、写作还是策划方面，都能展现出与众不同的才华。',
+                usage: '在日常生活中多使用紫罗兰、薰衣草紫、深紫等色调，能增强你的贵人运和灵感运。穿着上可以选择紫色丝巾、紫色包包。家居装饰中，在卧室和冥想角使用紫色系物品，如紫水晶、紫色抱枕、薰衣草香薰，能有效提升直觉力和精神能量。',
+                luckyItems: ['紫水晶球', '薰衣草香薰', '紫色丝巾', '紫檀木手串'],
+                placement: '在家中东南方或卧室床头摆放紫色调物品效果最佳。书桌上放一颗紫水晶球，有助于激发创造力。卧室使用薰衣草色系的床品或香薰，能提升睡眠质量和灵感。冥想时点一盏紫色蜡烛，有助于静心和开发直觉。',
+                luckyDir: '东南方、正东方',
+                luckyNum: '5、0'
+            }
+        };
+
+        // ========== 状态变量 ==========
+        let currentQ = 0;
+        let scores = { '金': 0, '绿': 0, '蓝': 0, '红': 0, '紫': 0 };
+
+        // ========== 开始测试 ==========
+        window.startTest = function() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            currentQ = 0;
+            scores = { '金': 0, '绿': 0, '蓝': 0, '红': 0, '紫': 0 };
+            renderQuestion();
+        };
+
+        // ========== 渲染问题 ==========
+        function renderQuestion() {
+            const q = questions[currentQ];
+            const area = document.getElementById('question-area');
+            // 打乱选项顺序
+            const shuffled = q.options.slice().sort(function() { return Math.random() - 0.5; });
+
+            let html = '<div class="question-card">';
+            html += '<div class="question-title">' + q.q + '</div>';
+            html += '<div class="options-list">';
+            shuffled.forEach(function(opt) {
+                html += '<button class="option-btn" onclick="selectOption(\'' + opt.color + '\')">' + opt.text + '</button>';
+            });
+            html += '</div></div>';
+            area.innerHTML = html;
+
+            // 更新进度
+            document.getElementById('progress-num').textContent = (currentQ + 1) + ' / 8';
+            document.getElementById('progress-fill').style.width = ((currentQ + 1) / 8 * 100) + '%';
+        }
+
+        // ========== 选择选项 ==========
+        window.selectOption = function(color) {
+            scores[color]++;
+            currentQ++;
+
+            if (currentQ < questions.length) {
+                renderQuestion();
+            } else {
+                showAnalyzing();
+            }
+        };
+
+        // ========== 分析中动画 ==========
+        function showAnalyzing() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            var screen = document.getElementById('analyzing-screen');
+            screen.classList.add('active');
+
+            setTimeout(function() {
+                screen.classList.remove('active');
+                showResult();
+            }, 2000);
+        }
+
+        // ========== 计算结果 ==========
+        function getDominantColor() {
+            let max = 0;
+            let dominant = '金';
+            var colors = ['金', '绿', '蓝', '红', '紫'];
+            for (var i = 0; i < colors.length; i++) {
+                var c = colors[i];
+                if (scores[c] > max) {
+                    max = scores[c];
+                    dominant = c;
+                }
+            }
+            return dominant;
+        }
+
+        // ========== 显示结果 ==========
+        function showResult() {
+            var dominant = getDominantColor();
+            var data = colorData[dominant];
+            var screen = document.getElementById('result-screen');
+
+            var html = '';
+
+            // 主色彩卡片
+            html += '<div class="result-hero" style="border-top: 3px solid ' + data.cssColor + ';">';
+            html += '<div class="result-element-icon" style="background:' + data.bgColor + ';border:2px solid ' + data.borderColor + ';color:' + data.cssColor + ';">' + data.emoji + '</div>';
+            html += '<div class="result-element-name" style="color:' + data.cssColor + ';">你的幸运色：' + data.name + '</div>';
+            html += '<div class="result-element-sub">' + data.subtitle + '</div>';
+            html += '<div class="color-band" style="background: linear-gradient(90deg, ' + data.bgColor + ', ' + data.cssColor + ', ' + data.bgColor + ');"></div>';
+            html += '</div>';
+
+            // 风水寓意
+            html += '<div class="result-detail-card" style="border-left: 3px solid ' + data.cssColor + ';">';
+            html += '<h3><span class="detail-icon" style="color:' + data.cssColor + ';">&#9673;</span> 风水寓意</h3>';
+            html += '<p>' + data.meaning + '</p>';
+            html += '</div>';
+
+            // 性格匹配
+            html += '<div class="result-detail-card" style="border-left: 3px solid ' + data.cssColor + ';">';
+            html += '<h3><span class="detail-icon" style="color:' + data.cssColor + ';">&#9733;</span> 性格匹配</h3>';
+            html += '<p>' + data.personality + '</p>';
+            html += '</div>';
+
+            // 如何运用
+            html += '<div class="result-detail-card" style="border-left: 3px solid ' + data.cssColor + ';">';
+            html += '<h3><span class="detail-icon" style="color:' + data.cssColor + ';">&#9776;</span> 色彩运用建议</h3>';
+            html += '<p>' + data.usage + '</p>';
+            html += '</div>';
+
+            // 幸运物品
+            html += '<div class="result-detail-card" style="border-left: 3px solid ' + data.cssColor + ';">';
+            html += '<h3><span class="detail-icon" style="color:' + data.cssColor + ';">&#10070;</span> 幸运物品推荐</h3>';
+            html += '<div class="lucky-items-list">';
+            data.luckyItems.forEach(function(item) {
+                html += '<span class="lucky-tag" style="background:' + data.tagBg + ';color:' + data.tagColor + ';">' + item + '</span>';
+            });
+            html += '</div>';
+            html += '</div>';
+
+            // 风水摆放
+            html += '<div class="result-detail-card" style="border-left: 3px solid ' + data.cssColor + ';">';
+            html += '<h3><span class="detail-icon" style="color:' + data.cssColor + ';">&#8962;</span> 风水摆放贴士</h3>';
+            html += '<p>' + data.placement + '</p>';
+            html += '</div>';
+
+            // 幸运信息
+            html += '<div class="lucky-grid">';
+            html += '<div class="lucky-item" style="border-top: 2px solid ' + data.cssColor + ';"><div class="lucky-label">幸运方位</div><div class="lucky-value" style="color:' + data.cssColor + ';">' + data.luckyDir + '</div></div>';
+            html += '<div class="lucky-item" style="border-top: 2px solid ' + data.cssColor + ';"><div class="lucky-label">幸运数字</div><div class="lucky-value" style="color:' + data.cssColor + ';">' + data.luckyNum + '</div></div>';
+            html += '</div>';
+
+            // CTA
+            html += '<div class="result-cta">';
+            html += '<h3>想了解更多色彩风水秘密？</h3>';
+            html += '<div class="result-cta-btns">';
+            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥9.9</button>';
+            html += '<button class="btn-cta-wechat" onclick="document.getElementById(\'lead-popup\').classList.add(\'active\')">添加微信咨询</button>';
+            html += '</div>';
+            html += '</div>';
+
+            // 重新测试
+            html += '<div class="restart-wrap">';
+            html += '<button class="btn-restart" onclick="restartTest()">重新测试</button>';
+            html += '</div>';
+
+            screen.innerHTML = html;
+            screen.classList.add('active');
+
+            // 滚动到结果顶部
+            screen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ========== 重新测试 ==========
+        window.restartTest = function() {
+            document.getElementById('result-screen').classList.remove('active');
+            document.getElementById('result-screen').innerHTML = '';
+            document.getElementById('start-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // ========== 支付弹窗兼容（如果主页没有加载支付脚本） ==========
+        if (typeof window.openPayModal === 'undefined') {
+            window.openPayModal = function(productId) {
+                var modal = document.getElementById('modal-pay');
+                if (modal) {
+                    modal.classList.add('active');
+                    var selectDiv = document.getElementById('pay-step-select');
+                    if (selectDiv) {
+                        var list = document.getElementById('pay-product-list');
+                        if (list) {
+                            list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:0.88rem;">' +
+                                '<p style="margin-bottom:12px;">请添加微信获取支付链接</p>' +
+                                '<button class="btn" style="max-width:200px;margin:0 auto;" onclick="document.getElementById(\'modal-pay\').classList.remove(\'active\');document.getElementById(\'lead-popup\').classList.add(\'active\');">添加微信</button>' +
+                                '</div>';
+                        }
+                    }
+                }
+            };
+        }
+        if (typeof window.closePayModal === 'undefined') {
+            window.closePayModal = function() {
+                var modal = document.getElementById('modal-pay');
+                if (modal) modal.classList.remove('active');
+            };
+        }
+
+    })();
+    </script>
+</body>
+</html>

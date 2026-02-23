@@ -902,6 +902,32 @@ body::before{
 .breadcrumb a:hover{color:var(--gold);}
 .breadcrumb span{margin:0 6px;}
 
+/* === 趣味测试卡片 === */
+.test-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;max-width:960px;margin:0 auto;
+}
+.test-card-item{
+    text-decoration:none;color:inherit;
+    background:var(--white);border:1px solid var(--border-soft);
+    border-radius:12px;padding:24px 20px;text-align:center;
+    transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s;
+}
+.test-card-item:hover{
+    border-color:var(--gold-soft);
+    box-shadow:var(--shadow-md);
+    transform:translateY(-2px);
+}
+.test-card-icon{font-size:2rem;margin-bottom:8px;}
+.test-card-title{font-weight:600;font-size:0.95rem;color:var(--ink);}
+.test-card-desc{font-size:0.8rem;color:var(--text-secondary);margin-top:6px;}
+.test-card-item.test-card--hidden{display:none;}
+.test-grid.expanded .test-card-item.test-card--hidden{
+    display:block;
+    animation:fadeSlideIn 0.4s ease forwards;
+}
+
 /* === 响应式 === */
 @media(max-width:768px){
     .topbar-nav a:not(:last-child){display:none;}
