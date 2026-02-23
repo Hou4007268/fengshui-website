@@ -79,7 +79,7 @@
                 <h2>风水服务</h2>
                 <p>覆盖财运、事业、姻缘、房屋、择日、起名、商业、法事等13大类</p>
             </div>
-            <div class="services">
+            <div class="services" id="services-grid">
                 <a class="service-card service-card--featured" href="services/zhenren.html">
                     <div class="card-icon">师</div>
                     <div class="card-body">
@@ -129,49 +129,54 @@
                         <div class="card-desc">还阴债 / 补财库 / 超度 / 祈福转运</div>
                     </div>
                 </a>
-                <a class="service-card" href="services/yinzhai.html">
+                <!-- 以下为折叠区域 -->
+                <a class="service-card service-card--hidden" href="services/yinzhai.html">
                     <div class="card-icon">坟</div>
                     <div class="card-body">
                         <div class="card-title">祖坟 / 阴宅选址</div>
                         <div class="card-desc">祖坟迁移 / 阴宅选址 / 墓地风水</div>
                     </div>
                 </a>
-                <!-- 新增 5 个服务 -->
-                <a class="service-card" href="services/zeri.html">
+                <a class="service-card service-card--hidden" href="services/zeri.html">
                     <div class="card-icon">日</div>
                     <div class="card-body">
                         <div class="card-title">择日选时</div>
                         <div class="card-desc">搬家吉日 / 开业良辰 / 婚嫁择日 / 动土奠基</div>
                     </div>
                 </a>
-                <a class="service-card" href="services/qiming.html">
+                <a class="service-card service-card--hidden" href="services/qiming.html">
                     <div class="card-icon">名</div>
                     <div class="card-body">
                         <div class="card-title">起名改名</div>
                         <div class="card-desc">宝宝起名 / 成人改名 / 公司取名 / 品牌命名</div>
                     </div>
                 </a>
-                <a class="service-card" href="services/liunian.html">
+                <a class="service-card service-card--hidden" href="services/liunian.html">
                     <div class="card-icon">运</div>
                     <div class="card-body">
                         <div class="card-title">流年运势</div>
                         <div class="card-desc">个人年度运势 / 每月运程 / 流年吉凶</div>
                     </div>
                 </a>
-                <a class="service-card" href="services/shangye.html">
+                <a class="service-card service-card--hidden" href="services/shangye.html">
                     <div class="card-icon">商</div>
                     <div class="card-body">
                         <div class="card-title">商业风水</div>
                         <div class="card-desc">办公室风水 / 店铺选址 / 公司布局</div>
                     </div>
                 </a>
-                <a class="service-card" href="services/kaiguang.html">
+                <a class="service-card service-card--hidden" href="services/kaiguang.html">
                     <div class="card-icon">宝</div>
                     <div class="card-body">
                         <div class="card-title">开光法物</div>
                         <div class="card-desc">水晶摆件 / 貔貅开光 / 风水罗盘 / 转运手链</div>
                     </div>
                 </a>
+            </div>
+            <div style="text-align:center;margin-top:20px;">
+                <button class="btn-expand-services" id="btn-expand-services" onclick="toggleServices()">
+                    展开更多服务 <span class="expand-arrow">▼</span>
+                </button>
             </div>
         </div>
     </div>
@@ -375,6 +380,17 @@
     <script src="js/shared.js"></script>
 
     <script>
+    // 服务卡片折叠/展开
+    function toggleServices(){
+        const grid = document.getElementById('services-grid');
+        const btn = document.getElementById('btn-expand-services');
+        const expanded = grid.classList.toggle('expanded');
+        btn.classList.toggle('expanded', expanded);
+        btn.innerHTML = expanded
+            ? '收起服务 <span class="expand-arrow">▼</span>'
+            : '展开更多服务 <span class="expand-arrow">▼</span>';
+    }
+
     fetch('/api/stats').then(r=>r.json()).then(d=>{
         document.getElementById('chat-count-display').textContent='今日对话: '+d.count+'次';
     }).catch(()=>{});

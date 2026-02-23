@@ -243,6 +243,44 @@ body::before{
 .card-title{font-size:0.95rem;color:var(--ink);font-weight:500;margin-bottom:3px;}
 .card-desc{font-size:0.8rem;color:var(--text-secondary);line-height:1.7;}
 
+/* 服务卡片折叠 */
+.service-card.service-card--hidden{
+    display:none;
+}
+.services.expanded .service-card.service-card--hidden{
+    display:flex;
+    animation: fadeSlideIn 0.4s ease forwards;
+}
+@keyframes fadeSlideIn{
+    from{opacity:0;transform:translateY(12px);}
+    to{opacity:1;transform:translateY(0);}
+}
+.btn-expand-services{
+    display:inline-flex;align-items:center;gap:6px;
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text-secondary);
+    padding:10px 28px;
+    border-radius:20px;
+    font-size:0.88rem;
+    cursor:pointer;
+    transition:all 0.3s;
+    font-family:inherit;
+}
+.btn-expand-services:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+    background:var(--gold-bg);
+}
+.expand-arrow{
+    font-size:0.7rem;
+    transition:transform 0.3s;
+    display:inline-block;
+}
+.btn-expand-services.expanded .expand-arrow{
+    transform:rotate(180deg);
+}
+
 /* === 咨询流程 === */
 .process{
     display:grid;
