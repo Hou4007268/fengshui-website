@@ -9,4 +9,4 @@ Disallow: /website-20260221/
 Disallow: /api/
 
 # 站点地图
-Sitemap: https://www.12zn.com/sitemap.xml
+Sitemap: https://12zn.com/sitemap.xml

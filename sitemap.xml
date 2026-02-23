@@ -2,279 +2,279 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- 首页 -->
   <url>
-    <loc>https://www.12zn.com/</loc>
+    <loc>https://12zn.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- 服务详情页 -->
   <url>
-    <loc>https://www.12zn.com/services/zhenren.html</loc>
+    <loc>https://12zn.com/services/zhenren.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/caiyun.html</loc>
+    <loc>https://12zn.com/services/caiyun.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/yinyuan.html</loc>
+    <loc>https://12zn.com/services/yinyuan.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/zhuangxiu.html</loc>
+    <loc>https://12zn.com/services/zhuangxiu.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/huxing.html</loc>
+    <loc>https://12zn.com/services/huxing.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/qingfu.html</loc>
+    <loc>https://12zn.com/services/qingfu.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/fashi.html</loc>
+    <loc>https://12zn.com/services/fashi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/yinzhai.html</loc>
+    <loc>https://12zn.com/services/yinzhai.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/zeri.html</loc>
+    <loc>https://12zn.com/services/zeri.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/qiming.html</loc>
+    <loc>https://12zn.com/services/qiming.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/liunian.html</loc>
+    <loc>https://12zn.com/services/liunian.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/shangye.html</loc>
+    <loc>https://12zn.com/services/shangye.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/kaiguang.html</loc>
+    <loc>https://12zn.com/services/kaiguang.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- 趣味测试 -->
   <url>
-    <loc>https://www.12zn.com/services/test-yunshi.html</loc>
+    <loc>https://12zn.com/services/test-yunshi.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/test-wuxing.html</loc>
+    <loc>https://12zn.com/services/test-wuxing.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/test-fengshui.html</loc>
+    <loc>https://12zn.com/services/test-fengshui.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/services/test-xingming.html</loc>
+    <loc>https://12zn.com/services/test-xingming.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- 博客 -->
   <url>
-    <loc>https://www.12zn.com/blog/</loc>
+    <loc>https://12zn.com/blog/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/sofa-fengshui.html</loc>
+    <loc>https://12zn.com/blog/sofa-fengshui.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/wo-shi-chuang-pu.html</loc>
+    <loc>https://12zn.com/blog/wo-shi-chuang-pu.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/zaotai.html</loc>
+    <loc>https://12zn.com/blog/zaotai.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/men-kou-fengshui.html</loc>
+    <loc>https://12zn.com/blog/men-kou-fengshui.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/weishengjian-fengshui.html</loc>
+    <loc>https://12zn.com/blog/weishengjian-fengshui.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/caiwei.html</loc>
+    <loc>https://12zn.com/blog/caiwei.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/chuantangfeng.html</loc>
+    <loc>https://12zn.com/blog/chuantangfeng.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/rumen-zhishi.html</loc>
+    <loc>https://12zn.com/blog/rumen-zhishi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/shafa-dui-men.html</loc>
+    <loc>https://12zn.com/blog/shafa-dui-men.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/chuangwei-jiedu.html</loc>
+    <loc>https://12zn.com/blog/chuangwei-jiedu.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/kai-men-jian-zao.html</loc>
+    <loc>https://12zn.com/blog/kai-men-jian-zao.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/jingzi.html</loc>
+    <loc>https://12zn.com/blog/jingzi.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/caishen-fangwei.html</loc>
+    <loc>https://12zn.com/blog/caishen-fangwei.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/banjia-yuyue.html</loc>
+    <loc>https://12zn.com/blog/banjia-yuyue.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/jingzhe.html</loc>
+    <loc>https://12zn.com/blog/jingzhe.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/blog/fengshui-ip.html</loc>
+    <loc>https://12zn.com/blog/fengshui-ip.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- 工具页 -->
   <url>
-    <loc>https://www.12zn.com/tools.html</loc>
+    <loc>https://12zn.com/tools.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/babyname/</loc>
+    <loc>https://12zn.com/babyname/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/name/</loc>
+    <loc>https://12zn.com/name/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/name/same-name.html</loc>
+    <loc>https://12zn.com/name/same-name.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/calendar/</loc>
+    <loc>https://12zn.com/calendar/</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/fortune/</loc>
+    <loc>https://12zn.com/fortune/</loc>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- 测试页 -->
   <url>
-    <loc>https://www.12zn.com/test/</loc>
+    <loc>https://12zn.com/test/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/career.html</loc>
+    <loc>https://12zn.com/test/career.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/couple.html</loc>
+    <loc>https://12zn.com/test/couple.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/face.html</loc>
+    <loc>https://12zn.com/test/face.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/fate.html</loc>
+    <loc>https://12zn.com/test/fate.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/love.html</loc>
+    <loc>https://12zn.com/test/love.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/mental-age.html</loc>
+    <loc>https://12zn.com/test/mental-age.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/palm.html</loc>
+    <loc>https://12zn.com/test/palm.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/test/personality.html</loc>
+    <loc>https://12zn.com/test/personality.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <!-- 其他页面 -->
   <url>
-    <loc>https://www.12zn.com/about.html</loc>
+    <loc>https://12zn.com/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/cases.html</loc>
+    <loc>https://12zn.com/cases.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.12zn.com/case-gallery.html</loc>
+    <loc>https://12zn.com/case-gallery.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
