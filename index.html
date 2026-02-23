@@ -723,12 +723,19 @@
             const wechat=document.getElementById('talisman-wechat').value;
             if(!name||!wechat)return alert('请填写姓名和微信');
             showLoading();
-            const info='请符\n类型: '+type+'\n姓名: '+name+'\n出生: '+birth+'\n微信: '+wechat;
-            setTimeout(function(){
+            fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:wechat,type:'请符请物 - '+type,message:'出生: '+birth,source:'请符请物'})})
+            .then(r=>r.json()).then(data=>{
                 hideLoading();
-                showResult('talisman-result','<h4>请符已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">符咒需要根据您的信息定制，我们将在24小时内通过微信与您确认详情。</p><div style="margin-top:14px;padding:12px;background:var(--parchment);border-radius:8px;"><p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">点击下方按钮复制信息：</p><button onclick="var t=document.getElementById(\'copytxt_talisman\');t.select();document.execCommand(\'copy\');this.innerText=\'已复制\';this.style.background=\'#5a8f5a\';this.style.color=\'#fff\'" class="btn">一键复制请符信息</button><textarea id="copytxt_talisman" style="opacity:0;position:absolute;z-index:-1">'+info+'</textarea></div>');
-                document.getElementById('talisman-name').value='';document.getElementById('talisman-birth').value='';document.getElementById('talisman-wechat').value='';
-            },600);
+                if(data.success){
+                    showResult('talisman-result','<h4>✅ 请符已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">符咒需要根据您的信息定制，我们将在24小时内通过微信与您确认详情。</p>');
+                    document.getElementById('talisman-name').value='';document.getElementById('talisman-birth').value='';document.getElementById('talisman-wechat').value='';
+                } else {
+                    showResult('talisman-result','<h4>提交失败</h4><p style="color:var(--vermilion);font-size:0.85rem;">'+( data.error||'请稍后重试')+'</p>');
+                }
+            }).catch(()=>{
+                hideLoading();
+                showResult('talisman-result','<h4>网络错误</h4><p style="color:var(--vermilion);font-size:0.85rem;">请检查网络后重试</p>');
+            });
         }
         function submitSupport(){
             const name=document.getElementById('support-name').value;
@@ -737,12 +744,19 @@
             const desc=document.getElementById('support-desc').value;
             if(!name||!wechat||!desc)return alert('请填写完整信息');
             showLoading();
-            const info='新咨询\n姓名: '+name+'\n微信: '+wechat+'\n类型: '+type+'\n问题: '+desc;
-            setTimeout(function(){
+            fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:wechat,type:type,message:desc,source:'预约咨询'})})
+            .then(r=>r.json()).then(data=>{
                 hideLoading();
-                showResult('support-result','<h4>咨询已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">感谢您的信任！我们将在24小时内通过微信与您联系。</p><div style="margin-top:14px;padding:12px;background:var(--parchment);border-radius:8px;"><p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">点击下方按钮复制信息：</p><button onclick="var t=document.getElementById(\'copytxt\');t.select();document.execCommand(\'copy\');this.innerText=\'已复制\';this.style.background=\'#5a8f5a\';this.style.color=\'#fff\'" class="btn">一键复制咨询信息</button><textarea id="copytxt" style="opacity:0;position:absolute;z-index:-1">'+info+'</textarea></div>');
-                document.getElementById('support-name').value='';document.getElementById('support-wechat').value='';document.getElementById('support-desc').value='';
-            },600);
+                if(data.success){
+                    showResult('support-result','<h4>✅ 咨询已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">感谢您的信任！我们将在24小时内通过微信与您联系。</p>');
+                    document.getElementById('support-name').value='';document.getElementById('support-wechat').value='';document.getElementById('support-desc').value='';
+                } else {
+                    showResult('support-result','<h4>提交失败</h4><p style="color:var(--vermilion);font-size:0.85rem;">'+(data.error||'请稍后重试')+'</p>');
+                }
+            }).catch(()=>{
+                hideLoading();
+                showResult('support-result','<h4>网络错误</h4><p style="color:var(--vermilion);font-size:0.85rem;">请检查网络后重试</p>');
+            });
         }
     </script>
 
