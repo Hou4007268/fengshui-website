@@ -7,6 +7,13 @@
     "login.html",
     "api",
     "images",
-    "videos"
-  ]
+    "videos",
+    "css",
+    "js",
+    "services"
+  ],
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "front-design": "^0.9.6"
+  }
 }
