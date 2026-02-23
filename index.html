@@ -232,7 +232,7 @@
                     <h3>AI深度分析</h3>
                     <p class="desc">详细解读 + 具体建议<br>含化解方案与注意事项</p>
                     <div class="price-amount">¥9.9</div>
-                    <button class="btn-price btn-price--primary" onclick="document.getElementById('lead-popup').classList.add('active')">加微信购买</button>
+                    <button class="btn-price btn-price--primary" onclick="openPayModal('ai_deep')">立即支付 ¥9.9</button>
                 </div>
                 <div class="price-card">
                     <h3>真人1v1服务</h3>
@@ -595,6 +595,35 @@
         </div>
     </div>
 
+    <!-- 支付宝支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+                <button class="btn" onclick="checkPayStatus()" style="margin-top:14px;">我已支付</button>
+                <p style="margin-top:10px;"><a href="#" onclick="backToProducts();return false;" style="color:var(--text-secondary);font-size:0.82rem;">← 返回选择</a></p>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <div style="font-size:3rem;margin:20px 0;">✅</div>
+                <h2 style="font-size:1.2rem;color:var(--bamboo);">支付成功！</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-top:10px;" id="pay-success-msg"></p>
+                <button class="btn" onclick="closePayModal()" style="margin-top:18px;">确定</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ========== 业务逻辑 ========== -->
     <script>
         let floorplanFile=null;
@@ -740,7 +769,7 @@
 
         if(chatCount>=3&&!isPaid){
             ms.innerHTML+='<div class="chat-msg user">'+msg+'</div>';
-            ms.innerHTML+='<div class="chat-msg bot">您已使用3次免费提问。<br><br>解锁<strong>深度分析</strong>（详细+化解方案），只需 <strong>¥9.9</strong><br><br><button onclick="document.getElementById(\'lead-popup\').classList.add(\'active\');" style="background:var(--gold);border:none;padding:8px 18px;border-radius:6px;color:var(--white);font-weight:500;cursor:pointer;">支付¥9.9解锁</button> <button onclick="showRedeem()" style="background:transparent;border:1px solid var(--border);padding:8px 18px;border-radius:6px;color:var(--text);cursor:pointer;">兑换码</button></div>';
+            ms.innerHTML+='<div class="chat-msg bot">您已使用3次免费提问。<br><br>解锁<strong>深度分析</strong>（详细+化解方案），只需 <strong>¥9.9</strong><br><br><button onclick="openPayModal(\'ai_deep\')" style="background:var(--gold);border:none;padding:8px 18px;border-radius:6px;color:var(--white);font-weight:500;cursor:pointer;">支付¥9.9解锁</button> <button onclick="showRedeem()" style="background:transparent;border:1px solid var(--border);padding:8px 18px;border-radius:6px;color:var(--text);cursor:pointer;">兑换码</button></div>';
             function showRedeem(){
                 const code=prompt('请输入兑换码：');
                 if(code&&code.toLowerCase()==='vip2026'){localStorage.setItem('aiPaid','true');isPaid=true;ms.innerHTML+='<div class="chat-msg bot">兑换成功！您已解锁深度分析，继续提问吧。</div>';}
@@ -767,6 +796,143 @@
             ms.innerHTML+='<div class="chat-msg bot">网络问题，请稍后再试。</div>';ms.scrollTop=ms.scrollHeight;
         });
     }
+    </script>
+
+    <!-- 支付逻辑 -->
+    <script>
+    let currentOrderNo = null;
+    let payCheckTimer = null;
+
+    // 打开支付弹窗（可指定商品或显示选择列表）
+    function openPayModal(productId) {
+        const modal = document.getElementById('modal-pay');
+        modal.classList.add('active');
+        if (productId) {
+            createOrder(productId);
+        } else {
+            showProductList();
+        }
+    }
+
+    function closePayModal() {
+        document.getElementById('modal-pay').classList.remove('active');
+        if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+        currentOrderNo = null;
+        // 重置步骤
+        document.getElementById('pay-step-select').style.display = 'block';
+        document.getElementById('pay-step-qr').style.display = 'none';
+        document.getElementById('pay-step-success').style.display = 'none';
+    }
+
+    function backToProducts() {
+        if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+        document.getElementById('pay-step-qr').style.display = 'none';
+        document.getElementById('pay-step-select').style.display = 'block';
+        showProductList();
+    }
+
+    // 显示商品列表
+    async function showProductList() {
+        const list = document.getElementById('pay-product-list');
+        list.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">加载中...</p>';
+        try {
+            const res = await fetch('/api/pay/products');
+            const data = await res.json();
+            let html = '';
+            data.products.forEach(function(p) {
+                html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;margin-bottom:10px;background:var(--cream);border:1px solid var(--border-soft);border-radius:10px;cursor:pointer;transition:border-color 0.2s;" onclick="createOrder(\'' + p.id + '\')" onmouseover="this.style.borderColor=\'var(--gold)\'" onmouseout="this.style.borderColor=\'var(--border-soft)\'">' +
+                    '<div><div style="font-weight:500;font-size:0.95rem;color:var(--ink);">' + p.name + '</div>' +
+                    '<div style="font-size:0.8rem;color:var(--text-secondary);margin-top:3px;">' + p.desc + '</div></div>' +
+                    '<div style="font-size:1.1rem;font-weight:600;color:var(--gold);white-space:nowrap;margin-left:12px;">¥' + p.price + '</div></div>';
+            });
+            list.innerHTML = html;
+        } catch(e) {
+            list.innerHTML = '<p style="text-align:center;color:var(--vermilion);">加载失败，请稍后重试</p>';
+        }
+    }
+
+    // 创建订单
+    async function createOrder(productId) {
+        document.getElementById('pay-step-select').style.display = 'none';
+        document.getElementById('pay-step-qr').style.display = 'block';
+        document.getElementById('pay-qr-img').src = '';
+        document.getElementById('pay-order-info').textContent = '正在生成支付二维码...';
+        document.getElementById('pay-amount-display').textContent = '';
+        document.getElementById('pay-status-msg').style.display = 'none';
+
+        try {
+            const res = await fetch('/api/pay', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ product_id: productId })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                currentOrderNo = data.order_no;
+                document.getElementById('pay-qr-img').src = data.qr_code;
+                document.getElementById('pay-order-info').textContent = data.subject + ' · 订单号: ' + data.order_no;
+                document.getElementById('pay-amount-display').textContent = '¥' + data.amount;
+
+                // 自动轮询支付状态（每3秒）
+                payCheckTimer = setInterval(function() { checkPayStatus(true); }, 3000);
+            } else {
+                document.getElementById('pay-order-info').textContent = '';
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--vermilion-soft)';
+                msg.style.color = 'var(--vermilion)';
+                msg.textContent = data.error || data.detail || '创建订单失败，请稍后重试';
+            }
+        } catch(e) {
+            document.getElementById('pay-order-info').textContent = '';
+            var msg = document.getElementById('pay-status-msg');
+            msg.style.display = 'block';
+            msg.style.background = 'var(--vermilion-soft)';
+            msg.style.color = 'var(--vermilion)';
+            msg.textContent = '网络错误，请稍后重试';
+        }
+    }
+
+    // 检查支付状态
+    async function checkPayStatus(silent) {
+        if (!currentOrderNo) return;
+        try {
+            const res = await fetch('/api/pay/status?order_no=' + currentOrderNo);
+            const data = await res.json();
+            if (data.status === 'paid') {
+                // 支付成功
+                if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+                document.getElementById('pay-step-qr').style.display = 'none';
+                document.getElementById('pay-step-success').style.display = 'block';
+                document.getElementById('pay-success-msg').textContent = '感谢您的支持！服务已解锁，如需帮助请添加微信联系我们。';
+
+                // 如果是AI深度分析，解锁
+                localStorage.setItem('aiPaid', 'true');
+                isPaid = true;
+            } else if (!silent) {
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--gold-bg)';
+                msg.style.color = 'var(--text)';
+                msg.textContent = '暂未检测到支付，请确认已完成扫码付款';
+                setTimeout(function() { msg.style.display = 'none'; }, 3000);
+            }
+        } catch(e) {
+            if (!silent) {
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--vermilion-soft)';
+                msg.style.color = 'var(--vermilion)';
+                msg.textContent = '查询失败，请稍后再试';
+            }
+        }
+    }
+
+    // 弹窗点击外部关闭
+    document.getElementById('modal-pay').addEventListener('click', function(e) {
+        if (e.target === this) closePayModal();
+    });
     </script>
 </body>
 </html>
