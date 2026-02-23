@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>户型/阳宅分析 - 一宅一句风水咨询</title>
+    <meta name="description" content="一宅一句 户型/阳宅分析：发送户型图，详细分析风水格局，找出问题与解决方案，精准定位财位桃花位，全面化煞指导。">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html#messages">留言</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html#services">服务</a><span>›</span>
+            户型/阳宅分析
+        </div>
+    </div>
+
+    <!-- 服务 Hero -->
+    <section class="service-hero">
+        <div class="service-icon">图</div>
+        <h1>户型/阳宅分析</h1>
+        <p class="service-tagline">发送户型图，详细分析风水格局，找出问题与解决方案</p>
+    </section>
+
+    <!-- 详细介绍 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>服务介绍</h2>
+            </div>
+            <div class="service-features">
+                <div class="service-feature-item">
+                    <h4>户型格局分析</h4>
+                    <p>对您的户型图进行全面的风水格局分析，评估房屋形状是否方正、缺角情况、房间分布是否合理、动线设计是否流畅等。每一个格局特征都会详细解读其对居住者运势的具体影响。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>方位吉凶判断</h4>
+                    <p>根据房屋坐向和居住者命理，精确判断八方吉凶。哪个方位旺事业、哪个方位利健康、哪个方位要注意化解，都会在分析报告中一一标注清楚，让您对自家风水了然于心。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>财位桃花位定位</h4>
+                    <p>精准定位您家中的财位、桃花位、文昌位等吉位，并给出相应的激活方法。告诉您在这些位置应该摆放什么、避免什么，让家中的每一个吉位都发挥最大的正面作用。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>化煞建议</h4>
+                    <p>识别户型中存在的各种煞气，如穿堂煞、反弓煞、天斩煞、尖角煞等，并给出具体的化解方法。无论是利用家具遮挡、摆放化煞物品还是调整空间布局，都会给出详细的操作指南。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 服务流程 4 步 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>服务流程</h2>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">上传户型图</div>
+                    <div class="process-desc">通过微信发送您的户型图（开发商提供的或手绘均可），同时标注大门朝向和楼层信息，方便精准分析。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">AI识别分析</div>
+                    <div class="process-desc">AI系统自动识别户型结构，结合方位学原理进行初步的风水格局分析，快速生成基础评估报告。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">出具报告</div>
+                    <div class="process-desc">在AI分析基础上，风水师进行人工复核和深度解读，出具完整的户型风水分析报告，标注每个区域的吉凶和建议。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">化解方案</div>
+                    <div class="process-desc">针对报告中发现的风水问题，提供详细的化解方案，包括家具调整、摆件推荐、颜色建议等具体可执行的操作指南。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 收费标准 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>收费标准</h2>
+            </div>
+            <div class="service-price-table">
+                <div class="service-price-item">
+                    <h4>AI快速分析</h4>
+                    <div class="price">免费</div>
+                    <p>上传户型图，AI即刻识别并生成基础风水分析，包含户型评分、主要优缺点、基础布局建议，让您快速了解自家风水概况。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>详细报告</h4>
+                    <div class="price">¥9.9</div>
+                    <p>全面深度的户型风水分析报告，包含八方吉凶标注、财位桃花位定位、煞气识别与化解、各房间布局建议和家具摆放指南。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>专家分析</h4>
+                    <div class="price">¥299</div>
+                    <p>资深风水师亲自分析您的户型，结合居住者命理进行个性化研判。包含一对一视频讲解、详细书面报告、化解方案及后续跟踪服务。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>常见问题</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">户型图需要什么格式？</div>
+                    <div class="faq-a"><p>我们接受各种格式的户型图：开发商提供的标准户型图、房产证附图、手机拍摄的纸质户型图、甚至手绘的简易户型图都可以。关键是要标注清楚大门的朝向（东南西北），以及各房间的大致用途。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">分析有多详细？</div>
+                    <div class="faq-a"><p>免费的AI快速分析会给出整体评分和主要问题；详细报告则会逐一分析每个房间的风水状况，标注吉凶方位，定位财位等吉位，识别煞气并给出化解方案，通常报告在3000-5000字；专家分析则更加深入，会结合居住者命理进行个性化解读。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">如何拍出好的户型图照片？</div>
+                    <div class="faq-a"><p>如果您手边有纸质户型图，请在光线充足的地方平放拍摄，确保图片清晰、不变形、四边完整。如果是在售楼处拍摄，建议正面拍摄展板上的户型图，避免侧拍导致透视变形。手绘图请用直线标注墙体，注明各房间名称和大门位置。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">买房前可以先分析户型风水吗？</div>
+                    <div class="faq-a"><p>非常建议买房前先做户型风水分析！这是最划算的风水投资。在选房阶段就排除风水格局有严重问题的户型，比入住后再花大价钱改造要明智得多。您可以同时提交多个备选户型，我们会给出对比分析和推荐。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">楼层高度会影响分析结果吗？</div>
+                    <div class="faq-a"><p>会的。楼层高度影响采光、通风和气场，是风水分析的重要参考因素。高层和低层在气场特征上有明显差异，不同楼层适合不同命格的人居住。建议您在提交户型图时一并告知楼层信息，我们会纳入综合分析。</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信 CTA -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>开始您的户型/阳宅分析之旅</h2>
+            <p class="wechat-sub">扫码添加微信，获得专属分析报告</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

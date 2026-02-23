@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财运事业咨询 - 一宅一句风水咨询</title>
+    <meta name="description" content="一宅一句 财运事业咨询：财运提升、事业方向、职业规划、创业咨询，结合命理与风水为您的事业发展指明方向，助您事业腾飞。">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html#messages">留言</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html#services">服务</a><span>›</span>
+            财运事业咨询
+        </div>
+    </div>
+
+    <!-- 服务 Hero -->
+    <section class="service-hero">
+        <div class="service-icon">财</div>
+        <h1>财运事业咨询</h1>
+        <p class="service-tagline">财运提升 / 事业方向 / 职业规划 / 创业咨询，助您事业腾飞</p>
+    </section>
+
+    <!-- 详细介绍 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>服务介绍</h2>
+            </div>
+            <div class="service-features">
+                <div class="service-feature-item">
+                    <h4>财运分析</h4>
+                    <p>根据您的生辰八字和居住环境，全面分析您的先天财运格局。找出正财、偏财的旺衰时段，明确财位方位，通过风水布局激活财运能量，帮助您在最佳时机做出正确的财务决策。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>事业方向指导</h4>
+                    <p>结合命理五行分析您最适合的行业和发展方向。每个人的命格不同，适合的事业领域也不同。我们会帮您找到与自身能量场最匹配的事业方向，避免在不适合的赛道上消耗精力。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>职业规划</h4>
+                    <p>面临职业选择困惑？跳槽还是留任？升职加薪的最佳时机是什么时候？我们从命理和风水两个维度，为您提供清晰的职业发展路线图，让您的每一步都踩在运势的节拍上。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>创业投资建议</h4>
+                    <p>创业选址、开业择日、合伙人匹配、办公室风水布局......创业路上的每个关键节点，都需要天时地利人和。我们为创业者提供全方位的风水支持，助您在创业路上少走弯路。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 服务流程 4 步 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>服务流程</h2>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">提交信息</div>
+                    <div class="process-desc">提供您的出生年月日时、性别、当前职业状况以及具体的事业/财运困惑，信息越详细分析越精准。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">AI初步分析</div>
+                    <div class="process-desc">AI系统根据您的信息进行快速命理分析，生成初步的财运和事业运势报告，帮您快速了解整体格局。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">深度解读</div>
+                    <div class="process-desc">资深风水师对AI报告进行人工复核和深度解读，结合实际经验给出更具针对性的分析和判断。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">定制化解方案</div>
+                    <div class="process-desc">针对发现的问题，提供具体可执行的化解方案，包括风水布局调整、行为建议、时间节点把握等。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 收费标准 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>收费标准</h2>
+            </div>
+            <div class="service-price-table">
+                <div class="service-price-item">
+                    <h4>AI快速分析</h4>
+                    <div class="price">免费</div>
+                    <p>输入基本信息，AI即刻生成财运事业初步分析报告。包含五行属性、财运大势、事业方向基础判断，适合快速了解自身格局。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>AI深度报告</h4>
+                    <div class="price">¥9.9</div>
+                    <p>全面深度的AI分析报告，包含未来三年财运走势、最佳投资时机、事业发展建议、办公桌风水布局等详细内容，附带个性化化解方案。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>真人一对一</h4>
+                    <div class="price">¥99起</div>
+                    <p>资深风水师一对一深度沟通，针对您的具体情况进行全方位分析。包含语音/视频咨询、详细书面报告及后续跟踪指导服务。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>常见问题</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">财运分析的准确度如何？</div>
+                    <div class="faq-a"><p>我们的分析基于传统命理学理论体系，结合现代大数据验证。过往客户反馈满意度超过90%。当然，风水是辅助决策的工具，最终的成功还需要个人的努力和行动。我们帮您找到最顺应运势的方向，让努力事半功倍。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">需要提供哪些信息？</div>
+                    <div class="faq-a"><p>基础信息包括：出生年月日时（精确到小时最佳）、性别、出生地。如需更精准的分析，建议额外提供当前居住地址、办公室照片、职业信息等。所有信息我们严格保密，仅用于分析。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">多久可以出结果？</div>
+                    <div class="faq-a"><p>AI快速分析即时出结果；AI深度报告通常在提交信息后30分钟内生成；真人一对一咨询需提前预约，咨询后3个工作日内出具详细的书面报告。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">分析后需要购买风水物品吗？</div>
+                    <div class="faq-a"><p>我们绝不强制推销任何风水物品。大多数情况下，通过调整家具摆放、颜色搭配、生活习惯等就能改善风水。如果确实需要特定物品辅助，我们会说明原因并提供参考，但购买完全自愿。</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信 CTA -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>开始您的财运事业咨询之旅</h2>
+            <p class="wechat-sub">扫码添加微信，获得专属分析报告</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

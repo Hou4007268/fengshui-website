@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装修风水咨询 - 一宅一句风水咨询</title>
+    <meta name="description" content="一宅一句 装修风水咨询：装修布局、颜色搭配、门灶厕设计，从风水角度为您的装修提供专业指导，打造宜居好风水。">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html#messages">留言</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html#services">服务</a><span>›</span>
+            装修风水咨询
+        </div>
+    </div>
+
+    <!-- 服务 Hero -->
+    <section class="service-hero">
+        <div class="service-icon">宅</div>
+        <h1>装修风水咨询</h1>
+        <p class="service-tagline">装修布局 / 颜色搭配 / 门灶厕设计，打造宜居好风水</p>
+    </section>
+
+    <!-- 详细介绍 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>服务介绍</h2>
+            </div>
+            <div class="service-features">
+                <div class="service-feature-item">
+                    <h4>整体布局规划</h4>
+                    <p>装修前的风水规划至关重要。我们根据户型朝向和居住者命理，规划客厅、卧室、书房等各功能区的最佳位置，确保动静分区合理、气流通畅，从源头打造符合风水原则的居住空间。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>颜色搭配建议</h4>
+                    <p>不同方位适合不同的颜色系统，错误的颜色搭配会导致五行失衡，影响居住者的运势和健康。我们根据房屋方位和主人命理，为每个房间推荐最佳的主色调和辅助色，让家既美观又旺运。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>门灶厕位置</h4>
+                    <p>门、灶、厕是家居风水的三大核心要素。大门朝向关系到纳气，灶台位置影响家人健康和财运，卫生间方位不当则容易漏财招灾。我们精确分析并给出最优方案，避免常见的风水禁忌。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>玄关设计</h4>
+                    <p>玄关是家的第一道风水关口，起到引气、挡煞、藏风聚气的重要作用。我们根据入户门方位和整体格局，为您设计最合适的玄关形式，包括隔断样式、鞋柜位置、装饰摆件和灯光布局等细节。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 服务流程 4 步 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>服务流程</h2>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">提交户型+需求</div>
+                    <div class="process-desc">发送您的户型图、房屋朝向、家庭成员信息以及装修风格偏好，让我们全面了解您的房屋情况和装修需求。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">风水分析</div>
+                    <div class="process-desc">风水师对户型进行全面的风水分析，评估各方位的吉凶、气场流通情况、五行配置是否均衡等关键指标。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">布局建议</div>
+                    <div class="process-desc">根据分析结果，出具详细的装修风水建议书，包含功能区规划、家具摆放、颜色推荐、材质选择等具体方案。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">装修指导</div>
+                    <div class="process-desc">在装修过程中提供持续指导，解答施工中遇到的风水问题，确保方案落地不走样，打造真正的风水好宅。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 收费标准 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>收费标准</h2>
+            </div>
+            <div class="service-price-table">
+                <div class="service-price-item">
+                    <h4>AI基础建议</h4>
+                    <div class="price">免费</div>
+                    <p>上传户型图，AI快速分析房屋风水格局，给出基础的布局建议和注意事项，帮您在装修前了解自家风水概况。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>详细方案</h4>
+                    <div class="price">¥9.9</div>
+                    <p>包含完整的装修风水分析报告，覆盖每个房间的布局、颜色、家具摆放建议，以及门窗、灶台、卫浴的风水优化方案。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>全程指导</h4>
+                    <div class="price">¥299</div>
+                    <p>从装修前规划到施工中指导，全程跟进您的装修过程。包含一对一咨询、详细方案、施工节点风水把关和竣工验收服务。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>常见问题</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">装修什么时候开始最好？</div>
+                    <div class="faq-a"><p>装修的最佳时机需要结合业主的命理和房屋方位综合判断。一般来说，春季和秋季是装修的黄金季节，但具体的开工日期最好择一个与业主命格相合的吉日。我们会根据您的情况给出最佳的开工时间建议。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">颜色选择有哪些风水讲究？</div>
+                    <div class="faq-a"><p>家居颜色要根据方位五行来选择。比如南方属火，适合红色、橙色系；北方属水，适合蓝色、黑色系；东方属木，适合绿色系。但还要结合居住者的命理五行喜忌，不能一概而论，这正是我们专业分析的价值所在。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">装修中有哪些常见的风水错误？</div>
+                    <div class="faq-a"><p>常见错误包括：大门正对卫生间门、灶台与水槽正对、镜子对着床头、横梁压顶未处理、玄关过于狭窄导致气流不畅、卧室门正对大门等。这些问题在装修前规划时就应该避免，后期改造成本会大幅增加。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">已经装修完的房子还能调整风水吗？</div>
+                    <div class="faq-a"><p>当然可以。虽然装修前规划是最佳时机，但已经装修完的房子也有很多调整空间。通过调整家具位置、增减装饰品、改变灯光布局、使用风水摆件等方式，都可以在不大动工程的情况下改善风水格局。</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信 CTA -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>开始您的装修风水咨询之旅</h2>
+            <p class="wechat-sub">扫码添加微信，获得专属分析报告</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

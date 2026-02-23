@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业风水 - 一宅一句风水咨询</title>
+    <meta name="description" content="一宅一句 商业风水：办公室风水布局、店铺选址分析、公司环境优化，助力您的商业成功与事业腾飞。">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html#services">服务</a>
+                <a href="../index.html#pricing">报价</a>
+                <a href="../index.html#cases">案例</a>
+                <a href="../index.html#messages">留言</a>
+                <a href="../index.html" class="topbar-cta">返回首页</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html#services">服务</a><span>›</span>
+            商业风水
+        </div>
+    </div>
+
+    <!-- 服务 Hero -->
+    <section class="service-hero">
+        <div class="service-icon">商</div>
+        <h1>商业风水</h1>
+        <p class="service-tagline">办公室风水 / 店铺选址 / 公司布局，助力商业成功</p>
+    </section>
+
+    <!-- 详细介绍 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>服务介绍</h2>
+            </div>
+            <div class="service-features">
+                <div class="service-feature-item">
+                    <h4>办公室风水</h4>
+                    <p>针对老板办公室、员工工作区域、会议室等关键空间进行风水布局分析与优化，提升团队凝聚力与工作效率，营造聚财旺运的办公环境。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>店铺选址</h4>
+                    <p>从风水角度全面评估商铺位置、朝向、周边环境及人流动线，帮助您选择最佳旺铺，避开不利因素，从源头上奠定生意兴隆的基础。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>公司布局</h4>
+                    <p>科学规划前台接待区、财务室、总经理室等核心区域的最佳位置与朝向，合理安排各部门方位，使公司整体气场和谐，有利于业务拓展与财源广进。</p>
+                </div>
+                <div class="service-feature-item">
+                    <h4>商业开业</h4>
+                    <p>精选开业吉日吉时，设计开业仪式流程，指导风水摆件的选择与摆放位置，让您的新店或新公司从第一天起就拥有最佳的风水气场。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 服务流程 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>服务流程</h2>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">提交商业信息</div>
+                    <div class="process-desc">提供公司/店铺的地址、户型图、经营类型、负责人生辰等基本信息，以便进行针对性分析。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">现场/远程勘察</div>
+                    <div class="process-desc">根据您的需求选择实地勘察或远程分析，师傅将对商业空间的气场、方位、格局进行全面评估。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">出具方案</div>
+                    <div class="process-desc">整理勘察结果，出具详细的商业风水优化方案，包含布局调整建议、摆件推荐和注意事项。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">调整指导</div>
+                    <div class="process-desc">协助您落实方案中的各项调整，提供后续跟踪服务，确保风水布局达到最佳效果。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 收费标准 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>收费标准</h2>
+            </div>
+            <div class="service-price-table">
+                <div class="service-price-item">
+                    <h4>远程分析</h4>
+                    <div class="price">¥299</div>
+                    <p>通过照片、视频和户型图进行远程风水分析，适合异地客户或初步评估需求，提供书面分析报告与调整建议。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>实地勘察</h4>
+                    <div class="price">¥999起</div>
+                    <p>师傅亲临现场，使用专业罗盘进行精准测量与分析，根据面积和复杂度报价，提供详细勘察报告与全套优化方案。</p>
+                </div>
+                <div class="service-price-item">
+                    <h4>全程顾问</h4>
+                    <div class="price">¥2999起</div>
+                    <p>从选址、装修到开业全流程风水顾问服务，包含多次现场勘察、持续跟踪调整、全年不限次咨询，适合重视风水的企业客户。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>常见问题</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">服务是线上还是线下？</div>
+                    <div class="faq-a"><p>两种方式均可。远程分析通过照片、视频和户型图完成，方便快捷；实地勘察则由师傅亲临现场，使用罗盘精准测量，分析更加全面深入。您可以根据实际需求和预算选择适合的方式。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">需要提供什么资料？</div>
+                    <div class="faq-a"><p>基本资料包括：商业空间的地址、户型图或平面图、室内外照片、经营行业类型。如选择深度分析，还需提供负责人的生辰八字，以便结合个人命理进行更精准的风水布局。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">调整后多久见效？</div>
+                    <div class="faq-a"><p>风水调整的效果因人因地而异。一般来说，简单的摆件调整和布局优化在1-3个月内会有明显感受；涉及装修改造的大调整可能需要3-6个月逐步显现效果。坚持按方案执行是见效的关键。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">适用于哪些行业？</div>
+                    <div class="faq-a"><p>商业风水适用于各行各业，包括但不限于：餐饮、零售、美容、教育培训、科技公司、金融机构、医疗诊所等。不同行业有不同的风水侧重点，师傅会结合行业特性给出针对性建议。</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信 CTA -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>开始您的商业风水之旅</h2>
+            <p class="wechat-sub">扫码添加微信，获得专属服务</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html#services">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js"></script>
+</body>
+</html>

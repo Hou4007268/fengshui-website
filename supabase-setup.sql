@@ -109,9 +109,38 @@ RETURNS VOID
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    UPDATE public.users 
-    SET last_login_at = NOW(), 
+    UPDATE public.users
+    SET last_login_at = NOW(),
         login_count = login_count + 1
     WHERE wechat_id = p_wechat_id;
 END;
 $$;
+
+-- =====================================================
+-- 10. 留言板 messages 表
+-- =====================================================
+CREATE TABLE IF NOT EXISTS public.messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    author_name VARCHAR(50) NOT NULL,
+    content TEXT NOT NULL CHECK (char_length(content) <= 500),
+    service_type VARCHAR(50),
+    ip_hash VARCHAR(20),
+    is_visible BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_messages_created_at ON public.messages(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_messages_is_visible ON public.messages(is_visible);
+
+-- RLS: 所有人可读可见留言，所有人可插入
+ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "messages_select_visible" ON public.messages
+    FOR SELECT USING (is_visible = true);
+
+CREATE POLICY "messages_insert_all" ON public.messages
+    FOR INSERT WITH CHECK (true);
+
+-- 管理员可更新（隐藏/显示）- 通过 service_role key 绕过 RLS
+CREATE POLICY "messages_update_admin" ON public.messages
+    FOR UPDATE USING (true);

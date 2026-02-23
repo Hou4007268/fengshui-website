@@ -3,106 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>留言管理 - 一宅一句</title>
+    <title>一宅一句 - 管理后台</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
+        :root {
+            --primary: #c9a962;
+            --bg-dark: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text: #ffffff;
+            --text-muted: #bbbbbb;
+            --border: rgba(201, 169, 98, 0.3);
+            --success: #4CAF50;
+            --danger: #f44336;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #fff; min-height: 100vh; }
-        header { background: rgba(0,0,0,0.3); padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        header h1 { background: linear-gradient(90deg, #f093fb, #f5576c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .card { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        .message-card { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 20px; margin-bottom: 15px; border-left: 3px solid #f5576c; }
-        .message-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .message-name { color: #f093fb; font-weight: bold; }
-        .message-time { color: #666; font-size: 0.85rem; }
-        .message-content { color: #ddd; line-height: 1.6; margin: 10px 0; }
-        .message-contact { color: #888; font-size: 0.85rem; }
-        .reply-box { margin-top: 15px; }
-        .reply-box textarea { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #333; background: #222; color: #fff; min-height: 60px; }
-        .btn { background: linear-gradient(90deg, #f093fb, #f5576c); border: none; padding: 8px 16px; border-radius: 6px; color: white; cursor: pointer; margin-right: 10px; }
-        .btn-secondary { background: rgba(255,255,255,0.2); }
-        .btn-delete { background: #ff4d4f; }
-        .logout { background: transparent; border: 1px solid #666; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .header h1 { color: var(--primary); font-size: 1.8rem; }
+        .header p { color: var(--text-muted); margin-top: 10px; }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .stat-card .num { font-size: 2rem; color: var(--primary); font-weight: bold; }
+        .stat-card .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; }
+        
+        .section { margin-bottom: 30px; }
+        .section h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.3rem; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-card); color: var(--primary); }
+        tr:hover { background: var(--bg-card); }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        .badge-paid { background: var(--success); color: white; }
+        .badge-free { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-vip { background: var(--primary); color: #111; }
+        .btn-danger { background: var(--danger); color: white; }
+        
+        .actions { display: flex; gap: 8px; }
+        
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: var(--primary);
+            color: #111;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212,175,55,0.4);
+        }
+        
+        .loading { text-align: center; padding: 40px; color: var(--text-muted); }
     </style>
 </head>
 <body>
-    <header>
-        <h1>💬 留言管理</h1>
-        <div>
-            <span id="userDisplay"></span>
-            <button class="btn logout" onclick="logout()">退出</button>
-        </div>
-    </header>
+    <div class="header">
+        <h1>🏮 一宅一句 - 管理后台</h1>
+        <p>用户管理 · 数据统计</p>
+    </div>
     
-    <div class="container">
-        <div class="card">
-            <h2>用户留言 (<span id="count">0</span>)</h2>
-            <div id="messageList"></div>
+    <div class="stats" id="stats">
+        <div class="stat-card">
+            <div class="num" id="total-users">-</div>
+            <div class="label">总用户</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="paid-users">-</div>
+            <div class="label">付费用户</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="today-users">-</div>
+            <div class="label">今日新增</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>📋 用户列表</h2>
+        <div id="user-table">
+            <div class="loading">加载中...</div>
         </div>
     </div>
 
+    <div class="section">
+        <h2>💬 留言管理</h2>
+        <div id="message-table">
+            <div class="loading">加载中...</div>
+        </div>
+    </div>
+
+    <button class="refresh-btn" onclick="loadUsers();loadAdminMessages()">🔄 刷新数据</button>
+    
     <script>
-        var currentUser = localStorage.getItem('fengshui_current');
-        var isAdmin = localStorage.getItem('fengshui_admin');
+        const SUPABASE_URL = 'https://fugdohvvjqwwobdkfsii.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
         
-        if (!isAdmin) {
-            alert('请先登录管理员');
-            window.location.href = '/login.html';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        async function loadUsers() {
+            document.getElementById('user-table').innerHTML = '<div class="loading">加载中...</div>';
+            
+            const { data: users, error } = await supabase
+                .from('users')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if (error) {
+                document.getElementById('user-table').innerHTML = '<div class="loading">❌ 加载失败：' + error.message + '</div>';
+                return;
+            }
+            
+            // 统计
+            const total = users.length;
+            const paid = users.filter(u => u.is_paid).length;
+            const today = users.filter(u => {
+                const d = new Date(u.created_at);
+                const now = new Date();
+                return d.toDateString() === now.toDateString();
+            }).length;
+            
+            document.getElementById('total-users').textContent = total;
+            document.getElementById('paid-users').textContent = paid;
+            document.getElementById('today-users').textContent = today;
+            
+            // 渲染表格
+            if (users.length === 0) {
+                document.getElementById('user-table').innerHTML = '<div class="loading">暂无用户</div>';
+                return;
+            }
+            
+            let html = '<table><thead><tr><th>微信ID</th><th>注册时间</th><th>状态</th><th>操作</th></tr></thead><tbody>';
+            
+            users.forEach(u => {
+                const time = new Date(u.created_at).toLocaleString('zh-CN');
+                const status = u.is_paid 
+                    ? '<span class="badge badge-paid">✅ 已付费</span>'
+                    : '<span class="badge badge-free">免费用户</span>';
+                const actions = u.is_paid 
+                    ? ''
+                    : `<button class="btn btn-vip" onclick="setPaid('${u.id}')">设为VIP</button>`;
+                
+                html += `<tr>
+                    <td>${u.wechat_id || '-'}</td>
+                    <td>${time}</td>
+                    <td>${status}</td>
+                    <td class="actions">${actions}</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            document.getElementById('user-table').innerHTML = html;
         }
         
-        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
-        
-        function render() {
-            var html = '';
-            if (messages.length === 0) {
-                html = '<p style="color:#666;text-align:center;padding:20px;">暂无留言</p>';
+        async function setPaid(userId) {
+            if (!confirm('确定要将此用户设为VIP吗？')) return;
+            
+            const { error } = await supabase
+                .from('users')
+                .update({ is_paid: true, paid_at: new Date().toISOString() })
+                .eq('id', userId);
+            
+            if (error) {
+                alert('❌ 设置失败：' + error.message);
             } else {
-                for (var i = 0; i < messages.length; i++) {
-                    var m = messages[i];
-                    html += '<div class="message-card">';
-                    html += '<div class="message-header">';
-                    html += '<span class="message-name">' + m.name + '</span>';
-                    html += '<span class="message-time">' + m.time + '</span>';
-                    html += '</div>';
-                    html += '<div class="message-content">' + m.content + '</div>';
-                    if (m.contact) {
-                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
-                    }
-                    html += '<div class="reply-box">';
-                    html += '<textarea id="reply' + i + '" placeholder="回复内容...">' + (m.reply || '') + '</textarea>';
-                    html += '<div style="margin-top:10px;">';
-                    html += '<button class="btn" onclick="saveReply(' + i + ')">保存回复</button>';
-                    html += '<button class="btn btn-delete" onclick="deleteMsg(' + i + ')">删除</button>';
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                }
-            }
-            document.getElementById('messageList').innerHTML = html;
-            document.getElementById('count').textContent = messages.length;
-        }
-        
-        function saveReply(index) {
-            var reply = document.getElementById('reply' + index).value;
-            messages[index].reply = reply;
-            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
-            alert('回复已保存！');
-        }
-        
-        function deleteMsg(index) {
-            if (confirm('确定删除这条留言吗？')) {
-                messages.splice(index, 1);
-                localStorage.setItem('fengshui_messages', JSON.stringify(messages));
-                render();
+                alert('✅ 设置成功！');
+                loadUsers();
             }
         }
         
-        function logout() {
-            localStorage.removeItem('fengshui_admin');
-            window.location.href = '/login.html';
+        loadUsers();
+        loadAdminMessages();
+
+        async function loadAdminMessages() {
+            document.getElementById('message-table').innerHTML = '<div class="loading">加载中...</div>';
+
+            const { data: messages, error } = await supabase
+                .from('messages')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(100);
+
+            if (error) {
+                document.getElementById('message-table').innerHTML = '<div class="loading">加载失败：' + error.message + '</div>';
+                return;
+            }
+
+            if (!messages || messages.length === 0) {
+                document.getElementById('message-table').innerHTML = '<div class="loading">暂无留言</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>姓名</th><th>内容</th><th>服务类型</th><th>时间</th><th>状态</th><th>操作</th></tr></thead><tbody>';
+
+            messages.forEach(m => {
+                const time = new Date(m.created_at).toLocaleString('zh-CN');
+                const status = m.is_visible
+                    ? '<span class="badge badge-paid">显示中</span>'
+                    : '<span class="badge badge-free">已隐藏</span>';
+                const contentShort = m.content.length > 60 ? m.content.substring(0, 60) + '...' : m.content;
+                const toggleBtn = m.is_visible
+                    ? `<button class="btn btn-danger" onclick="toggleMessage('${m.id}', false)">隐藏</button>`
+                    : `<button class="btn btn-vip" onclick="toggleMessage('${m.id}', true)">显示</button>`;
+
+                html += `<tr>
+                    <td>${m.author_name}</td>
+                    <td title="${m.content}">${contentShort}</td>
+                    <td>${m.service_type || '-'}</td>
+                    <td>${time}</td>
+                    <td>${status}</td>
+                    <td class="actions">${toggleBtn}</td>
+                </tr>`;
+            });
+
+            html += '</tbody></table>';
+            document.getElementById('message-table').innerHTML = html;
         }
-        
-        render();
+
+        async function toggleMessage(msgId, visible) {
+            const { error } = await supabase
+                .from('messages')
+                .update({ is_visible: visible })
+                .eq('id', msgId);
+
+            if (error) {
+                alert('操作失败：' + error.message);
+            } else {
+                loadAdminMessages();
+            }
+        }
+        window.toggleMessage = toggleMessage;
     </script>
 </body>
 </html>
