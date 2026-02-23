@@ -1,5 +1,14 @@
 /* === 一宅一句 公共 JS === */
 
+// 百度统计
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?68d648c33764cf3ae6f44a43cbc3a8d9";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+
 // Supabase 初始化
 const SUPABASE_URL = 'https://zzukurhrupvyieetppty.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_aalFKYjpIEVYqTegN2oalA_NNVnwbcy';
