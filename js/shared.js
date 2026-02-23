@@ -1,8 +1,8 @@
 /* === 一宅一句 公共 JS === */
 
 // Supabase 初始化
-const SUPABASE_URL = 'https://fugdohvvjqwwobdkfsii.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
+const SUPABASE_URL = 'https://zzukurhrupvyieetppty.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_aalFKYjpIEVYqTegN2oalA_NNVnwbcy';
 const { createClient } = window.supabase || {};
 let supabaseClient = null;
 if(createClient) supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

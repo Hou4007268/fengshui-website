@@ -2,8 +2,8 @@
 // GET: 分页查询留言  POST: 提交留言
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://fugdohvvjqwwobdkfsii.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1Z2RvaHZ2anF3d29iZGtmc2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNDA4NzcsImV4cCI6MjA4NjcxNjg3N30.SY3WYl8ElSQS0pdER5uV8VU9j6Dh5GM6MTU9MEuOroM';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://zzukurhrupvyieetppty.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY || 'sb_publishable_aalFKYjpIEVYqTegN2oalA_NNVnwbcy';
 
 let supabase;
 try {
