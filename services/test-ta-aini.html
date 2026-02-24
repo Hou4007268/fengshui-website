@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0>Ta是否爱你测试">
+    <title | 一宅一句 - 测测Ta对你的心意</title>
+    <meta name="description" content="一宅一句Ta是否爱你测试：8道心理题，测测Ta心里到底有没有你。暗恋、暧昧、单恋必测！免费测试，快来发现Ta的真实心意！">
+    <meta name="keywords" content="Ta是否爱我,爱情测试,暗恋测试,情感测试,对方心意,免费测试">
+    <link rel="canonical" href="https://12zn.com/services/test-ta-aini.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ta是否爱你测试 | 一宅一句 - 测测Ta对你的心意">
+    <meta property="og:description" content="一宅一句Ta是否爱你测试：8道心理题，测测Ta心里到底有没有你。暗恋、暧昧、单恋必测！">
+    <meta property="og:url" content="https://12zn.com/services/test-ta-aini.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=20260224">
+    <style>
+        .test-container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+        .progress-wrap { margin-bottom: 32px; }
+        .progress-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .progress-text { font-size: 0.82rem; color: var(--text-secondary); }
+        .progress-num { font-family: 'Noto Serif SC', serif; font-size: 0.9rem; font-weight: 600; color: var(--gold); }
+        .progress-bar { width: 100%; height: 6px; background: var(--border-soft); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-soft)); border-radius: 3px; transition: width 0.4s ease; }
+        .question-card { background: var(--white); border-radius: 16px; padding: 32px 24px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+        .question-num { font-size: 0.8rem; color: var(--gold); margin-bottom: 12px; font-weight: 500; }
+        .question-text { font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 24px; line-height: 1.7; }
+        .options-list { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn { width: 100%; padding: 16px 20px; border: 2px solid var(--border); border-radius: 12px; background: var(--white); font-size: 0.95rem; color: var(--text); text-align: left; cursor: pointer; transition: all 0.2s; }
+        .option-btn:hover { border-color: var(--gold-soft); background: var(--gold-bg); }
+        .option-btn.selected { border-color: var(--gold); background: var(--gold-bg); }
+        .result-card { background: var(--white); border-radius: 16px; padding: 40px 24px; box-shadow: var(--shadow-md); text-align: center; }
+        .result-icon { font-size: 3rem; margin-bottom: 16px; }
+        .result-title { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .result-subtitle { font-size: 0.95rem; color: var(--gold); margin-bottom: 20px; }
+        .result-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; text-align: left; }
+        .result-section { text-align: left; margin-bottom: 20px; padding: 16px; background: var(--parchment); border-radius: 10px; }
+        .result-section-title { font-weight: 600; color: var(--ink); margin-bottom: 8px; font-size: 0.9rem; }
+        .result-section-content { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+        .btn-retest { display: inline-block; padding: 14px 32px; background: var(--gold); color: #fff; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; text-decoration: none; }
+        .btn-retest:hover { background: var(--gold-soft); }
+        .home-link { display: block; margin-top: 16px; color: var(--text-secondary); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="test-container" style="padding-top: 40px; padding-bottom: 60px;">
+        <!-- 进度条 -->
+        <div class="progress-wrap" id="progress-wrap">
+            <div class="progress-info">
+                <span class="progress-text">问题 <span id="current-q">1</span> / <span id="total-q">8</span></span>
+                <span class="progress-num" id="progress-percent">12%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 12%;"></div></div>
+        </div>
+
+        <!-- 问题卡片 -->
+        <div class="question-card" id="question-card">
+            <div class="question-num" id="question-num">问题一</div>
+            <div class="question-text" id="question-text">加载中...</div>
+            <div class="options-list" id="options-list"></div>
+        </div>
+
+        <!-- 结果卡片 -->
+        <div class="result-card" id="result-card" style="display: none;">
+            <div class="result-icon" id="result-icon">💕</div>
+            <div class="result-title" id="result-title">测试结果</div>
+            <div class="result-subtitle" id="result-subtitle"></div>
+            <div class="result-desc" id="result-desc"></div>
+            <div class="result-section">
+                <div class="result-section-title">📊 结果说明</div>
+                <div class="result-section-content" id="result-explain"></div>
+            </div>
+            <a href="test-ta-aini.html" class="btn-retest">重新测试</a>
+            <a href="/" class="home-link">返回首页</a>
+        </div>
+    </div>
+
+    <script>
+        // ========== Ta是否爱你问题数据 ==========
+        const questions = [
+            {
+                q: 'Ta看你的眼神通常是什么样的？',
+                options: [
+                    { text: '眼神会发光，忍不住一直看你', type: 'very' },
+                    { text: '比较正常，偶尔会对视', type: 'normal' },
+                    { text: '很少看我，眼神会躲闪', type: 'low' },
+                    { text: '看不出来有什么不同', type: 'none' }
+                ]
+            },
+            {
+                q: '当你生病或不舒服时，Ta的反应是？',
+                options: [
+                    { text: '非常紧张，关心得不行', type: 'very' },
+                    { text: '会问候一下，表示关心', type: 'normal' },
+                    { text: '淡淡的，可能问一句', type: 'low' },
+                    { text: '完全没反应，像没看到', type: 'none' }
+                ]
+            },
+            {
+                q: 'Ta会主动找你聊天吗？',
+                options: [
+                    { text: '经常主动，消息秒回', type: 'very' },
+                    { text: '偶尔主动，回复也算快', type: 'normal' },
+                    { text: '很少主动，一般是我找Ta', type: 'low' },
+                    { text: '从不主动，我找Ta也不理', type: 'none' }
+                ]
+            },
+            {
+                q: '你们单独相处时，Ta会找机会靠近你吗？',
+                options: [
+                    { text: '总是找机会靠近，肢体接触多', type: 'very' },
+                    { text: '偶尔会，动作比较自然', type: 'normal' },
+                    { text: '比较少，保持一定距离', type: 'low' },
+                    { text: '完全没有，总是躲远远的', type: 'none' }
+                ]
+            },
+            {
+                q: 'Ta会在社交平台上关注你的动态吗？',
+                options: [
+                    { text: '每条动态都点赞评论，非常积极', type: 'very' },
+                    { text: '会看，偶尔互动', type: 'normal' },
+                    { text: '很少看，几乎不互动', type: 'low' },
+                    { text: '完全不看，也不点赞', type: 'none' }
+                ]
+            },
+            {
+                q: '当你提到未来计划时，Ta的反应是？',
+                options: [
+                    { text: '很有兴趣，问很多细节', type: 'very' },
+                    { text: '会听听，淡淡回应', type: 'normal' },
+                    { text: '敷衍一下，不太关心', type: 'low' },
+                    { text: '直接转移话题', type: 'none' }
+                ]
+            },
+            {
+                q: 'Ta吃醋吗？当你和其他人走得近时？',
+                options: [
+                    { text: '非常在意，会直接表现出来', type: 'very' },
+                    { text: '会有点不爽，但不明显', type: 'normal' },
+                    { text: '完全无所谓', type: 'low' },
+                    { text: 'Ta也有别人', type: 'none' }
+                ]
+            },
+            {
+                q: '如果Ta现在向你表白，你会？',
+                options: [
+                    { text: '马上答应，非常期待', type: 'very' },
+                    { text: '会认真考虑', type: 'normal' },
+                    { text: '会犹豫，需要时间', type: 'low' },
+                    { text: '会拒绝', type: 'none' }
+                ]
+            }
+        ];
+
+        // ========== 结果数据 ==========
+        const resultData = {
+            'very': {
+                icon: '💖',
+                color: '#e91e63',
+                name: 'Ta超爱你！',
+                subtitle: '情深似海 · 命中注定',
+                desc: '恭喜！从测试结果来看，Ta对你的爱意已经很明显了！Ta看你的眼神里带着光，会主动找你聊天，在你生病时紧张得不行。这些都是 Ta 深爱你的表现。',
+                explain: '测试结果显示：Ta对你有非常强烈的爱情意向。Ta不仅在言语上关心你，更在行动上表现出对你的在意。Ta的注意力几乎都在你身上，你的喜怒哀乐牵动着Ta的心。'
+            },
+            'normal': {
+                icon: '💌',
+                color: '#9c27b0',
+                name: 'Ta有点喜欢你',
+                subtitle: '情意渐生 · 稳步发展中',
+                desc: 'Ta对你有一定的好感，但还没有到非你不可的程度。Ta会关心你，偶尔也会主动，但可能还在观望或者不确定自己的心意。',
+                explain: '测试结果显示：Ta对你有normal级别的喜欢。这种状态最适合慢慢发展，不要急于表白，给Ta时间和空间，让感情自然生长。'
+            },
+            'low': {
+                icon: '💭',
+                color: '#607d8b',
+                name: 'Ta对你感觉一般',
+                subtitle: '朋友以上 · 恋人未满',
+                desc: 'Ta对你没有那种心动的感觉，更多是把你当成朋友或者普通同事。Ta会回应你的好，但不会主动付出。',
+                explain: '测试结果显示：Ta对你没有强烈的爱情意向。建议保持普通朋友关系，不要投入太多感情，以免受伤。'
+            },
+            'none': {
+                icon: '❄️',
+                color: '#9e9e9e',
+                name: 'Ta不喜欢你',
+                subtitle: '落花有意 · 流水无情',
+                desc: '很残酷，但还是要告诉你——Ta对你没有爱情方面的意思。Ta可能享受你的好，但并不想和你发展成恋人关系。',
+                explain: '测试结果显示：Ta对你没有爱情意向。建议及时止损，把精力投入到更值得的人身上。'
+            }
+        };
+
+        // ========== 测试逻辑 ==========
+        let currentQuestion = 0;
+        let answers = [];
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-num').textContent = '问题' + (currentQuestion + 1);
+            document.getElementById('question-text').textContent = q.q;
+            document.getElementById('current-q').textContent = currentQuestion + 1;
+            document.getElementById('total-q').textContent = questions.length;
+            document.getElementById('progress-percent').textContent = Math.round((currentQuestion + 1) / questions.length * 100) + '%';
+            document.getElementById('progress-fill').style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
+
+            const optionsHtml = q.options.map((opt, i) => 
+                '<button class="option-btn" onclick="selectOption(' + i + ')">' + opt.text + '</button>'
+            ).join('');
+            document.getElementById('options-list').innerHTML = optionsHtml;
+        }
+
+        function selectOption(index) {
+            answers.push(questions[currentQuestion].options[index].type);
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            // 计算结果
+            const counts = { very: 0, normal: 0, low: 0, none: 0 };
+            answers.forEach(a => counts[a]++);
+            
+            // 找出最高分
+            let maxType = 'normal';
+            let maxScore = 0;
+            for (const type in counts) {
+                if (counts[type] > maxScore) {
+                    maxScore = counts[type];
+                    maxType = type;
+                }
+            }
+
+            const result = resultData[maxType];
+            
+            document.getElementById('question-card').style.display = 'none';
+            document.getElementById('progress-wrap').style.display = 'none';
+            document.getElementById('result-card').style.display = 'block';
+            
+            document.getElementById('result-icon').textContent = result.icon;
+            document.getElementById('result-title').textContent = result.name;
+            document.getElementById('result-title').style.color = result.color;
+            document.getElementById('result-subtitle').textContent = result.subtitle;
+            document.getElementById('result-desc').textContent = result.desc;
+            document.getElementById('result-explain').textContent = result.explain;
+        }
+
+        // 初始化
+        showQuestion();
+    </script>
+</body>
+</html>
