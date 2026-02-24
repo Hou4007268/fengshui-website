@@ -40,9 +40,21 @@
         .result-section { text-align: left; margin-bottom: 20px; padding: 16px; background: var(--parchment); border-radius: 10px; }
         .result-section-title { font-weight: 600; color: var(--ink); margin-bottom: 8px; font-size: 0.9rem; }
         .result-section-content { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
-        .btn-retest { display: inline-block; padding: 14px 32px; background: var(--gold); color: #fff; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; text-decoration: none; }
+        .btn-retest { display: inline-block; padding: 14px : var(--gold32px; background); color: #fff; border: none; border-radius: 25px; font-size: 1rem; cursor: pointer; text-decoration: none; }
         .btn-retest:hover { background: var(--gold-soft); }
         .home-link { display: block; margin-top: 16px; color: var(--text-secondary); font-size: 0.9rem; }
+        .share-section { margin: 24px 0; padding: 20px; background: var(--parchment); border-radius: 12px; }
+        .share-title { font-weight: 600; margin-bottom: 12px; color: var(--ink); }
+        .share-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .share-btn { padding: 10px 16px; border: none; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+        .share-btn--copy { background: var(--ink); color: #fff; }
+        .share-btn--copy:hover { background: var(--ink-light); }
+        .share-btn--twitter { background: #000; color: #fff; }
+        .share-btn--twitter:hover { background: #333; }
+        .share-btn--wechat { background: #07c160; color: #fff; }
+        .share-btn--wechat:hover { background: #06ad56; }
+        .share-msg { margin-top: 10px; font-size: 0.85rem; color: var(--gold); text-align: center; }
+        .wechat-qr { margin-top: 12px; text-align: center; }
     </style>
 </head>
 <body>
@@ -73,6 +85,21 @@
                 <div class="result-section-title">📊 结果说明</div>
                 <div class="result-section-content" id="result-explain"></div>
             </div>
+            
+            <!-- 分享按钮 -->
+            <div class="share-section">
+                <div class="share-title">📤 分享结果</div>
+                <div class="share-buttons">
+                    <button class="share-btn share-btn--copy" onclick="copyLink()">📋 复制链接</button>
+                    <button class="share-btn share-btn--twitter" onclick="shareToTwitter()">🐦 分享到X</button>
+                    <button class="share-btn share-btn--wechat" onclick="showWechatQR()">💬 微信分享</button>
+                </div>
+                <div class="share-msg" id="share-msg"></div>
+                <div class="wechat-qr" id="wechat-qr" style="display:none;">
+                    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">扫码打开测试链接</p>
+                </div>
+            </div>
+            
             <a href="test-ta-aini.html" class="btn-retest">重新测试</a>
             <a href="/" class="home-link">返回首页</a>
         </div>
@@ -251,6 +278,33 @@
 
         // 初始化
         showQuestion();
+
+        // ========== 分享功能 ==========
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                document.getElementById('share-msg').textContent = '✓ 链接已复制到剪贴板';
+                setTimeout(() => document.getElementById('share-msg').textContent = '', 3000);
+            });
+        }
+
+        function shareToTwitter() {
+            const title = document.getElementById('result-title').textContent;
+            const desc = document.getElementById('result-desc').textContent.substring(0, 50) + '...';
+            const url = window.location.href;
+            const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + ' ' + desc) + '&url=' + encodeURIComponent(url);
+            window.open(twitterUrl, '_blank');
+        }
+
+        function showWechatQR() {
+            const qrDiv = document.getElementById('wechat-qr');
+            if (qrDiv.style.display === 'none') {
+                qrDiv.style.display = 'block';
+                qrDiv.innerHTML = '<p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">扫码打开测试链接</p><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(window.location.href) + '" alt="微信二维码">';
+            } else {
+                qrDiv.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
