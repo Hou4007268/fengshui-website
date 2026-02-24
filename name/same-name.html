@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重名查询 - 一宅一句</title>
+    <meta name="description" content="姓名重名查询">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .search-box {
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .search-box h2 {
+            color: #f5576c;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+        }
+        input::placeholder { color: #666; }
+        
+        .btn {
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.02); }
+        
+        .result {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .result.show { display: block; }
+        
+        .result-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .name-display {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .count {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #f5576c;
+            margin: 15px 0;
+        }
+        
+        .count-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .rank {
+            display: inline-block;
+            background: rgba(240,147,251,0.2);
+            color: #f093fb;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .tips {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 20px;
+        }
+        
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+        }
+        nav a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        nav a.active { color: #f5576c; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏮 一宅一句</h1>
+    </header>
+    
+    <div class="container">
+        <div class="search-box">
+            <h2>🔍 重名查询</h2>
+            <p style="color:#888;margin-bottom:20px;">输入姓名，看看全国有多少人和你同名</p>
+            
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="10">
+            </div>
+            <button class="btn" onclick="searchName()">查询</button>
+            
+            <div class="result" id="result">
+                <div class="result-card">
+                    <div class="name-display" id="nameDisplay">张三</div>
+                    <p class="count-label">全国约有多少人与你同名？</p>
+                    <div class="count" id="countDisplay">12,580</div>
+                    <div class="rank" id="rankDisplay">同名率：中等</div>
+                </div>
+                <p class="tips">数据来源：根据大数据统计，仅供参考</p>
+            </div>
+        </div>
+    </div>
+    
+    <nav>
+        <a href="/">🏠 首页</a>
+        <a href="/tools.html">🔧 工具</a>
+        <a href="/name/">📝 姓名</a>
+        <a href="/login.html">👤 我的</a>
+    </nav>
+
+    <script>
+        // 模拟数据 - 实际应该调用API
+        var nameData = {};
+        
+        function searchName() {
+            var name = document.getElementById('nameInput').value.trim();
+            
+            if (!name || name.length < 2) {
+                alert('请输入至少2个字的姓名');
+                return;
+            }
+            
+            // 模拟查询（实际项目中应调用真实API）
+            var count = simulateCount(name);
+            
+            document.getElementById('nameDisplay').textContent = name;
+            document.getElementById('countDisplay').textContent = count.toLocaleString();
+            
+            // 计算同名率
+            var rank = '';
+            if (count < 1000) {
+                rank = '稀有姓名';
+            } else if (count < 10000) {
+                rank = '较少同名';
+            } else if (count < 50000) {
+                rank = '中等同名';
+            } else if (count < 200000) {
+                rank = '常见姓名';
+            } else {
+                rank = '大姓同名';
+            }
+            document.getElementById('rankDisplay').textContent = rank;
+            
+            document.getElementById('result').classList.add('show');
+        }
+        
+        function simulateCount(name) {
+            // 简单哈希模拟，实际用API
+            var hash = 0;
+            for (var i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            var absHash = Math.abs(hash);
+            
+            // 常见姓概率更高
+            var commonSurnames = ['王','李','张','刘','陈','杨','赵','黄','周','吴'];
+            var firstChar = name.charAt(0);
+            var baseCount = 5000;
+            
+            for (var j = 0; j < commonSurnames.length; j++) {
+                if (firstChar === commonSurnames[j]) {
+                    baseCount = 30000;
+                    break;
+                }
+            }
+            
+            return baseCount + (absHash % 200000);
+        }
+        
+        // 回车查询
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchName();
+            }
+        });
+    </script>
+</body>
+</html>

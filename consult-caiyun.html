@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财运事业咨询 - 一宅一句</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C9A962;
+            --primary-dark: #A8863D;
+            --bg-dark: #1A1A1A;
+            --bg-card: #252525;
+            --text: #FFFFFF;
+            --text-muted: #999999;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(180deg, #1F1F1F 0%, var(--bg-dark) 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+        header h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 10px; }
+        header p { color: var(--text-muted); font-size: 0.9rem; }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .service-info {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+        }
+        .service-info h2 { color: var(--primary); margin-bottom: 15px; }
+        .service-info ul { list-style: none; }
+        .service-info li { padding: 8px 0; color: var(--text-muted); }
+        .service-info li::before { content: "✓ "; color: var(--primary); }
+        .questions {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .questions h3 { color: var(--primary); margin-bottom: 15px; }
+        .question-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        .question-btn:hover {
+            background: rgba(201, 169, 98, 0.2);
+            border-color: var(--primary);
+        }
+        .chat-box {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 400px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .chat-message {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+        .chat-message.ai {
+            background: rgba(201, 169, 98, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+        .chat-message.user {
+            background: rgba(255, 255, 255, 0.05);
+            border-right: 3px solid var(--primary);
+            text-align: right;
+        }
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 10px;
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        .input-area input:focus { outline: none; border-color: var(--primary); }
+        .input-area button {
+            padding: 15px 30px;
+            background: var(--primary);
+            color: #111;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .input-area button:hover { background: var(--primary-dark); }
+        .loading { color: var(--text-muted); text-align: center; padding: 20px; }
+    </style>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?68d648c33764cf3ae6f44a43cbc3a8d9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+<body>
+    <header>
+        <a href="/" class="back-btn">← 返回首页</a>
+        <h1>💰 财运事业咨询</h1>
+        <p>AI智能分析，为您指点财运与事业方向</p>
+    </header>
+    
+    <div class="container">
+        <div class="service-info">
+            <h2>为您提供</h2>
+            <ul>
+                <li>命理八字财运分析</li>
+                <li>事业发展方向指导</li>
+                <li>职业选择建议</li>
+                <li>提升运势的方法</li>
+            </ul>
+        </div>
+        
+        <div class="questions" id="questions">
+            <h3>请选择您想了解的问题，或直接提问：</h3>
+            <button class="question-btn" onclick="startChat('我的八字是...')">📝 提供八字，详解财运</button>
+            <button class="question-btn" onclick="startChat('我从事...')">💼 分析事业运势</button>
+            <button class="question-btn" onclick="startChat('我想换工作')">🔄 职业发展建议</button>
+            <button class="question-btn" onclick="startChat('如何提升财运')">📈 财运提升方法</button>
+            <button class="question-btn" onclick="startChat('今年运势如何')">🗓️ 流年运势分析</button>
+        </div>
+        
+        <div class="chat-box" id="chatBox" style="display:none;">
+            <div class="chat-message ai">
+                您好！我是AI风水助手。请告诉我您的出生年月日时（八字），以及您想了解哪方面的财运或事业问题，我会为您详细分析。
+            </div>
+        </div>
+        
+        <div class="input-area" id="inputArea" style="display:none;">
+            <input type="text" id="userInput" placeholder="请输入您的问题..." onkeypress="if(event.key==='Enter')sendMessage()">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+    
+    <script>
+        let serviceType = '财运事业';
+        
+        function startChat(question) {
+            document.getElementById('questions').style.display = 'none';
+            document.getElementById('chatBox').style.display = 'block';
+            document.getElementById('inputArea').style.display = 'flex';
+            if (question) {
+                document.getElementById('userInput').value = question;
+                sendMessage();
+            }
+        }
+        
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const chatBox = document.getElementById('chatBox');
+            
+            // Add user message
+            chatBox.innerHTML += '<div class="chat-message user">' + message + '</div>';
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            // Show loading
+            chatBox.innerHTML += '<div class="loading">AI正在分析中...</div>';
+            chatBox.scrollTop = chatBox.scrollHeight;
+            
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        message: message,
+                        service: serviceType
+                    })
+                });
+                const data = await response.json();
+                
+                // Remove loading
+                const loading = chatBox.querySelector('.loading');
+                if (loading) loading.remove();
+                
+                // Add AI response
+                chatBox.innerHTML += '<div class="chat-message ai">' + data.response + '</div>';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (e) {
+                const loading = chatBox.querySelector('.loading');
+                if (loading) loading.remove();
+                chatBox.innerHTML += '<div class="chat-message ai">抱歉，请稍后再试或联系客服。</div>';
+            }
+        }
+    </script>
+</body>
+</html>

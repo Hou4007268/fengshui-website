@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦想职业测试 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #FF512F, #F09819);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #F09819;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .icon { font-size: 5rem; margin-bottom: 15px; }
+        .career {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #FF512F, #F09819);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .desc {
+            color: #aaa;
+            line-height: 1.6;
+            margin: 20px 0;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+        .trait-tag {
+            background: rgba(255, 81, 47, 0.2);
+            border: 1px solid rgba(255, 81, 47, 0.4);
+            color: #F09819;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #F09819;
+        }
+        .btn {
+            background: linear-gradient(90deg, #FF512F, #F09819);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+        .btn:hover { transform: scale(1.02); }
+        .result-box {
+            display: none;
+        }
+        .form-box {
+            display: block;
+        }
+        .tips {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+        .recommendation {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border-left: 4px solid #F09819;
+        }
+        .recommendation h4 {
+            color: #F09819;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💼 梦想职业测试</h1>
+    </header>
+    <div class="container">
+        <a href="/test/index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="card">
+            <!-- 表单填写区域 -->
+            <div class="form-box" id="formBox">
+                <div class="icon">💼</div>
+                <div class="desc" style="text-align: center;">输入你的姓名，系统将分析你的性格特质并匹配最适合你的梦想职业</div>
+                
+                <div class="form-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn" onclick="submitTest()">提交测试</button>
+                <div class="tips">每个姓名仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="result-box" id="resultBox">
+                <div class="icon" id="icon">💼</div>
+                <div class="career" id="career"></div>
+                <div class="desc" id="desc"></div>
+                <div class="traits" id="traits"></div>
+                
+                <div class="recommendation">
+                    <h4>💡 职业建议</h4>
+                    <p id="recommendation"></p>
+                </div>
+                
+                <div style="color: #666; font-size: 0.85rem; margin-top: 15px;">
+                    测试时间：<span id="testTime"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const careers = [
+            { 
+                emoji: "👨‍💻", 
+                name: "科技创客", 
+                desc: "你是天生的技术奇才，对新技术充满好奇，喜欢通过代码解决实际问题。逻辑思维能力强，善于分析复杂系统。",
+                traits: ["创新", "逻辑", "技术", "专注"],
+                recommendation: "适合软件工程、数据科学、AI开发、产品经理等岗位，创业也是不错的选择。"
+            },
+            { 
+                emoji: "🎨", 
+                name: "创意设计师", 
+                desc: "你有丰富的想象力和独特的审美眼光，能用视觉语言表达内心世界。对美有执着的追求，享受创作过程。",
+                traits: ["创意", "审美", "表达", "敏感"],
+                recommendation: "平面设计、UI/UX设计、影视制作、艺术指导等职业会让你如鱼得水。"
+            },
+            { 
+                emoji: "👨‍🏫", 
+                name: "教育导师", 
+                desc: "你天生具备沟通和引导能力，乐于分享知识，耐心细致。看到他人成长会让你获得巨大的满足感。",
+                traits: ["耐心", "沟通", "同理心", "引导"],
+                recommendation: "教师、培训师、心理咨询师、职业规划师等职业非常适合你。"
+            },
+            { 
+                emoji: "👨‍⚕️", 
+                name: "健康守护者", 
+                desc: "你有强烈的责任感和同情心，关注他人健康，细心周到。能够在压力下保持冷静，给予专业帮助。",
+                traits: ["责任", "细心", "冷静", "关怀"],
+                recommendation: "医生、护士、心理咨询师、健康管理师等医疗健康相关职业。"
+            },
+            { 
+                emoji: "👨‍💼", 
+                name: "商业领袖", 
+                desc: "你具备战略眼光和领导才能，善于发现机会，有很强的决策能力和风险承受能力。",
+                traits: ["领导力", "战略", "决策", "冒险"],
+                recommendation: "企业家、投资经理、市场营销总监、战略咨询等管理职位。"
+            },
+            { 
+                emoji: "👨‍🔬", 
+                name: "科研学者", 
+                desc: "你对世界充满好奇心，喜欢探索未知，有严谨的思维和持久的耐心。享受发现真理的过程。",
+                traits: ["好奇", "严谨", "专注", "探索"],
+                recommendation: "科学研究员、实验室主管、学术教授、技术研发等科研岗位。"
+            },
+            { 
+                emoji: "👨‍🎤", 
+                name: "艺术表演者", 
+                desc: "你情感丰富，表现力强，渴望用艺术形式表达内心世界。舞台是你绽放光芒的地方。",
+                traits: ["表现力", "情感", "勇气", "魅力"],
+                recommendation: "演员、歌手、舞者、主持人、短视频创作者等表演艺术职业。"
+            },
+            { 
+                emoji: "👨‍🌾", 
+                name: "生活美学家", 
+                desc: "你热爱生活，注重生活品质，擅长发现日常中的美好。追求工作与生活的平衡。",
+                traits: ["品味", "平衡", "温暖", "实践"],
+                recommendation: "生活博主、美食家、园艺师、民宿主人、手工艺人等生活美学职业。"
+            }
+        ];
+        
+        // 根据姓名生成hash，确保同一姓名得到相同结果
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            // 用姓名生成固定结果
+            const hash = getHash(name);
+            const result = careers[hash % careers.length];
+            
+            // 显示结果
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').style.display = 'block';
+            
+            document.getElementById('icon').textContent = result.emoji;
+            document.getElementById('career').textContent = result.emoji + " " + result.name;
+            document.getElementById('desc').textContent = result.desc;
+            document.getElementById('recommendation').textContent = result.recommendation;
+            
+            // 显示特质标签
+            const traitsDiv = document.getElementById('traits');
+            traitsDiv.innerHTML = '';
+            result.traits.forEach(trait => {
+                const tag = document.createElement('span');
+                tag.className = 'trait-tag';
+                tag.textContent = trait;
+                traitsDiv.appendChild(tag);
+            });
+            
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            // 保存到localStorage，防止重复测试
+            localStorage.setItem('career_test_done', name);
+        }
+        
+        // 检查是否已测试过
+        window.onload = function() {
+            const done = localStorage.getItem('career_test_done');
+            if (done) {
+                const hash = getHash(done);
+                const result = careers[hash % careers.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').style.display = 'block';
+                document.getElementById('icon').textContent = result.emoji;
+                document.getElementById('career').textContent = result.emoji + " " + result.name;
+                document.getElementById('desc').textContent = result.desc;
+                document.getElementById('recommendation').textContent = result.recommendation;
+                
+                const traitsDiv = document.getElementById('traits');
+                traitsDiv.innerHTML = '';
+                result.traits.forEach(trait => {
+                    const tag = document.createElement('span');
+                    tag.className = 'trait-tag';
+                    tag.textContent = trait;
+                    traitsDiv.appendChild(tag);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

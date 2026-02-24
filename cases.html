@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例展示 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Noto Sans SC', sans-serif; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #b8964c, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav {
+            padding: 15px 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+        .nav a {
+            color: #b8964c;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.95rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 1.6rem;
+            color: #b8964c;
+            margin-bottom: 10px;
+        }
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .case-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(184,150,76,0.2);
+            transition: transform 0.3s;
+        }
+        .case-card:hover {
+            transform: translateY(-5px);
+            border-color: #b8964c;
+        }
+        .case-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .case-card .content {
+            padding: 20px;
+        }
+        .case-card h3 {
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .case-card p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .videos-section {
+            margin-top: 60px;
+        }
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .video-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(184,150,76,0.2);
+        }
+        .video-card video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .video-card .content {
+            padding: 15px;
+        }
+        .video-card h3 {
+            color: #b8964c;
+            font-size: 1rem;
+        }
+        .wechat-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+        }
+        .wechat-section h2 {
+            color: #b8964c;
+            margin-bottom: 20px;
+        }
+        .wechat-section img {
+            width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .wechat-section p {
+            color: #999;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?68d648c33764cf3ae6f44a43cbc3a8d9";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</head>
+<body>
+    <header>
+        <h1>🏮 一宅一句 · 案例展示</h1>
+    </header>
+    <nav class="nav">
+        <a href="/">返回首页</a>
+        <a href="/consult.html">在线咨询</a>
+    </nav>
+    
+    <div class="container">
+        <div class="section-title">
+            <h2>📸 家居风水调整案例</h2>
+            <p>真实客户案例，见证风水调整效果</p>
+        </div>
+        
+        <div class="cases-grid">
+            <div class="case-card">
+                <img src="/images/case-1.jpg" alt="案例1">
+                <div class="content">
+                    <h3>🏠 家居布局调整</h3>
+                    <p>通过调整家具摆放位置，改善客厅采光和气流，提升整体运势。</p>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="/images/case-2.jpg" alt="案例2">
+                <div class="content">
+                    <h3>🎯 财运方位优化</h3>
+                    <p>找准财位，放置适当招财摆件，助力事业发展。</p>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="/images/case-3.jpg" alt="案例3">
+                <div class="content">
+                    <h3>🛋️ 沙发摆放风水</h3>
+                    <p>调整沙发朝向，解决门冲问题，提升家庭和谐。</p>
+                </div>
+            </div>
+            <div class="case-card">
+                <img src="/images/case-4.jpg" alt="案例4">
+                <div class="content">
+                    <h3>📐 户型分析诊断</h3>
+                    <p>新建房屋风水规划，提前规避结构性问题。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wechat-section">
+            <h2>📱 添加微信了解更多案例</h2>
+            <img src="/images/wechat-qr.jpg" alt="微信二维码">
+            <p>扫码添加微信，备注"案例"</p>
+        </div>
+        
+        <div class="videos-section">
+            <div class="section-title">
+                <h2>🎬 法事现场实录</h2>
+                <p>真实法事过程，案例见证</p>
+            </div>
+            
+            <div class="videos-grid">
+                <div class="video-card">
+                    <video src="/videos/ritual-1.mp4" controls></video>
+                    <div class="content"><h3>法事实录 1</h3></div>
+                </div>
+                <div class="video-card">
+                    <video src="/videos/ritual-2.mp4" controls></video>
+                    <div class="content"><h3>法事实录 2</h3></div>
+                </div>
+                <div class="video-card">
+                    <video src="/videos/ritual-3.mp4" controls></video>
+                    <div class="content"><h3>法事实录 3</h3></div>
+                </div>
+                <div class="video-card">
+                    <video src="/videos/ritual-4.mp4" controls></video>
+                    <div class="content"><h3>法事实录 4</h3></div>
+                </div>
+                <div class="video-card">
+                    <video src="/videos/ritual-5.mp4" controls></video>
+                    <div class="content"><h3>法事实录 5</h3></div>
+                </div>
+                <div class="video-card">
+                    <video src="/videos/ritual-6.mp4" controls></video>
+                    <div class="content"><h3>法事实录 6</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

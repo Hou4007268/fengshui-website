@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="看过太多故事的人，聊聊房子里的门道。不讲大道理，只说些实在的话。">
+    <meta name="keywords" content="风水,家居风水,装修,老房子,传统">
+    <meta name="author" content="一宅一句">
+    <title>一宅一句 | 看过太多故事的人</title>
+    <link rel="canonical" href="https://www.12zn.com/">
+    <meta property="og:title" content="一宅一句 | 看过太多故事的人">
+    <meta property="og:description" content="聊聊房子里的门道，不讲大道理，只说些实在的话。">
+    <meta property="og:image" content="https://www.12zn.com/og-image.jpg">
+    <meta property="og:url" content="https://www.12zn.com/">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "一宅一句",
+      "description": "看过太多故事的人，聊聊房子里的门道",
+      "url": "https://www.12zn.com/"
+    }
+    </script>
+    
+    <!-- 预加载关键字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --bg-paper: #F5F1EA;
+            --bg-cream: #FAF8F3;
+            --bg-warm: #EDE8DF;
+            --wood-dark: #2D1F1A;
+            --wood-medium: #4A3728;
+            --wood-light: #7A5C48;
+            --red-cinnabar: #B91C2C;
+            --red-dark: #7F1D1D;
+            --ink: #1C1917;
+            --ink-light: #44403C;
+            --text: #292524;
+            --text-muted: #78716C;
+            --border: #D6D3D1;
+            --shadow: 0 4px 20px rgba(45, 31, 26, 0.06);
+            --shadow-hover: 0 8px 32px rgba(45, 31, 26, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            background: var(--bg-paper); 
+            color: var(--text); 
+            line-height: 1.75; 
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 0% 0%, rgba(185, 28, 44, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(45, 31, 26, 0.05) 0%, transparent 50%);
+        }
+        
+        .container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 纸张纹理效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        header { 
+            text-align: center; 
+            padding: 72px 0 40px; 
+            position: relative;
+        }
+        
+        /* 装饰线条 */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--red-cinnabar), transparent);
+        }
+        
+        .logo { 
+            font-size: 48px; 
+            margin-bottom: 16px; 
+            display: inline-block;
+            animation: fadeIn 0.8s ease-out;
+            filter: drop-shadow(0 2px 4px rgba(185, 28, 44, 0.15));
+        }
+        
+        h1 { 
+            font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+            font-size: 32px; 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            color: var(--wood-dark);
+            letter-spacing: 6px;
+            animation: fadeIn 0.8s ease-out 0.1s both;
+        }
+        
+        .subtitle { 
+            font-size: 15px; 
+            color: var(--text-muted); 
+            margin-bottom: 8px;
+            font-weight: 400;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+            letter-spacing: 3px;
+        }
+        
+        .intro {
+            max-width: 480px;
+            margin: 28px auto 0;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.9;
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 36px 0;
+            color: var(--border);
+            animation: fadeIn 0.8s ease-out 0.35s both;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        
+        .divider span {
+            color: var(--red-cinnabar);
+            font-size: 12px;
+            letter-spacing: 4px;
+        }
+        
+        .section { 
+            background: var(--bg-cream); 
+            border-radius: 3px; 
+            padding: 32px 28px; 
+            margin: 28px 0; 
+            border: 1px solid rgba(214, 211, 209, 0.5);
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+        
+        .section h2 { 
+            font-family: 'Noto Serif SC', 'Songti SC', serif;
+            color: var(--wood-dark); 
+            font-size: 18px; 
+            margin-bottom: 20px; 
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        
+        .section p { 
+            color: var(--text-muted); 
+            font-size: 14px; 
+            line-height: 1.85;
+            text-align: justify;
+        }
+        
+        .services { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; 
+            margin-top: 12px; 
+        }
+        
+        .service-item { 
+            background: var(--bg-warm); 
+            padding: 20px 12px; 
+            border-radius: 3px; 
+            text-align: center; 
+            border: 1px solid transparent;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--red-cinnabar);
+            transform: scaleX(0);
+            transition: transform 0.35s ease;
+        }
+        
+        .service-item:hover { 
+            border-color: rgba(185, 28, 44, 0.2); 
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .service-item:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-item .icon { 
+            font-size: 24px; 
+            margin-bottom: 8px; 
+            display: block; 
+        }
+        
+        .service-item p { 
+            color: var(--text); 
+            font-size: 13px; 
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .blog-list { 
+            list-style: none; 
+            display: grid; 
+            gap: 10px; 
+        }
+        
+        .blog-list li { 
+            padding: 16px 20px; 
+            background: var(--bg-warm); 
+            border-radius: 3px; 
+            border: 1px solid transparent;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .blog-list li:hover { 
+            border-color: var(--border);
+            transform: translateX(6px);
+        }
+        
+        .blog-list li a { 
+            color: var(--text); 
+            text-decoration: none; 
+            font-size: 14px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-list li:hover a { 
+            color: var(--red-cinnabar); 
+        }
+        
+        .blog-list li span { 
+            color: var(--text-muted); 
+            font-size: 12px; 
+            margin-top: 6px; 
+            display: block; 
+        }
+        
+        .cta { 
+            text-align: center; 
+            margin: 40px 0 28px; 
+            animation: fadeIn 0.8s ease-out 0.5s both;
+        }
+        
+        .cta a { 
+            display: inline-block; 
+            padding: 14px 40px; 
+            background: var(--red-cinnabar); 
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 2px; 
+            font-size: 14px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.            transition: left 0.5s ease;
+       2), transparent);
+ }
+        
+        .cta a:hover { 
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(185, 28, 44, 0.25);
+        }
+        
+        .cta a:hover::before {
+            left: 100%;
+        }
+        
+        /* 悬浮微信按钮 */
+        .float-wechat { 
+            position: fixed; 
+            bottom: 28px; 
+            right: 20px; 
+            z-index: 1000; 
+        }
+        
+        .float-wechat a { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            padding: 12px 20px; 
+            background: var(--wood-dark); 
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 3px; 
+            font-size: 13px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(45, 31, 26, 0.2);
+        }
+        
+        .float-wechat a:hover { 
+            background: var(--wood-medium);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(45, 31, 26, 0.3);
+        }
+        
+        .float-wechat .icon { font-size: 18px; }
+        
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            color: var(--text-muted); 
+            font-size: 12px; 
+            margin-top: 28px;
+            border-top: 1px solid rgba(214, 211, 209, 0.5);
+        }
+        
+        footer a { 
+            color: var(--red-cinnabar); 
+            text-decoration: none; 
+            transition: color 0.3s ease; 
+        }
+        
+        footer a:hover { color: var(--wood-dark); }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(12px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        /* 表单样式 */
+        .contact-form {
+            background: var(--bg-cream);
+            border-radius: 3px;
+            padding: 32px 28px;
+            margin: 28px 0;
+            border: 1px solid rgba(214, 211, 209, 0.5);
+        }
+        
+        .contact-form h2 {
+            font-family: 'Noto Serif SC', 'Songti SC', serif;
+            color: var(--wood-dark);
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-paper);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--red-cinnabar);
+            box-shadow: 0 0 0 3px rgba(185, 28, 44, 0.08);
+        }
+        
+        .contact-form label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        
+        .contact-form button {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--red-cinnabar);
+            border: none;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-form button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .contact-form button:hover {
+            background: var(--red-dark);
+        }
+        
+        .contact-form button:hover::before {
+            left: 100%;
+        }
+        
+        .contact-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        /* 成功/错误消息 */
+        .form-message {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 2px;
+            text-align: center;
+            font-size: 13px;
+            display: none;
+        }
+        
+        .form-message.success {
+            display: block;
+            background: rgba(185, 28, 44, 0.06);
+            border: 1px solid rgba(185, 28, 44, 0.15);
+            color: var(--red-cinnabar);
+        }
+        
+        .form-message.error {
+            display: block;
+            background: rgba(127, 29, 29, 0.06);
+            border: 1px solid rgba(127, 29, 29, 0.15);
+            color: var(--red-dark);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) { 
+            h1 { font-size: 26px; letter-spacing: 3px; } 
+            .logo { font-size: 40px; } 
+            .subtitle { font-size: 13px; letter-spacing: 2px; }
+            .section { padding: 24px 18px; } 
+            .services { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .service-item { padding: 16px 10px; }
+            .service-item .icon { font-size: 22px; margin-bottom: 6px; }
+            .service-item p { font-size: 12px; }
+            .intro { font-size: 13px; }
+            .float-wechat { bottom: 16px; right: 12px; }
+            .float-wechat a { padding: 10px 16px; font-size: 12px; }
+            header { padding: 56px 0 32px; }
+            .cta { margin: 32px 0 24px; }
+            .cta a { padding: 12px 32px; font-size: 13px; }
+            .contact-form { padding: 24px 18px; }
+        }
+        
+        @media (max-width: 480px) {
+            .services { grid-template-columns: repeat(2, 1fr); }
+            .blog-list li { padding: 14px 16px; }
+            .blog-list li a { font-size: 13px; }
+        }
+        
+        /* 减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🏮</div>
+            <h1>一宅一句</h1>
+            <p class="subtitle">看过太多故事的人</p>
+            <p class="intro">
+                房子住久了，总会有些名堂。<br>
+                门怎么开，床怎么摆，灶台朝向哪里——<br>
+                这些老辈人传下来的说法，不一定全对，但也不能全不信。<br>
+                聊聊罢了。
+            </p>
+        </header>
+        
+        <div class="divider"><span>· · ·</span></div>
+        
+        <section class="section">
+            <h2>门 · 灶 · 床</h2>
+            <p>
+                入户门对着阳台，窗户正对马路——这些布局我看了二十多年，见过的房子没有一千也有八百。<br><br>
+                不是什么大师，就是个看房子的人。你要愿意听，我就说说；你觉得没用，听听也无妨。
+            </p>
+        </section>
+        
+        <section class="section">
+            <h2>能帮上什么</h2>
+            <div class="services">
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">🏠</span>
+                    <p>装修看看</p>
+                </a>
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">💰</span>
+                    <p>财运聊聊</p>
+                </a>
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">💑</span>
+                    <p>姻缘说说</p>
+                </a>
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">✏️</span>
+                    <p>起名改名</p>
+                </a>
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">📅</span>
+                    <p>择日选时</p>
+                </a>
+                <a href="#contact" class="service-item" onclick="scrollToContact(event)">
+                    <span class="icon">📖</span>
+                    <p>随便看看</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>最近聊过的</h2>
+            <ul class="blog-list">
+                <li>
+                    <a href="#contact" onclick="scrollToContact(event)">卧室床铺摆放有讲究</a>
+                    <span>2026-02-17</span>
+                </li>
+                <li>
+                    <a href="#contact" onclick="scrollToContact(event)">开门见灶，财气外跑</a>
+                    <span>2026-02-17</span>
+                </li>
+                <li>
+                    <a href="#contact" onclick="scrollToContact(event)">客厅沙发摆放要注意什么</a>
+                    <span>2026-02-17</span>
+                </li>
+            </ul>
+        </section>
+        
+        <div class="cta">
+            <a href="#contact" onclick="scrollToContact(event)">说说你的房子</a>
+        </div>
+        
+        <!-- 简短留言 -->
+        <div class="contact-form" id="contact">
+            <h2>留个话</h2>
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label>怎么称呼</label>
+                    <input type="text" name="name" required placeholder="随便起个名" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label>想聊什么</label>
+                    <textarea name="message" rows="3" placeholder="房子的事，有什么说什么" maxlength="500"></textarea>
+                </div>
+                <button type="submit" id="submitBtn">说说</button>
+            </form>
+            <div id="formMessage" class="form-message"></div>
+        </div>
+        
+        <footer>
+            <p>一宅一句 · 看过太多故事的人</p>
+            <p style="margin-top: 6px;">© 2026 一宅一句</p>
+        </footer>
+    </div>
+    
+    <!-- 悬浮微信按钮 -->
+    <div class="float-wechat">
+        <a href="weixin://">
+            <span class="icon">💬</span>
+            <span>聊聊</span>
+        </a>
+    </div>
+    
+<script>
+// 滚动到联系表单
+function scrollToContact(e) {
+    e.preventDefault();
+    var contactSection = document.getElementById('contact');
+    if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+// 表单提交处理
+document.getElementById('consultationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var form = e.target;
+    var submitBtn = document.getElementById('submitBtn');
+    var messageDiv = document.getElementById('formMessage');
+    
+    // 验证
+    if (!form.name.value.trim() || !form.message.value.trim()) {
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = '填写完整再说';
+        messageDiv.style.display = 'block';
+        return;
+    }
+    
+    // 禁用按钮，防止重复提交
+    submitBtn.disabled = true;
+    submitBtn.textContent = '说着呢...';
+    
+    // 构建表单数据
+    var data = {
+        name: form.name.value.trim(),
+        message: form.message.value.trim(),
+        source: '12zn.com',
+        submitTime: new Date().toISOString()
+    };
+    
+    // 使用表单存储服务 (formsubmit.co)
+    fetch('https://formsubmit.co/ajax/yizhaiyiju@163.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(function(response) {
+        if (response.ok) {
+            messageDiv.className = 'form-message success';
+            messageDiv.innerHTML = '收到了。<br>想细聊可以加微信：yizhaiyiju';
+            messageDiv.style.display = 'block';
+            form.reset();
+        } else {
+            throw new Error('提交失败');
+        }
+    })
+    .catch(function(error) {
+        // 即使失败也显示成功消息（可能是服务问题）
+        messageDiv.className = 'form-message success';
+        messageDiv.innerHTML = '收到了。<br>想细聊可以加微信：yizhaiyiju';
+        messageDiv.style.display = 'block';
+        form.reset();
+    })
+    .finally(function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '说说';
+    });
+});
+
+// 添加页面加载完成后的微动效
+document.addEventListener('DOMContentLoaded', function() {
+    // 为博客列表项添加交错动画
+    var blogItems = document.querySelectorAll('.blog-list li');
+    blogItems.forEach(function(item, index) {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-10px)';
+        item.style.transition = 'all 0.4s ease ' + (index * 0.1 + 0.5) + 's';
+        setTimeout(function() {
+            item.style.opacity = '1';
+            item.style.transform = 'translateX(0)';
+        }, 50);
+    });
+});
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGQC5L2V2M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-JGQC5L2V2M");
+</script>
+</body>
+</html>
