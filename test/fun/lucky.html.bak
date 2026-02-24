@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日幸运测试 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #f5576c;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .result-item {
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .result-item .icon { font-size: 2rem; margin-bottom: 10px; }
+        .result-item .label { color: #888; font-size: 0.8rem; margin-bottom: 5px; }
+        .result-item .value { font-size: 1.1rem; font-weight: bold; }
+        
+        .result-item:nth-child(1) .value { color: #ff6b6b; }
+        .result-item:nth-child(2) .value { color: #ffd93d; }
+        .result-item:nth-child(3) .value { color: #6bcb77; }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #f093fb;
+        }
+        .btn {
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        .btn:hover { transform: scale(1.02); }
+        
+        .result-box { display: none; }
+        .form-box { display: block; }
+        .tips { color: #666; font-size: 0.8rem; margin-top: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🍀 今日幸运测试</h1>
+    </header>
+    <div class="container">
+        <a href="/test/index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="card">
+            <!-- 表单填写区域 -->
+            <div class="form-box" id="formBox">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">幸运颜色</div>
+                        <div class="value" style="color:#aaa;">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🎲</div>
+                        <div class="label">幸运数字</div>
+                        <div class="value" style="color:#aaa;">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🍜</div>
+                        <div class="label">幸运食物</div>
+                        <div class="value" style="color:#aaa;">-</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn" onclick="submitTest()">查询今日运势</button>
+                <div class="tips">每个姓名每天仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="result-box" id="resultBox">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">幸运颜色</div>
+                        <div class="value" id="color">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🎲</div>
+                        <div class="label">幸运数字</div>
+                        <div class="value" id="number">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🍜</div>
+                        <div class="label">幸运食物</div>
+                        <div class="value" id="food">-</div>
+                    </div>
+                </div>
+                <div style="color: #666; font-size: 0.85rem; margin-top: 15px; text-align: center;">
+                    测试时间：<span id="testTime"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const colors = ["红色", "橙色", "黄色", "绿色", "青色", "蓝色", "紫色", "粉色", "白色", "黑色"];
+        const foods = ["火锅", "烧烤", "寿司", "披萨", "炸鸡", "拉面", "粤菜", "川菜", "日料", "泰餐"];
+        
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            // 用姓名+日期生成固定结果
+            const today = new Date().getDate();
+            const hash = getHash(name) + today;
+            
+            document.getElementById('color').textContent = colors[hash % colors.length];
+            document.getElementById('number').textContent = ((hash * 7) % 99) + 1;
+            document.getElementById('food').textContent = foods[hash % foods.length];
+            
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            localStorage.setItem('lucky_test_done', name + '_' + today);
+        }
+        
+        // 检查今天是否已测试过
+        window.onload = function() {
+            const today = new Date().getDate();
+            const done = localStorage.getItem('lucky_test_done');
+            if (done && done.endsWith('_' + today)) {
+                const name = done.replace('_' + today, '');
+                const hash = getHash(name) + today;
+                
+                document.getElementById('color').textContent = colors[hash % colors.length];
+                document.getElementById('number').textContent = ((hash * 7) % 99) + 1;
+                document.getElementById('food').textContent = foods[hash % foods.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

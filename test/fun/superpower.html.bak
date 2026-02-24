@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超能力测试 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #c471ed, #f64f59);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .back-link {
+            display: inline-block;
+            color: #c471ed;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .icon { font-size: 5rem; margin-bottom: 15px; }
+        .power {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #c471ed, #f64f59);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .desc {
+            color: #aaa;
+            line-height: 1.6;
+            margin: 20px 0;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #c471ed;
+        }
+        .btn {
+            background: linear-gradient(90deg, #c471ed, #f64f59);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+        }
+        .btn:hover { transform: scale(1.02); }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .result-box {
+            display: none;
+        }
+        .form-box {
+            display: block;
+        }
+        .tips {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✨ 超能力测试</h1>
+    </header>
+    <div class="container">
+        <a href="/test/index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="card">
+            <!-- 表单填写区域 -->
+            <div class="form-box" id="formBox">
+                <div class="icon">🔮</div>
+                <div class="desc" style="text-align: center;">输入你的姓名，系统将根据姓名生成专属超能力</div>
+                
+                <div class="form-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn" onclick="submitTest()">提交测试</button>
+                <div class="tips">每个姓名仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="result-box" id="resultBox">
+                <div class="icon" id="icon">🔮</div>
+                <div class="power" id="power"></div>
+                <div class="desc" id="desc"></div>
+                <div style="color: #666; font-size: 0.85rem; margin-top: 15px;">
+                    测试时间：<span id="testTime"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const powers = [
+            { emoji: "🧠", name: "读心术", desc: "你想知道别人在想什么吗？这项能力代表你渴望理解他人，有强烈的同理心。", trait: "洞察力" },
+            { emoji: "⚡", name: "瞬间移动", desc: "想去哪就去哪！这项能力代表你向往自由，不受束缚。", trait: "自由派" },
+            { emoji: "👻", name: "隐身", desc: "来无影去无踪，你是个注重隐私的人，不想被束缚。", trait: "神秘感" },
+            { emoji: "🔮", name: "预知未来", desc: "想知道明天会发生什么？你是个有远见的人，喜欢规划。", trait: "前瞻性" },
+            { emoji: "💪", name: "力大无穷", desc: "超级英雄既视感！你有保护他人的欲望，内心富有正义感。", trait: "责任感" },
+            { emoji: "🗣️", name: "语言天才", desc: "学会所有语言！你渴望连接世界，了解不同文化。", trait: "外交力" },
+            { emoji: "⏰", name: "操控时间", desc: "时间是最宝贵的能力，你想掌握自己的命运。", trait: "掌控力" },
+            { emoji: "🎭", name: "变形术", desc: "可以变成任何样子！你的适应能力很强，喜欢多样化。", trait: "多面手" },
+            { emoji: "🌀", name: "召唤术", desc: "召唤任何你需要的东西！你善于利用资源，头脑灵活。", trait: "资源王" },
+            { emoji: "💚", name: "治愈力", desc: "能治愈一切伤病！你内心善良，有强烈的奉献精神。", trait: "治愈者" }
+        ];
+        
+        // 根据姓名生成hash，确保同一姓名得到相同结果
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            // 用姓名生成固定结果
+            const hash = getHash(name);
+            const result = powers[hash % powers.length];
+            
+            // 显示结果
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').style.display = 'block';
+            
+            document.getElementById('icon').textContent = result.emoji;
+            document.getElementById('power').textContent = result.emoji + " " + result.name;
+            document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>属性：" + result.trait + "</strong>";
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            // 保存到localStorage，防止重复测试
+            localStorage.setItem('superpower_test_done', name);
+        }
+        
+        // 检查是否已测试过
+        window.onload = function() {
+            const done = localStorage.getItem('superpower_test_done');
+            if (done) {
+                const hash = getHash(done);
+                const result = powers[hash % powers.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').style.display = 'block';
+                document.getElementById('icon').textContent = result.emoji;
+                document.getElementById('power').textContent = result.emoji + " " + result.name;
+                document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>属性：" + result.trait + "</strong>";
+            }
+        }
+    </script>
+</body>
+</html>

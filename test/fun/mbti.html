@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>梦想职业测试 - 一宅一句</title>
-    <meta name="description" content="免费梦想职业测试，输入姓名即可分析你的性格特质并匹配最适合你的职业方向和潜能。">
-    <link rel="canonical" href="https://12zn.com/test/fun/dream-career.html">
+    <title>MBTI人格测试 - 一宅一句</title>
+    <meta name="description" content="免费MBTI人格测试，输入姓名即可生成专属MBTI人格类型，探索你的性格和潜能。">
+    <link rel="canonical" href="https://12zn.com/test/fun/mbti.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="梦想职业测试 - 一宅一句">
-    <meta property="og:description" content="免费梦想职业测试，探索你的梦想职业和隐藏潜能">
-    <meta property="og:url" content="https://12zn.com/test/fun/dream-career.html">
+    <meta property="og:title" content="MBTI人格测试 - 一宅一句">
+    <meta property="og:description" content="免费MBTI人格测试，探索你的MBTI类型和隐藏潜能">
+    <meta property="og:url" content="https://12zn.com/test/fun/mbti.html">
     <meta property="og:site_name" content="一宅一句">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,11 +120,16 @@
         .test-result-active {
             display: block;
         }
-        .result-career {
+        .result-mbti {
             font-size: 2rem;
             font-weight: 600;
             color: var(--ink);
             margin: 20px 0;
+        }
+        .result-name-emoji {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
         }
         .result-desc {
             color: var(--text-secondary);
@@ -139,38 +144,6 @@
             color: var(--text-light);
             font-size: 0.85rem;
             margin-top: 20px;
-        }
-        .result-traits {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        .result-trait {
-            background: var(--gold-bg);
-            color: var(--gold);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        .recommendation-box {
-            margin-top: 20px;
-            padding: 24px;
-            background: var(--cream);
-            border-radius: 12px;
-            border-left: 4px solid var(--gold-soft);
-            text-align: left;
-        }
-        .recommendation-box h4 {
-            color: var(--ink);
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        .recommendation-box p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
 
         .back-link {
@@ -201,10 +174,10 @@
 
     <!-- Hero -->
     <section class="test-page-hero">
-        <h1>🎯 梦想职业测试</h1>
+        <h1>🎭 MBTI人格测试</h1>
         <p class="hero-desc">
-            输入你的姓名，系统将分析你的性格特质<br>
-            匹配最适合你的梦想职业和潜能
+            输入你的姓名，系统将根据姓名生成专属MBTI人格类型<br>
+            探索你的MBTI类型和隐藏潜能
         </p>
     </section>
 
@@ -215,29 +188,23 @@
         <div class="test-card">
             <!-- 表单填写区域 -->
             <div class="test-form" id="formBox">
-                <div class="test-icon">🎯</div>
+                <div class="test-icon">🎭</div>
                 
                 <div class="test-input-group">
                     <label>你的姓名</label>
                     <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
                 </div>
                 
-                <button class="btn-test" onclick="submitTest()">提交测试</button>
+                <button class="btn-test" onclick="submitTest()">开始测试</button>
                 <div class="test-tips">每个姓名仅有一次测试结果</div>
             </div>
             
             <!-- 结果展示区域 -->
             <div class="test-result" id="resultBox">
-                <div class="test-icon" id="icon">🎯</div>
-                <div class="result-career" id="career"></div>
-                <div class="result-traits" id="traits"></div>
+                <div class="test-icon" id="icon">🎭</div>
+                <div class="result-mbti" id="result">---</div>
+                <div class="result-name-emoji" id="nameEmoji"></div>
                 <div class="result-desc" id="desc"></div>
-                
-                <div class="recommendation-box">
-                    <h4>💡 职业建议</h4>
-                    <p id="recommendation"></p>
-                </div>
-                
                 <div class="result-time">测试时间：<span id="testTime"></span></div>
             </div>
         </div>
@@ -246,7 +213,7 @@
     <!-- CTA -->
     <section class="wechat-section">
         <div class="wechat-inner">
-            <h2>想要更精准的职业规划？</h2>
+            <h2>想要更精准的性格分析？</h2>
             <p class="wechat-sub">扫码添加微信，获得一对一专属指导</p>
             <img class="wechat-qr" src="../../images/wechat-qr.jpg" alt="微信二维码">
             <p class="wechat-hint">长按识别二维码 · 添加微信</p>
@@ -268,66 +235,25 @@
 
     <script src="../../js/shared.js?v=20260223"></script>
     <script>
-        const careers = [
-            { 
-                emoji: "👨💻", 
-                name: "科技创客", 
-                desc: "你是天生的技术奇才，对新技术充满好奇，喜欢通过代码解决实际问题。逻辑思维能力强，善于分析复杂系统。",
-                traits: ["创新", "逻辑", "技术", "专注"],
-                recommendation: "适合软件工程、数据科学、AI开发、产品经理等岗位，创业也是不错的选择。"
-            },
-            { 
-                emoji: "🎨", 
-                name: "创意设计师", 
-                desc: "你有丰富的想象力和独特的审美眼光，能用视觉语言表达内心世界。对美有执着的追求，享受创作过程。",
-                traits: ["创意", "审美", "表达", "敏感"],
-                recommendation: "平面设计、UI/UX设计、影视制作、艺术指导等职业会让你如鱼得水。"
-            },
-            { 
-                emoji: "👨🏫", 
-                name: "教育导师", 
-                desc: "你天生具备沟通和引导能力，乐于分享知识，耐心细致。看到他人成长会让你获得巨大的满足感。",
-                traits: ["耐心", "沟通", "同理心", "引导"],
-                recommendation: "教师、培训师、心理咨询师、职业规划师等职业非常适合你。"
-            },
-            { 
-                emoji: "👨⚕️", 
-                name: "健康守护者", 
-                desc: "你有强烈的责任感和同情心，关注他人健康，细心周到。能够在压力下保持冷静，给予专业帮助。",
-                traits: ["责任", "细心", "冷静", "关怀"],
-                recommendation: "医生、护士、心理咨询师、健康管理师等医疗健康相关职业。"
-            },
-            { 
-                emoji: "👨💼", 
-                name: "商业领袖", 
-                desc: "你具备战略眼光和领导才能，善于发现机会，有很强的决策能力和风险承受能力。",
-                traits: ["领导力", "战略", "决策", "冒险"],
-                recommendation: "企业家、投资经理、市场营销总监、战略咨询等管理职位。"
-            },
-            { 
-                emoji: "👨🔬", 
-                name: "科研学者", 
-                desc: "你对世界充满好奇心，喜欢探索未知，有严谨的思维和持久的耐心。享受发现真理的过程。",
-                traits: ["好奇", "严谨", "专注", "探索"],
-                recommendation: "科学研究员、实验室主管、学术教授、技术研发等科研岗位。"
-            },
-            { 
-                emoji: "👨🎤", 
-                name: "艺术表演者", 
-                desc: "你情感丰富，表现力强，渴望用艺术形式表达内心世界。舞台是你绽放光芒的地方。",
-                traits: ["表现力", "情感", "勇气", "魅力"],
-                recommendation: "演员、歌手、舞者、主持人、短视频创作者等表演艺术职业。"
-            },
-            { 
-                emoji: "👨🌾", 
-                name: "生活美学家", 
-                desc: "你热爱生活，注重生活品质，擅长发现日常中的美好。追求工作与生活的平衡。",
-                traits: ["品味", "平衡", "温暖", "实践"],
-                recommendation: "生活博主、美食家、园艺师、民宿主人、手工艺人等生活美学职业。"
-            }
+        const mbtiTypes = [
+            { type: "INFP", name: "调停者", desc: "理想主义、富有同情心，喜欢探索可能性和创新。内心世界丰富，重视个人价值观。", emoji: "🌸" },
+            { type: "INFJ", name: "提倡者", desc: "理想主义、有洞察力，天生擅长理解他人。富有创造力，看重意义和价值。", emoji: "🦉" },
+            { type: "INTP", name: "逻辑学家", desc: "思想者、善于分析，喜欢理论探索。独立思考，对知识有强烈渴望。", emoji: "🧠" },
+            { type: "INTJ", name: "建筑师", desc: "战略思维、独立性强，善于规划。追求知识和效率，有远见卓识。", emoji: "🏗️" },
+            { type: "ISFP", name: "探险家", desc: "灵活、艺术感强，善于发现美。安静友好，注重实际体验。", emoji: "🎨" },
+            { type: "ISFJ", name: "守卫者", desc: "忠诚、细心，善于照顾他人。传统价值观，实际可靠。", emoji: "🛡️" },
+            { type: "ISTP", name: "鉴赏家", desc: "实用主义、善于动手，喜欢探索原理。冷静观察，分析能力强。", emoji: "🔧" },
+            { type: "ISTJ", name: "物流师", desc: "可靠、传统，注重责任。善于组织，讲究逻辑和事实。", emoji: "📊" },
+            { type: "ENFP", name: "竞选者", desc: "热情、创意，善于激励他人。喜欢新想法，富有感染力。", emoji: "🔥" },
+            { type: "ENFJ", name: "主人公", desc: "领导者魅力、善于沟通，天生能激励他人。重视人际关系。", emoji: "⭐" },
+            { type: "ENTP", name: "辩论家", desc: "聪明、好奇，喜欢挑战和辩论。善于发现问题，思维敏捷。", emoji: "💡" },
+            { type: "ENTJ", name: "指挥官", desc: "果断、有领导力，善于制定战略。目标导向，决策能力强。", emoji: "👑" },
+            { type: "ESFP", name: "表演者", desc: "热情、活泼，善于娱乐他人。喜欢行动，享受当下。", emoji: "🎉" },
+            { type: "ESFJ", name: "执政官", desc: "关怀、传统，善于照顾他人。喜欢帮助别人，重视和谐。", emoji: "🤝" },
+            { type: "ESTP", name: "企业家", desc: "大胆、实际，喜欢冒险和挑战。善于把握机会，行动派。", emoji: "🚀" },
+            { type: "ESTJ", name: "总经理", desc: "传统、组织能力强，善于管理。注重效率和结果。", emoji: "📈" }
         ];
         
-        // 根据姓名生成hash，确保同一姓名得到相同结果
         function getHash(str) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -345,57 +271,33 @@
                 return;
             }
             
-            // 用姓名生成固定结果
             const hash = getHash(name);
-            const result = careers[hash % careers.length];
+            const result = mbtiTypes[hash % mbtiTypes.length];
             
-            // 显示结果
             document.getElementById('formBox').style.display = 'none';
             document.getElementById('resultBox').classList.add('test-result-active');
             
             document.getElementById('icon').textContent = result.emoji;
-            document.getElementById('career').textContent = result.emoji + " " + result.name;
+            document.getElementById('result').textContent = result.type;
+            document.getElementById('nameEmoji').innerHTML = `<strong>${result.name}</strong> · ${result.emoji}`;
             document.getElementById('desc').textContent = result.desc;
-            document.getElementById('recommendation').textContent = result.recommendation;
-            
-            // 显示特质标签
-            const traitsDiv = document.getElementById('traits');
-            traitsDiv.innerHTML = '';
-            result.traits.forEach(trait => {
-                const tag = document.createElement('span');
-                tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                tag.textContent = trait;
-                traitsDiv.appendChild(tag);
-            });
-            
             document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
             
-            // 保存到localStorage，防止重复测试
-            localStorage.setItem('career_test_done', name);
+            localStorage.setItem('mbti_test_done', name);
         }
         
-        // 检查是否已测试过
         window.onload = function() {
-            const done = localStorage.getItem('career_test_done');
+            const done = localStorage.getItem('mbti_test_done');
             if (done) {
                 const hash = getHash(done);
-                const result = careers[hash % careers.length];
+                const result = mbtiTypes[hash % mbtiTypes.length];
                 
                 document.getElementById('formBox').style.display = 'none';
                 document.getElementById('resultBox').classList.add('test-result-active');
                 document.getElementById('icon').textContent = result.emoji;
-                document.getElementById('career').textContent = result.emoji + " " + result.name;
+                document.getElementById('result').textContent = result.type;
+                document.getElementById('nameEmoji').innerHTML = `<strong>${result.name}</strong> · ${result.emoji}`;
                 document.getElementById('desc').textContent = result.desc;
-                document.getElementById('recommendation').textContent = result.recommendation;
-                
-                const traitsDiv = document.getElementById('traits');
-                traitsDiv.innerHTML = '';
-                result.traits.forEach(trait => {
-                    const tag = document.createElement('span');
-                    tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                    tag.textContent = trait;
-                    traitsDiv.appendChild(tag);
-                });
             }
         }
     </script>

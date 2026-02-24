@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>梦想职业测试 - 一宅一句</title>
-    <meta name="description" content="免费梦想职业测试，输入姓名即可分析你的性格特质并匹配最适合你的职业方向和潜能。">
-    <link rel="canonical" href="https://12zn.com/test/fun/dream-career.html">
+    <title>动物人格测试 - 一宅一句</title>
+    <meta name="description" content="免费动物人格测试，输入姓名即可生成专属动物人格，看看你的隐藏性格是什么动物？">
+    <link rel="canonical" href="https://12zn.com/test/fun/animal.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="梦想职业测试 - 一宅一句">
-    <meta property="og:description" content="免费梦想职业测试，探索你的梦想职业和隐藏潜能">
-    <meta property="og:url" content="https://12zn.com/test/fun/dream-career.html">
+    <meta property="og:title" content="动物人格测试 - 一宅一句">
+    <meta property="og:description" content="免费动物人格测试，发现你的动物本能和隐藏性格">
+    <meta property="og:url" content="https://12zn.com/test/fun/animal.html">
     <meta property="og:site_name" content="一宅一句">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@
         .test-result-active {
             display: block;
         }
-        .result-career {
+        .result-animal {
             font-size: 2rem;
             font-weight: 600;
             color: var(--ink);
@@ -154,24 +154,6 @@
             border-radius: 20px;
             font-size: 0.8rem;
         }
-        .recommendation-box {
-            margin-top: 20px;
-            padding: 24px;
-            background: var(--cream);
-            border-radius: 12px;
-            border-left: 4px solid var(--gold-soft);
-            text-align: left;
-        }
-        .recommendation-box h4 {
-            color: var(--ink);
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        .recommendation-box p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
 
         .back-link {
             display: inline-block;
@@ -201,10 +183,10 @@
 
     <!-- Hero -->
     <section class="test-page-hero">
-        <h1>🎯 梦想职业测试</h1>
+        <h1>🐾 动物人格测试</h1>
         <p class="hero-desc">
-            输入你的姓名，系统将分析你的性格特质<br>
-            匹配最适合你的梦想职业和潜能
+            输入你的姓名，系统将根据姓名生成专属动物人格<br>
+            测测你的动物本能和隐藏性格
         </p>
     </section>
 
@@ -215,7 +197,7 @@
         <div class="test-card">
             <!-- 表单填写区域 -->
             <div class="test-form" id="formBox">
-                <div class="test-icon">🎯</div>
+                <div class="test-icon">🐾</div>
                 
                 <div class="test-input-group">
                     <label>你的姓名</label>
@@ -228,16 +210,10 @@
             
             <!-- 结果展示区域 -->
             <div class="test-result" id="resultBox">
-                <div class="test-icon" id="icon">🎯</div>
-                <div class="result-career" id="career"></div>
+                <div class="test-icon" id="icon">🐾</div>
+                <div class="result-animal" id="animal"></div>
                 <div class="result-traits" id="traits"></div>
                 <div class="result-desc" id="desc"></div>
-                
-                <div class="recommendation-box">
-                    <h4>💡 职业建议</h4>
-                    <p id="recommendation"></p>
-                </div>
-                
                 <div class="result-time">测试时间：<span id="testTime"></span></div>
             </div>
         </div>
@@ -246,7 +222,7 @@
     <!-- CTA -->
     <section class="wechat-section">
         <div class="wechat-inner">
-            <h2>想要更精准的职业规划？</h2>
+            <h2>想要更精准的性格分析？</h2>
             <p class="wechat-sub">扫码添加微信，获得一对一专属指导</p>
             <img class="wechat-qr" src="../../images/wechat-qr.jpg" alt="微信二维码">
             <p class="wechat-hint">长按识别二维码 · 添加微信</p>
@@ -268,66 +244,19 @@
 
     <script src="../../js/shared.js?v=20260223"></script>
     <script>
-        const careers = [
-            { 
-                emoji: "👨💻", 
-                name: "科技创客", 
-                desc: "你是天生的技术奇才，对新技术充满好奇，喜欢通过代码解决实际问题。逻辑思维能力强，善于分析复杂系统。",
-                traits: ["创新", "逻辑", "技术", "专注"],
-                recommendation: "适合软件工程、数据科学、AI开发、产品经理等岗位，创业也是不错的选择。"
-            },
-            { 
-                emoji: "🎨", 
-                name: "创意设计师", 
-                desc: "你有丰富的想象力和独特的审美眼光，能用视觉语言表达内心世界。对美有执着的追求，享受创作过程。",
-                traits: ["创意", "审美", "表达", "敏感"],
-                recommendation: "平面设计、UI/UX设计、影视制作、艺术指导等职业会让你如鱼得水。"
-            },
-            { 
-                emoji: "👨🏫", 
-                name: "教育导师", 
-                desc: "你天生具备沟通和引导能力，乐于分享知识，耐心细致。看到他人成长会让你获得巨大的满足感。",
-                traits: ["耐心", "沟通", "同理心", "引导"],
-                recommendation: "教师、培训师、心理咨询师、职业规划师等职业非常适合你。"
-            },
-            { 
-                emoji: "👨⚕️", 
-                name: "健康守护者", 
-                desc: "你有强烈的责任感和同情心，关注他人健康，细心周到。能够在压力下保持冷静，给予专业帮助。",
-                traits: ["责任", "细心", "冷静", "关怀"],
-                recommendation: "医生、护士、心理咨询师、健康管理师等医疗健康相关职业。"
-            },
-            { 
-                emoji: "👨💼", 
-                name: "商业领袖", 
-                desc: "你具备战略眼光和领导才能，善于发现机会，有很强的决策能力和风险承受能力。",
-                traits: ["领导力", "战略", "决策", "冒险"],
-                recommendation: "企业家、投资经理、市场营销总监、战略咨询等管理职位。"
-            },
-            { 
-                emoji: "👨🔬", 
-                name: "科研学者", 
-                desc: "你对世界充满好奇心，喜欢探索未知，有严谨的思维和持久的耐心。享受发现真理的过程。",
-                traits: ["好奇", "严谨", "专注", "探索"],
-                recommendation: "科学研究员、实验室主管、学术教授、技术研发等科研岗位。"
-            },
-            { 
-                emoji: "👨🎤", 
-                name: "艺术表演者", 
-                desc: "你情感丰富，表现力强，渴望用艺术形式表达内心世界。舞台是你绽放光芒的地方。",
-                traits: ["表现力", "情感", "勇气", "魅力"],
-                recommendation: "演员、歌手、舞者、主持人、短视频创作者等表演艺术职业。"
-            },
-            { 
-                emoji: "👨🌾", 
-                name: "生活美学家", 
-                desc: "你热爱生活，注重生活品质，擅长发现日常中的美好。追求工作与生活的平衡。",
-                traits: ["品味", "平衡", "温暖", "实践"],
-                recommendation: "生活博主、美食家、园艺师、民宿主人、手工艺人等生活美学职业。"
-            }
+        const animals = [
+            { emoji: "🦊", name: "狐狸", desc: "聪明狡黠，善于观察，适应性强的机会主义者。有自己的小算盘，但懂得审时度势。", traits: ["聪明", "灵活", "神秘"] },
+            { emoji: "🐺", name: "狼", desc: "忠诚且有团队精神，但内心孤独。重视伙伴，有强烈的领地意识和保护欲。", traits: ["忠诚", "勇敢", "团队"] },
+            { emoji: "🐱", name: "猫", desc: "独立自主，爱干净，有自己的节奏。看似冷漠其实很在乎，只是不轻易表达。", traits: ["独立", "优雅", "自我"] },
+            { emoji: "🐕", name: "狗", desc: "热情忠诚，喜欢陪伴人类。性格开朗，喜欢互动，是天生的社交达人。", traits: ["忠诚", "热情", "友好"] },
+            { emoji: "🐻", name: "熊", desc: "外表沉稳，内心柔软。力量型选手，但也有细腻的一面。", traits: ["稳重", "力量", "可靠"] },
+            { emoji: "🦅", name: "鹰", desc: "高瞻远瞩，眼神锐利。喜欢独立思考，有强烈的目标导向。", traits: ["智慧", "远见", "独立"] },
+            { emoji: "🐆", name: "豹", desc: "速度快，爆发力强。喜欢冒险，享受刺激带来的快感。", traits: ["敏捷", "大胆", "速度"] },
+            { emoji: "🦉", name: "猫头鹰", desc: "睿智深沉，喜欢在安静中思考。洞察力强，善于发现问题。", traits: ["智慧", "洞察", "冷静"] },
+            { emoji: "🐰", name: "兔子", desc: "温柔可爱，警惕性高。善于倾听，待人友好，但有时有点敏感。", traits: ["温柔", "敏感", "善良"] },
+            { emoji: "🐼", name: "熊猫", desc: "呆萌可爱，与世无争。内心丰富，有自己的小世界。", traits: ["萌", "佛系", "悠然"] }
         ];
         
-        // 根据姓名生成hash，确保同一姓名得到相同结果
         function getHash(str) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -345,57 +274,38 @@
                 return;
             }
             
-            // 用姓名生成固定结果
             const hash = getHash(name);
-            const result = careers[hash % careers.length];
+            const result = animals[hash % animals.length];
             
-            // 显示结果
             document.getElementById('formBox').style.display = 'none';
             document.getElementById('resultBox').classList.add('test-result-active');
             
             document.getElementById('icon').textContent = result.emoji;
-            document.getElementById('career').textContent = result.emoji + " " + result.name;
+            document.getElementById('animal').textContent = result.emoji + " " + result.name;
             document.getElementById('desc').textContent = result.desc;
-            document.getElementById('recommendation').textContent = result.recommendation;
-            
-            // 显示特质标签
-            const traitsDiv = document.getElementById('traits');
-            traitsDiv.innerHTML = '';
-            result.traits.forEach(trait => {
-                const tag = document.createElement('span');
-                tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                tag.textContent = trait;
-                traitsDiv.appendChild(tag);
-            });
-            
             document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
             
-            // 保存到localStorage，防止重复测试
-            localStorage.setItem('career_test_done', name);
+            // 显示特质标签
+            const traitsHtml = result.traits.map(t => '<span class="result-trait">' + t + '</span>').join('');
+            document.getElementById('traits').innerHTML = traitsHtml;
+            
+            localStorage.setItem('animal_test_done', name);
         }
         
-        // 检查是否已测试过
         window.onload = function() {
-            const done = localStorage.getItem('career_test_done');
+            const done = localStorage.getItem('animal_test_done');
             if (done) {
                 const hash = getHash(done);
-                const result = careers[hash % careers.length];
+                const result = animals[hash % animals.length];
                 
                 document.getElementById('formBox').style.display = 'none';
                 document.getElementById('resultBox').classList.add('test-result-active');
                 document.getElementById('icon').textContent = result.emoji;
-                document.getElementById('career').textContent = result.emoji + " " + result.name;
+                document.getElementById('animal').textContent = result.emoji + " " + result.name;
                 document.getElementById('desc').textContent = result.desc;
-                document.getElementById('recommendation').textContent = result.recommendation;
                 
-                const traitsDiv = document.getElementById('traits');
-                traitsDiv.innerHTML = '';
-                result.traits.forEach(trait => {
-                    const tag = document.createElement('span');
-                    tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                    tag.textContent = trait;
-                    traitsDiv.appendChild(tag);
-                });
+                const traitsHtml = result.traits.map(t => '<span class="result-trait">' + t + '</span>').join('');
+                document.getElementById('traits').innerHTML = traitsHtml;
             }
         }
     </script>

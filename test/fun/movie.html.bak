@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影类型测试 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header { padding: 20px; text-align: center; background: rgba(0,0,0,0.3); }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container { max-width: 600px; margin: 0 auto; padding: 30px 20px; }
+        .back-link { display: inline-block; color: #ff9a9e; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .icon { font-size: 5rem; margin-bottom: 15px; }
+        .genre {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 15px 0;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .desc { color: #aaa; line-height: 1.6; margin: 20px 0; }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #ff9a9e;
+        }
+        .btn {
+            background: linear-gradient(90deg, #ff9a9e, #fecfef);
+            border: none;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        .btn:hover { transform: scale(1.02); }
+        
+        .result-box { display: none; }
+        .form-box { display: block; }
+        .tips { color: #666; font-size: 0.8rem; margin-top: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+    <header><h1>🎬 电影类型测试</h1></header>
+    <div class="container">
+        <a href="/test/index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="card">
+            <!-- 表单填写区域 -->
+            <div class="form-box" id="formBox">
+                <div class="icon">🎬</div>
+                <div class="desc">输入你的姓名，系统将根据姓名生成你命中注定的电影类型</div>
+                
+                <div class="form-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn" onclick="submitTest()">开始测试</button>
+                <div class="tips">每个姓名仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="result-box" id="resultBox">
+                <div class="icon" id="icon">🎬</div>
+                <div class="genre" id="genre"></div>
+                <div class="desc" id="desc"></div>
+                <div style="color: #666; font-size: 0.85rem; margin-top: 20px; text-align: center;">
+                    测试时间：<span id="testTime"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const movies = [
+            { emoji: "😂", name: "喜剧", desc: "你是个乐观的人，喜欢用笑声面对生活。喜剧是你的解压神器。", trait: "乐天派" },
+            { emoji: "💥", name: "动作", desc: "你热爱刺激，喜欢快节奏的视觉盛宴。内心有冒险精神。", trait: "冒险家" },
+            { emoji: "🚀", name: "科幻", desc: "你对未来充满好奇，思维开放，喜欢探索未知世界。", trait: "梦想家" },
+            { emoji: "💕", name: "爱情", desc: "你内心浪漫，渴望美好的情感体验，重视人与人之间的连接。", trait: "浪漫主义者" },
+            { emoji: "🔍", name: "悬疑", desc: "你善于思考，喜欢破解谜题。享受逻辑推理带来的快感。", trait: "智者" },
+            { emoji: "👻", name: "恐怖", desc: "你敢于直面恐惧，喜欢刺激带来的肾上腺素飙升。", trait: "勇士" },
+            { emoji: "🎨", name: "动画", desc: "你内心纯真，保持童心。喜欢简单美好的故事。", trait: "童心未泯" },
+            { emoji: "📽️", name: "纪录片", desc: "你重视真实，喜欢探索世界的真相。求知欲强。", trait: "探索者" },
+            { emoji: "⚔️", name: "战争", desc: "你关注历史与人性，喜欢宏大的叙事和深刻的思考。", trait: "思考者" },
+            { emoji: "🎭", name: "文艺", desc: "你有艺术气质，喜欢慢节奏、深度内涵的电影。", trait: "文艺青年" }
+        ];
+        
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            const hash = getHash(name);
+            const result = movies[hash % movies.length];
+            
+            document.getElementById('icon').textContent = result.emoji;
+            document.getElementById('genre').textContent = result.emoji + " " + result.name + "片";
+            document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>你是：" + result.trait + "</strong>";
+            
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            localStorage.setItem('movie_test_done', name);
+        }
+        
+        // 检查是否已测试过
+        window.onload = function() {
+            const done = localStorage.getItem('movie_test_done');
+            if (done) {
+                const hash = getHash(done);
+                const result = movies[hash % movies.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').style.display = 'block';
+                document.getElementById('icon').textContent = result.emoji;
+                document.getElementById('genre').textContent = result.emoji + " " + result.name + "片";
+                document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>你是：" + result.trait + "</strong>";
+            }
+        }
+    </script>
+</body>
+</html>

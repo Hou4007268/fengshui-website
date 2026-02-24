@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>梦想职业测试 - 一宅一句</title>
-    <meta name="description" content="免费梦想职业测试，输入姓名即可分析你的性格特质并匹配最适合你的职业方向和潜能。">
-    <link rel="canonical" href="https://12zn.com/test/fun/dream-career.html">
+    <title>超能力测试 - 一宅一句</title>
+    <meta name="description" content="免费超能力测试，输入姓名即可生成专属超能力">
+    <link rel="canonical" href="https://12zn.com/test/fun/superpower.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="梦想职业测试 - 一宅一句">
-    <meta property="og:description" content="免费梦想职业测试，探索你的梦想职业和隐藏潜能">
-    <meta property="og:url" content="https://12zn.com/test/fun/dream-career.html">
+    <meta property="og:title" content="超能力测试 - 一宅一句">
+    <meta property="og:description" content="免费超能力测试，如果拥有超能力，你会是哪种英雄？">
+    <meta property="og:url" content="https://12zn.com/test/fun/superpower.html">
     <meta property="og:site_name" content="一宅一句">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +120,7 @@
         .test-result-active {
             display: block;
         }
-        .result-career {
+        .result-power {
             font-size: 2rem;
             font-weight: 600;
             color: var(--ink);
@@ -139,38 +139,6 @@
             color: var(--text-light);
             font-size: 0.85rem;
             margin-top: 20px;
-        }
-        .result-traits {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        .result-trait {
-            background: var(--gold-bg);
-            color: var(--gold);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        .recommendation-box {
-            margin-top: 20px;
-            padding: 24px;
-            background: var(--cream);
-            border-radius: 12px;
-            border-left: 4px solid var(--gold-soft);
-            text-align: left;
-        }
-        .recommendation-box h4 {
-            color: var(--ink);
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        .recommendation-box p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
 
         .back-link {
@@ -201,10 +169,10 @@
 
     <!-- Hero -->
     <section class="test-page-hero">
-        <h1>🎯 梦想职业测试</h1>
+        <h1>✨ 超能力测试</h1>
         <p class="hero-desc">
-            输入你的姓名，系统将分析你的性格特质<br>
-            匹配最适合你的梦想职业和潜能
+            输入你的姓名，系统将根据姓名生成专属超能力<br>
+            如果拥有超能力，你会是哪种英雄？
         </p>
     </section>
 
@@ -215,7 +183,7 @@
         <div class="test-card">
             <!-- 表单填写区域 -->
             <div class="test-form" id="formBox">
-                <div class="test-icon">🎯</div>
+                <div class="test-icon">🔮</div>
                 
                 <div class="test-input-group">
                     <label>你的姓名</label>
@@ -228,16 +196,9 @@
             
             <!-- 结果展示区域 -->
             <div class="test-result" id="resultBox">
-                <div class="test-icon" id="icon">🎯</div>
-                <div class="result-career" id="career"></div>
-                <div class="result-traits" id="traits"></div>
+                <div class="test-icon" id="icon">🔮</div>
+                <div class="result-power" id="power"></div>
                 <div class="result-desc" id="desc"></div>
-                
-                <div class="recommendation-box">
-                    <h4>💡 职业建议</h4>
-                    <p id="recommendation"></p>
-                </div>
-                
                 <div class="result-time">测试时间：<span id="testTime"></span></div>
             </div>
         </div>
@@ -246,7 +207,7 @@
     <!-- CTA -->
     <section class="wechat-section">
         <div class="wechat-inner">
-            <h2>想要更精准的职业规划？</h2>
+            <h2>想要更精准的性格分析？</h2>
             <p class="wechat-sub">扫码添加微信，获得一对一专属指导</p>
             <img class="wechat-qr" src="../../images/wechat-qr.jpg" alt="微信二维码">
             <p class="wechat-hint">长按识别二维码 · 添加微信</p>
@@ -268,66 +229,19 @@
 
     <script src="../../js/shared.js?v=20260223"></script>
     <script>
-        const careers = [
-            { 
-                emoji: "👨💻", 
-                name: "科技创客", 
-                desc: "你是天生的技术奇才，对新技术充满好奇，喜欢通过代码解决实际问题。逻辑思维能力强，善于分析复杂系统。",
-                traits: ["创新", "逻辑", "技术", "专注"],
-                recommendation: "适合软件工程、数据科学、AI开发、产品经理等岗位，创业也是不错的选择。"
-            },
-            { 
-                emoji: "🎨", 
-                name: "创意设计师", 
-                desc: "你有丰富的想象力和独特的审美眼光，能用视觉语言表达内心世界。对美有执着的追求，享受创作过程。",
-                traits: ["创意", "审美", "表达", "敏感"],
-                recommendation: "平面设计、UI/UX设计、影视制作、艺术指导等职业会让你如鱼得水。"
-            },
-            { 
-                emoji: "👨🏫", 
-                name: "教育导师", 
-                desc: "你天生具备沟通和引导能力，乐于分享知识，耐心细致。看到他人成长会让你获得巨大的满足感。",
-                traits: ["耐心", "沟通", "同理心", "引导"],
-                recommendation: "教师、培训师、心理咨询师、职业规划师等职业非常适合你。"
-            },
-            { 
-                emoji: "👨⚕️", 
-                name: "健康守护者", 
-                desc: "你有强烈的责任感和同情心，关注他人健康，细心周到。能够在压力下保持冷静，给予专业帮助。",
-                traits: ["责任", "细心", "冷静", "关怀"],
-                recommendation: "医生、护士、心理咨询师、健康管理师等医疗健康相关职业。"
-            },
-            { 
-                emoji: "👨💼", 
-                name: "商业领袖", 
-                desc: "你具备战略眼光和领导才能，善于发现机会，有很强的决策能力和风险承受能力。",
-                traits: ["领导力", "战略", "决策", "冒险"],
-                recommendation: "企业家、投资经理、市场营销总监、战略咨询等管理职位。"
-            },
-            { 
-                emoji: "👨🔬", 
-                name: "科研学者", 
-                desc: "你对世界充满好奇心，喜欢探索未知，有严谨的思维和持久的耐心。享受发现真理的过程。",
-                traits: ["好奇", "严谨", "专注", "探索"],
-                recommendation: "科学研究员、实验室主管、学术教授、技术研发等科研岗位。"
-            },
-            { 
-                emoji: "👨🎤", 
-                name: "艺术表演者", 
-                desc: "你情感丰富，表现力强，渴望用艺术形式表达内心世界。舞台是你绽放光芒的地方。",
-                traits: ["表现力", "情感", "勇气", "魅力"],
-                recommendation: "演员、歌手、舞者、主持人、短视频创作者等表演艺术职业。"
-            },
-            { 
-                emoji: "👨🌾", 
-                name: "生活美学家", 
-                desc: "你热爱生活，注重生活品质，擅长发现日常中的美好。追求工作与生活的平衡。",
-                traits: ["品味", "平衡", "温暖", "实践"],
-                recommendation: "生活博主、美食家、园艺师、民宿主人、手工艺人等生活美学职业。"
-            }
+        const powers = [
+            { emoji: "🧠", name: "读心术", desc: "你想知道别人在想什么吗？这项能力代表你渴望理解他人，有强烈的同理心。", trait: "洞察力" },
+            { emoji: "⚡", name: "瞬间移动", desc: "想去哪就去哪！这项能力代表你向往自由，不受束缚。", trait: "自由派" },
+            { emoji: "👻", name: "隐身", desc: "来无影去无踪，你是个注重隐私的人，不想被束缚。", trait: "神秘感" },
+            { emoji: "🔮", name: "预知未来", desc: "想知道明天会发生什么？你是个有远见的人，喜欢规划。", trait: "前瞻性" },
+            { emoji: "💪", name: "力大无穷", desc: "超级英雄既视感！你有保护他人的欲望，内心富有正义感。", trait: "责任感" },
+            { emoji: "🗣️", name: "语言天才", desc: "学会所有语言！你渴望连接世界，了解不同文化。", trait: "外交力" },
+            { emoji: "⏰", name: "操控时间", desc: "时间是最宝贵的能力，你想掌握自己的命运。", trait: "掌控力" },
+            { emoji: "🎭", name: "变形术", desc: "可以变成任何样子！你的适应能力很强，喜欢多样化。", trait: "多面手" },
+            { emoji: "🌀", name: "召唤术", desc: "召唤任何你需要的东西！你善于利用资源，头脑灵活。", trait: "资源王" },
+            { emoji: "💚", name: "治愈力", desc: "能治愈一切伤病！你内心善良，有强烈的奉献精神。", trait: "治愈者" }
         ];
         
-        // 根据姓名生成hash，确保同一姓名得到相同结果
         function getHash(str) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -345,57 +259,31 @@
                 return;
             }
             
-            // 用姓名生成固定结果
             const hash = getHash(name);
-            const result = careers[hash % careers.length];
+            const result = powers[hash % powers.length];
             
-            // 显示结果
             document.getElementById('formBox').style.display = 'none';
             document.getElementById('resultBox').classList.add('test-result-active');
             
             document.getElementById('icon').textContent = result.emoji;
-            document.getElementById('career').textContent = result.emoji + " " + result.name;
-            document.getElementById('desc').textContent = result.desc;
-            document.getElementById('recommendation').textContent = result.recommendation;
-            
-            // 显示特质标签
-            const traitsDiv = document.getElementById('traits');
-            traitsDiv.innerHTML = '';
-            result.traits.forEach(trait => {
-                const tag = document.createElement('span');
-                tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                tag.textContent = trait;
-                traitsDiv.appendChild(tag);
-            });
-            
+            document.getElementById('power').textContent = result.emoji + " " + result.name;
+            document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>属性：" + result.trait + "</strong>";
             document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
             
-            // 保存到localStorage，防止重复测试
-            localStorage.setItem('career_test_done', name);
+            localStorage.setItem('superpower_test_done', name);
         }
         
-        // 检查是否已测试过
         window.onload = function() {
-            const done = localStorage.getItem('career_test_done');
+            const done = localStorage.getItem('superpower_test_done');
             if (done) {
                 const hash = getHash(done);
-                const result = careers[hash % careers.length];
+                const result = powers[hash % powers.length];
                 
                 document.getElementById('formBox').style.display = 'none';
                 document.getElementById('resultBox').classList.add('test-result-active');
                 document.getElementById('icon').textContent = result.emoji;
-                document.getElementById('career').textContent = result.emoji + " " + result.name;
-                document.getElementById('desc').textContent = result.desc;
-                document.getElementById('recommendation').textContent = result.recommendation;
-                
-                const traitsDiv = document.getElementById('traits');
-                traitsDiv.innerHTML = '';
-                result.traits.forEach(trait => {
-                    const tag = document.createElement('span');
-                    tag.className = 'result-trait'; // Changed from 'trait-tag' to 'result-trait' to match shared style
-                    tag.textContent = trait;
-                    traitsDiv.appendChild(tag);
-                });
+                document.getElementById('power').textContent = result.emoji + " " + result.name;
+                document.getElementById('desc').innerHTML = result.desc + "<br><br><strong>属性：" + result.trait + "</strong>";
             }
         }
     </script>
