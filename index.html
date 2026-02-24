@@ -45,18 +45,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/shared.css?v=20260223">
-
-    <!-- 登录弹窗 -->
-    <div class="login-overlay" id="login-modal">
-        <div class="login-box">
-            <h3>用户登录</h3>
-            <input type="text" id="login-wechat" placeholder="请输入微信ID">
-            <button class="btn-login btn-login--primary" onclick="doLogin()">登录 / 注册</button>
-            <button class="btn-login btn-login--ghost" onclick="document.getElementById('login-modal').classList.remove('active')">取消</button>
-            <p id="login-msg" style="margin-top:12px;font-size:0.82rem;color:var(--text-secondary);text-align:center;"></p>
-        </div>
-    </div>
+    <link rel="stylesheet" href="css/shared.css?v=20260224">
 </head>
 <body>
 
@@ -506,10 +495,6 @@
         <p>科学风水 · 真实案例 · 专业服务</p>
         <div class="footer-links">
             <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
-            <span class="sep">·</span>
-            <span id="chat-count-display" style="color:var(--text-light);">今日对话: -</span>
-            <span class="sep">·</span>
-            <a href="#" onclick="openLogin();return false;">登录</a>
         </div>
     </footer>
 
@@ -537,10 +522,6 @@
             ? '收起测试 <span class="expand-arrow">▼</span>'
             : '展开更多测试 <span class="expand-arrow">▼</span>';
     }
-
-    fetch('/api/stats').then(r=>r.json()).then(d=>{
-        document.getElementById('chat-count-display').textContent='今日对话: '+d.count+'次';
-    }).catch(()=>{});
 
     // 弹窗点击外部关闭
     document.querySelectorAll('.modal').forEach(modal=>{
