@@ -403,6 +403,13 @@ body::before{
     background:var(--ink);aspect-ratio:16/10;
 }
 .video-item video{width:100%;height:100%;object-fit:cover;display:block;}
+.hidden-video{display:none;}
+#video-expand-btn{
+    background:transparent;border:1px solid var(--gold);color:var(--gold);
+    padding:8px 24px;border-radius:20px;cursor:pointer;font-size:0.85rem;
+    transition:all 0.3s;
+}
+#video-expand-btn:hover{background:var(--gold);color:#fff;}
 
 /* === 客户反馈 === */
 .cases{
@@ -417,6 +424,28 @@ body::before{
     padding:12px 14px;font-size:0.82rem;
     color:var(--text-secondary);text-align:center;
 }
+
+/* === 风水文章 === */
+.article-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto;
+}
+.article-card{
+    background:var(--white);border:1px solid var(--border-soft);
+    border-radius:10px;padding:20px;text-decoration:none;
+    transition:border-color 0.2s,box-shadow 0.2s;
+}
+.article-card:hover{border-color:var(--gold-soft);box-shadow:var(--shadow-md);}
+.article-card-title{
+    font-weight:600;font-size:0.95rem;color:var(--ink);margin-bottom:6px;
+}
+.article-card-desc{
+    font-size:0.82rem;color:var(--text-secondary);line-height:1.6;
+}
+.article-card--more{
+    display:flex;align-items:center;justify-content:center;
+    background:transparent;border:1px dashed var(--border);
+}
+.article-card--more:hover{border-color:var(--gold);background:var(--gold-bg);}
 
 /* === 微信引导区（页内） === */
 .wechat-section{

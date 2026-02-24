@@ -383,13 +383,14 @@
                 <div class="video-item"><video controls preload="none"><source src="videos/ritual-1.mp4" type="video/mp4"></video></div>
                 <div class="video-item"><video controls preload="none"><source src="videos/ritual-2.mp4" type="video/mp4"></video></div>
                 <div class="video-item"><video controls preload="none"><source src="videos/ritual-3.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-4.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-5.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-6.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-7.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-8.mp4" type="video/mp4"></video></div>
-                <div class="video-item"><video controls preload="none"><source src="videos/ritual-9.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-4.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-5.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-6.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-7.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-8.mp4" type="video/mp4"></video></div>
+                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-9.mp4" type="video/mp4"></video></div>
             </div>
+            <div id="video-expand-wrapper" style="text-align:center;margin-top:20px;"><button onclick="toggleVideos()" id="video-expand-btn">展开更多视频</button></div>
         </div>
     </div>
 
@@ -417,6 +418,33 @@
                     <img src="images/case-4.jpg" alt="风水法事客户反馈" loading="lazy">
                     <figcaption>风水法事</figcaption>
                 </figure>
+            </div>
+        </div>
+    </div>
+
+    <!-- 风水文章 -->
+    <div class="section" id="articles">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>📖 风水文章</h2>
+                <p>实用风水知识，让生活更顺遂</p>
+            </div>
+            <div class="article-grid">
+                <a href="/blog/rumen-zhishi.html" class="article-card">
+                    <div class="article-card-title">风水入门基础知识</div>
+                    <div class="article-card-desc">第一次了解风水该看什么？这篇带你入门</div>
+                </a>
+                <a href="/blog/men-kou-fengshui.html" class="article-card">
+                    <div class="article-card-title">门口风水有讲究</div>
+                    <div class="article-card-desc">这4个错误千万别犯，影响全家运势</div>
+                </a>
+                <a href="/blog/caishen-fangwei.html" class="article-card">
+                    <div class="article-card-title">财神方位在哪里</div>
+                    <div class="article-card-desc">2026年催财必看，让你财源滚滚</div>
+                </a>
+                <a href="/blog/index.html" class="article-card article-card--more">
+                    <div class="article-card-title">查看更多文章 →</div>
+                </a>
             </div>
         </div>
     </div>
@@ -1066,6 +1094,18 @@
     document.getElementById('modal-pay').addEventListener('click', function(e) {
         if (e.target === this) closePayModal();
     });
+
+    // 视频折叠功能
+    let videosExpanded = false;
+    function toggleVideos() {
+        const hiddenVideos = document.querySelectorAll('.hidden-video');
+        const btn = document.getElementById('video-expand-btn');
+        hiddenVideos.forEach(v => {
+            v.style.display = videosExpanded ? 'none' : 'block';
+        });
+        videosExpanded = !videosExpanded;
+        btn.textContent = videosExpanded ? '收起视频' : '展开更多视频';
+    }
     </script>
 </body>
 </html>
