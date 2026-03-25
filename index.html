@@ -41,7 +41,7 @@
       }
     }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -55,7 +55,8 @@
             <div class="topbar-brand">一宅一句</div>
             <div class="topbar-nav">
                 <a href="#services">服务</a>
-                <a href="#tests">测试</a>
+                <a href="test/">测试</a>
+                <a href="blog/">文章</a>
                 <a href="#pricing">报价</a>
                 <a href="#cases">案例</a>
                 <a href="#messages">留言</a>
@@ -146,13 +147,6 @@
                     <div class="card-body">
                         <div class="card-title">请符 / 请物</div>
                         <div class="card-desc">太岁符 / 招财符 / 桃花符 / 护身符</div>
-                    </div>
-                </a>
-                <a class="service-card" href="services/test-ta-aini.html">
-                    <div class="card-icon">爱</div>
-                    <div class="card-body">
-                        <div class="card-title">他是否爱你</div>
-                        <div class="card-desc">情感测试 / 爱情配对 / 缘分分析</div>
                     </div>
                 </a>
                 <a class="service-card" href="services/fashi.html">
@@ -253,6 +247,11 @@
                     <div class="test-card-title">桃花运测试</div>
                     <div class="test-card-desc">测测你的姻缘桃花运类型</div>
                 </a>
+                <a class="test-card-item test-card--hidden" href="services/test-ta-aini.html">
+                    <div class="test-card-icon">💕</div>
+                    <div class="test-card-title">他是否爱你</div>
+                    <div class="test-card-desc">测测Ta对你的心意</div>
+                </a>
                 <a class="test-card-item test-card--hidden" href="services/test-caishang.html">
                     <div class="test-card-icon">💰</div>
                     <div class="test-card-title">财商测试</div>
@@ -333,8 +332,8 @@
                 </div>
                 <div class="price-card price-card--hot">
                     <div class="price-badge">推荐</div>
-                    <h3>AI深度分析</h3>
-                    <p class="desc">详细解读 + 具体建议<br>含化解方案与注意事项</p>
+                    <h3>AI深度分析体验包</h3>
+                    <p class="desc">1份深度报告 + 48小时内3次追问<br>仅限AI分析，不含真人一对一咨询</p>
                     <div class="price-amount">¥9.9</div>
                     <button class="btn-price btn-price--primary" onclick="openPayModal('ai_deep')">立即支付 ¥9.9</button>
                 </div>
@@ -382,9 +381,6 @@
                 <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-4.mp4" type="video/mp4"></video></div>
                 <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-5.mp4" type="video/mp4"></video></div>
                 <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-6.mp4" type="video/mp4"></video></div>
-                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-7.mp4" type="video/mp4"></video></div>
-                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-8.mp4" type="video/mp4"></video></div>
-                <div class="video-item hidden-video"><video controls preload="none"><source src="videos/ritual-9.mp4" type="video/mp4"></video></div>
             </div>
             <div id="video-expand-wrapper" style="text-align:center;margin-top:20px;"><button onclick="toggleVideos()" id="video-expand-btn">展开更多视频</button></div>
         </div>
@@ -426,15 +422,15 @@
                 <p>实用风水知识，让生活更顺遂</p>
             </div>
             <div class="article-grid">
-                <a href="/blog/rumen-zhishi.html" class="article-card">
+                <a href="/blog/zaotai.html" class="article-card">
                     <div class="article-card-title">风水入门基础知识</div>
                     <div class="article-card-desc">第一次了解风水该看什么？这篇带你入门</div>
                 </a>
-                <a href="/blog/men-kou-fengshui.html" class="article-card">
+                <a href="/blog/kai-men-jian-zao.html" class="article-card">
                     <div class="article-card-title">门口风水有讲究</div>
                     <div class="article-card-desc">这4个错误千万别犯，影响全家运势</div>
                 </a>
-                <a href="/blog/caishen-fangwei.html" class="article-card">
+                <a href="/blog/caiwei.html" class="article-card">
                     <div class="article-card-title">财神方位在哪里</div>
                     <div class="article-card-desc">2026年催财必看，让你财源滚滚</div>
                 </a>
@@ -485,6 +481,38 @@
         </div>
     </div>
 
+    <!-- 常见问题 -->
+    <div class="section" id="faq">
+        <div class="container">
+            <div class="section-head">
+                <h2>常见问题</h2>
+                <p>先看这 5 个高频问题，再决定是否需要一对一咨询</p>
+            </div>
+            <div style="display:grid;gap:12px;">
+                <details style="background:var(--white);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;">
+                    <summary style="cursor:pointer;font-weight:600;color:var(--ink);">什么是风水？</summary>
+                    <p style="margin:10px 0 0;color:var(--text);line-height:1.8;">风水是中国传统文化中关于人和居住环境关系的经验体系。实际应用时，建议以采光、动线、收纳、通风等可执行优化为主，避免盲目迷信。</p>
+                </details>
+                <details style="background:var(--white);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;">
+                    <summary style="cursor:pointer;font-weight:600;color:var(--ink);">客厅沙发怎么摆放更稳妥？</summary>
+                    <p style="margin:10px 0 0;color:var(--text);line-height:1.8;">优先做到 4 点：背后有靠、避开横梁、避免正对镜面反射、保留主要通行动线。先满足居住舒适度，再做风水细节微调。</p>
+                </details>
+                <details style="background:var(--white);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;">
+                    <summary style="cursor:pointer;font-weight:600;color:var(--ink);">卧室床位有哪些常见禁忌？</summary>
+                    <p style="margin:10px 0 0;color:var(--text);line-height:1.8;">常见问题包括床头不靠实墙、床尾直冲门口、镜子直照床面、上方有压梁。先确保睡眠质量和安全感，再谈运势提升才有意义。</p>
+                </details>
+                <details style="background:var(--white);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;">
+                    <summary style="cursor:pointer;font-weight:600;color:var(--ink);">提升财运最先该做什么？</summary>
+                    <p style="margin:10px 0 0;color:var(--text);line-height:1.8;">建议先从基础环境入手：入口整洁、主要空间明亮、杂物减少、工作区有序。风水调整是辅助，核心仍然是行动、执行和长期复利。</p>
+                </details>
+                <details style="background:var(--white);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;">
+                    <summary style="cursor:pointer;font-weight:600;color:var(--ink);">装修前要不要先看风水？</summary>
+                    <p style="margin:10px 0 0;color:var(--text);line-height:1.8;">建议在平面方案阶段先做一次风水排雷。这个时点改动成本最低，能同时兼顾审美、预算和实用性，避免完工后返工。</p>
+                </details>
+            </div>
+        </div>
+    </div>
+
     <!-- 微信引导区（页内，非弹窗） -->
     <section class="wechat-section">
         <div class="wechat-inner">
@@ -505,7 +533,7 @@
         </div>
     </footer>
 
-    <script src="js/shared.js?v=20260223"></script>
+    <script src="js/shared.js?v=20260307"></script>
 
     <script>
     // 服务卡片折叠/展开
@@ -778,44 +806,44 @@
         function analyzeFloorplan(){
             if(!floorplanFile)return alert('请先上传户型图');
             const resultDiv=document.getElementById('floorplan-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'户型风水分析',question:'请分析这个户型图的风水，给出专业建议'})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('','户型风水分析报告',data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'户型风水分析',message:'请分析这个户型图的风水，给出专业建议'})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('','户型风水分析报告',data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML('户型风水分析');});
         }
         function getColor(){
             const type=document.getElementById('color-room').value;const desc=document.getElementById('color-style').value;
             const resultDiv=document.getElementById('color-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,question:desc})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
         }
         function getBudget(){
             const type=document.getElementById('budget-area').value;const desc=document.getElementById('budget-style').value;
             const resultDiv=document.getElementById('budget-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,question:desc})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
         }
         function getStorage(){
             const type=document.getElementById('storage-room').value;const desc=document.getElementById('storage-family').value;
             const resultDiv=document.getElementById('storage-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,question:desc})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
         }
         function submitStyle(){
             const type=document.getElementById('style-room').value;const desc=document.getElementById('style-desc').value;
             const resultDiv=document.getElementById('style-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,question:desc})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
         }
         function getLight(){
             const stage=document.getElementById('light-room').value;const concern=document.getElementById('light-orientation').value;
             const desc=document.getElementById('light-description').value;
             const resultDiv=document.getElementById('light-result');showLoadingInResult(resultDiv);
-            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:concern+'(装修风水)',question:desc||stage})})
-            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',concern,data.answer||'抱歉，AI正在休息，请加微信详谈');})
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:concern+'(装修风水)',message:desc||stage})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',concern,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
             .catch(()=>{resultDiv.innerHTML=buildErrorHTML(concern);});
         }
 
@@ -877,7 +905,7 @@
                 <span class="chat-head-close" onclick="toggleAIChatWidget()">✕</span>
             </div>
             <div class="chat-body" id="chat-messages-widget">
-                <div class="chat-msg bot">您好，我是「一宅一句」AI风水助手。<br>新用户可<strong>免费3次</strong>提问，深度分析（¥9.9）更详细。</div>
+                <div class="chat-msg bot">您好，我是「一宅一句」AI风水助手。<br>新用户可<strong>免费3次</strong>提问。解锁体验包（¥9.9）：1份深度报告 + 48小时内3次追问。</div>
                 <div class="chat-quick">
                     <button onclick="quickAsk('我想算算财运')">财运</button>
                     <button onclick="quickAsk('我想看姻缘')">姻缘</button>
@@ -900,14 +928,60 @@
         else{w.classList.remove('active');b.style.display='flex';}
     }
     function quickAsk(q){document.getElementById('chat-input').value=q;sendChatMessage();}
+    function appendChatText(container, role, text){
+        const el = document.createElement('div');
+        el.className = 'chat-msg ' + role;
+        el.textContent = text || '';
+        container.appendChild(el);
+        return el;
+    }
+    function appendChatHtml(container, role, html){
+        const el = document.createElement('div');
+        el.className = 'chat-msg ' + role;
+        el.innerHTML = html;
+        container.appendChild(el);
+        return el;
+    }
+    function showPaywallPrompt(container){
+        appendChatHtml(container, 'bot', '您已用完免费提问次数。<br><br>解锁 <strong>AI深度分析体验包</strong>：<br>1份深度报告 + 48小时内3次追问，仅 <strong>¥9.9</strong><br><br><button onclick="openPayModal(\'ai_deep\')" style="background:var(--gold);border:none;padding:8px 18px;border-radius:6px;color:var(--white);font-weight:500;cursor:pointer;">支付¥9.9解锁</button>');
+        container.scrollTop=container.scrollHeight;
+    }
+
+    function getAiDeepPaidState(){
+        try{
+            const map = JSON.parse(localStorage.getItem('paid_products') || '{}');
+            const rec = map.ai_deep;
+            if(!rec || !rec.paid_at) return false;
+            const paidAt = new Date(rec.paid_at).getTime();
+            if(!Number.isFinite(paidAt)) return false;
+            return (Date.now() - paidAt) <= (48 * 60 * 60 * 1000);
+        }catch(e){
+            return false;
+        }
+    }
+
+    function markAiDeepPaidLocal(source, orderNo, amount){
+        try{
+            const map = JSON.parse(localStorage.getItem('paid_products') || '{}');
+            map.ai_deep = {
+                paid_at: new Date().toISOString(),
+                order_no: orderNo || '',
+                amount: amount || '9.90',
+                source: source || 'index'
+            };
+            localStorage.setItem('paid_products', JSON.stringify(map));
+            localStorage.setItem('unlock_ai_deep', 'true');
+            localStorage.setItem('aiPaid', 'true');
+        }catch(e){}
+    }
 
     let chatCount=parseInt(localStorage.getItem('aiChatCount')||'0');
-    let isPaid=localStorage.getItem('aiPaid')==='true';
+    let isPaid=getAiDeepPaidState();
     (async function syncPaidStatus(){
         const user=getUser();
         if(user&&user.id&&supabaseClient){
             try{const{data}=await supabaseClient.from('users').select('is_paid').eq('id',user.id).single();
-            if(data&&data.is_paid){isPaid=true;localStorage.setItem('aiPaid','true');}}catch(e){}
+            if(data&&data.is_paid){markAiDeepPaidLocal('supabase_sync','','9.90');isPaid=true;}}catch(e){}
         }
     })();
     localStorage.setItem('aiChatCount',chatCount);
@@ -915,34 +989,41 @@
     function sendChatMessage(){
         const input=document.getElementById('chat-input');const msg=input.value.trim();if(!msg)return;
         const ms=document.getElementById('chat-messages-widget');
-
-        if(chatCount>=3&&!isPaid){
-            ms.innerHTML+='<div class="chat-msg user">'+msg+'</div>';
-            ms.innerHTML+='<div class="chat-msg bot">您已使用3次免费提问。<br><br>解锁<strong>深度分析</strong>（详细+化解方案），只需 <strong>¥9.9</strong><br><br><button onclick="openPayModal(\'ai_deep\')" style="background:var(--gold);border:none;padding:8px 18px;border-radius:6px;color:var(--white);font-weight:500;cursor:pointer;">支付¥9.9解锁</button> <button onclick="showRedeem()" style="background:transparent;border:1px solid var(--border);padding:8px 18px;border-radius:6px;color:var(--text);cursor:pointer;">兑换码</button></div>';
-            function showRedeem(){
-                const code=prompt('请输入兑换码：');
-                if(code&&code.toLowerCase()==='vip2026'){localStorage.setItem('aiPaid','true');isPaid=true;ms.innerHTML+='<div class="chat-msg bot">兑换成功！您已解锁深度分析，继续提问吧。</div>';}
-                else if(code){ms.innerHTML+='<div class="chat-msg bot">兑换码错误，请联系客服获取正确兑换码。</div>';}
-                ms.scrollTop=ms.scrollHeight;
-            }
-            window.showRedeem=showRedeem;ms.scrollTop=ms.scrollHeight;return;
-        }
-
-        ms.innerHTML+='<div class="chat-msg user">'+msg+'</div>';input.value='';
-        ms.innerHTML+='<div class="chat-msg bot" id="chat-thinking">'+((chatCount>=3)?'深度分析中...':'思考中...')+'</div>';
+        const user = getUser();
+        const userId = user && user.id ? String(user.id) : '';
+        appendChatText(ms, 'user', msg);input.value='';
+        const thinkingEl = appendChatText(ms, 'bot', (chatCount>=3)?'深度分析中...':'思考中...');
+        thinkingEl.id = 'chat-thinking';
         ms.scrollTop=ms.scrollHeight;
-        chatCount++;localStorage.setItem('aiChatCount',chatCount);
         chatHistory.push({role:'user',content:msg});
 
-        fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'对话咨询',question:msg,history:chatHistory})})
-        .then(r=>r.json()).then(data=>{
+        fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'对话咨询',message:msg,history:chatHistory,user_id:userId})})
+        .then(async (r)=>{
+            const data = await r.json().catch(()=>({}));
+            return { ok:r.ok, status:r.status, data:data };
+        }).then(({ok,status,data})=>{
             const el=document.getElementById('chat-thinking');if(el)el.remove();
-            const answer=data.answer||'抱歉，AI正在休息，请加微信详谈';
-            ms.innerHTML+='<div class="chat-msg bot">'+answer+'</div>';
+            if(!ok){
+                if(status===402||data.requires_payment){
+                    chatCount=Math.max(chatCount,3);localStorage.setItem('aiChatCount',chatCount);
+                    showPaywallPrompt(ms);
+                    return;
+                }
+                appendChatText(ms, 'bot', data.error||'网络问题，请稍后再试。');ms.scrollTop=ms.scrollHeight;
+                return;
+            }
+            const answer=data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈';
+            appendChatText(ms, 'bot', answer);
+            if(data.quota){
+                if(data.quota.paid){isPaid=true;}
+                if(Number.isFinite(data.quota.used)){chatCount=data.quota.used;localStorage.setItem('aiChatCount',chatCount);}
+            }else{
+                chatCount++;localStorage.setItem('aiChatCount',chatCount);
+            }
             chatHistory.push({role:'assistant',content:answer});ms.scrollTop=ms.scrollHeight;
         }).catch(()=>{
             const el=document.getElementById('chat-thinking');if(el)el.remove();
-            ms.innerHTML+='<div class="chat-msg bot">网络问题，请稍后再试。</div>';ms.scrollTop=ms.scrollHeight;
+            appendChatText(ms, 'bot', '网络问题，请稍后再试。');ms.scrollTop=ms.scrollHeight;
         });
     }
     </script>
@@ -951,6 +1032,17 @@
     <script>
     let currentOrderNo = null;
     let payCheckTimer = null;
+    function sanitizeProductId(value){
+        return String(value || '').replace(/[^a-zA-Z0-9_-]/g, '');
+    }
+    function escapePayHTML(value){
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
 
     // 打开支付弹窗（可指定商品或显示选择列表）
     function openPayModal(productId) {
@@ -989,10 +1081,15 @@
             const data = await res.json();
             let html = '';
             data.products.forEach(function(p) {
-                html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;margin-bottom:10px;background:var(--cream);border:1px solid var(--border-soft);border-radius:10px;cursor:pointer;transition:border-color 0.2s;" onclick="createOrder(\'' + p.id + '\')" onmouseover="this.style.borderColor=\'var(--gold)\'" onmouseout="this.style.borderColor=\'var(--border-soft)\'">' +
-                    '<div><div style="font-weight:500;font-size:0.95rem;color:var(--ink);">' + p.name + '</div>' +
-                    '<div style="font-size:0.8rem;color:var(--text-secondary);margin-top:3px;">' + p.desc + '</div></div>' +
-                    '<div style="font-size:1.1rem;font-weight:600;color:var(--gold);white-space:nowrap;margin-left:12px;">¥' + p.price + '</div></div>';
+                const id = sanitizeProductId(p.id);
+                if(!id) return;
+                const name = escapePayHTML(p.name);
+                const desc = escapePayHTML(p.desc);
+                const price = escapePayHTML(p.price);
+                html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;margin-bottom:10px;background:var(--cream);border:1px solid var(--border-soft);border-radius:10px;cursor:pointer;transition:border-color 0.2s;" onclick="createOrder(\'' + id + '\')" onmouseover="this.style.borderColor=\'var(--gold)\'" onmouseout="this.style.borderColor=\'var(--border-soft)\'">' +
+                    '<div><div style="font-weight:500;font-size:0.95rem;color:var(--ink);">' + name + '</div>' +
+                    '<div style="font-size:0.8rem;color:var(--text-secondary);margin-top:3px;">' + desc + '</div></div>' +
+                    '<div style="font-size:1.1rem;font-weight:600;color:var(--gold);white-space:nowrap;margin-left:12px;">¥' + price + '</div></div>';
             });
             list.innerHTML = html;
         } catch(e) {
@@ -1054,10 +1151,10 @@
                 if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
                 document.getElementById('pay-step-qr').style.display = 'none';
                 document.getElementById('pay-step-success').style.display = 'block';
-                document.getElementById('pay-success-msg').textContent = '感谢您的支持！服务已解锁，如需帮助请添加微信联系我们。';
+                document.getElementById('pay-success-msg').textContent = '支付成功，已解锁 AI 深度分析体验包。您现在可使用：1份深度报告 + 48小时内3次追问。';
 
                 // 如果是AI深度分析，解锁
-                localStorage.setItem('aiPaid', 'true');
+                markAiDeepPaidLocal('index_pay', currentOrderNo, data.amount || '9.90');
                 isPaid = true;
             } else if (!silent) {
                 var msg = document.getElementById('pay-status-msg');
@@ -1093,6 +1190,82 @@
         });
         videosExpanded = !videosExpanded;
         btn.textContent = videosExpanded ? '收起视频' : '展开更多视频';
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "什么是风水？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "风水是中国传统文化中关于人和居住环境关系的经验体系。实际应用时建议以采光、动线、收纳、通风等可执行优化为主，避免盲目迷信。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "客厅沙发怎么摆放更稳妥？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "优先做到背后有靠、避开横梁、避免正对镜面反射、保留主要通行动线。先满足居住舒适度，再做风水细节微调。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "卧室床位有哪些常见禁忌？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "常见问题包括床头不靠实墙、床尾直冲门口、镜子直照床面、上方有压梁。先确保睡眠质量和安全感，再谈运势提升才有意义。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "提升财运最先该做什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先从基础环境入手：入口整洁、主要空间明亮、杂物减少、工作区有序。风水调整是辅助，核心仍然是行动、执行和长期复利。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "装修前要不要先看风水？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建议在平面方案阶段先做一次风水排雷。这个时点改动成本最低，能同时兼顾审美、预算和实用性，避免完工后返工。"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://12zn.com/#organization",
+      "name": "一宅一句",
+      "url": "https://12zn.com/",
+      "sameAs": [
+        "https://x.com/y5065236990506"
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://12zn.com/#website",
+      "name": "一宅一句",
+      "url": "https://12zn.com/",
+      "inLanguage": "zh-CN",
+      "publisher": {
+        "@id": "https://12zn.com/#organization"
+      }
     }
     </script>
 </body>
