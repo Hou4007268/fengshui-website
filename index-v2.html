@@ -748,7 +748,7 @@
         };
         var messageDiv = document.getElementById('formMessage');
         
-        fetch('http://124.156.176.155:8080/api/contact', {
+        fetch('/api/contact', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
