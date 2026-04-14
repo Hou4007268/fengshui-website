@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yizhai Yiju | Feng Shui Consulting for Home, Career, and Relationships</title>
+  <meta name="description" content="Practical feng shui consulting for home layout, career momentum, relationship clarity, and floor plan optimization.">
+  <link rel="canonical" href="https://12zn.com/en/">
+  <link rel="alternate" hreflang="en" href="https://12zn.com/en/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://12zn.com/">
+  <link rel="alternate" hreflang="x-default" href="https://12zn.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Yizhai Yiju | Feng Shui Consulting">
+  <meta property="og:description" content="Practical feng shui consulting for home, work, and life decisions.">
+  <meta property="og:url" content="https://12zn.com/en/">
+  <meta property="og:site_name" content="Yizhai Yiju">
+  <link rel="stylesheet" href="../css/shared.css?v=20260319">
+</head>
+<body>
+  <div class="login-overlay" id="login-modal">
+    <div class="login-box">
+      <h3>User Login</h3>
+      <input type="text" id="login-wechat" placeholder="Enter your WeChat ID">
+      <button class="btn-login btn-login--primary" type="button">Login / Register</button>
+      <button class="btn-login btn-login--ghost" type="button" onclick="document.getElementById('login-modal').classList.remove('active')">Cancel</button>
+      <p id="login-msg" style="margin-top:12px;font-size:0.82rem;color:var(--text-secondary);text-align:center;"></p>
+    </div>
+  </div>
+
+  <nav class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a href="/en/" class="topbar-brand">Yizhai Yiju</a>
+      <div class="topbar-nav">
+        <a href="#services">Services</a>
+        <a href="#tests">Tests</a>
+        <a href="#articles">Articles</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#cases">Cases</a>
+        <a href="#messages">Messages</a>
+        <a href="/">中文</a>
+        <a class="topbar-cta" href="/en/services/zhenren.html">Book 1:1</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="seal">Yi<br>Zhai</div>
+    <h1 class="hero-title">Practical Feng Shui Consulting<br><span style="font-size:0.58em;">Fix high-impact friction first, then scale</span></h1>
+    <p class="hero-claim">Actionable advice · Real-world execution · Sustainable changes</p>
+    <p class="hero-desc">We focus on home flow, work setup, and life momentum with a test-and-iterate method.</p>
+    <div class="hero-actions">
+      <a class="btn-hero btn-hero--primary" href="/en/services/zhenren.html" style="text-decoration:none;">Book 1:1 Consultation</a>
+      <a class="btn-hero btn-hero--outline" href="/en/services/huxing.html" style="text-decoration:none;">Start with Floor Plan Review</a>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item"><div class="trust-num">500+</div><div class="trust-label">Clients Served</div></div>
+      <div class="trust-item"><div class="trust-num">13</div><div class="trust-label">Service Categories</div></div>
+      <div class="trust-item"><div class="trust-num">10+</div><div class="trust-label">Years of Experience</div></div>
+      <div class="trust-item"><div class="trust-num">98%</div><div class="trust-label">Positive Feedback</div></div>
+    </div>
+  </div>
+
+  <div class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Core Services</h2>
+        <p>Start with the highest-impact scenario first.</p>
+      </div>
+      <div class="services" id="services-grid">
+        <a class="service-card service-card--featured" href="/en/services/zhenren.html"><div class="card-icon">1:1</div><div class="card-body"><div class="card-title">1:1 Expert Consultation</div><div class="card-desc">Voice/video session with actionable recommendations.</div></div></a>
+        <a class="service-card" href="/en/services/huxing.html"><div class="card-icon">FP</div><div class="card-body"><div class="card-title">Floor Plan Analysis</div><div class="card-desc">Identify layout bottlenecks and improvement priorities.</div></div></a>
+        <a class="service-card" href="/en/services/caiyun.html"><div class="card-icon">W</div><div class="card-body"><div class="card-title">Wealth & Career Consultation</div><div class="card-desc">Optimize direction, execution, and work rhythm.</div></div></a>
+        <a class="service-card" href="/en/services/yinyuan.html"><div class="card-icon">R</div><div class="card-body"><div class="card-title">Relationship Consultation</div><div class="card-desc">Dating, conflict diagnosis, and relationship adjustment.</div></div></a>
+        <a class="service-card" href="/en/services/zhuangxiu.html"><div class="card-icon">Reno</div><div class="card-body"><div class="card-title">Renovation Consultation</div><div class="card-desc">Layout-first renovation planning to reduce rework risk.</div></div></a>
+        <a class="service-card" href="/en/services/qingfu.html"><div class="card-icon">T</div><div class="card-body"><div class="card-title">Talisman & Ritual Items</div><div class="card-desc">Guidance for annual, wealth, relationship, and protection use.</div></div></a>
+        <a class="service-card" href="/en/services/fashi.html"><div class="card-icon">Ritual</div><div class="card-body"><div class="card-title">Ritual Service</div><div class="card-desc">Structured support for transition and rebalance scenarios.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/yinzhai.html"><div class="card-icon">A</div><div class="card-body"><div class="card-title">Ancestral Site Consultation</div><div class="card-desc">Site selection, diagnosis, and relocation planning.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/zeri.html"><div class="card-icon">D</div><div class="card-body"><div class="card-title">Date Selection</div><div class="card-desc">Auspicious timing for move-ins, launches, and weddings.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/qiming.html"><div class="card-icon">N</div><div class="card-body"><div class="card-title">Naming Consultation</div><div class="card-desc">Baby names, renaming, business naming, and branding.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/liunian.html"><div class="card-icon">Y</div><div class="card-body"><div class="card-title">Annual Fortune Analysis</div><div class="card-desc">Yearly and monthly trend insights with practical timing.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/shangye.html"><div class="card-icon">Biz</div><div class="card-body"><div class="card-title">Business Feng Shui</div><div class="card-desc">Office layout, store location review, and opening support.</div></div></a>
+        <a class="service-card service-card--hidden" href="/en/services/kaiguang.html"><div class="card-icon">Item</div><div class="card-body"><div class="card-title">Consecrated Items</div><div class="card-desc">Crystal items, Pixiu activation, and wearable luck items.</div></div></a>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <button class="btn-expand-services" id="btn-expand-services" onclick="toggleServices()">Show More Services <span class="expand-arrow">▼</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--alt" id="tests">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>Quick Tests</h2>
+        <p>Try a free test to identify your current layout signals.</p>
+      </div>
+      <div class="test-grid" id="test-grid">
+        <a class="test-card-item" href="/services/test-yunshi.html"><div class="test-card-icon">🔮</div><div class="test-card-title">Daily Fortune Test</div><div class="test-card-desc">Input zodiac and get a quick daily reading.</div></a>
+        <a class="test-card-item" href="/services/test-wuxing.html"><div class="test-card-icon">🌊</div><div class="test-card-title">Five Elements Test</div><div class="test-card-desc">8 quick questions to reveal your element profile.</div></a>
+        <a class="test-card-item" href="/services/test-fengshui.html"><div class="test-card-icon">🏠</div><div class="test-card-title">Home Feng Shui Score</div><div class="test-card-desc">6 questions for a quick home layout score.</div></a>
+        <a class="test-card-item" href="/services/test-xingming.html"><div class="test-card-icon">✍️</div><div class="test-card-title">Name Luck Check</div><div class="test-card-desc">Analyze your name with five-grid numerology.</div></a>
+      </div>
+      <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="/test/" class="btn-expand-services" style="text-decoration:none;">View All Tests →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="articles">
+    <div class="container">
+      <div class="section-head">
+        <h2>Latest English Articles</h2>
+        <p>Low-cost, high-impact layout fixes with weekly review loops.</p>
+      </div>
+      <div class="services">
+        <a class="service-card" href="/en/blog/front-door-direction-financial-stagnation.html"><div class="card-icon">Door</div><div class="card-body"><div class="card-title">Front Door Direction and Financial Stagnation</div><div class="card-desc">Fix entry flow before symbolic solutions.</div></div></a>
+        <a class="service-card" href="/en/blog/entry-door-facing-elevator-fixes.html"><div class="card-icon">Entry</div><div class="card-body"><div class="card-title">Entry Door Facing Elevator: Practical Fixes</div><div class="card-desc">Buffering and flow control that renters can use.</div></div></a>
+        <a class="service-card" href="/en/blog/living-room-wealth-corner-placement.html"><div class="card-icon">Living</div><div class="card-body"><div class="card-title">Living Room Wealth Corner Placement</div><div class="card-desc">Choose maintainable setups, not visual overload.</div></div></a>
+        <a class="service-card" href="/en/blog/rental-feng-shui-5-point-checklist.html"><div class="card-icon">Rent</div><div class="card-body"><div class="card-title">Rental Feng Shui: 5-Point Quick Checklist</div><div class="card-desc">Low-cost checks you can apply in 30 minutes.</div></div></a>
+        <a class="service-card" href="/en/blog/desk-direction-career-setup-checklist.html"><div class="card-icon">Desk</div><div class="card-body"><div class="card-title">Desk Direction: Career Setup Checklist</div><div class="card-desc">Improve focus with practical workspace tweaks.</div></div></a>
+        <a class="service-card" href="/en/blog/sofa-facing-door-practical-fixes.html"><div class="card-icon">Sofa</div><div class="card-body"><div class="card-title">Sofa Facing the Door: Practical Fixes</div><div class="card-desc">Three stable layout options for small rooms.</div></div></a>
+      </div>
+      <div style="text-align:center;margin-top:20px;">
+        <a href="/en/blog/" class="btn-expand-services" style="text-decoration:none;">Browse English Blog →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--alt" id="process">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>Consultation Flow</h2>
+        <p>4 steps to get an actionable plan.</p>
+      </div>
+      <div class="process">
+        <div class="process-step"><div class="process-num">1</div><div class="process-title">Describe Your Issue</div><div class="process-desc">Pick service type and describe your current friction.</div></div>
+        <div class="process-step"><div class="process-num">2</div><div class="process-title">Initial AI Direction</div><div class="process-desc">Get a fast baseline before deeper diagnosis.</div></div>
+        <div class="process-step"><div class="process-num">3</div><div class="process-title">Deep Consultation</div><div class="process-desc">1:1 review with practical constraints included.</div></div>
+        <div class="process-step"><div class="process-num">4</div><div class="process-title">Customized Plan</div><div class="process-desc">Receive a plan and track outcomes weekly.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="pricing">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>Pricing</h2>
+        <p>Choose based on your scenario and urgency.</p>
+      </div>
+      <div class="pricing">
+        <div class="price-card">
+          <h3>AI Quick Consultation</h3>
+          <p class="desc">Fast baseline guidance for common layout questions.</p>
+          <div class="price-amount">Free</div>
+          <a class="btn-price btn-price--outline" href="/en/services/huxing.html" style="text-decoration:none;">Start</a>
+        </div>
+        <div class="price-card price-card--hot">
+          <div class="price-badge">Popular</div>
+          <h3>AI Deep Analysis Pack</h3>
+          <p class="desc">1 deep report + up to 3 follow-up questions within 48 hours.</p>
+          <div class="price-amount">¥9.9</div>
+          <a class="btn-price btn-price--primary" href="/en/services/zhenren.html" style="text-decoration:none;">Get Pack</a>
+        </div>
+        <div class="price-card">
+          <h3>1:1 Expert Service</h3>
+          <p class="desc">Senior consultant voice/video session with actionable execution plan.</p>
+          <div class="price-amount">From ¥99</div>
+          <a class="btn-price btn-price--outline" href="/en/services/zhenren.html" style="text-decoration:none;">Book</a>
+        </div>
+      </div>
+      <div class="addons">
+        <div class="addon-card"><h4>Floor Plan Analysis</h4><p class="desc">Upload plan and get actionable recommendations.</p><div class="addon-price">¥299</div><a class="btn-addon" href="/en/services/huxing.html">Details</a></div>
+        <div class="addon-card"><h4>Ritual Service</h4><p class="desc">Transition and rebalance support process.</p><div class="addon-price">Quote</div><a class="btn-addon" href="/en/services/fashi.html">Details</a></div>
+        <div class="addon-card"><h4>Talisman / Items</h4><p class="desc">Annual, wealth, relationship, and protection use cases.</p><div class="addon-price">From ¥99</div><a class="btn-addon" href="/en/services/qingfu.html">Details</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="pricing-policy">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2>Purchase Notes</h2>
+        <p>AI Deep Analysis Pack (¥9.9) terms and scope</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:16px;line-height:1.9;color:var(--text-secondary);font-size:0.85rem;">
+        <p>1. Product: AI Deep Analysis Pack (¥9.9).</p>
+        <p>2. Includes: 1 deep report + up to 3 follow-up questions within 48 hours.</p>
+        <p>3. Effective time: starts immediately after successful payment.</p>
+        <p>4. Scope: AI analysis only, no 1:1 human consultation included.</p>
+        <p>5. Validity: after 48 hours or question limit reached, purchase again or upgrade.</p>
+        <p>6. Refund note: once virtual content is unlocked and used, no unconditional refund.</p>
+        <p>7. Risk notice: results are for reference and not medical, legal, or investment advice.</p>
+      </div>
+      <div style="margin-top:14px;background:#faf8f2;border:1px solid var(--border-soft);border-radius:12px;padding:16px;line-height:1.9;color:var(--text-secondary);font-size:0.85rem;">
+        <h4 style="margin:0 0 8px;color:var(--text);font-size:1rem;">Quick FAQ</h4>
+        <p><strong>Q1: Is ¥9.9 charged per question?</strong><br>No, it is a fixed pack with fixed rights.</p>
+        <p><strong>Q2: Is this a lifetime membership?</strong><br>No, it is a one-time unlock pack.</p>
+        <p><strong>Q3: How is it different from 1:1 consultation?</strong><br>¥9.9 is AI-only. 1:1 expert consultation is a separate paid service.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Ritual Service On-site</h2>
+        <p>Real process clips from completed cases</p>
+      </div>
+      <div class="video-grid">
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-1.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-2.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-3.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-4.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-5.mp4" type="video/mp4"></video></div>
+        <div class="video-item"><video controls preload="none"><source src="/videos/ritual-6.mp4" type="video/mp4"></video></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="cases">
+    <div class="container">
+      <div class="section-head">
+        <h2>Client Case Feedback</h2>
+        <p>Real examples from delivered scenarios.</p>
+      </div>
+      <div class="cases">
+        <figure class="case-card"><img src="/images/case-1.jpg" alt="Wealth and career case feedback" loading="lazy"><figcaption>Wealth and Career</figcaption></figure>
+        <figure class="case-card"><img src="/images/case-2.jpg" alt="Residential layout case feedback" loading="lazy"><figcaption>Residential Layout</figcaption></figure>
+        <figure class="case-card"><img src="/images/case-3.jpg" alt="Relationship case feedback" loading="lazy"><figcaption>Relationship</figcaption></figure>
+        <figure class="case-card"><img src="/images/case-4.jpg" alt="Ritual service case feedback" loading="lazy"><figcaption>Ritual Service</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section--alt" id="messages">
+    <div class="container">
+      <div class="section-head">
+        <h2>Client Message Board</h2>
+        <p>Share your experience and help others choose a practical path.</p>
+      </div>
+      <div class="message-board">
+        <div class="message-form">
+          <h3>Leave a Message</h3>
+          <div class="form-row">
+            <input type="text" id="msg-author" placeholder="Your name" maxlength="50">
+            <select id="msg-service-type">
+              <option value="">Choose service type (optional)</option>
+              <option value="Wealth and Career">Wealth and Career</option>
+              <option value="Relationship">Relationship</option>
+              <option value="Renovation">Renovation</option>
+              <option value="Floor Plan">Floor Plan</option>
+              <option value="Ritual">Ritual</option>
+              <option value="Date Selection">Date Selection</option>
+              <option value="Naming">Naming</option>
+            </select>
+          </div>
+          <textarea id="msg-content" placeholder="Share your experience... (up to 500 chars)" maxlength="500" rows="4"></textarea>
+          <button class="btn" type="button">Submit Message</button>
+        </div>
+        <div class="message-list" id="message-list"></div>
+        <button class="btn-load-more" id="btn-load-more-messages" style="display:none;" type="button">Load More</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="home-faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Common Questions</h2>
+        <p>Start with low-cost, high-impact moves before bigger changes.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Will an unfavorable door direction always block wealth?</div><div class="faq-a"><p>Not always. Entry flow, light, and storage friction usually matter more first. Optimize those and review outcomes in 7 to 14 days.</p></div></div>
+        <div class="faq-item"><div class="faq-q">What should I fix first with a limited budget?</div><div class="faq-a"><p>Address one or two high-impact issues first, such as entry congestion, unstable sleep area, or kitchen door-line conflicts.</p></div></div>
+        <div class="faq-item"><div class="faq-q">Is feng shui optimization worth it for rentals?</div><div class="faq-a"><p>Yes. Focus on reversible, low-cost changes like movement-path cleanup, layered lighting, and storage improvements.</p></div></div>
+        <div class="faq-item"><div class="faq-q">How often should I review after adjustments?</div><div class="faq-a"><p>Review every 7 to 14 days and track sleep, focus, and execution quality. Reassess the plan after four weeks.</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wechat-section">
+    <div class="wechat-inner">
+      <h2>Start with a focused conversation</h2>
+      <p class="wechat-sub">Book a consultation and receive a practical next-step roadmap.</p>
+      <a class="btn" href="/en/services/zhenren.html" style="text-decoration:none;">Book Consultation</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p class="footer-brand">Yizhai Yiju</p>
+    <p>Practical Feng Shui · Real Cases · Professional Service</p>
+    <div class="footer-links">
+      <a href="https://x.com/y5065236990506" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <span class="sep">·</span>
+      <span id="chat-count-display" style="color:var(--text-light);">Today's messages: -</span>
+    </div>
+  </footer>
+
+  <button class="fab-chat" id="chat-float-btn" type="button" onclick="toggleAIChatWidget()">
+    <span class="fab-chat-icon">AI</span>
+    <span class="fab-chat-text">Free AI Q&A</span>
+  </button>
+  <div class="chat-widget" id="ai-chat-widget">
+    <div class="chat-header">
+      <div class="chat-title">AI Feng Shui Assistant</div>
+      <button class="chat-close" type="button" onclick="toggleAIChatWidget()">×</button>
+    </div>
+    <div class="chat-body" id="chat-messages-widget">
+      <div class="chat-msg ai">Ask your question and get a quick direction first.</div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chat-input" type="text" placeholder="Type your feng shui question...">
+      <button type="button">Send</button>
+    </div>
+  </div>
+
+  <script src="../js/shared.js?v=20260319"></script>
+  <script>
+    function toggleServices() {
+      var grid = document.getElementById('services-grid');
+      var btn = document.getElementById('btn-expand-services');
+      var expanded = grid.classList.toggle('expanded');
+      btn.classList.toggle('expanded', expanded);
+      btn.innerHTML = expanded
+        ? 'Collapse Services <span class="expand-arrow">▲</span>'
+        : 'Show More Services <span class="expand-arrow">▼</span>';
+    }
+
+    function toggleAIChatWidget() {
+      var w = document.getElementById('ai-chat-widget');
+      var b = document.getElementById('chat-float-btn');
+      if (!w || !b) return;
+      var opening = !w.classList.contains('active');
+      w.classList.toggle('active', opening);
+      b.classList.toggle('hidden', opening);
+    }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Yizhai Yiju Feng Shui Consulting",
+    "url": "https://12zn.com/en/",
+    "description": "Practical feng shui consulting for home, career, and relationships.",
+    "areaServed": "US",
+    "serviceType": "Feng Shui Consulting"
+  }
+  </script>
+</body>
+</html>

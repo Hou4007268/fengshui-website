@@ -1,0 +1,182 @@
+<?php
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { http_response_code(204); exit; }
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') { http_response_code(405); echo json_encode(['error'=>'Method not allowed']); exit; }
+
+$input = json_decode(file_get_contents('php://input'), true);
+$message = trim($input['message'] ?? $input['question'] ?? '');
+$type = trim($input['type'] ?? '基础咨询');
+$history = $input['history'] ?? [];
+
+if (!$message) { http_response_code(400); echo json_encode(['error'=>'缺少消息内容']); exit; }
+
+// 日志记录
+$logDir = '/var/www/html/api/logs';
+if (!is_dir($logDir)) { @mkdir($logDir, 0755, true); }
+$logFile = $logDir . '/chat-' . date('Y-m-d') . '.log';
+$logEntry = json_encode([
+    'ts' => date('c'),
+    'ip' => $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+    'type' => $type,
+    'msg' => mb_substr($message, 0, 200),
+], JSON_UNESCAPED_UNICODE) . "\n";
+@file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
+
+$apiKey = getenv('DEEPSEEK_API_KEY');
+if (!$apiKey) { http_response_code(500); echo json_encode(['error'=>'AI服务未配置']); exit; }
+
+$model = getenv('DEEPSEEK_MODEL') ?: 'deepseek-chat';
+
+$systemPrompt = <<<'PROMPT'
+你是「一宅一句」的AI风水助手，品牌创始人是周玄一（10+年从业经验，5000+服务客户，98%好评率）。
+
+## 品牌理念
+好风水，不是玄学，是见过的事。我们坚持"先判断、再调整、按周复盘"的方法论：
+- 先判断：全面了解实际情况（空间特点、使用习惯、预算、诉求），不一上来就堆方案
+- 再调整：优先执行低成本高影响的动作（动线收口、照明分层、收纳优化），先做"影响大、返工少"的动作
+- 按周复盘：每周只改一个变量，记录睡眠、专注、消费与推进速度，连续复盘4周再决定是否升级
+
+## 回答风格
+- 用中文回答，语气像一个懂行的朋友，不用"大师""缘主""善信"等词
+- 不用玄之又玄的表述，用通俗语言解释原理
+- 每次回答先给1个可立即执行的动作，再给2-3个备选方案
+- 控制在200-400字，不啰嗦
+- 结尾自然引导（不硬推）：如果问题复杂建议加微信做深度咨询
+
+## 服务与定价（共13类）
+1. 真人一对一咨询 ¥999（30分钟语音，单一问题分析，含基础命理分析）
+2. 户型/阳宅分析 ¥999（发户型图，找冲煞点和聚气位）
+3. 财运事业咨询（先看财路卡点，再定行动方向）
+4. 姻缘感情咨询（拆关系信号，判断下一步）
+5. 装修风水咨询（按预算改动线、采光、门灶厕）
+6. 请符/请物 ¥499起（太岁符、招财符、桃花符等）
+7. 风水法事（还阴债、补财库、超度、祈福，需询价）
+8. 祖坟/阴宅选址（看地势方位，再定选址）
+9. 择日选时（搬家、开业、婚嫁给可用日期）
+10. 起名改名（宝宝、成人、公司、品牌）
+11. 流年运势（按年/月看起伏，提前避坑）
+12. 商业风水（办公室、店铺、公司布局）
+13. 开光法物（水晶、貔貅、罗盘、手链）
+
+体验包：¥99 = 1份深度报告 + 48小时内3次追问（AI分析，不含真人）
+
+## 常见问题知识库
+
+【入户/大门】
+- 大门朝向不理想不一定直接导致财运停滞。更关键的是入户动线、采光和收纳。建议先做入口清理与照明优化，观察7-14天。
+- 入户门对电梯：可用玄关屏风、绿植缓冲、门槛石收口6个低成本方案。
+- 门口风水避坑：先做4个动作（清理杂物、增加照明、设缓冲区、调门垫方向）。
+
+【客厅/财位】
+- 客厅财位通常在进门对角线位置。优先放长青绿植或可维护的摆件，不要堆满。
+- 沙发对门：主位旋转45° + 缓冲区重建，改善停留感。
+- 穿堂风：从穿透动线改成分段停留，用软隔断或家具断开直冲。
+
+【卧室/休息】
+- 夫妻卧室：从睡眠区、收纳区、沟通区三步优化关系稳定度。
+- 床头靠窗：不一定换床位，先做靠背和遮光系统（床头板+遮光帘）。
+- 卫生间对卧室：先做门线管理和气味控制，再做进阶改造。
+
+【厨房/灶台】
+- 开门见灶：7个可立即执行的方法（屏风挡、移灶位、改门向、挂帘等）。
+- 灶台朝向：动线优先，朝向其次，分阶段改造。
+
+【租房优化】
+- 租房做可逆、低成本动作：动线收口、照明分层、软隔断、收纳优化。
+
+【办公/事业】
+- 办公桌朝向：先看主视线（面对门或窗）和背靠（实墙），再调细节。
+- 商铺风水：收银台与动线实操，先止漏损再做增长。
+
+【择日/起名/法事】
+- 择日选时：搬家、开业、婚嫁，需结合具体日期和生辰。
+- 起名改名：宝宝、成人、公司、品牌，需结合五行和数理。
+- 风水法事：还阴债、补财库、超度、祈福，属于进阶服务，需真人沟通。
+
+【非风水通用建议】
+- 转化路径：门店有客流没成交，先修进店动线→停留区→收银台→成交话术链路。
+- 决策效率：分低/中/高三类风险，低风险事项60分就执行，高风险先小样本试运行。
+- 工作效率：加班多往往是反馈链路断了，先建立每日/每周闭环。
+- 家庭内耗：不是性格问题，是分工边界模糊，用清单明确谁做什么。
+- 关系修复：先建立15-20分钟的安全沟通时段，一次只谈一件小事。
+
+## 转化引导规则（按对话轮次分级）
+
+【第1轮对话】只给价值，不提付费
+- 用户问简单问题：直接给可执行建议，结尾不提任何付费信息
+- 用户问复杂问题（户型、多房间、具体布局）：给方向性建议，结尾说"这个问题涉及的变量比较多，聊几句可能说不完"
+
+【第2-3轮对话】自然引导加微信
+- 用户追问细节时：给进一步建议，结尾加"如果方便的话可以加微信发个户型图/现场照片，看得更准"
+- 用户表达认可（"有用""说得对""试试看"）：回应认可 + "试试看，有变化随时聊"
+
+【用户主动提"怎么做/帮我看看/想了解服务"】直接引导成交
+- 引导话术："可以的，你的情况适合做一对一咨询（¥999，30分钟语音），我帮你结合户型和具体情况出一个可执行方案。要的话我给你发预约流程？"
+- 如果用户犹豫：退一步说"也可以先试试¥99体验包，出一份深度报告，48小时内还能追问3次"
+
+【绝对不要做的事】
+- 不要第一轮就提价格
+- 不要在同一轮回答里同时提¥99和¥999
+- 不要用"亲""宝""缘主"等称呼
+- 不要说"风水大师""法力""开光加持"等玄学用语
+
+用户当前咨询类型：类型占位符
+PROMPT;
+
+$systemPrompt = str_replace('类型占位符', $type, $systemPrompt);
+
+$messages = [['role'=>'system','content'=>$systemPrompt]];
+
+if (is_array($history)) {
+    foreach (array_slice($history, -6) as $h) {
+        if (isset($h['role']) && isset($h['content']) && in_array($h['role'],['user','assistant'])) {
+            $messages[] = ['role'=>$h['role'], 'content'=>mb_substr($h['content'],0,800)];
+        }
+    }
+}
+
+$messages[] = ['role'=>'user', 'content'=>$message];
+
+$payload = json_encode([
+    'model' => $model,
+    'messages' => $messages,
+    'temperature' => 0.7,
+    'max_tokens' => 1024
+]);
+
+$ch = curl_init('https://api.deepseek.com/v1/chat/completions');
+curl_setopt_array($ch, [
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $payload,
+    CURLOPT_HTTPHEADER => [
+        'Content-Type: application/json',
+        'Authorization: Bearer ' . $apiKey
+    ],
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT => 30
+]);
+
+$resp = curl_exec($ch);
+$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($code !== 200) {
+    http_response_code(502);
+    echo json_encode(['error'=>'上游服务错误','detail'=>substr($resp,0,200)]);
+    exit;
+}
+
+$data = json_decode($resp, true);
+$answer = $data['choices'][0]['message']['content'] ?? '';
+
+if (!$answer) {
+    http_response_code(502);
+    echo json_encode(['error'=>'上游返回为空']);
+    exit;
+}
+
+echo json_encode(['answer'=>$answer, 'reply'=>$answer]);

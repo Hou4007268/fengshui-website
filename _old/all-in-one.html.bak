@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>综合测试 - 一宅一句</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        header { padding: 20px; text-align: center; background: rgba(0,0,0,0.3); }
+        header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, #ffecd2, #fcb69f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container { max-width: 700px; margin: 0 auto; padding: 30px 20px; }
+        .back-link { display: inline-block; color: #fcb69f; text-decoration: none; margin-bottom: 20px; font-size: 0.9rem; }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .result-item {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .result-item .icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .result-item .label { color: #888; font-size: 0.75rem; margin-bottom: 5px; }
+        .result-item .value { font-size: 0.95rem; font-weight: bold; }
+        
+        .result-item:nth-child(1) .value { color: #00d2ff; }
+        .result-item:nth-child(2) .value { color: #f5576c; }
+        .result-item:nth-child(3) .value { color: #ffd93d; }
+        .result-item:nth-child(4) .value { color: #6bcb77; }
+        .result-item:nth-child(5) .value { color: #c471ed; }
+        .result-item:nth-child(6) .value { color: #ff9a9e; }
+        
+        .btn {
+            background: linear-gradient(90deg, #ffecd2, #fcb69f);
+            border: none;
+            color: #333;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            transition: transform 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        
+        .tip {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header><h1>🎁 趣味综合测试</h1></header>
+    <div class="container">
+        <a href="/test/index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="card">
+            <div class="result-grid">
+                <div class="result-item">
+                    <div class="icon">🎭</div>
+                    <div class="label">MBTI人格</div>
+                    <div class="value" id="mbti">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🍀</div>
+                    <div class="label">幸运颜色</div>
+                    <div class="value" id="color">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🎲</div>
+                    <div class="label">幸运数字</div>
+                    <div class="value" id="number">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🍜</div>
+                    <div class="label">幸运食物</div>
+                    <div class="value" id="food">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="icon">🐾</div>
+                    <div class="label">动物人格</div>
+                    <div class="value" id="animal">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="icon">✨</div>
+                    <div class="label">超能力</div>
+                    <div class="value" id="power">-</div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="testAll()">开始综合测试</button>
+        
+        <div class="tip">💡 每天测试结果可能不同，不同日期测试会有不同发现！</div>
+    </div>
+    
+    <script>
+        const mbtiTypes = ["INFP", "INFJ", "INTP", "INTJ", "ISFP", "ISFJ", "ISTP", "ISTJ", "ENFP", "ENFJ", "ENTP", "ENTJ", "ESFP", "ESFJ", "ESTP", "ESTJ"];
+        const mbtiNames = ["调停者", "提倡者", "逻辑学家", "建筑师", "探险家", "守卫者", "鉴赏家", "物流师", "竞选者", "主人公", "辩论家", "指挥官", "表演者", "执政官", "企业家", "总经理"];
+        const colors = ["红色", "橙色", "黄色", "绿色", "青色", "蓝色", "紫色", "粉色", "白色", "黑色"];
+        const foods = ["火锅", "烧烤", "寿司", "披萨", "炸鸡", "拉面", "粤菜", "川菜", "日料", "泰餐"];
+        const animals = ["狐狸", "狼", "猫", "狗", "熊", "鹰", "豹", "猫头鹰", "兔子", "熊猫"];
+        const powers = ["读心术", "瞬间移动", "隐身", "预知未来", "力大无穷", "语言天才", "操控时间", "变形术", "召唤术", "治愈力"];
+        
+        function testAll() {
+            const seed = new Date().getDate();
+            
+            const mbtiIdx = seed % mbtiTypes.length;
+            document.getElementById('mbti').textContent = mbtiTypes[mbtiIdx] + " · " + mbtiNames[mbtiIdx];
+            
+            document.getElementById('color').textContent = colors[seed % colors.length];
+            document.getElementById('number').textContent = ((seed * 7) % 99) + 1;
+            document.getElementById('food').textContent = foods[seed % foods.length];
+            document.getElementById('animal').textContent = animals[seed % animals.length];
+            document.getElementById('power').textContent = powers[seed % powers.length];
+        }
+        
+        // 初始化
+        testAll();
+    </script>
+</body>
+</html>

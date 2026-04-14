@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="baidu-site-verification" content="codeva-B4A0c31M08" />
+    <title>一宅一句 | 专业风水咨询 - 家居风水布局·装修风水·财运事业·姻缘感情</title>
+    <meta name="description" content="一宅一句提供风水咨询、户型分析、装修布局、文章库与在线测试，先判断问题、再做低成本调整、最后按周复盘。">
+    <meta name="keywords" content="风水,风水咨询,家居风水,装修风水,风水布局,财运风水,姻缘风水,风水师,看风水,户型风水,办公室风水,店铺风水,择日,起名,风水法事">
+    <link rel="canonical" href="https://12zn.com/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://12zn.com/">
+    <link rel="alternate" hreflang="en-US" href="https://12zn.com/en/">
+    <link rel="alternate" hreflang="x-default" href="https://12zn.com/">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="一宅一句 | 专业风水咨询服务">
+    <meta property="og:description" content="10年经验资深风水师，13大类专业风水服务。科学风水、真实案例、5000+客户好评。">
+    <meta property="og:url" content="https://12zn.com/">
+    <meta property="og:site_name" content="一宅一句">
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@y5065236990506">
+    <meta name="twitter:title" content="一宅一句 | 专业风水咨询服务">
+    <meta name="twitter:description" content="10年经验资深风水师，13大类专业风水服务。科学风水、真实案例、5000+客户好评。">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta property="og:locale" content="zh_CN">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://12zn.com/#organization",
+          "name": "一宅一句",
+          "alternateName": "Yizhai Yiju",
+          "url": "https://12zn.com/",
+          "sameAs": ["https://x.com/y5065236990506"],
+          "contactPoint": [{
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": ["zh-CN", "en-US"],
+            "url": "https://12zn.com/services/zhenren.html"
+          }]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://12zn.com/#website",
+          "name": "一宅一句",
+          "alternateName": "Yizhai Yiju",
+          "url": "https://12zn.com/",
+          "publisher": {
+            "@id": "https://12zn.com/#organization"
+          },
+          "inLanguage": "zh-CN"
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://12zn.com/#service",
+          "inLanguage": "zh-CN",
+          "name": "一宅一句风水咨询",
+          "url": "https://12zn.com",
+          "description": "专业风水咨询服务，涵盖财运事业、姻缘感情、装修风水、户型分析等13大类服务",
+          "serviceType": "风水咨询",
+          "areaServed": "CN",
+          "availableLanguage": ["zh-CN", "en-US"],
+          "sameAs": ["https://x.com/y5065236990506"],
+          "contactPoint": [{
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": ["zh-CN", "en-US"],
+            "url": "https://12zn.com/services/zhenren.html"
+          }],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "5000"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "风水服务",
+            "itemListElement": [
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI免费风水咨询", "description": "AI助手快速解答基础风水问题"}, "price": "0", "priceCurrency": "CNY"},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI深度风水分析", "description": "详细解读+具体建议+化解方案"}, "price": "99", "priceCurrency": "CNY"},
+              {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "真人一对一咨询", "description": "资深风水师语音/视频沟通"}, "price": "999", "priceCurrency": "CNY"}
+            ]
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://12zn.com/#webpage",
+          "name": "一宅一句 | 专业风水咨询 - 家居风水布局·装修风水·财运事业·姻缘感情",
+          "url": "https://12zn.com/",
+          "inLanguage": "zh-CN",
+          "description": "一宅一句提供风水咨询、户型分析、装修布局、文章库与在线测试，先判断问题、再做低成本调整、最后按周复盘。",
+          "isPartOf": {
+            "@id": "https://12zn.com/#website"
+          },
+          "mainEntity": {
+            "@id": "https://12zn.com/#service"
+          }
+        }
+      ]
+    }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="css/shared.css?v=20260319">
+</head>
+<body>
+
+    <!-- 登录弹窗 -->
+    <div class="login-overlay" id="login-modal">
+        <div class="login-box">
+            <h3>用户登录</h3>
+            <input type="text" id="login-wechat" placeholder="请输入微信ID">
+            <button class="btn-login btn-login--primary" onclick="doLogin()" aria-label="登录或注册账号">登录 / 注册</button>
+            <button class="btn-login btn-login--ghost" onclick="document.getElementById('login-modal').classList.remove('active')" aria-label="取消登录">取消</button>
+            <p id="login-msg" style="margin-top:12px;font-size:0.82rem;color:var(--text-secondary);text-align:center;"></p>
+        </div>
+    </div>
+
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-brand">一宅一句</div>
+            <div class="topbar-nav">
+                <a href="#services">服务</a>
+                <a href="#tests">测试</a>
+                <a href="#articles">文章</a>
+                <a href="#pricing">报价</a>
+                <a href="#cases">案例</a>
+                <a href="#messages">留言</a>
+                <a href="/en/">EN</a>
+                <button class="topbar-cta" onclick="openModal('support')" aria-label="预约风水咨询服务">预约咨询</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="seal">一宅<br>一句</div>
+        <h1 class="hero-title">一宅一句｜专业风水咨询服务<br><span style="font-size:0.6em;">好风水，不是玄学，是见过的事</span></h1>
+        <p class="hero-claim">科学风水 · 真实案例 · 专业服务</p>
+        <p class="hero-desc">每一次咨询，都从一次真诚的对话开始。<br>支持全国远程咨询、海外华语用户咨询，按时区预约，按需可预约上门服务。</p>
+        <div class="hero-actions">
+            <button class="btn-hero btn-hero--primary" onclick="openModal('support')" aria-label="预约风水咨询服务">预约咨询</button>
+            <button class="btn-hero btn-hero--outline" onclick="document.getElementById('chat-float-btn').click()" aria-label="使用免费AI风水问答">免费AI问答</button>
+        </div>
+    </section>
+
+    <!-- 信任背书条 -->
+    <div class="trust-bar">
+        <div class="trust-inner">
+            <div class="trust-item">
+                <div class="trust-num">5000+</div>
+                <div class="trust-label">已服务客户</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-num">13</div>
+                <div class="trust-label">大类服务</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-num">10+</div>
+                <div class="trust-label">年从业经验</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-num">98%</div>
+                <div class="trust-label">客户好评率</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="method">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>先判断，再调整</h2>
+                <p>把风水问题拆成可以执行、可以复盘、可以验证的步骤</p>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">先定问题类型</div>
+                    <div class="process-desc">先分清入口、卧室、厨房、办公或命名问题，避免一上来就堆方案。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">先改低成本项</div>
+                    <div class="process-desc">优先处理动线、照明、收纳与缓冲区，先做影响大、返工少的动作。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">再进入深度咨询</div>
+                    <div class="process-desc">需要户型图、现场判断或长期跟踪时，再升级到真人咨询或深度分析。</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">按周复盘结果</div>
+                    <div class="process-desc">每周只改一个变量，记录睡眠、专注、消费与推进速度，判断调整是否有效。</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 服务项目 -->
+    <div class="section" id="services">
+        <div class="container">
+            <div class="section-head">
+                <h2>风水服务</h2>
+                <p>覆盖财运、事业、姻缘、房屋、择日、起名、商业、法事等13大类</p>
+            </div>
+            <div class="services" id="services-grid">
+                <a class="service-card service-card--featured" href="services/zhenren.html">
+                    <div class="card-icon">师</div>
+                    <div class="card-body">
+                        <div class="card-title">真人一对一咨询 ¥999</div>
+                        <div class="card-desc">直接说问题，老师给你定方案</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/huxing.html">
+                    <div class="card-icon">图</div>
+                    <div class="card-body">
+                        <div class="card-title">户型 / 阳宅分析</div>
+                        <div class="card-desc">发户型图，先找冲煞点和聚气位</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/caiyun.html">
+                    <div class="card-icon">财</div>
+                    <div class="card-body">
+                        <div class="card-title">财运事业咨询</div>
+                        <div class="card-desc">先看财路卡点，再定行动方向</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/yinyuan.html">
+                    <div class="card-icon">缘</div>
+                    <div class="card-body">
+                        <div class="card-title">姻缘感情咨询</div>
+                        <div class="card-desc">拆关系信号，判断下一步怎么走</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/zhuangxiu.html">
+                    <div class="card-icon">宅</div>
+                    <div class="card-body">
+                        <div class="card-title">装修风水咨询</div>
+                        <div class="card-desc">按预算先改动线、采光、门灶厕</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/qingfu.html">
+                    <div class="card-icon">符</div>
+                    <div class="card-body">
+                        <div class="card-title">请符 / 请物</div>
+                        <div class="card-desc">按需求选符物，不绕弯</div>
+                    </div>
+                </a>
+                <a class="service-card" href="services/fashi.html">
+                    <div class="card-icon">法</div>
+                    <div class="card-body">
+                        <div class="card-title">风水法事</div>
+                        <div class="card-desc">还阴债、补财库、超度、祈福一站处理</div>
+                    </div>
+                </a>
+                <!-- 以下为折叠区域 -->
+                <a class="service-card service-card--hidden" href="services/yinzhai.html">
+                    <div class="card-icon">坟</div>
+                    <div class="card-body">
+                        <div class="card-title">祖坟 / 阴宅选址</div>
+                        <div class="card-desc">先看地势和方位，再定选址</div>
+                    </div>
+                </a>
+                <a class="service-card service-card--hidden" href="services/zeri.html">
+                    <div class="card-icon">日</div>
+                    <div class="card-body">
+                        <div class="card-title">择日选时</div>
+                        <div class="card-desc">搬家、开业、婚嫁，直接给可用日期</div>
+                    </div>
+                </a>
+                <a class="service-card service-card--hidden" href="services/qiming.html">
+                    <div class="card-icon">名</div>
+                    <div class="card-body">
+                        <div class="card-title">起名改名</div>
+                        <div class="card-desc">宝宝、成人、公司、品牌都能起</div>
+                    </div>
+                </a>
+                <a class="service-card service-card--hidden" href="services/liunian.html">
+                    <div class="card-icon">运</div>
+                    <div class="card-body">
+                        <div class="card-title">流年运势</div>
+                        <div class="card-desc">按年/月看起伏，提前避坑</div>
+                    </div>
+                </a>
+                <a class="service-card service-card--hidden" href="services/shangye.html">
+                    <div class="card-icon">商</div>
+                    <div class="card-body">
+                        <div class="card-title">商业风水</div>
+                        <div class="card-desc">办公室、店铺、公司布局直接优化</div>
+                    </div>
+                </a>
+                <a class="service-card service-card--hidden" href="services/kaiguang.html">
+                    <div class="card-icon">宝</div>
+                    <div class="card-body">
+                        <div class="card-title">开光法物</div>
+                        <div class="card-desc">水晶、貔貅、罗盘、手链按需选</div>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align:center;margin-top:20px;">
+                <button class="btn-expand-services" id="btn-expand-services" onclick="toggleServices()" aria-label="展开查看所有风水服务项目">
+                    展开更多服务 <span class="expand-arrow">▼</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 趣味测试 -->
+    <div class="section section--alt" id="tests">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>趣味测试</h2>
+                <p>先判断今天适不适合行动，再做下一步决定</p>
+            </div>
+            <div class="test-grid" id="test-grid">
+                <a class="test-card-item" href="services/test-yunshi.html">
+                    <div class="test-card-icon">🔮</div>
+                    <div class="test-card-title">今日运势速测</div>
+                    <div class="test-card-desc">先看今天适不适合行动，再看财感事业</div>
+                </a>
+                <a class="test-card-item" href="services/test-wuxing.html">
+                    <div class="test-card-icon">🌊</div>
+                    <div class="test-card-title">五行属性测试</div>
+                    <div class="test-card-desc">8道趣味题，揭秘你的五行性格</div>
+                </a>
+                <a class="test-card-item" href="services/test-fengshui.html">
+                    <div class="test-card-icon">🏠</div>
+                    <div class="test-card-title">家居风水评分</div>
+                    <div class="test-card-desc">6道题，给你家风水打个分</div>
+                </a>
+                <a class="test-card-item" href="services/test-taohua.html">
+                    <div class="test-card-icon">🌸</div>
+                    <div class="test-card-title">桃花运测试</div>
+                    <div class="test-card-desc">测测你的桃花指数</div>
+                </a>
+            </div>
+            <div style="text-align:center;margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                <a href="test/" class="btn-expand-services" style="text-decoration:none;">
+                    查看全部测试 →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="section" id="articles">
+        <div class="container">
+            <div class="section-head">
+                <h2>最新风水知识</h2>
+                <p>按“成交决策-执行落地-关系稳定”排序，先看最能直接改善结果的实操文章</p>
+            </div>
+            <div class="services">
+                <a class="service-card" href="blog/mendian-zhuanhua-lujing-youhua.html">
+                    <div class="card-icon">转</div>
+                    <div class="card-body">
+                        <div class="card-title">客流有了没成交？先修你的转化路径</div>
+                        <div class="card-desc">经营实操：先补漏斗，再加流量，避免忙而不赚。</div>
+                    </div>
+                </a>
+                <a class="service-card" href="blog/ni-bushi-yourou-guaduan-shi-juece-menkan-shecuo-le.html">
+                    <div class="card-icon">决</div>
+                    <div class="card-body">
+                        <div class="card-title">你不是优柔寡断，是决策门槛设错了</div>
+                        <div class="card-desc">决策实操：先分层门槛，再做选择，减少纠结和拖延。</div>
+                    </div>
+                </a>
+                <a class="service-card" href="blog/jiaban-budengyu-gaoxiao-fankui-lianlu-duanle.html">
+                    <div class="card-icon">链</div>
+                    <div class="card-body">
+                        <div class="card-title">加班不等于高效，是你的反馈链路断了</div>
+                        <div class="card-desc">工作效率实操：先修反馈，再谈拼命，用闭环替代焦虑。</div>
+                    </div>
+                </a>
+                <a class="service-card" href="blog/ni-bushi-zhixingcha-shi-huanchongtai-taiduo.html">
+                    <div class="card-icon">执</div>
+                    <div class="card-body">
+                        <div class="card-title">你不是执行差，是你的“缓冲台”太多</div>
+                        <div class="card-desc">执行系统实操：先减缓冲动作，再谈持续推进。</div>
+                    </div>
+                </a>
+                <a class="service-card" href="blog/jiating-neihao-bushi-xingge-wenti-shi-fengong-mohu.html">
+                    <div class="card-icon">界</div>
+                    <div class="card-body">
+                        <div class="card-title">家庭内耗不是性格问题，是分工边界太模糊</div>
+                        <div class="card-desc">家庭协作实操：边界清晰，争执和返工自然下降。</div>
+                    </div>
+                </a>
+                <a class="service-card" href="blog/guanxi-xiufu-bie-xian-jieshi-xian-zhongjian-anquan-goutong-duan.html">
+                    <div class="card-icon">修</div>
+                    <div class="card-body">
+                        <div class="card-title">关系修复别先解释，先重建安全沟通段</div>
+                        <div class="card-desc">关系修复实操：先稳住沟通节奏，再处理争议议题。</div>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align:center;margin-top:20px;">
+                <a href="blog/" class="btn-expand-services" style="text-decoration:none;">查看全部文章 →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 咨询流程 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>咨询流程</h2>
+                <p>简单四步，开始您的咨询之旅</p>
+            </div>
+            <div class="process">
+                <div class="process-step">
+                    <div class="process-num">一</div>
+                    <div class="process-title">描述问题</div>
+                    <div class="process-desc">选择服务类型<br>填写您的困惑</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">二</div>
+                    <div class="process-title">AI初步分析</div>
+                    <div class="process-desc">AI助手快速给出<br>基础方向建议</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">三</div>
+                    <div class="process-title">深度沟通</div>
+                    <div class="process-desc">添加微信<br>一对一详细了解</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-num">四</div>
+                    <div class="process-title">定制方案</div>
+                    <div class="process-desc">出具完整报告<br>持续跟进指导</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 服务报价 -->
+    <div class="section" id="pricing">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>服务报价</h2>
+                <p>三种方式，按需选择</p>
+            </div>
+            <div class="pricing">
+                <div class="price-card">
+                    <h3>AI免费咨询</h3>
+                    <p class="desc">右下角AI助手<br>快速解答基础问题</p>
+                    <div class="price-amount">免费</div>
+                    <button class="btn-price btn-price--outline" onclick="document.getElementById('chat-float-btn').click()" aria-label="开始免费AI风水咨询">开始咨询</button>
+                </div>
+                <div class="price-card price-card--hot">
+                    <div class="price-badge">推荐</div>
+                    <h3>AI深度分析体验包</h3>
+                    <p class="desc">1份深度报告 + 48小时内3次追问<br>仅限AI分析，不含真人一对一咨询</p>
+                    <div class="price-amount">¥99</div>
+                    <button class="btn-price btn-price--primary" onclick="openPayModal('ai_deep')" aria-label="立即支付¥99获取AI深度分析报告">立即支付 ¥99</button>
+                </div>
+                <div class="price-card">
+                    <h3>真人1v1服务</h3>
+                    <p class="desc">资深风水师一对一<br>语音/视频详细沟通</p>
+                    <div class="price-amount">¥999</div>
+                    <button class="btn-price btn-price--outline" onclick="openModal('support')" aria-label="预约真人一对一风水咨询服务">预约咨询</button>
+                </div>
+            </div>
+            <div class="addons">
+                <div class="addon-card">
+                    <h4>户型分析</h4>
+                    <p class="desc">发送户型图<br>详细风水分析</p>
+                    <div class="addon-price">¥999</div>
+                    <a class="btn-addon" href="services/huxing.html">了解详情</a>
+                </div>
+                <div class="addon-card">
+                    <h4>风水法事</h4>
+                    <p class="desc">还阴债 / 补财库<br>超度 / 祈福转运</p>
+                    <div class="addon-price">请询价</div>
+                    <a class="btn-addon" href="services/fashi.html">了解详情</a>
+                </div>
+                <div class="addon-card">
+                    <h4>请符 / 请物</h4>
+                    <p class="desc">太岁符 / 招财符<br>桃花符 / 护身符</p>
+                    <div class="addon-price">¥499起</div>
+                    <a class="btn-addon" href="services/qingfu.html">了解详情</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 购买说明与常见问题 -->
+    <div class="section" id="pricing-policy">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h2>购买说明</h2>
+                <p>AI深度分析体验包（¥99）权益说明</p>
+            </div>
+            <div style="background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:16px;line-height:1.9;color:var(--text-secondary);font-size:0.85rem;">
+                <p>1. 商品名称：AI深度分析体验包（¥99）。</p>
+                <p>2. 权益内容：1份深度报告 + 48小时内3次追问。</p>
+                <p>3. 生效时间：支付成功后立即生效。</p>
+                <p>4. 服务边界：本商品仅提供AI分析结果，不包含真人一对一咨询。</p>
+                <p>5. 有效规则：超过48小时或超出追问次数后，需重新购买或升级套餐。</p>
+                <p>6. 退款说明：虚拟内容服务解锁并开始使用后，不支持无理由退款；重复扣款或系统异常可联系客服处理。</p>
+                <p>7. 风险提示：分析结果仅供参考，不构成医疗、法律、投资等专业建议。</p>
+            </div>
+            <div style="margin-top:14px;background:#faf8f2;border:1px solid var(--border-soft);border-radius:12px;padding:16px;line-height:1.9;color:var(--text-secondary);font-size:0.85rem;">
+                <h4 style="margin:0 0 8px;color:var(--text);font-size:1rem;">常见问题</h4>
+                <p><strong>Q1：99 是按次收费吗？</strong><br>不是。99 是体验包，包含固定权益（1份深度报告 + 48小时内3次追问）。</p>
+                <p><strong>Q2：99 是终身会员吗？</strong><br>不是。该商品是单次解锁权益包，不是终身订阅。</p>
+                <p><strong>Q3：和真人咨询有什么区别？</strong><br>99 为AI自动分析；真人咨询是单独收费服务（999/1999/31999档）。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 做法事现场 -->
+    <div class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>做法事现场</h2>
+                <p>真实记录每一次祈福</p>
+            </div>
+            <div class="video-grid">
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-1.mp4" type="video/mp4"></video></div>
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-2.mp4" type="video/mp4"></video></div>
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-3.mp4" type="video/mp4"></video></div>
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-4.mp4" type="video/mp4"></video></div>
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-5.mp4" type="video/mp4"></video></div>
+                <div class="video-item"><video controls preload="none" loading="lazy"><source src="videos/ritual-6.mp4" type="video/mp4"></video></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 客户反馈 -->
+    <div class="section" id="cases">
+        <div class="container">
+            <div class="section-head">
+                <h2>客户真实反馈</h2>
+                <p>好口碑值得信赖</p>
+            </div>
+            <div class="cases">
+                <figure class="case-card">
+                    <picture>
+                        <source srcset="images/case-1.webp" type="image/webp">
+                        <img src="images/case-1.jpg" alt="财运事业咨询客户反馈" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption>财运事业咨询</figcaption>
+                </figure>
+                <figure class="case-card">
+                    <picture>
+                        <source srcset="images/case-2.webp" type="image/webp">
+                        <img src="images/case-2.jpg" alt="阳宅风水调理客户反馈" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption>阳宅风水调理</figcaption>
+                </figure>
+                <figure class="case-card">
+                    <picture>
+                        <source srcset="images/case-3.webp" type="image/webp">
+                        <img src="images/case-3.jpg" alt="姻缘感情咨询客户反馈" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption>姻缘感情咨询</figcaption>
+                </figure>
+                <figure class="case-card">
+                    <picture>
+                        <source srcset="images/case-4.webp" type="image/webp">
+                        <img src="images/case-4.jpg" alt="风水法事客户反馈" loading="lazy" decoding="async">
+                    </picture>
+                    <figcaption>风水法事</figcaption>
+                </figure>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 留言板 -->
+    <div class="section section--alt" id="messages">
+        <div class="container">
+            <div class="section-head">
+                <h2>客户留言板</h2>
+                <p>分享您的体验，帮助更多人了解真实的风水服务</p>
+            </div>
+            <div class="message-board">
+                <div class="message-form">
+                    <h3>发表留言</h3>
+                    <div class="form-row">
+                        <input type="text" id="msg-author" placeholder="您的称呼" maxlength="50">
+                        <select id="msg-service-type">
+                            <option value="">选择服务类型（可选）</option>
+                            <option value="财运事业">财运事业</option>
+                            <option value="姻缘感情">姻缘感情</option>
+                            <option value="装修风水">装修风水</option>
+                            <option value="户型分析">户型分析</option>
+                            <option value="请符请物">请符请物</option>
+                            <option value="风水法事">风水法事</option>
+                            <option value="祖坟阴宅">祖坟阴宅</option>
+                            <option value="择日选时">择日选时</option>
+                            <option value="起名改名">起名改名</option>
+                            <option value="流年运势">流年运势</option>
+                            <option value="商业风水">商业风水</option>
+                            <option value="开光法物">开光法物</option>
+                            <option value="真人咨询">真人咨询</option>
+                        </select>
+                    </div>
+                    <textarea id="msg-content" placeholder="分享您的体验或感受...（最多500字）" maxlength="500" rows="4"></textarea>
+                    <button class="btn" id="btn-submit-message" onclick="submitMessage()" aria-label="提交您的留言">发表留言</button>
+                </div>
+                <div class="message-list" id="message-list" data-max-items="4">
+                    <div style="text-align:center;padding:24px 0;color:var(--text-light);font-size:.88rem;">留言加载中...</div>
+                </div>
+                <div style="text-align:center;margin-top:16px;"><a href="messages/" style="display:inline-block;padding:10px 24px;background:var(--gold);color:#fff;border-radius:8px;text-decoration:none;font-size:.95rem;" aria-label="查看所有客户留言">查看全部留言 →</a></div>
+                <button class="btn-load-more" id="btn-load-more-messages" style="display:none;" onclick="loadMessages(true)" aria-label="加载更多客户留言">加载更多</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 首页 FAQ（SEO 意图承接） -->
+    <div class="section" id="home-faq">
+        <div class="container">
+            <div class="section-head">
+                <h2>风水常见问题</h2>
+                <p>先做低成本高影响动作，再决定是否进入深度咨询。</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">大门朝向不理想，会直接导致财运停滞吗？</div>
+                    <div class="faq-a"><p>不一定。朝向只是一个条件，通常更关键的是入户动线、采光和收纳是否让空间“进得来、留得住”。建议先做入口清理与照明优化，再观察 7-14 天变化。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">预算有限时，风水调整先做哪一步？</div>
+                    <div class="faq-a"><p>优先处理影响最大的 1-2 个问题：入户区杂乱、卧室睡眠区不稳、厨房门灶直冲。先把这些高影响项稳定下来，通常比一次大改更有效。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">租房也值得做风水优化吗？</div>
+                    <div class="faq-a"><p>值得。租房更适合做可逆、低成本的动作，例如动线收口、照明分层、软隔断和收纳优化，执行快、试错成本低。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">做完调整后多久复盘一次最合适？</div>
+                    <div class="faq-a"><p>建议每 7-14 天复盘一次，记录睡眠、专注度、情绪和事务推进效率。连续复盘 4 周后再决定是否升级方案。</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 微信引导区（页内，非弹窗） -->
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>每一次咨询，从一次真诚的对话开始</h2>
+            <p class="wechat-sub">扫码添加微信，获得专属风水分析报告<br>新客赠送《居家风水避坑指南》电子版</p>
+            <img class="wechat-qr" src="images/wechat-qr.jpg" alt="微信二维码" loading="lazy" decoding="async">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+            <p class="wechat-note">尊重隐私，绝不打扰</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <span class="sep">·</span>
+            <span id="chat-count-display" style="color:var(--text-light);">今日留言: -</span>
+        
+            <span class="sep">·</span>
+            <a href="privacy.html">隐私政策</a>
+            <span class="sep">·</span>
+            <a href="terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <script src="js/shared.js?v=20260330"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+  "inLanguage": "zh-CN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "大门朝向不理想，会直接导致财运停滞吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不一定。朝向只是一个条件，通常更关键的是入户动线、采光和收纳是否让空间进得来、留得住。建议先做入口清理与照明优化，再观察7-14天变化。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "预算有限时，风水调整先做哪一步？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "优先处理影响最大的1-2个问题：入户区杂乱、卧室睡眠区不稳、厨房门灶直冲。先把这些高影响项稳定下来，通常比一次大改更有效。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "租房也值得做风水优化吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "值得。租房更适合做可逆、低成本的动作，例如动线收口、照明分层、软隔断和收纳优化，执行快、试错成本低。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "做完调整后多久复盘一次最合适？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建议每7-14天复盘一次，记录睡眠、专注度、情绪和事务推进效率。连续复盘4周后再决定是否升级方案。"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "一宅一句客户评价",
+      "description": "真实客户反馈，验证风水调整效果",
+      "itemListElement": [
+        {
+          "@type": "Review",
+          "position": 1,
+          "itemReviewed": {
+            "@type": "ProfessionalService",
+            "name": "一宅一句风水咨询",
+            "url": "https://12zn.com/"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "张先生"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-03-15",
+          "reviewBody": "张老师非常专业，通过户型图分析就找出了我们家的问题所在。按照他的建议调整了动线和照明，一个月后睡眠质量明显改善，家人的关系也更和谐了。强烈推荐！"
+        },
+        {
+          "@type": "Review",
+          "position": 2,
+          "itemReviewed": {
+            "@type": "ProfessionalService",
+            "name": "一宅一句风水咨询",
+            "url": "https://12zn.com/"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "李女士"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-03-10",
+          "reviewBody": "装修前咨询了风水问题，张师傅帮我避开了好几个硬伤。现在住进来半年了，各方面都很顺。特别是厨房和卫生间的布局调整，效果立竿见影。"
+        },
+        {
+          "@type": "Review",
+          "position": 3,
+          "itemReviewed": {
+            "@type": "ProfessionalService",
+            "name": "一宅一句风水咨询",
+            "url": "https://12zn.com/"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "王先生"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-03-05",
+          "reviewBody": "公司搬新办公室后团队协作效率下降，张老师远程分析了办公桌布局，调整后3个月内跨部门沟通效率提升明显，员工满意度也上来了。"
+        },
+        {
+          "@type": "Review",
+          "position": 4,
+          "itemReviewed": {
+            "@type": "ProfessionalService",
+            "name": "一宅一句风水咨询",
+            "url": "https://12zn.com/"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "陈女士"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-02-28",
+          "reviewBody": "和老公经常吵架，张大师看了卧室布局后给了几个调整建议。改了床头方向和镜子位置，现在吵架少多了，睡眠也好了。真的很神奇。"
+        },
+        {
+          "@type": "Review",
+          "position": 5,
+          "itemReviewed": {
+            "@type": "ProfessionalService",
+            "name": "一宅一句风水咨询",
+            "url": "https://12zn.com/"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "赵先生"
+          },
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "datePublished": "2026-02-20",
+          "reviewBody": "店铺生意一直不温不火，张老师来看了收银台位置和门口动线，调整后客流量明显增加了。按周复盘的方法很实用，能看到实实在在的变化。"
+        }
+      ]
+    }
+    </script>
+
+    <script>
+    // 服务卡片折叠/展开
+    function toggleServices(){
+        const grid = document.getElementById('services-grid');
+        const btn = document.getElementById('btn-expand-services');
+        const expanded = grid.classList.toggle('expanded');
+        btn.classList.toggle('expanded', expanded);
+        btn.innerHTML = expanded
+            ? '收起服务 <span class="expand-arrow">▼</span>'
+            : '展开更多服务 <span class="expand-arrow">▼</span>';
+    }
+
+    const chatCountEl = document.getElementById('chat-count-display');
+    if(chatCountEl){
+        fetch('/api/stats').then(r=>r.json()).then(d=>{
+            chatCountEl.textContent='今日留言: '+d.count+'条';
+        }).catch(()=>{});
+    }
+
+    // 弹窗点击外部关闭
+    document.querySelectorAll('.modal').forEach(modal=>{
+        modal.addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
+    });
+    </script>
+
+    <!-- ========== 弹窗区域 ========== -->
+
+    <div class="modal" id="modal-floorplan">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('floorplan')">×</span>
+            <h2>户型 / 阳宅分析</h2>
+            <p class="modal-desc">发送户型图，详细分析风水格局</p>
+            <div class="upload-area" onclick="document.getElementById('floorplan-input').click()">
+                <p>点击上传户型图</p>
+                <p class="upload-hint">支持 JPG、PNG</p>
+                <input type="file" id="floorplan-input" accept="image/*" style="display:none" onchange="uploadFloorplan(this)">
+            </div>
+            <img id="floorplan-preview" alt="户型图预览" style="max-width:100%;margin:10px 0;border-radius:8px;display:none">
+            <button class="btn" onclick="analyzeFloorplan()" aria-label="开始AI风水分析">开始AI分析</button>
+            <div class="result" id="floorplan-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-color">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('color')">×</span>
+            <h2>财运事业咨询</h2>
+            <p class="modal-desc">财运提升 / 事业方向 / 职业规划</p>
+            <div class="form-group"><label>您的问题类型</label>
+                <select id="color-room">
+                    <option value="财运提升">财运提升</option><option value="事业方向">事业方向</option>
+                    <option value="职业规划">职业规划</option><option value="创业咨询">创业咨询</option>
+                    <option value="投资理财">投资理财</option>
+                </select>
+            </div>
+            <div class="form-group"><label>详细描述您的情况</label>
+                <textarea id="color-style" rows="4" placeholder="请描述：从事行业/目前困境/具体需求..."></textarea>
+            </div>
+            <button class="btn" onclick="getColor()" aria-label="提交色彩搭配咨询">提交咨询</button>
+            <div class="result" id="color-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-budget">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('budget')">×</span>
+            <h2>姻缘感情咨询</h2>
+            <p class="modal-desc">单身找对象 / 感情问题 / 婚姻调理</p>
+            <div class="form-group"><label>您的问题类型</label>
+                <select id="budget-area">
+                    <option value="单身找对象">单身找对象</option><option value="相亲指导">相亲指导</option>
+                    <option value="感情问题">感情问题</option><option value="婚姻调理">婚姻调理</option>
+                    <option value="分手挽回">分手挽回</option>
+                </select>
+            </div>
+            <div class="form-group"><label>您的性别</label>
+                <select id="budget-room"><option value="男">男</option><option value="女">女</option></select>
+            </div>
+            <div class="form-group"><label>详细描述您的情况</label>
+                <textarea id="budget-style" rows="4" placeholder="请描述：年龄/单身原因/感情经历/具体需求..."></textarea>
+            </div>
+            <button class="btn" onclick="getBudget()" aria-label="提交预算咨询">提交咨询</button>
+            <div class="result" id="budget-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-storage">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('storage')">×</span>
+            <h2>祖坟 / 阴宅选址</h2>
+            <p class="modal-desc">祖坟迁移 / 阴宅选址 / 墓地风水</p>
+            <div class="form-group"><label>您的问题类型</label>
+                <select id="storage-room">
+                    <option value="祖坟迁移">祖坟迁移</option><option value="阴宅选址">阴宅选址</option>
+                    <option value="墓地风水">墓地风水</option><option value="迁坟吉日">迁坟吉日</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="form-group"><label>详细描述您的情况</label>
+                <textarea id="storage-family" rows="4" placeholder="请描述：现有祖坟位置/迁移原因/具体需求..."></textarea>
+            </div>
+            <button class="btn" onclick="getStorage()">提交咨询</button>
+            <div class="result" id="storage-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-style">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('style')">×</span>
+            <h2>风水法事</h2>
+            <p class="modal-desc">还阴债 / 补财库 / 超度 / 祈福转运</p>
+            <div class="form-group"><label>法事类型</label>
+                <select id="style-room">
+                    <option value="还阴债">还阴债</option><option value="补财库">补财库</option>
+                    <option value="超度">超度（堕胎/宠物/祖先）</option><option value="祈福转运">祈福转运</option>
+                    <option value="化太岁">化太岁</option><option value="催桃花">催桃花/姻缘</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            <div class="form-group"><label>详细描述您的情况</label>
+                <textarea id="style-desc" rows="4" placeholder="请描述：法事原因/具体需求/期望效果..."></textarea>
+            </div>
+            <button class="btn" onclick="submitStyle()">提交咨询</button>
+            <div class="result" id="style-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-light">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('light')">×</span>
+            <h2>装修风水咨询</h2>
+            <p class="modal-desc">装修布局 / 颜色搭配 / 门灶厕设计</p>
+            <div class="form-group"><label>装修阶段</label>
+                <select id="light-room">
+                    <option value="规划设计">规划设计阶段</option><option value="施工中">施工中</option>
+                    <option value="已入住">已入住想调整</option><option value="准备装修">准备装修</option>
+                </select>
+            </div>
+            <div class="form-group"><label>您最关心的问题</label>
+                <select id="light-orientation">
+                    <option value="整体布局">整体布局规划</option><option value="颜色搭配">颜色搭配</option>
+                    <option value="门的位置">门的位置/朝向</option><option value="灶台位置">灶台/厨房位置</option>
+                    <option value="卫生间">卫生间布局</option><option value="玄关">玄关设计</option>
+                    <option value="其他">其他问题</option>
+                </select>
+            </div>
+            <div class="form-group"><label>详细描述您的需求</label>
+                <textarea id="light-description" rows="4" placeholder="请描述：房屋户型/面积/目前遇到的困惑..."></textarea>
+            </div>
+            <button class="btn" onclick="getLight()">提交咨询</button>
+            <div class="result" id="light-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-talisman">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('talisman')">×</span>
+            <h2>请符 / 请物</h2>
+            <p class="modal-desc">太岁符 / 招财符 / 桃花符 / 护身符</p>
+            <div class="form-group"><label>想请什么符？</label>
+                <select id="talisman-type">
+                    <option value="太岁符">太岁符（犯太岁用）</option><option value="招财符">招财符（财运提升）</option>
+                    <option value="财神符">财神符（供奉财神）</option><option value="桃花符">桃花符（姻缘爱情）</option>
+                    <option value="和合符">和合符（夫妻和合）</option><option value="护身符">护身符（平安健康）</option>
+                    <option value="文昌符">文昌符（学业事业）</option><option value="辟邪符">辟邪符（镇宅驱邪）</option>
+                    <option value="安门符">安门符（安门安宅）</option><option value="车平安符">车平安符（行车平安）</option>
+                    <option value="其他">其他符</option>
+                </select>
+            </div>
+            <div class="form-group"><label>您的姓名</label><input type="text" id="talisman-name" placeholder="请输入姓名"></div>
+            <div class="form-group"><label>出生年月（用于定制）</label><input type="text" id="talisman-birth" placeholder="如：1990年5月"></div>
+            <div class="form-group"><label>微信号</label><input type="text" id="talisman-wechat" placeholder="请输入微信号"></div>
+            <button class="btn" onclick="submitTalisman()">提交请符</button>
+            <div class="result" id="talisman-result"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-support">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('support')">×</span>
+            <h2>真人一对一咨询</h2>
+            <p class="modal-desc">任何风水问题，资深风水师解答</p>
+            <div class="form-group"><label>您的姓名</label><input type="text" id="support-name" placeholder="请输入姓名"></div>
+            <div class="form-group"><label>微信号（方便联系）</label><input type="text" id="support-wechat" placeholder="请输入微信号"></div>
+            <div class="form-group"><label>咨询类型</label>
+                <select id="support-type">
+                    <option value="财运事业">财运事业</option><option value="姻缘感情">姻缘感情</option>
+                    <option value="户型诊断">户型诊断（现有房屋）</option><option value="装修咨询">装修风水咨询</option>
+                    <option value="选址评估">选址/买房评估</option><option value="祖坟阴宅">祖坟/阴宅</option>
+                    <option value="风水法事">风水法事</option><option value="择日选时">择日选时</option>
+                    <option value="起名改名">起名改名</option><option value="流年运势">流年运势</option>
+                    <option value="商业风水">商业风水</option><option value="开光法物">开光法物</option>
+                    <option value="其他">其他问题</option>
+                </select>
+            </div>
+            <div class="form-group"><label>简要描述问题</label>
+                <textarea id="support-desc" rows="3" placeholder="请简要描述您的风水问题..."></textarea>
+            </div>
+            <button class="btn" onclick="submitSupport()">提交咨询</button>
+            <div class="result" id="support-result"></div>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p style="color:var(--text-secondary);font-size:0.88rem;">分析中，请稍候...</p>
+    </div>
+
+    <!-- 微信弹窗（点击触发的） -->
+    <div class="lead-popup" id="lead-popup">
+        <div class="lead-box">
+            <h3>获取完整风水报告</h3>
+            <p class="lead-hint">扫码添加微信，领取专属分析</p>
+            <img src="images/wechat-qr.jpg" alt="微信二维码" loading="lazy" decoding="async">
+            <p class="qr-hint">长按识别二维码 · 添加微信</p>
+            <div class="lead-close" onclick="document.getElementById('lead-popup').classList.remove('active')">暂不需要</div>
+        </div>
+    </div>
+
+    <!-- 支付宝支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.84rem;line-height:1.7;margin:0 0 6px;">支付后立即解锁：<strong>1份深度报告 + 48小时内3次追问</strong></p>
+                <p style="color:var(--text-secondary);font-size:0.8rem;line-height:1.7;margin:0 0 12px;">本服务为AI生成内容，不包含真人咨询；为单次解锁权益包，非终身会员。</p>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" alt="支付宝支付二维码" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+                <button class="btn" onclick="checkPayStatus()" style="margin-top:14px;">我已支付</button>
+                <p style="margin-top:10px;"><a href="#" onclick="backToProducts();return false;" style="color:var(--text-secondary);font-size:0.82rem;">← 返回选择</a></p>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <div style="font-size:3rem;margin:20px 0;">✅</div>
+                <h2 style="font-size:1.2rem;color:var(--bamboo);">支付成功！</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-top:10px;" id="pay-success-msg"></p>
+                <button class="btn" onclick="closePayModal()" style="margin-top:18px;">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 业务逻辑 ========== -->
+    <script>
+        let floorplanFile=null;
+
+        function uploadFloorplan(input){
+            floorplanFile=input.files[0];
+            if(floorplanFile){
+                const reader=new FileReader();
+                reader.onload=function(e){
+                    document.getElementById('floorplan-preview').src=e.target.result;
+                    document.getElementById('floorplan-preview').style.display='block';
+                };
+                reader.readAsDataURL(floorplanFile);
+            }
+        }
+
+        function analyzeFloorplan(){
+            if(!floorplanFile)return alert('请先上传户型图');
+            const resultDiv=document.getElementById('floorplan-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'户型风水分析',message:'请分析这个户型图的风水，给出专业建议'})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('','户型风水分析报告',data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML('户型风水分析');});
+        }
+        function getColor(){
+            const type=document.getElementById('color-room').value;const desc=document.getElementById('color-style').value;
+            const resultDiv=document.getElementById('color-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
+        }
+        function getBudget(){
+            const type=document.getElementById('budget-area').value;const desc=document.getElementById('budget-style').value;
+            const resultDiv=document.getElementById('budget-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
+        }
+        function getStorage(){
+            const type=document.getElementById('storage-room').value;const desc=document.getElementById('storage-family').value;
+            const resultDiv=document.getElementById('storage-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
+        }
+        function submitStyle(){
+            const type=document.getElementById('style-room').value;const desc=document.getElementById('style-desc').value;
+            const resultDiv=document.getElementById('style-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:type,message:desc})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',type,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML(type);});
+        }
+        function getLight(){
+            const stage=document.getElementById('light-room').value;const concern=document.getElementById('light-orientation').value;
+            const desc=document.getElementById('light-description').value;
+            const resultDiv=document.getElementById('light-result');showLoadingInResult(resultDiv);
+            fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:concern+'(装修风水)',message:desc||stage})})
+            .then(r=>r.json()).then(data=>{resultDiv.innerHTML=buildResultHTML('',concern,data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈');})
+            .catch(()=>{resultDiv.innerHTML=buildErrorHTML(concern);});
+        }
+
+        function submitTalisman(){
+            const type=document.getElementById('talisman-type').value;
+            const name=document.getElementById('talisman-name').value;
+            const birth=document.getElementById('talisman-birth').value;
+            const wechat=document.getElementById('talisman-wechat').value;
+            if(!name||!wechat)return alert('请填写姓名和微信');
+            showLoading();
+            fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:wechat,type:'请符请物 - '+type,message:'出生: '+birth,source:'请符请物'})})
+            .then(r=>r.json()).then(data=>{
+                hideLoading();
+                if(data.success){
+                    showResult('talisman-result','<h4>✅ 请符已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">符咒需要根据您的信息定制，我们将在24小时内通过微信与您确认详情。</p>');
+                    document.getElementById('talisman-name').value='';document.getElementById('talisman-birth').value='';document.getElementById('talisman-wechat').value='';
+                } else {
+                    showResult('talisman-result','<h4>提交失败</h4><p style="color:var(--vermilion);font-size:0.85rem;">'+( data.error||'请稍后重试')+'</p>');
+                }
+            }).catch(()=>{
+                hideLoading();
+                showResult('talisman-result','<h4>网络错误</h4><p style="color:var(--vermilion);font-size:0.85rem;">请检查网络后重试</p>');
+            });
+        }
+        function submitSupport(){
+            const name=document.getElementById('support-name').value;
+            const wechat=document.getElementById('support-wechat').value;
+            const type=document.getElementById('support-type').value;
+            const desc=document.getElementById('support-desc').value;
+            if(!name||!wechat||!desc)return alert('请填写完整信息');
+            showLoading();
+            fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:wechat,type:type,message:desc,source:'预约咨询'})})
+            .then(r=>r.json()).then(data=>{
+                hideLoading();
+                if(data.success){
+                    showResult('support-result','<h4>✅ 咨询已提交</h4><p style="color:var(--text-secondary);font-size:0.85rem;margin-top:10px;">感谢您的信任！我们将在24小时内通过微信与您联系。</p>');
+                    document.getElementById('support-name').value='';document.getElementById('support-wechat').value='';document.getElementById('support-desc').value='';
+                } else {
+                    showResult('support-result','<h4>提交失败</h4><p style="color:var(--vermilion);font-size:0.85rem;">'+(data.error||'请稍后重试')+'</p>');
+                }
+            }).catch(()=>{
+                hideLoading();
+                showResult('support-result','<h4>网络错误</h4><p style="color:var(--vermilion);font-size:0.85rem;">请检查网络后重试</p>');
+            });
+        }
+    </script>
+
+    <!-- 悬浮按钮 -->
+    <button class="fab-chat" id="chat-float-btn" onclick="toggleAIChatWidget()">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </button>
+    <div class="fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+    <!-- AI聊天窗口 -->
+    <div class="chat-widget" id="ai-chat-widget">
+        <div class="chat-container">
+            <div class="chat-head">
+                <span class="chat-head-title">一宅一句 · AI风水助手</span>
+                <span class="chat-head-close" onclick="toggleAIChatWidget()">✕</span>
+            </div>
+            <div class="chat-body" id="chat-messages-widget">
+                <div class="chat-msg bot">您好，我是「一宅一句」AI风水助手。<br>新用户可<strong>免费3次</strong>提问。解锁体验包（¥99）：1份深度报告 + 48小时内3次追问。</div>
+                <div class="chat-quick">
+                    <button onclick="quickAsk('我想算算财运')">财运</button>
+                    <button onclick="quickAsk('我想看姻缘')">姻缘</button>
+                    <button onclick="quickAsk('帮我看看房子')">房子</button>
+                    <button onclick="quickAsk('犯太岁怎么办')">太岁</button>
+                </div>
+            </div>
+            <div class="chat-foot">
+                <input id="chat-input" type="text" placeholder="输入您的风水问题..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+                <button onclick="sendChatMessage()">发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let chatHistory=[];
+    function toggleAIChatWidget(){
+        const w=document.getElementById('ai-chat-widget');const b=document.getElementById('chat-float-btn');
+        if(!w.classList.contains('active')){w.classList.add('active');b.style.display='none';}
+        else{w.classList.remove('active');b.style.display='flex';}
+    }
+    function quickAsk(q){document.getElementById('chat-input').value=q;sendChatMessage();}
+    function appendChatText(container, role, text){
+        const el = document.createElement('div');
+        el.className = 'chat-msg ' + role;
+        el.textContent = text || '';
+        container.appendChild(el);
+        return el;
+    }
+    function appendChatHtml(container, role, html){
+        const el = document.createElement('div');
+        el.className = 'chat-msg ' + role;
+        el.innerHTML = html;
+        container.appendChild(el);
+        return el;
+    }
+    function showPaywallPrompt(container){
+        appendChatHtml(container, 'bot', '您已用完免费提问次数。<br><br>解锁 <strong>AI深度分析体验包</strong>：<br>1份深度报告 + 48小时内3次追问，仅 <strong>¥99</strong><br><br><button onclick="openPayModal(\'ai_deep\')" style="background:var(--gold);border:none;padding:8px 18px;border-radius:6px;color:var(--white);font-weight:500;cursor:pointer;">支付¥99解锁</button>');
+        container.scrollTop=container.scrollHeight;
+    }
+
+    function getAiDeepPaidState(){
+        try{
+            const map = JSON.parse(localStorage.getItem('paid_products') || '{}');
+            const rec = map.ai_deep;
+            if(!rec || !rec.paid_at) return false;
+            const paidAt = new Date(rec.paid_at).getTime();
+            if(!Number.isFinite(paidAt)) return false;
+            return (Date.now() - paidAt) <= (48 * 60 * 60 * 1000);
+        }catch(e){
+            return false;
+        }
+    }
+
+    function markAiDeepPaidLocal(source, orderNo, amount){
+        try{
+            const map = JSON.parse(localStorage.getItem('paid_products') || '{}');
+            map.ai_deep = {
+                paid_at: new Date().toISOString(),
+                order_no: orderNo || '',
+                amount: amount || '99.00',
+                source: source || 'index'
+            };
+            localStorage.setItem('paid_products', JSON.stringify(map));
+            localStorage.setItem('unlock_ai_deep', 'true');
+            localStorage.setItem('aiPaid', 'true');
+        }catch(e){}
+    }
+
+    let chatCount=parseInt(localStorage.getItem('aiChatCount')||'0');
+    let isPaid=getAiDeepPaidState();
+    (async function syncPaidStatus(){
+        const user=getUser();
+        if(user&&user.id&&supabaseClient){
+            try{const{data}=await supabaseClient.from('users').select('is_paid').eq('id',user.id).single();
+            if(data&&data.is_paid){markAiDeepPaidLocal('supabase_sync','','99.00');isPaid=true;}}catch(e){}
+        }
+    })();
+    localStorage.setItem('aiChatCount',chatCount);
+
+    function sendChatMessage(){
+        const input=document.getElementById('chat-input');const msg=input.value.trim();if(!msg)return;
+        const ms=document.getElementById('chat-messages-widget');
+        const user = getUser();
+        const userId = user && user.id ? String(user.id) : '';
+        appendChatText(ms, 'user', msg);input.value='';
+        const thinkingEl = appendChatText(ms, 'bot', (chatCount>=3)?'深度分析中...':'思考中...');
+        thinkingEl.id = 'chat-thinking';
+        ms.scrollTop=ms.scrollHeight;
+        chatHistory.push({role:'user',content:msg});
+
+        fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'对话咨询',message:msg,history:chatHistory,user_id:userId})})
+        .then(async (r)=>{
+            const data = await r.json().catch(()=>({}));
+            return { ok:r.ok, status:r.status, data:data };
+        }).then(({ok,status,data})=>{
+            const el=document.getElementById('chat-thinking');if(el)el.remove();
+            if(!ok){
+                if(status===402||data.requires_payment){
+                    chatCount=Math.max(chatCount,3);localStorage.setItem('aiChatCount',chatCount);
+                    showPaywallPrompt(ms);
+                    return;
+                }
+                appendChatText(ms, 'bot', data.error||'网络问题，请稍后再试。');ms.scrollTop=ms.scrollHeight;
+                return;
+            }
+            const answer=data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈';
+            appendChatText(ms, 'bot', answer);
+            if(data.quota){
+                if(data.quota.paid){isPaid=true;}
+                if(Number.isFinite(data.quota.used)){chatCount=data.quota.used;localStorage.setItem('aiChatCount',chatCount);}
+            }else{
+                chatCount++;localStorage.setItem('aiChatCount',chatCount);
+            }
+            chatHistory.push({role:'assistant',content:answer});ms.scrollTop=ms.scrollHeight;
+        }).catch(()=>{
+            const el=document.getElementById('chat-thinking');if(el)el.remove();
+            appendChatText(ms, 'bot', '网络问题，请稍后再试。');ms.scrollTop=ms.scrollHeight;
+        });
+    }
+    </script>
+
+    <!-- 支付逻辑 -->
+    <script>
+    let currentOrderNo = null;
+    let payCheckTimer = null;
+    function sanitizeProductId(value){
+        return String(value || '').replace(/[^a-zA-Z0-9_-]/g, '');
+    }
+    function escapePayHTML(value){
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // 打开支付弹窗（可指定商品或显示选择列表）
+    function openPayModal(productId) {
+        const modal = document.getElementById('modal-pay');
+        modal.classList.add('active');
+        if (productId) {
+            createOrder(productId);
+        } else {
+            showProductList();
+        }
+    }
+
+    function closePayModal() {
+        document.getElementById('modal-pay').classList.remove('active');
+        if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+        currentOrderNo = null;
+        // 重置步骤
+        document.getElementById('pay-step-select').style.display = 'block';
+        document.getElementById('pay-step-qr').style.display = 'none';
+        document.getElementById('pay-step-success').style.display = 'none';
+    }
+
+    function backToProducts() {
+        if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+        document.getElementById('pay-step-qr').style.display = 'none';
+        document.getElementById('pay-step-select').style.display = 'block';
+        showProductList();
+    }
+
+    // 显示商品列表
+    async function showProductList() {
+        const list = document.getElementById('pay-product-list');
+        list.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">加载中...</p>';
+        try {
+            const res = await fetch('/api/pay/products');
+            const data = await res.json();
+            let html = '';
+            data.products.forEach(function(p) {
+                const id = sanitizeProductId(p.id);
+                if(!id) return;
+                const name = escapePayHTML(p.name);
+                const desc = escapePayHTML(p.desc);
+                const price = escapePayHTML(p.price);
+                html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;margin-bottom:10px;background:var(--cream);border:1px solid var(--border-soft);border-radius:10px;cursor:pointer;transition:border-color 0.2s;" onclick="createOrder(\'' + id + '\')" onmouseover="this.style.borderColor=\'var(--gold)\'" onmouseout="this.style.borderColor=\'var(--border-soft)\'">' +
+                    '<div><div style="font-weight:500;font-size:0.95rem;color:var(--ink);">' + name + '</div>' +
+                    '<div style="font-size:0.8rem;color:var(--text-secondary);margin-top:3px;">' + desc + '</div></div>' +
+                    '<div style="font-size:1.1rem;font-weight:600;color:var(--gold);white-space:nowrap;margin-left:12px;">¥' + price + '</div></div>';
+            });
+            list.innerHTML = html;
+        } catch(e) {
+            list.innerHTML = '<p style="text-align:center;color:var(--vermilion);">加载失败，请稍后重试</p>';
+        }
+    }
+
+    // 创建订单
+    async function createOrder(productId) {
+        document.getElementById('pay-step-select').style.display = 'none';
+        document.getElementById('pay-step-qr').style.display = 'block';
+        document.getElementById('pay-qr-img').src = '';
+        document.getElementById('pay-order-info').textContent = '正在生成支付二维码...';
+        document.getElementById('pay-amount-display').textContent = '';
+        document.getElementById('pay-status-msg').style.display = 'none';
+
+        try {
+            const res = await fetch('/api/pay', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ product_id: productId })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                currentOrderNo = data.order_no;
+                document.getElementById('pay-qr-img').src = data.qr_code;
+                document.getElementById('pay-order-info').textContent = data.subject + ' · 订单号: ' + data.order_no;
+                document.getElementById('pay-amount-display').textContent = '¥' + data.amount;
+
+                // 自动轮询支付状态（每3秒）
+                payCheckTimer = setInterval(function() { checkPayStatus(true); }, 3000);
+            } else {
+                document.getElementById('pay-order-info').textContent = '';
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--vermilion-soft)';
+                msg.style.color = 'var(--vermilion)';
+                msg.textContent = data.error || data.detail || '创建订单失败，请稍后重试';
+            }
+        } catch(e) {
+            document.getElementById('pay-order-info').textContent = '';
+            var msg = document.getElementById('pay-status-msg');
+            msg.style.display = 'block';
+            msg.style.background = 'var(--vermilion-soft)';
+            msg.style.color = 'var(--vermilion)';
+            msg.textContent = '网络错误，请稍后重试';
+        }
+    }
+
+    // 检查支付状态
+    async function checkPayStatus(silent) {
+        if (!currentOrderNo) return;
+        try {
+            const res = await fetch('/api/pay/status?order_no=' + currentOrderNo);
+            const data = await res.json();
+            if (data.status === 'paid') {
+                // 支付成功
+                if (payCheckTimer) { clearInterval(payCheckTimer); payCheckTimer = null; }
+                document.getElementById('pay-step-qr').style.display = 'none';
+                document.getElementById('pay-step-success').style.display = 'block';
+                document.getElementById('pay-success-msg').textContent = '支付成功，已解锁 AI 深度分析体验包。您现在可使用：1份深度报告 + 48小时内3次追问。';
+
+                // 如果是AI深度分析，解锁
+                markAiDeepPaidLocal('index_pay', currentOrderNo, data.amount || '99.00');
+                isPaid = true;
+            } else if (!silent) {
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--gold-bg)';
+                msg.style.color = 'var(--text)';
+                msg.textContent = '暂未检测到支付，请确认已完成扫码付款';
+                setTimeout(function() { msg.style.display = 'none'; }, 3000);
+            }
+        } catch(e) {
+            if (!silent) {
+                var msg = document.getElementById('pay-status-msg');
+                msg.style.display = 'block';
+                msg.style.background = 'var(--vermilion-soft)';
+                msg.style.color = 'var(--vermilion)';
+                msg.textContent = '查询失败，请稍后再试';
+            }
+        }
+    }
+
+    // 弹窗点击外部关闭
+    document.getElementById('modal-pay').addEventListener('click', function(e) {
+        if (e.target === this) closePayModal();
+    });
+    </script>
+</body>
+</html>

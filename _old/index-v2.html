@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="一宅一句｜真实民间风水故事分享。不劝迷信，只讲见过的事。帮你避开装修坑，提升家居运势。">
+    <meta name="keywords" content="风水,家居风水,装修风水,财运提升,风水咨询,阴宅祖坟">
+    <title>一宅一句 | 风水咨询 · 看过太多故事的人</title>
+    <link rel="canonical" href="https://12zn.com/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="一宅一句 | 风水咨询">
+    <meta property="og:description" content="不劝迷信，只讲见过的事。帮你避开装修坑，提升家居运势。">
+    <meta property="og:image" content="https://12zn.com/og-image.jpg">
+    <meta property="og:url" content="https://12zn.com/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="一宅一句 | 风水咨询">
+    <meta name="twitter:description" content="不劝迷信，只讲见过的事。">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "一宅一句",
+      "description": "风水咨询服务，不劝迷信，只讲见过的事",
+      "url": "https://12zn.com/",
+      "areaServed": "中国",
+      "serviceType": ["风水咨询", "家居风水", "财运提升"]
+    }
+    </script>
+    
+    <!-- Google Fonts - 更有质感的字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-paper: #f5f0e8;
+            --bg-card: #fffef9;
+            --bg-dark: #1a1815;
+            --text-main: #2c2824;
+            --text-muted: #6b635a;
+            --text-light: #9a928a;
+            --accent-red: #c23a2b;
+            --accent-gold: #b8964c;
+            --border-color: #e5ddd0;
+            --shadow-soft: 0 2px 20px rgba(44, 40, 36, 0.08);
+            --shadow-hover: 0 8px 32px rgba(44, 40, 36, 0.12);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Noto Serif SC', 'Songti SC', serif;
+            background: var(--bg-paper);
+            color: var(--text-main);
+            line-height: 1.8;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(184, 150, 76, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(194, 58, 43, 0.03) 0%, transparent 50%);
+        }
+        
+        /* 纹理背景 - 仿宣纸 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+        
+        /* 装饰性图案 - 简化的太极或祥云 */
+        header::before {
+            content: '☯';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: var(--accent-gold);
+            opacity: 0.4;
+            letter-spacing: 20px;
+        }
+        
+        .logo {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 56px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            letter-spacing: 8px;
+        }
+        
+        h1 {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            letter-spacing: 4px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            font-family: 'ZCOOL XiaoWei', serif;
+        }
+        
+        /* 导航 */
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 32px 0;
+            padding: 16px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav a {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: var(--accent-red);
+            background: rgba(194, 58, 43, 0.05);
+        }
+        
+        /* 文章卡片 */
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        
+        .section h2 {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section h2::before {
+            content: '';
+            width: 3px;
+            height: 18px;
+            background: var(--accent-red);
+            border-radius: 2px;
+        }
+        
+        .section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+        
+        /* 服务卡片 - 更紧凑 */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .service-item {
+            background: var(--bg-paper);
+            padding: 20px 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-item:hover {
+            border-color: var(--accent-gold);
+            background: #fff;
+            transform: translateY(-3px);
+        }
+        
+        .service-item .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .service-item p {
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        /* 案例故事 */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .case-item {
+            background: var(--bg-paper);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .case-item:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-3px);
+        }
+        
+        .case-item .cover {
+            height: 100px;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8e0d5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .case-item .content {
+            padding: 16px;
+        }
+        
+        .case-item h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+        
+        .case-item p {
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        
+        /* 博客列表 */
+        .blog-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+        
+        .blog-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .blog-list li:hover {
+            padding-left: 8px;
+        }
+        
+        .blog-list li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 15px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-list li:hover a {
+            color: var(--accent-red);
+        }
+        
+        .blog-list li span {
+            color: var(--text-light);
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+        
+        /* 留言卡片 - 更有人情味 */
+        .guestbook {
+            display: grid;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .guest-item {
+            background: var(--bg-paper);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-gold);
+        }
+        
+        .guest-item .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .guest-item .avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .guest-item .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        
+        .guest-item .time {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-left: auto;
+        }
+        
+        .guest-item .text {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        /* 联系表单 */
+        .contact-form {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .contact-form h2 {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 20px;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .contact-form form {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        
+        .contact-form label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-paper);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: #fff;
+        }
+        
+        .contact-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            background: var(--text-main);
+            color: var(--bg-paper);
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            background: var(--accent-red);
+            transform: translateY(-2px);
+        }
+        
+        #formMessage {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+        
+        #formMessage.success {
+            display: block;
+            background: rgba(7, 193, 96, 0.1);
+            color: #07c160;
+        }
+        
+        #formMessage.error {
+            display: block;
+            background: rgba(194, 58, 43, 0.1);
+            color: var(--accent-red);
+        }
+        
+        /* 按钮 */
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .cta a {
+            display: inline-block;
+            padding: 14px 40px;
+            background: var(--text-main);
+            color: var(--bg-paper);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta a:hover {
+            background: var(--accent-red);
+            transform: translateY(-2px);
+        }
+        
+        /* 悬浮微信 */
+        .float-wechat {
+            position: fixed;
+            bottom: 40px;
+            right: 24px;
+            z-index: 1000;
+        }
+        
+        .float-wechat a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #07c160;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            box-shadow: 0 4px 16px rgba(12, 193, 96, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .float-wechat a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(12, 193, 96, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--accent-red);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 42px;
+            }
+            
+            h1 {
+                font-size: 16px;
+            }
+            
+            .section {
+                padding: 24px 20px;
+            }
+        }
+        
+        /* 加载动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section, .nav, header, .cta {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .nav { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">一宅一句</div>
+            <h1>看过太多故事的人</h1>
+            <p class="subtitle">不劝迷信，只讲见过的事</p>
+        </header>
+        
+        <nav class="nav">
+            <a href="/">首页</a>
+            <a href="/blog/">故事</a>
+            <a href="/services/">服务</a>
+            <a href="/cases.html">案例</a>
+            <a href="/messages/">留言</a>
+        </nav>
+        
+        <!-- 服务项目 -->
+        <section class="section">
+            <h2>能帮您做什么</h2>
+            <div class="services">
+                <div class="service-item">
+                    <span class="icon">🏠</span>
+                    <p>家居风水</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">💰</span>
+                    <p>财运提升</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">🏢</span>
+                    <p>事业咨询</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">💑</span>
+                    <p>姻缘咨询</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">🏔️</span>
+                    <p>阴宅祖坟</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">📚</span>
+                    <p>学业咨询</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">🔮</span>
+                    <p>风水法事</p>
+                </div>
+                <div class="service-item">
+                    <span class="icon">✍️</span>
+                    <p>其他咨询</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 客户案例 -->
+        <section class="section">
+            <h2>最近帮客户看过的问题</h2>
+            <div class="case-grid">
+                <div class="case-item">
+                    <div class="cover">🏠</div>
+                    <div class="content">
+                        <h3>入户门对阳台穿堂煞</h3>
+                        <p>深圳·老王：师父帮忙看了新家布局，按照建议调整后睡眠好多了</p>
+                    </div>
+                </div>
+                <div class="case-item">
+                    <div class="cover">💼</div>
+                    <div class="content">
+                        <h3>办公室财位调整</h3>
+                        <p>北京·李总：调整后公司业绩明显提升，推荐！</p>
+                    </div>
+                </div>
+                <div class="case-item">
+                    <div class="cover">🏔️</div>
+                    <div class="content">
+                        <h3>祖坟修缮择日</h3>
+                        <p>广州·陈生：修祖坟前请师父看了日子，做完心里踏实多了</p>
+                    </div>
+                </div>
+                <div class="case-item">
+                    <div class="cover">🔮</div>
+                    <div class="content">
+                        <h3>店铺门脸风水</h3>
+                        <p>上海·刘姐：饭店生意不好，看完后布局调整渐渐有起色</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 最近文章 -->
+        <section class="section">
+            <h2>最近写的故事</h2>
+            <ul class="blog-list">
+                <li>
+                    <a href="/blog/wo-shi-chuang-pu.html">为什么我劝你装修前先看风水</a>
+                    <span>2026-02-20 · 装修必看</span>
+                </li>
+                <li>
+                    <a href="/blog/shafa-dui-men.html">一个户型害了一家人：角煞的教训</a>
+                    <span>2026-02-18 · 真实案例</span>
+                </li>
+                <li>
+                    <a href="/blog/caiwei.html">2026年财位在哪里？</a>
+                    <span>2026-02-15 · 干货分享</span>
+                </li>
+                <li>
+                    <a href="/blog/jingzhe.html">祖坟那点事：清明扫墓要注意什么</a>
+                    <span>2026-02-12 · 阴宅知识</span>
+                </li>
+            </ul>
+            <div class="cta">
+                <a href="/blog/">查看更多故事 →</a>
+            </div>
+        </section>
+        
+        <!-- 在线留言 -->
+        <section class="contact-form">
+            <h2>有问题？加微信聊</h2>
+            <form id="consultationForm">
+                <label>姓名</label>
+                <input type="text" name="name" required placeholder="怎么称呼您">
+                
+                <label>微信 / 电话</label>
+                <input type="text" name="phone" required placeholder="方便联系您的方式">
+                
+                <label>咨询类型</label>
+                <select name="type">
+                    <option value="家居风水">家居风水</option>
+                    <option value="财运提升">财运提升</option>
+                    <option value="事业咨询">事业咨询</option>
+                    <option value="姻缘咨询">姻缘咨询</option>
+                    <option value="阴宅祖坟">阴宅祖坟</option>
+                    <option value="学业咨询">学业咨询</option>
+                    <option value="风水法事">风水法事</option>
+                    <option value="其他">其他</option>
+                </select>
+                
+                <label>具体问题</label>
+                <textarea name="message" placeholder="简单说说您的问题"></textarea>
+                
+                <button type="submit">提交咨询</button>
+                
+                <div id="formMessage"></div>
+            </form>
+        </section>
+        
+        <footer>
+            <p>一宅一句 · 看过太多故事的人</p>
+            <p style="margin-top: 8px; color: var(--text-light);">
+                <a href="/about.html">关于</a> · 
+                <a href="/consult.html">联系</a> · 
+                <a href="/yinsi.html">隐私</a>
+            </p>
+        </footer>
+    </div>
+    
+    <!-- 悬浮微信 -->
+    <div class="float-wechat">
+        <a href="wechat:yizhaiyiju">
+            <span>💬</span>
+            微信 yizhaiyiju
+        </a>
+    </div>
+    
+    <script>
+    document.getElementById('consultationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = e.target;
+        var data = {
+            name: form.name.value,
+            phone: form.phone.value,
+            type: form.type.value,
+            message: form.message.value,
+            source: window.location.href,
+            submitTime: new Date().toISOString()
+        };
+        var messageDiv = document.getElementById('formMessage');
+        
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(result) {
+            if (result.success) {
+                messageDiv.className = 'success';
+                messageDiv.innerHTML = '✅ 提交成功！会尽快联系您<br><span style="font-size:12px;color:#666">也可直接加微信 yizhaiyiju</span>';
+                form.reset();
+            } else {
+                messageDiv.className = 'error';
+                messageDiv.innerHTML = '提交失败，请直接加微信 yizhaiyiju';
+            }
+        })
+        .catch(function(err) {
+            messageDiv.className = 'error';
+            messageDiv.innerHTML = '提交失败，请直接加微信 yizhaiyiju';
+        });
+    });
+    </script>
+</body>
+</html>
