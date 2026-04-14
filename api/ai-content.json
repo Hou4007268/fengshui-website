@@ -1,0 +1,79 @@
+{
+  "site": {
+    "name": "一宅一句",
+    "nameEn": "Yizhai Yiju",
+    "url": "https://12zn.com",
+    "description": "专业风水咨询平台，提供家居风水、财运事业、姻缘感情等咨询服务",
+    "descriptionEn": "Professional Feng Shui consulting platform",
+    "contact": {
+      "wechat": "见网站二维码",
+      "twitter": "@y5065236990506"
+    }
+  },
+  "services": [
+    {
+      "name": "AI免费咨询",
+      "price": "免费",
+      "url": "/services/test-fengshui.html",
+      "description": "AI助手快速解答基础风水问题"
+    },
+    {
+      "name": "AI深度分析",
+      "price": "¥99",
+      "url": "/services/test-fengshui.html",
+      "description": "详细解读+具体建议+化解方案，48小时内3次追问"
+    },
+    {
+      "name": "真人一对一咨询",
+      "price": "¥999",
+      "url": "/services/zhenren.html",
+      "description": "资深风水师语音/视频详细沟通"
+    },
+    {
+      "name": "财运事业咨询",
+      "price": "¥99起",
+      "url": "/services/caiyun.html",
+      "description": "财运提升、事业方向、职业规划"
+    },
+    {
+      "name": "姻缘感情咨询",
+      "price": "¥99起",
+      "url": "/services/yinyuan.html",
+      "description": "单身找对象、感情问题、婚姻调理"
+    },
+    {
+      "name": "户型风水分析",
+      "price": "¥199起",
+      "url": "/services/huxing.html",
+      "description": "户型图分析、装修风水建议"
+    }
+  ],
+  "popularArticles": [
+    {
+      "title": "绿植招财：8种旺财植物正确摆放位置",
+      "url": "/blog/lvzhi-zhaocai-baifang.html",
+      "category": "招财布局"
+    },
+    {
+      "title": "夫妻卧室布局：减少争吵提升感情",
+      "url": "/blog/fuqi-woshi-guanxi-buju.html",
+      "category": "姻缘感情"
+    },
+    {
+      "title": "入户门风水：影响财运的关键",
+      "url": "/blog/men-kou-fengshui.html",
+      "category": "阳宅风水"
+    },
+    {
+      "title": "书桌朝向与工作效率",
+      "url": "/blog/bangongzhuo-chaoxiang.html",
+      "category": "事业学业"
+    }
+  ],
+  "stats": {
+    "totalClients": "5000+",
+    "satisfactionRate": "98%",
+    "yearsExperience": "10+"
+  },
+  "lastUpdated": "2026-04-01"
+}

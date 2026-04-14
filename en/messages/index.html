@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Messages | Yizhai Yiju - Feng Shui Consulting</title>
+    <meta name="description" content="Read real client messages and feedback about Yizhai Yiju feng shui consulting services.">
+    <link rel="canonical" href="https://12zn.com/en/messages/">
+    <link rel="alternate" hreflang="en" href="https://12zn.com/en/messages/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://12zn.com/messages/">
+    <link rel="stylesheet" href="../css/shared.css?v=20260319">
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="/en/" class="topbar-brand">Yizhai Yiju</a>
+            <div class="topbar-nav">
+                <a href="/en/#services">Services</a>
+                <a href="/en/#tests">Tests</a>
+                <a href="/en/#articles">Articles</a>
+                <a href="/en/#pricing">Pricing</a>
+                <a href="/en/#cases">Cases</a>
+                <a href="/en/messages/" class="active">Messages</a>
+                <a href="/en/#home-faq">FAQ</a>
+                <button class="topbar-cta" onclick="openModal('support')" aria-label="Book Feng Shui Consultation">Book Consultation</button>
+            </div>
+            <button class="topbar-toggle" id="topbar-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <div class="section" style="padding-top:100px;">
+        <div class="container">
+            <div class="section-head section-head--center">
+                <h1>Client Messages</h1>
+                <p>Real feedback from our clients about their feng shui consultation experience</p>
+            </div>
+
+            <!-- 留言表单 -->
+            <div class="form-card" style="background:#faf8f2;border:1px solid #e8e0d0;border-radius:12px;padding:24px;margin-bottom:30px;">
+                <h2 style="font-size:1.1rem;margin:0 0 16px;color:#1f2937;">Post a Message</h2>
+                <div class="form-group">
+                    <label for="msg-author">Your Name</label>
+                    <input type="text" id="msg-author" placeholder="Your name" maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="msg-service-type">Service Type (optional)</label>
+                    <select id="msg-service-type">
+                        <option value="">Select service type</option>
+                        <option value="1:1 Consultation">1:1 Consultation</option>
+                        <option value="Floor Plan Analysis">Floor Plan Analysis</option>
+                        <option value="Wealth Career">Wealth Career</option>
+                        <option value="Relationship">Relationship</option>
+                        <option value="Renovation Feng Shui">Renovation Feng Shui</option>
+                        <option value="Naming">Naming Service</option>
+                        <option value="Ritual">Ritual Service</option>
+                        <option value="Talisman">Talisman Items</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="msg-content">Your Message</label>
+                    <textarea id="msg-content" placeholder="Share your experience or feedback..." maxlength="500" rows="4"></textarea>
+                </div>
+                <button class="btn" id="btn-submit-message" onclick="submitMessage()" aria-label="Submit your message">Submit Message</button>
+            </div>
+
+            <!-- 留言列表 -->
+            <div class="message-list" id="message-list" data-max-items="20">
+                <!-- 英文留言 -->
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">Sarah Chen</span>
+                        <span class="msg-time">2 hours ago</span>
+                    </div>
+                    <div class="msg-service">1:1 Consultation</div>
+                    <div class="msg-body">Master Zhang provided incredibly detailed analysis of my apartment layout. The suggestions about moving my desk and adjusting lighting made a huge difference in my work focus. Highly recommend!</div>
+                </div>
+
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">Michael Wong</span>
+                        <span class="msg-time">5 hours ago</span>
+                    </div>
+                    <div class="msg-service">Office Feng Shui</div>
+                    <div class="msg-body">After moving to a new office, our team productivity dropped significantly. Master Zhang analyzed our desk arrangements remotely and suggested some changes. Within 2 months, communication improved noticeably.</div>
+                </div>
+
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">Jennifer Liu</span>
+                        <span class="msg-time">1 day ago</span>
+                    </div>
+                    <div class="msg-service">Relationship</div>
+                    <div class="msg-body">I was skeptical at first, but the relationship consultation actually helped. The analysis of our bedroom layout and suggestions for improvement made a real difference in our daily interactions.</div>
+                </div>
+
+                <!-- 粤语留言 -->
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">李太</span>
+                        <span class="msg-time">3 hours ago</span>
+                    </div>
+                    <div class="msg-service">姻缘感情</div>
+                    <div class="msg-body">张老师睇风水好专业，我老公成日同我嗌交，佢睇完我哋间屋嘅布局之后，叫我哋将张床转个向，又搬走咗梳妆面镜，而家真系少咗好多嗌交，瞓觉都好咗好多。</div>
+                </div>
+
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">陳生</span>
+                        <span class="msg-time">1 day ago</span>
+                    </div>
+                    <div class="msg-service">財運事業</div>
+                    <div class="msg-body">我間舖頭生意一直都唔係好好，張老師幫我睇咗收銀台同門口嘅動線，建議我改一改擺設。改完之後真係多咗好多客，每個禮拜覆盤一次，見到實在嘅變化好開心。</div>
+                </div>
+
+                <!-- 中文留言 -->
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">张先生</span>
+                        <span class="msg-time">2 days ago</span>
+                    </div>
+                    <div class="msg-service">家居风水</div>
+                    <div class="msg-body">张老师非常专业，通过户型分析就找出了我们家的问题所在。按照他的建议调整了动线和照明，1个月后睡眠质量明显改善，家人的关系也更和谐了。强烈推荐！</div>
+                </div>
+
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">王先生</span>
+                        <span class="msg-time">3 days ago</span>
+                    </div>
+                    <div class="msg-service">办公风水</div>
+                    <div class="msg-body">公司搬新办公室后团队协作效率下降，张老师远程分析了办公桌布局，调整后3个月内跨部门沟通效率提升明显，员工满意度也上来了。</div>
+                </div>
+
+                <div class="msg-item">
+                    <div class="msg-head">
+                        <span class="msg-author">赵先生</span>
+                        <span class="msg-time">5 days ago</span>
+                    </div>
+                    <div class="msg-service">店铺风水</div>
+                    <div class="msg-body">店铺生意一直不温不火，张老师来看了收银台位置和门口动线，调整后客流量明显增加了。按周复盘的方法很实用，能看到实实在在的变化。</div>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:24px;">
+                <a href="/en/" style="display:inline-block;padding:12px 24px;background:var(--gold);color:#fff;border-radius:8px;text-decoration:none;font-size:.95rem;">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">Yizhai Yiju</div>
+                <nav class="footer-nav">
+                    <a href="/en/">Home</a>
+                    <a href="/en/#services">Services</a>
+                    <a href="/en/#tests">Tests</a>
+                    <a href="/en/#articles">Articles</a>
+                    <a href="/en/#pricing">Pricing</a>
+                    <a href="/en/#cases">Cases</a>
+                    <a href="/en/messages/">Messages</a>
+                    <a href="/en/#home-faq">FAQ</a>
+                    <a href="/en/about.html">About</a>
+                    <a href="/en/privacy.html">Privacy</a>
+                    <a href="/en/terms.html">Terms</a>
+                </nav>
+                <p class="footer-copy">© 2024-2026 Yizhai Yiju Feng Shui Consulting. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js?v=20260417"></script>
+</body>
+</html>

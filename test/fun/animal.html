@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="../../css/shared.css?v=20260415">
     <style>
         .test-page-hero {
             text-align: center;
@@ -166,6 +166,11 @@
             color: var(--ink);
         }
     </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"动物人格测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
     <!-- Sticky 导航 -->
@@ -173,10 +178,14 @@
         <div class="topbar-inner">
             <a href="../../index.html" class="topbar-brand">一宅一句</a>
             <div class="topbar-nav">
-                <a href="../../index.html#services">服务</a>
-                <a href="../../index.html#pricing">报价</a>
-                <a href="../../index.html#cases">案例</a>
-                <a href="../../index.html" class="topbar-cta">返回首页</a>
+                <a href="../../index.html">服务</a>
+                <a href="../">测试</a>
+                <a href="../../blog/">文章</a>
+                <a href="../../services/pricing.html">报价</a>
+                <a href="../../services/cases.html">案例</a>
+                <a href="../../services/faq.html">FAQ</a>
+                <a href="../../en/">EN</a>
+                <a href="../../services/zhenren.html" class="topbar-cta">预约咨询</a>
             </div>
         </div>
     </nav>
@@ -220,6 +229,19 @@
     </div>
     
     <!-- CTA -->
+<section style="max-width:640px;margin:0 auto;padding:0 24px 32px;">
+    <div style="background:var(--white);border:1px solid var(--border-soft);border-radius:14px;padding:24px;">
+        <h3 style="font-family:Noto Serif SC,serif;font-size:1rem;color:var(--ink);margin-bottom:16px;">更多趣味测试</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+            <a href="../" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🔮 全部测试</a>
+            <a href="mbti.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎭 MBTI测试</a>
+            <a href="animal.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🐾 动物人格</a>
+            <a href="dream-career.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">💼 职业梦想</a>
+            <a href="superpower.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">⚡ 超能力</a>
+            <a href="all-in-one.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎁 综合测试</a>
+        </div>
+    </div>
+</section>
     <section class="wechat-section">
         <div class="wechat-inner">
             <h2>想要更精准的性格分析？</h2>
@@ -236,13 +258,13 @@
         <div class="footer-links">
             <a href="../../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../../index.html#services">全部服务</a>
+            <a href="../../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="https://x.com/yizhaiyiju" target="_blank">Twitter</a>
         </div>
     </footer>
 
-    <script src="../../js/shared.js?v=20260223"></script>
+    <script src="../../js/shared.js?v=20260417"></script>
     <script>
         const animals = [
             { emoji: "🦊", name: "狐狸", desc: "聪明狡黠，善于观察，适应性强的机会主义者。有自己的小算盘，但懂得审时度势。", traits: ["聪明", "灵活", "神秘"] },

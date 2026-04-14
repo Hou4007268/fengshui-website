@@ -1,12 +1,17 @@
 User-agent: *
 Allow: /
 
-# 屏蔽管理后台和备份
+# 管理后台和备份
 Disallow: /admin.html
 Disallow: /admin-login.html
 Disallow: /login.html
 Disallow: /website-20260221/
 Disallow: /api/
 
+# AI reference files
+Allow: /llms.txt
+Allow: /en/llms.txt
+
 # 站点地图
 Sitemap: https://12zn.com/sitemap.xml
+Sitemap: https://12zn.com/sitemap-en.xml

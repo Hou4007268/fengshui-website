@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句择日选时服务：搬家吉日、开业良辰、婚嫁择日、动土奠基。根据八字命理精准择日，趋吉避凶。">
     <meta name="keywords" content="择日,选日子,搬家吉日,开业吉日,婚嫁择日,黄道吉日,一宅一句">
     <link rel="canonical" href="https://12zn.com/services/zeri.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="择日选时 | 一宅一句 - 搬家吉日·开业良辰·婚嫁择日">
     <meta property="og:description" content="一宅一句择日选时服务：搬家吉日、开业良辰、婚嫁择日、动土奠基。根据八字命理精准择日，趋吉避凶。">
     <meta property="og:url" content="https://12zn.com/services/zeri.html">
@@ -16,19 +16,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <meta property="og:image" content="https://12zn.com/images/og/zeri.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/zeri.jpg">
+    <script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://12zn.com/services/zeri.html#service",
+      "name": "择日择吉",
+      "description": "一宅一句择日择吉服务：结婚、搬家、开业、动土等重要日子的选择。黄道吉日推荐。",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://12zn.com/#organization",
+        "name": "一宅一句",
+        "url": "https://12zn.com/"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "China"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://12zn.com/services/zeri.html"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "199",
+        "priceCurrency": "CNY",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://12zn.com/services/zeri.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "择日需要提供什么信息？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "需要办事人的生辰八字、办事类型（结婚/搬家/开业等）、可选日期范围。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首页",
+          "item": "https://12zn.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "服务",
+          "item": "https://12zn.com/services/all.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "择日择吉",
+          "item": "https://12zn.com/services/zeri.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">
             <a href="../index.html" class="topbar-brand">一宅一句</a>
-            <div class="topbar-nav">
-                <a href="../index.html#services">服务</a>
-                <a href="../index.html#pricing">报价</a>
-                <a href="../index.html#cases">案例</a>
-                <a href="../index.html#messages">留言</a>
-                <a href="../index.html" class="topbar-cta">返回首页</a>
+            <div class=topbar-nav>
+                <a href=../index.html>服务</a>
+                <a href=../test/>测试</a>
+                <a href=../blog/>文章</a>
+                <a href=../services/pricing.html>报价</a>
+                <a href=../services/cases.html>案例</a>
+                <a href=../services/faq.html>FAQ</a>
+                <a href=../en/>EN</a>
+                <a href=../services/zhenren.html class=topbar-cta>预约咨询</a>
             </div>
         </div>
     </nav>
@@ -37,7 +114,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
-            <a href="../index.html#services">服务</a><span>›</span>
+            <a href="../index.html">服务</a><span>›</span>
             择日选时
         </div>
     </div>
@@ -116,18 +193,21 @@
             <div class="service-price-table">
                 <div class="service-price-item">
                     <h4>单次择日</h4>
-                    <div class="price">¥99</div>
-                    <p>单一事项择日服务，如搬家择日、开业择日等。包含八字分析、吉日推算、提供2-3个备选日期及当日注意事项</p>
+                    <div class="price">¥499</div>
+                    <p>单一事项择日服务，如搬家择日、开业择日等。包含八字分析、吉日推算、提供2-3个备选日期及当日注意事项。</p>
+                    <button onclick="openPayModal('consult_199')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥499</button>
                 </div>
                 <div class="service-price-item">
                     <h4>多事择日</h4>
-                    <div class="price">¥199</div>
-                    <p>多项事务综合择日，如婚嫁全程（订婚+领证+迎亲+办宴）或搬家+开业组合。统筹规划，日期之间相互配合</p>
+                    <div class="price">¥1999</div>
+                    <p>多项事务综合择日，如婚嫁全程或搬家+开业组合。统筹规划，日期之间相互配合。</p>
+                    <button onclick="openPayModal('zeri_1999')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥1999</button>
                 </div>
                 <div class="service-price-item">
                     <h4>年度顾问</h4>
-                    <div class="price">¥599</div>
-                    <p>全年不限次数择日咨询服务，涵盖出行、签约、求医、祭祀等各类事务。年初另附全年运势参考与每月吉凶提示</p>
+                    <div class="price">¥39999</div>
+                    <p>全年不限次数择日咨询服务，涵盖出行、签约、求医、祭祀等各类事务。年初另附全年运势参考与每月吉凶提示。</p>
+                    <button onclick="openPayModal('annual_39999')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥39999</button>
                 </div>
             </div>
         </div>
@@ -177,12 +257,14 @@
         <div class="footer-links">
             <a href="../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../index.html#services">全部服务</a>
+            <a href="../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
         </div>
     </footer>
 
-    <script src="../js/shared.js?v=20260223"></script>
+    <script src="../js/shared.js?v=20260417"></script>
 </body>
 </html>

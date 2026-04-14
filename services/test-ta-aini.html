@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句Ta是否爱你测试：8道心理题，测测Ta心里到底有没有你。暗恋、暧昧、单恋必测！免费测试，快来发现Ta的真实心意！">
     <meta name="keywords" content="Ta是否爱我,爱情测试,暗恋测试,情感测试,对方心意,免费测试">
     <link rel="canonical" href="https://12zn.com/services/test-ta-aini.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="Ta是否爱你测试 | 一宅一句 - 测测Ta对你的心意">
     <meta property="og:description" content="一宅一句Ta是否爱你测试：8道心理题，测测Ta心里到底有没有你。暗恋、暧昧、单恋必测！">
     <meta property="og:url" content="https://12zn.com/services/test-ta-aini.html">
@@ -56,6 +56,10 @@
         .share-msg { margin-top: 10px; font-size: 0.85rem; color: var(--gold); text-align: center; }
         .wechat-qr { margin-top: 12px; text-align: center; }
     </style>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
     <div class="test-container" style="padding-top: 40px; padding-bottom: 60px;">
@@ -100,7 +104,16 @@
                 </div>
             </div>
             
-            <a href="test-ta-aini.html" class="btn-retest">重新测试</a>
+            
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+<a href="test-ta-aini.html" class="btn-retest">重新测试</a>
             <a href="/" class="home-link">返回首页</a>
         </div>
     </div>
@@ -306,5 +319,38 @@
             }
         }
     </script>
+<script>
+var TESTS_DATA = [
+{"file":"test-yunshi.html","icon":"🔮","title":"今日运势速测"},
+{"file":"test-wuxing.html","icon":"🌊","title":"五行属性测试"},
+{"file":"test-fengshui.html","icon":"🏠","title":"家居风水评分"},
+{"file":"test-xingming.html","icon":"✍️","title":"姓名吉凶测试"},
+{"file":"test-taohua.html","icon":"🌸","title":"桃花运测试"},
+{"file":"test-ta-aini.html","icon":"💕","title":"Ta是否爱你"},
+{"file":"test-caishang.html","icon":"💰","title":"财商测试"},
+{"file":"test-xinli.html","icon":"🧠","title":"心理年龄测试"},
+{"file":"test-mianxiang.html","icon":"👤","title":"面相气质测试"},
+{"file":"test-qianshi.html","icon":"🌙","title":"前世今生测试"},
+{"file":"test-lucky.html","icon":"🍀","title":"幸运色测试"},
+{"file":"test-ziwei.html","icon":"⭐","title":"紫微斗数排盘"}
+];
+window.shareResult=function(){
+var t=document.title.replace(/\s*\|.*$/,'');
+var r=document.querySelector('.result-hero');
+var rt=r?r.textContent.trim():'';
+var txt='我在一宅一句测了「'+t+'」\n'+rt+'\n\n你也来测测：'+window.location.href;
+if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)})}
+else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)}
+};
+(function(){
+var c=document.getElementById('related-tests');if(!c)return;
+var cf=window.location.pathname.split('/').pop();
+var r=TESTS_DATA.filter(function(t){return t.file!==cf});
+r.sort(function(){return Math.random()-0.5});
+var p=r.slice(0,4);var h='';
+for(var i=0;i<p.length;i++)h+='<a href="'+p[i].file+'" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">'+p[i].icon+' '+p[i].title+'</a>';
+c.innerHTML=h;
+})();
+</script>
 </body>
 </html>

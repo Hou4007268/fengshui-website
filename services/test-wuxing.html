@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句五行属性测试：8道趣味题，揭秘你的五行性格。金木水火土，你属于哪一种？免费测试，快来发现！">
     <meta name="keywords" content="五行测试,五行属性,金木水火土,五行性格,五行查询,免费测试">
     <link rel="canonical" href="https://12zn.com/services/test-wuxing.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="五行属性测试 | 一宅一句 - 测测你是金木水火土哪种属性">
     <meta property="og:description" content="一宅一句五行属性测试：8道趣味题，揭秘你的五行性格。金木水火土，你属于哪一种？免费测试，快来发现！">
     <meta property="og:url" content="https://12zn.com/services/test-wuxing.html">
@@ -16,443 +16,156 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="test-common.css?v=20260414">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
     <style>
         /* === 五行测试专用样式 === */
         .test-container {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+  max-width: 640px; margin: 0 auto; padding: 0 24px;
+}
 
-        /* 进度条 */
-        .progress-wrap {
-            margin-bottom: 32px;
-        }
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .progress-text {
-            font-size: 0.82rem;
-            color: var(--text-secondary);
-        }
-        .progress-num {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: var(--border-soft);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold), var(--gold-soft));
-            border-radius: 3px;
-            transition: width 0.4s ease;
-        }
+.result-hero::before {
+  content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 400px; height: 160px; background: radial-gradient(ellipse, rgba(166,138,62,0.08) 0%, transparent 70%); pointer-events: none;
+}
 
-        /* 问题卡片 */
-        .question-card {
-            background: var(--white);
-            border: 1px solid var(--border-soft);
-            border-radius: 14px;
-            padding: 32px 28px;
-            box-shadow: var(--shadow-md);
-            animation: fadeUp 0.4s ease;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .question-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.15rem;
-            color: var(--ink);
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-align: center;
-            line-height: 1.6;
-        }
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .option-btn {
-            display: block;
-            width: 100%;
-            padding: 14px 18px;
-            background: var(--parchment);
-            border: 1px solid var(--border-soft);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            color: var(--text);
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s;
-            font-family: inherit;
-            line-height: 1.6;
-        }
-        .option-btn:hover {
-            border-color: var(--gold);
-            background: var(--gold-bg);
-            color: var(--ink);
-            transform: translateX(4px);
-        }
-        .option-btn:active {
-            transform: translateX(4px) scale(0.98);
-        }
+.result-element-icon {
+  width: 96px; height: 96px; margin: 0 auto 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 2.8rem; font-weight: 700; position: relative; animation: resultPop 0.6s ease;
+}
 
-        /* 分析中动画 */
-        .analyzing-screen {
-            text-align: center;
-            padding: 80px 24px;
-            display: none;
-        }
-        .analyzing-screen.active {
-            display: block;
-        }
-        .analyzing-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 24px;
-            border-radius: 50%;
-            border: 3px solid var(--border-soft);
-            border-top-color: var(--gold);
-            animation: spin 1s linear infinite;
-        }
-        .analyzing-text {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.2rem;
-            color: var(--ink);
-            letter-spacing: 0.15em;
-        }
-        .analyzing-sub {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 8px;
-        }
-
-        /* 结果页面 */
-        .result-screen {
-            display: none;
-            animation: fadeUp 0.6s ease;
-        }
-        .result-screen.active {
-            display: block;
-        }
-
-        .result-hero {
-            text-align: center;
-            padding: 40px 24px;
-            background: var(--white);
-            border-radius: 14px;
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-md);
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .result-hero::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 400px;
-            height: 160px;
-            background: radial-gradient(ellipse, rgba(166,138,62,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .result-element-icon {
-            width: 96px;
-            height: 96px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Noto Serif SC', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            position: relative;
-            animation: resultPop 0.6s ease;
-        }
-        @keyframes resultPop {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.15); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .result-element-name {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--ink);
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
-        }
-        .result-element-sub {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-        }
-
-        /* 结果详情卡片 */
-        .result-detail-card {
-            background: var(--white);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 14px;
-        }
-        .result-detail-card h3 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1rem;
-            color: var(--ink);
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .result-detail-card h3 .detail-icon {
-            font-size: 1.1rem;
-        }
-        .result-detail-card p {
-            font-size: 0.88rem;
-            color: var(--text);
-            line-height: 1.9;
-        }
-
-        /* 相生相克 */
+/* 相生相克 */
         .wuxing-relation {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-        .relation-card {
-            background: var(--white);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-        .relation-card h4 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 0.92rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        .relation-card .relation-element {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .relation-card p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .relation-sheng h4 { color: var(--bamboo); }
-        .relation-sheng .relation-element { color: var(--bamboo); }
-        .relation-ke h4 { color: var(--vermilion); }
-        .relation-ke .relation-element { color: var(--vermilion); }
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
 
-        /* 幸运信息 */
+.relation-card {
+  background: var(--white); border: 1px solid var(--border-soft); border-radius: 12px; padding: 20px; text-align: center;
+}
+
+.relation-card h4 {
+  font-family: 'Noto Serif SC', serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 8px;
+}
+
+.relation-card .relation-element {
+  font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px;
+}
+
+.relation-card p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;
+}
+
+.relation-sheng h4 {
+  color: var(--bamboo);
+}
+
+.relation-sheng .relation-element {
+  color: var(--bamboo);
+}
+
+.relation-ke h4 {
+  color: var(--vermilion);
+}
+
+.relation-ke .relation-element {
+  color: var(--vermilion);
+}
+
+/* 幸运信息 */
         .lucky-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-        .lucky-item {
-            background: var(--white);
-            border: 1px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 18px;
-            text-align: center;
-        }
-        .lucky-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-        .lucky-value {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--gold);
-        }
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
 
-        /* CTA */
-        .result-cta {
-            background: var(--ink);
-            border-radius: 14px;
-            padding: 32px 24px;
-            text-align: center;
-            margin-top: 14px;
-        }
-        .result-cta h3 {
-            font-family: 'Noto Serif SC', serif;
-            color: var(--parchment);
-            font-size: 1.1rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            margin-bottom: 16px;
-        }
-        .result-cta-btns {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn-cta-pay {
-            padding: 12px 28px;
-            background: var(--gold);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            font-family: inherit;
-        }
-        .btn-cta-pay:hover { opacity: 0.85; }
-        .btn-cta-wechat {
-            padding: 12px 28px;
-            background: transparent;
-            color: var(--parchment);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-        .btn-cta-wechat:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
+.start-icon-item {
+  width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 1.3rem; font-weight: 700; animation: floatIcon 3s ease-in-out infinite;
+}
 
-        /* 重新测试 */
-        .restart-wrap {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .btn-restart {
-            display: inline-block;
-            padding: 10px 24px;
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-secondary);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-        .btn-restart:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
+.start-icon-item:nth-child(1) {
+  background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0s;
+}
 
-        /* 开始页面 */
-        .start-screen {
-            text-align: center;
-            padding: 40px 0;
-        }
-        .start-icons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-        .start-icon-item {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            animation: floatIcon 3s ease-in-out infinite;
-        }
-        .start-icon-item:nth-child(1) { background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0s; }
-        .start-icon-item:nth-child(2) { background: rgba(107,123,94,0.12); color: #6b7b5e; animation-delay: 0.3s; }
-        .start-icon-item:nth-child(3) { background: rgba(70,130,180,0.12); color: #4682b4; animation-delay: 0.6s; }
-        .start-icon-item:nth-child(4) { background: rgba(181,69,42,0.12); color: #b5452a; animation-delay: 0.9s; }
-        .start-icon-item:nth-child(5) { background: rgba(160,130,80,0.12); color: #a08250; animation-delay: 1.2s; }
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-        .start-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.3rem;
-            color: var(--ink);
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .start-desc {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 28px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .btn-start {
-            display: inline-block;
-            padding: 14px 40px;
-            background: var(--ink);
-            color: var(--parchment);
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            font-family: inherit;
-            letter-spacing: 0.1em;
-        }
-        .btn-start:hover { opacity: 0.85; }
+.start-icon-item:nth-child(2) {
+  background: rgba(107,123,94,0.12); color: #6b7b5e; animation-delay: 0.3s;
+}
 
-        /* 移动端适配 */
-        @media (max-width: 768px) {
-            .question-card { padding: 24px 20px; }
-            .question-title { font-size: 1.05rem; }
-            .wuxing-relation { grid-template-columns: 1fr; }
-            .lucky-grid { grid-template-columns: 1fr 1fr; }
-            .result-cta-btns { flex-direction: column; }
-            .btn-cta-pay, .btn-cta-wechat { width: 100%; }
-        }
+.start-icon-item:nth-child(3) {
+  background: rgba(70,130,180,0.12); color: #4682b4; animation-delay: 0.6s;
+}
+
+.start-icon-item:nth-child(4) {
+  background: rgba(181,69,42,0.12); color: #b5452a; animation-delay: 0.9s;
+}
+
+.start-icon-item:nth-child(5) {
+  background: rgba(160,130,80,0.12); color: #a08250; animation-delay: 1.2s;
+}
+
+.wuxing-relation {
+  grid-template-columns: 1fr;
+}
+
+.wuxing-dist {
+  margin-bottom: 12px;
+}
+
+.dist-row {
+  display: flex; align-items: center; margin-bottom: 6px;
+}
+
+.dist-label {
+  width: 24px; font-size: 0.82rem; font-weight: 500; color: var(--ink);
+}
+
+.dist-bar-wrap {
+  flex: 1; height: 18px; background: #f5f0e8; border-radius: 9px; overflow: hidden; margin: 0 8px;
+}
+
+.dist-bar {
+  height: 100%; border-radius: 9px; transition: width 0.6s ease;
+}
+
+.dist-score {
+  width: 20px; font-size: 0.75rem; color: var(--text-light); text-align: right;
+}
+
+.dist-bar-金 {
+  background: linear-gradient(90deg, #d4af37, #b8942e);
+}
+
+.dist-bar-木 {
+  background: linear-gradient(90deg, #8fbc6b, #6b7b5e);
+}
+
+.dist-bar-水 {
+  background: linear-gradient(90deg, #6db3d4, #4682b4);
+}
+
+.dist-bar-火 {
+  background: linear-gradient(90deg, #d4725a, #b5452a);
+}
+
+.dist-bar-土 {
+  background: linear-gradient(90deg, #c4a265, #a08250);
+}
     </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"五行属性测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">
             <a href="../index.html" class="topbar-brand">一宅一句</a>
-            <div class="topbar-nav">
-                <a href="../index.html#services">服务</a>
-                <a href="../index.html#pricing">报价</a>
-                <a href="../index.html#cases">案例</a>
-                <a href="../index.html#messages">留言</a>
-                <a href="../index.html" class="topbar-cta">返回首页</a>
+            <div class=topbar-nav>
+                <a href=../index.html>服务</a>
+                <a href=../test/>测试</a>
+                <a href=../blog/>文章</a>
+                <a href=../services/pricing.html>报价</a>
+                <a href=../services/cases.html>案例</a>
+                <a href=../services/faq.html>FAQ</a>
+                <a href=../en/>EN</a>
+                <a href=../services/zhenren.html class=topbar-cta>预约咨询</a>
             </div>
         </div>
     </nav>
@@ -461,7 +174,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
-            <a href="../index.html#services">服务</a><span>›</span>
+            <a href="../index.html">服务</a><span>›</span>
             五行属性测试
         </div>
     </div>
@@ -528,9 +241,11 @@
         <div class="footer-links">
             <a href="../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../index.html#services">全部服务</a>
+            <a href="../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
         </div>
     </footer>
 
@@ -570,7 +285,7 @@
         </div>
     </div>
 
-    <script src="../js/shared.js?v=20260223"></script>
+    <script src="../js/shared.js?v=20260417"></script>
     <script>
     (function() {
         // ========== 题目数据 ==========
@@ -819,6 +534,45 @@
             html += '<div class="result-element-sub">' + data.subtitle + '</div>';
             html += '</div>';
 
+            // 五行分布条
+            var totalScore = 0;
+            var elOrder = ['金', '木', '水', '火', '土'];
+            for (var i = 0; i < elOrder.length; i++) totalScore += scores[elOrder[i]];
+            if (totalScore === 0) totalScore = 1;
+
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9733;</span> 五行分布</h3>';
+            html += '<div class="wuxing-dist">';
+            for (var i = 0; i < elOrder.length; i++) {
+                var el = elOrder[i];
+                var pct = Math.round(scores[el] / totalScore * 100);
+                html += '<div class="dist-row">';
+                html += '<div class="dist-label">' + el + '</div>';
+                html += '<div class="dist-bar-wrap"><div class="dist-bar dist-bar-' + el + '" style="width:' + pct + '%"></div></div>';
+                html += '<div class="dist-score">' + scores[el] + '</div>';
+                html += '</div>';
+            }
+            html += '</div>';
+
+            // 最弱元素 + 补运建议
+            var minScore = 999, weakest = '';
+            for (var i = 0; i < elOrder.length; i++) {
+                if (scores[elOrder[i]] < minScore) { minScore = scores[elOrder[i]]; weakest = elOrder[i]; }
+            }
+            if (weakest && weakest !== dominant) {
+                var supplementTips = {
+                    '金': '建议多穿白色/银色系、佩戴金属饰品、办公桌朝西方、秋季多做重要决策。',
+                    '木': '建议多穿绿色系、亲近自然种绿植、办公桌朝东方、春季多开启新计划。',
+                    '水': '建议多穿蓝色/黑色系、家中北方放水景、多亲近水源、冬季适合深度思考。',
+                    '火': '建议多穿红色/暖色系、保持家中南方明亮、多社交、夏季适合拓展人脉。',
+                    '土': '建议多穿黄色/棕色系、用陶瓷装饰、多接触土地、换季时节多行动。'
+                };
+                html += '<p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);">';
+                html += '五行中<strong>' + weakest + '</strong>相对较弱。' + (supplementTips[weakest] || '');
+                html += '</p>';
+            }
+            html += '</div>';
+
             // 性格描述
             html += '<div class="result-detail-card">';
             html += '<h3><span class="detail-icon">&#9733;</span> 性格解读</h3>';
@@ -855,13 +609,26 @@
             html += '<div class="result-cta">';
             html += '<h3>想了解你的完整五行命理？</h3>';
             html += '<div class="result-cta-btns">';
-            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥9.9</button>';
+            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥99</button>';
             html += '<button class="btn-cta-wechat" onclick="document.getElementById(\'lead-popup\').classList.add(\'active\')">添加微信咨询</button>';
             html += '</div>';
             html += '</div>';
 
             // 重新测试
-            html += '<div class="restart-wrap">';
+            html += '
+            <!-- 分享按钮 -->
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+
+            <!-- 你可能还想测 -->
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+
+<div class="restart-wrap">';
             html += '<button class="btn-restart" onclick="restartTest()">重新测试</button>';
             html += '</div>';
 
@@ -908,5 +675,54 @@
 
     })();
     </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"五行属性测试是什么？","acceptedAnswer":{"@type":"Answer","text":"通过8道趣味题，分析你的金木水火土五行属性倾向，了解哪种元素对你影响最大。"}},{"@type":"Question","name":"五行属性和生辰八字有关系吗？","acceptedAnswer":{"@type":"Answer","text":"有关系但不完全相同。生辰八字的五行基于出生时间的天干地支推算，本测试通过性格表现趣味推断五行倾向。"}}]}</script><script>
+var TESTS_DATA = [{"file": "test-yunshi.html", "icon": "🔮", "title": "今日运势速测"}, {"file": "test-wuxing.html", "icon": "🌊", "title": "五行属性测试"}, {"file": "test-fengshui.html", "icon": "🏠", "title": "家居风水评分"}, {"file": "test-xingming.html", "icon": "✍️", "title": "姓名吉凶测试"}, {"file": "test-taohua.html", "icon": "🌸", "title": "桃花运测试"}, {"file": "test-ta-aini.html", "icon": "💕", "title": "Ta是否爱你"}, {"file": "test-caishang.html", "icon": "💰", "title": "财商测试"}, {"file": "test-xinli.html", "icon": "🧠", "title": "心理年龄测试"}, {"file": "test-mianxiang.html", "icon": "👤", "title": "面相气质测试"}, {"file": "test-qianshi.html", "icon": "🌙", "title": "前世今生测试"}, {"file": "test-lucky.html", "icon": "🍀", "title": "幸运色测试"}, {"file": "test-ziwei.html", "icon": "⭐", "title": "紫微斗数排盘"}];
+</script>
+
+<script>
+// 分享功能
+window.shareResult = function() {
+    var title = document.title.replace(/\s*\|.*$/, '');
+    var resultEl = document.querySelector('.result-hero') || document.querySelector('.result-element-name');
+    var resultText = resultEl ? resultEl.textContent.trim() : '';
+    var text = '我在一宅一句测了「' + title + '」\n' + resultText + '\n\n👉 你也来测测：' + window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            var tip = document.getElementById('share-tip');
+            tip.style.display = 'inline';
+            setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+        });
+    } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var tip = document.getElementById('share-tip');
+        tip.style.display = 'inline';
+        setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+    }
+};
+
+// 相关测试推荐
+(function(){
+    var allTests = TESTS_DATA;
+    var currentFile = window.location.pathname.split('/').pop();
+    var related = allTests.filter(function(t){ return t.file !== currentFile; });
+    // Shuffle and pick 4
+    related.sort(function(){ return Math.random() - 0.5; });
+    var picks = related.slice(0, 4);
+    var container = document.getElementById('related-tests');
+    if (!container) return;
+    var html = '';
+    for (var i = 0; i < picks.length; i++) {
+        html += '<a href="' + picks[i].file + '" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">' + picks[i].icon + ' ' + picks[i].title + '</a>';
+    }
+    container.innerHTML = html;
+})();
+</script>
+
 </body>
 </html>

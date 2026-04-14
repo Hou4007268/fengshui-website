@@ -9,6 +9,17 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(hm, s);
 })();
 
+// Google Analytics (GA4)
+var gtagScript = document.createElement("script");
+gtagScript.async = true;
+gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-JGQC5L2V2M";
+var s2 = document.getElementsByTagName("script")[0];
+s2.parentNode.insertBefore(gtagScript, s2);
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "G-JGQC5L2V2M");
+
 // Supabase 初始化
 const SUPABASE_URL = 'https://zzukurhrupvyieetppty.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_aalFKYjpIEVYqTegN2oalA_NNVnwbcy';
@@ -178,3 +189,124 @@ document.addEventListener('DOMContentLoaded', function(){
         loadMessages(false);
     }
 });
+
+// 百度自动推送
+(function(){
+    var bp = document.createElement("script");
+    bp.src = "https://zz.bdstatic.com/linksubmit/push.js";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+
+// 中英文切换 - 保持当前页面
+(function(){
+    var links = document.querySelectorAll(".topbar-nav a");
+    for(var i = 0; i < links.length; i++){
+        var a = links[i];
+        var href = a.getAttribute("href");
+        if(!href) continue;
+        var text = a.textContent.trim();
+        if(text === "EN"){
+            // Chinese page -> English equivalent
+            var path = location.pathname;
+            if(path === "/" || path === "/index.html"){
+                a.href = "/en/";
+            } else if(path.indexOf("/services/") !== -1 || path.indexOf("/messages/") !== -1){
+                a.href = "/en" + path;
+            } else if(path.indexOf("/test/") !== -1 || path.indexOf("/blog/") !== -1){
+                // test and blog are shared, just go to /en/ homepage
+                a.href = "/en/";
+            }
+        } else if(text === "\u4e2d\u6587"){
+            // English page -> Chinese equivalent
+            var path = location.pathname;
+            if(path === "/en/" || path === "/en/index.html"){
+                a.href = "/";
+            } else if(path.indexOf("/en/") === 0){
+                a.href = path.replace("/en/", "/");
+            }
+        }
+    }
+})();
+
+// 一键返回顶部
+(function(){
+    var btn = document.createElement("div");
+    btn.className = "fab-top";
+    btn.innerHTML = "&#9650;";
+    btn.title = "返回顶部";
+    
+    btn.onclick = function(){ window.scrollTo({top:0,behavior:"smooth"}); };
+    document.body.appendChild(btn);
+    window.addEventListener("scroll", function(){
+        if(window.scrollY > 400){ btn.classList.add("visible"); } else { btn.classList.remove("visible"); }
+    });
+})();
+
+// 手机端汉堡菜单
+(function(){
+    var nav = document.querySelector(".topbar-nav");
+    if(!nav || window.innerWidth > 768) return;
+    var toggle = document.createElement("a");
+    toggle.className = "mobile-toggle";
+    toggle.href = "javascript:void(0)";
+    toggle.innerHTML = "<span></span><span></span><span></span>";
+    toggle.onclick = function(e){ e.preventDefault(); nav.classList.toggle("open"); };
+    nav.insertBefore(toggle, nav.firstChild);
+    document.addEventListener("click", function(e){
+        if(!nav.contains(e.target)) nav.classList.remove("open");
+    });
+})();
+
+// AI聊天窗口 - 全站生效
+    window.toggleAIChatWidget = function(){var w=document.getElementById("ai-chat-widget");var b=document.getElementById("chat-float-btn");if(!w)return;if(w.style.display==="none"||!w.style.display){w.style.display="block";b.style.display="none";}else{w.style.display="none";b.style.display="flex";}};
+(function(){
+    if(document.getElementById("ai-chat-widget")) return;
+    var btn = document.createElement("button");
+    btn.className = "fab-chat fab-chat-pulse";
+    btn.id = "chat-float-btn";
+    btn.innerHTML = "AI";
+    btn.onclick = function(){
+        document.getElementById("ai-chat-widget").style.display = "block";
+        btn.style.display = "none";
+    };
+    document.body.appendChild(btn);
+    var widget = document.createElement("div");
+    widget.id = "ai-chat-widget";
+    widget.className = "chat-widget";
+    widget.style.display = "none";
+    widget.innerHTML = '<div class="chat-container"><div class="chat-head"><span class="chat-head-title">一宅一句 · AI风水助手</span><span class="chat-head-close" onclick="document.getElementById(&apos;ai-chat-widget&apos;).style.display=&apos;none&apos;;document.getElementById(&apos;chat-float-btn&apos;).style.display=&apos;flex&apos;">✕</span></div><div class="chat-body" id="chat-messages-widget"><div class="chat-msg bot">您好，我是「一宅一句」AI风水助手。<br>新用户可<strong>免费3次</strong>提问。解锁体验包（￥99）：1份深度报告 + 48小时内3次追问。</div><div class="chat-quick"><button onclick="quickAsk(&apos;我想算算财运&apos;)">财运</button><button onclick="quickAsk(&apos;我想看姻缘&apos;)">姻缘</button><button onclick="quickAsk(&apos;帮我看看房子&apos;)">房子</button><button onclick="quickAsk(&apos;犯太岁怎么办&apos;)">太岁</button></div></div><div class="chat-foot"><input id="chat-input" type="text" placeholder="输入您的风水问题..." onkeypress="if(event.key===&apos;Enter&apos;)sendChatMessage()"><button onclick="sendChatMessage()">发送</button></div></div>';
+    document.body.appendChild(widget);
+    window.quickAsk = function(q){
+        document.getElementById("chat-input").value = q;
+        sendChatMessage();
+    };
+    window.sendChatMessage = function(){
+        var input = document.getElementById("chat-input");
+        var msg = input.value.trim();
+        if(!msg) return;
+        var ms = document.getElementById("chat-messages-widget");
+        var el = document.createElement("div");
+        el.className = "chat-msg user";
+        el.textContent = msg;
+        ms.appendChild(el);
+        input.value = "";
+        var thinking = document.createElement("div");
+        thinking.className = "chat-msg bot";
+        thinking.textContent = "思考中...";
+        thinking.id = "chat-thinking";
+        ms.appendChild(thinking);
+        ms.scrollTop = ms.scrollHeight;
+        fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({type:"对话咨询",message:msg})})
+        .then(function(r){return r.json();})
+        .then(function(data){
+            var t=document.getElementById("chat-thinking");if(t)t.remove();
+            var answer=data.answer||data.reply||"抱歉，AI正在休息，请加微信详谈";
+            var r=document.createElement("div");r.className="chat-msg bot";r.textContent=answer;ms.appendChild(r);ms.scrollTop=ms.scrollHeight;
+        })
+        .catch(function(){
+            var t=document.getElementById("chat-thinking");if(t)t.remove();
+            var r=document.createElement("div");r.className="chat-msg bot";r.textContent="网络问题，请稍后再试。";ms.appendChild(r);
+        });
+    };
+})();

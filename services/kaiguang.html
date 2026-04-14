@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句开光法物：水晶摆件、貔貅开光、风水罗盘、转运手链等。正规开光加持，助你招财转运。">
     <meta name="keywords" content="开光,貔貅开光,风水摆件,转运手链,风水罗盘,水晶摆件,一宅一句">
     <link rel="canonical" href="https://12zn.com/services/kaiguang.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="开光法物 | 一宅一句 - 水晶摆件·貔貅开光·风水罗盘·转运手链">
     <meta property="og:description" content="一宅一句开光法物：水晶摆件、貔貅开光、风水罗盘、转运手链等。正规开光加持，助你招财转运。">
     <meta property="og:url" content="https://12zn.com/services/kaiguang.html">
@@ -16,7 +16,81 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <meta property="og:image" content="https://12zn.com/images/og/kaiguang.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/kaiguang.jpg">
+    <script type=application/ld+json>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://12zn.com/services/kaiguang.html#service",
+      "name": "开光加持",
+      "description": "一宅一句开光加持服务：佛像、神像、吉祥物、护身符开光。正规仪轨，专人操作。",
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://12zn.com/#organization",
+        "name": "一宅一句",
+        "url": "https://12zn.com/"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "China"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://12zn.com/services/kaiguang.html"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "199",
+        "priceCurrency": "CNY",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://12zn.com/services/kaiguang.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "开光后的物品有什么注意事项？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "开光后需保持恭敬心，避免污秽接触，定期清洁，不要随意丢弃或转送他人。"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首页",
+          "item": "https://12zn.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "服务",
+          "item": "https://12zn.com/services/all.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "开光加持",
+          "item": "https://12zn.com/services/kaiguang.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <!-- Sticky 导航 -->
@@ -24,11 +98,14 @@
         <div class="topbar-inner">
             <a href="../index.html" class="topbar-brand">一宅一句</a>
             <div class="topbar-nav">
-                <a href="../index.html#services">服务</a>
-                <a href="../index.html#pricing">报价</a>
-                <a href="../index.html#cases">案例</a>
-                <a href="../index.html#messages">留言</a>
-                <a href="../index.html" class="topbar-cta">返回首页</a>
+                <a href="../index.html">服务</a>
+                <a href="../test/">测试</a>
+                <a href="../blog/">文章</a>
+                <a href="../services/pricing.html">报价</a>
+                <a href="../services/cases.html">案例</a>
+                <a href="../services/faq.html">FAQ</a>
+                <a href="../en/">EN</a>
+                <a href="../services/zhenren.html" class="topbar-cta">预约咨询</a>
             </div>
         </div>
     </nav>
@@ -37,7 +114,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
-            <a href="../index.html#services">服务</a><span>›</span>
+            <a href="../index.html">服务</a><span>›</span>
             开光法物
         </div>
     </div>
@@ -115,19 +192,21 @@
             </div>
             <div class="service-price-table">
                 <div class="service-price-item">
-                    <h4>转运手链</h4>
-                    <div class="price">¥199起</div>
-                    <p>天然材质手链，含开光加持费用，根据您的八字推荐最适合的材质（黑曜石、虎眼石、朱砂等），附赠佩戴指南与保养说明。</p>
+                    <h4>转运手链/小件</h4>
+                    <div class="price">¥499起</div>
+                    <p>小型法物开光加持，如手链、吊坠、钥匙扣等，含八字匹配和开光仪式。</p>
+                    <button onclick="openPayModal('talisman_99')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥499</button>
                 </div>
                 <div class="service-price-item">
-                    <h4>貔貅开光</h4>
-                    <div class="price">¥399起</div>
-                    <p>含貔貅本体与专业开光仪式费用，可选玉质、铜质等不同材质，每尊貔貅均为师傅亲自开光，附赠红布底座与开光证书。</p>
+                    <h4>貔貅/摆件开光</h4>
+                    <div class="price">¥999</div>
+                    <p>大型法物开光，如貔貅、水晶球、风水摆件等，包含详细摆放指导。</p>
+                    <button onclick="openPayModal('consult_99')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥999</button>
                 </div>
                 <div class="service-price-item">
-                    <h4>水晶摆件</h4>
-                    <div class="price">¥599起</div>
-                    <p>天然水晶摆件含开光费用，根据摆件大小和品质定价，提供天然鉴定证书与开光证书，适合家居或办公室摆放招财聚气。</p>
+                    <h4>全套开光</h4>
+                    <div class="price">请询价</div>
+                    <p>多件法物组合开光或特殊法物定制。</p>
                 </div>
             </div>
         </div>
@@ -177,12 +256,14 @@
         <div class="footer-links">
             <a href="../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../index.html#services">全部服务</a>
+            <a href="../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
         </div>
     </footer>
 
-    <script src="../js/shared.js?v=20260223"></script>
+    <script src="../js/shared.js?v=20260417"></script>
 </body>
 </html>

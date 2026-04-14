@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句姓名吉凶测试：输入姓名，AI分析五格数理吉凶、五行属性、性格事业婚姻运势。免费测试！">
     <meta name="keywords" content="姓名测试,姓名吉凶,五格数理,姓名分析,名字测试,免费姓名测试">
     <link rel="canonical" href="https://12zn.com/services/test-xingming.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="姓名吉凶测试 | 一宅一句 - 免费测姓名五格数理">
     <meta property="og:description" content="一宅一句姓名吉凶测试：输入姓名，AI分析五格数理吉凶、五行属性、性格事业婚姻运势。免费测试！">
     <meta property="og:url" content="https://12zn.com/services/test-xingming.html">
@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
     <style>
         /* === 测试页面专属样式 === */
         .test-container {
@@ -559,18 +559,26 @@
             }
         }
     </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"姓名测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">
             <a href="../index.html" class="topbar-brand">一宅一句</a>
-            <div class="topbar-nav">
-                <a href="../index.html#services">服务</a>
-                <a href="../index.html#pricing">报价</a>
-                <a href="../index.html#cases">案例</a>
-                <a href="../index.html#messages">留言</a>
-                <a href="../index.html" class="topbar-cta">返回首页</a>
+            <div class=topbar-nav>
+                <a href=../index.html>服务</a>
+                <a href=../test/>测试</a>
+                <a href=../blog/>文章</a>
+                <a href=../services/pricing.html>报价</a>
+                <a href=../services/cases.html>案例</a>
+                <a href=../services/faq.html>FAQ</a>
+                <a href=../en/>EN</a>
+                <a href=../services/zhenren.html class=topbar-cta>预约咨询</a>
             </div>
         </div>
     </nav>
@@ -579,7 +587,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
-            <a href="../index.html#services">服务</a><span>›</span>
+            <a href="../index.html">服务</a><span>›</span>
             姓名吉凶测试
         </div>
     </div>
@@ -705,13 +713,22 @@
                     <h3>想获取专业的起名/改名服务？</h3>
                     <p>资深命理师结合八字五行，为您量身定制好名</p>
                     <div class="cta-buttons">
-                        <button class="cta-btn cta-btn--primary" onclick="openPayModal('consult_199')">专业起名 ¥199</button>
+                        <button class="cta-btn cta-btn--primary" onclick="openPayModal('consult_199')">专业起名 ¥499</button>
                         <button class="cta-btn cta-btn--secondary" onclick="window.location.href='../index.html#contact'">添加微信咨询</button>
                     </div>
                 </div>
 
                 <!-- 重测 -->
-                <button class="btn-retry" onclick="resetTest()">重新测试其他姓名</button>
+                
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+<button class="btn-retry" onclick="resetTest()">重新测试其他姓名</button>
             </div>
 
         </div>
@@ -724,13 +741,15 @@
         <div class="footer-links">
             <a href="../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../index.html#services">全部服务</a>
+            <a href="../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
         </div>
     </footer>
 
-    <script src="../js/shared.js?v=20260223"></script>
+    <script src="../js/shared.js?v=20260417"></script>
     <script>
     /* === 姓名吉凶测试算法 === */
 
@@ -1207,5 +1226,38 @@
     shakeStyle.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }';
     document.head.appendChild(shakeStyle);
     </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"姓名测试怎么测？","acceptedAnswer":{"@type":"Answer","text":"输入姓名和出生日期，系统会根据姓名学中的五格剖象法和生辰八字五行理论分析你的性格特质和运势倾向。"}},{"@type":"Question","name":"名字会影响运势吗？","acceptedAnswer":{"@type":"Answer","text":"在传统文化中名字被认为蕴含能量，现代观点更倾向于通过心理暗示影响个人发展。"}}]}</script><script>
+var TESTS_DATA = [
+{"file":"test-yunshi.html","icon":"🔮","title":"今日运势速测"},
+{"file":"test-wuxing.html","icon":"🌊","title":"五行属性测试"},
+{"file":"test-fengshui.html","icon":"🏠","title":"家居风水评分"},
+{"file":"test-xingming.html","icon":"✍️","title":"姓名吉凶测试"},
+{"file":"test-taohua.html","icon":"🌸","title":"桃花运测试"},
+{"file":"test-ta-aini.html","icon":"💕","title":"Ta是否爱你"},
+{"file":"test-caishang.html","icon":"💰","title":"财商测试"},
+{"file":"test-xinli.html","icon":"🧠","title":"心理年龄测试"},
+{"file":"test-mianxiang.html","icon":"👤","title":"面相气质测试"},
+{"file":"test-qianshi.html","icon":"🌙","title":"前世今生测试"},
+{"file":"test-lucky.html","icon":"🍀","title":"幸运色测试"},
+{"file":"test-ziwei.html","icon":"⭐","title":"紫微斗数排盘"}
+];
+window.shareResult=function(){
+var t=document.title.replace(/\s*\|.*$/,'');
+var r=document.querySelector('.result-hero');
+var rt=r?r.textContent.trim():'';
+var txt='我在一宅一句测了「'+t+'」\n'+rt+'\n\n你也来测测：'+window.location.href;
+if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)})}
+else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)}
+};
+(function(){
+var c=document.getElementById('related-tests');if(!c)return;
+var cf=window.location.pathname.split('/').pop();
+var r=TESTS_DATA.filter(function(t){return t.file!==cf});
+r.sort(function(){return Math.random()-0.5});
+var p=r.slice(0,4);var h='';
+for(var i=0;i<p.length;i++)h+='<a href="'+p[i].file+'" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">'+p[i].icon+' '+p[i].title+'</a>';
+c.innerHTML=h;
+})();
+</script>
 </body>
 </html>

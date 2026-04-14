@@ -7,7 +7,7 @@
     <meta name="description" content="一宅一句今日运势速测：输入生肖，AI秒测今日运势吉凶、财运、感情运、事业运。免费好玩，快来试试！">
     <meta name="keywords" content="今日运势,运势测试,生肖运势,每日运势,运势查询,免费测运势">
     <link rel="canonical" href="https://12zn.com/services/test-yunshi.html">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="今日运势速测 | 一宅一句 - 免费测今日运势吉凶">
     <meta property="og:description" content="一宅一句今日运势速测：输入生肖，AI秒测今日运势吉凶、财运、感情运、事业运。免费好玩，快来试试！">
     <meta property="og:url" content="https://12zn.com/services/test-yunshi.html">
@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/shared.css?v=20260223">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
     <style>
         /* 运势测试页专用样式 */
         .test-card {
@@ -422,18 +422,26 @@
             .yiji-grid { grid-template-columns: 1fr; }
         }
     </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"今日运势速测"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">
             <a href="../index.html" class="topbar-brand">一宅一句</a>
-            <div class="topbar-nav">
-                <a href="../index.html#services">服务</a>
-                <a href="../index.html#pricing">报价</a>
-                <a href="../index.html#cases">案例</a>
-                <a href="../index.html#messages">留言</a>
-                <a href="../index.html" class="topbar-cta">返回首页</a>
+            <div class=topbar-nav>
+                <a href=../index.html>服务</a>
+                <a href=../test/>测试</a>
+                <a href=../blog/>文章</a>
+                <a href=../services/pricing.html>报价</a>
+                <a href=../services/cases.html>案例</a>
+                <a href=../services/faq.html>FAQ</a>
+                <a href=../en/>EN</a>
+                <a href=../services/zhenren.html class=topbar-cta>预约咨询</a>
             </div>
         </div>
     </nav>
@@ -442,7 +450,7 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
-            <a href="../index.html#services">服务</a><span>›</span>
+            <a href="../index.html">服务</a><span>›</span>
             今日运势速测
         </div>
     </div>
@@ -583,19 +591,41 @@
                     <h3>想了解更详细的运势分析？</h3>
                     <p class="cta-sub">深度解读流年运势，定制专属化解方案</p>
                     <div class="cta-buttons">
-                        <button class="btn-cta-deep" onclick="openPayModal('ai_deep')">AI深度分析 ¥9.9</button>
-                        <a class="btn-cta-wechat" href="#wechat-section">添加微信咨询</a>
+                        <button class="btn-cta-deep" onclick="openPayModal('ai_deep')">AI深度分析 ¥99</button>
+                        <a class="btn-cta-wechat" href="">添加微信咨询</a>
                     </div>
                 </div>
 
                 <!-- 重新测试按钮 -->
-                <button class="btn-retest fade-in" style="animation-delay: 0.7s;" onclick="resetTest()">重新测算</button>
+                
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+<button class="btn-retest fade-in" style="animation-delay: 0.7s;" onclick="resetTest()">重新测算</button>
             </div>
 
         </div>
     </div>
 
     <!-- 微信 CTA -->
+<section style="max-width:640px;margin:0 auto;padding:0 24px 32px;">
+    <div style="background:var(--white);border:1px solid var(--border-soft);border-radius:14px;padding:24px;">
+        <h3 style="font-family:Noto Serif SC,serif;font-size:1rem;color:var(--ink);margin-bottom:16px;">更多趣味测试</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+            <a href="../test/" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">🔮 全部测试</a>
+            <a href="test-yunshi.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">📅 今日运势</a>
+            <a href="test-xinli.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">💭 心理年龄</a>
+            <a href="test-fengshui.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">🏠 风水评分</a>
+            <a href="test-taohua.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">🌸 桃花运</a>
+            <a href="test-wuxing.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;transition:all .2s;">🌊 五行属性</a>
+        </div>
+    </div>
+</section>
     <section class="wechat-section" id="wechat-section">
         <div class="wechat-inner">
             <h2>获取更详细的运势解读</h2>
@@ -612,13 +642,15 @@
         <div class="footer-links">
             <a href="../index.html">首页</a>
             <span class="sep">·</span>
-            <a href="../index.html#services">全部服务</a>
+            <a href="../index.html">全部服务</a>
             <span class="sep">·</span>
-            <a href="https://x.com/y5065236990506" target="_blank">Twitter</a>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
         </div>
     </footer>
 
-    <script src="../js/shared.js?v=20260223"></script>
+    <script src="../js/shared.js?v=20260417"></script>
 
     <script>
     /* === 今日运势速测 核心逻辑 === */
@@ -902,5 +934,70 @@
         }
     }
     </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "今日运势测试怎么测？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "输入您的姓名和出生日期，系统会根据传统命理算法，结合今日天干地支、五行生克关系，自动生成今日运势评分和详细解读，包括综合运势、财运、事业运、感情运等方面。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "运势测试的结果准确吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "运势测试基于传统命理学中的天干地支和五行理论，属于传统文化趣味解读，结果仅供参考和娱乐，不构成任何决策建议。如需精准分析，建议咨询专业风水命理师进行一对一解读。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "每天都可以测今日运势吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。每日运势会根据当天的天干地支变化而不同，所以每天测试的结果都会更新。建议每天早上测一次，作为当日行事的趣味参考。"
+      }
+    }
+  ]
+}
+</script>
+<script>
+var TESTS_DATA = [
+{"file":"test-yunshi.html","icon":"🔮","title":"今日运势速测"},
+{"file":"test-wuxing.html","icon":"🌊","title":"五行属性测试"},
+{"file":"test-fengshui.html","icon":"🏠","title":"家居风水评分"},
+{"file":"test-xingming.html","icon":"✍️","title":"姓名吉凶测试"},
+{"file":"test-taohua.html","icon":"🌸","title":"桃花运测试"},
+{"file":"test-ta-aini.html","icon":"💕","title":"Ta是否爱你"},
+{"file":"test-caishang.html","icon":"💰","title":"财商测试"},
+{"file":"test-xinli.html","icon":"🧠","title":"心理年龄测试"},
+{"file":"test-mianxiang.html","icon":"👤","title":"面相气质测试"},
+{"file":"test-qianshi.html","icon":"🌙","title":"前世今生测试"},
+{"file":"test-lucky.html","icon":"🍀","title":"幸运色测试"},
+{"file":"test-ziwei.html","icon":"⭐","title":"紫微斗数排盘"}
+];
+window.shareResult=function(){
+var t=document.title.replace(/\s*\|.*$/,'');
+var r=document.querySelector('.result-hero');
+var rt=r?r.textContent.trim():'';
+var txt='我在一宅一句测了「'+t+'」\n'+rt+'\n\n你也来测测：'+window.location.href;
+if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)})}
+else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)}
+};
+(function(){
+var c=document.getElementById('related-tests');if(!c)return;
+var cf=window.location.pathname.split('/').pop();
+var r=TESTS_DATA.filter(function(t){return t.file!==cf});
+r.sort(function(){return Math.random()-0.5});
+var p=r.slice(0,4);var h='';
+for(var i=0;i<p.length;i++)h+='<a href="'+p[i].file+'" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">'+p[i].icon+' '+p[i].title+'</a>';
+c.innerHTML=h;
+})();
+</script>
 </body>
 </html>

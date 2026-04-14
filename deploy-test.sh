@@ -1,8 +1,8 @@
 #!/bin/bash
 # 部署趣味测试到VPS
 
-VPS_IP="124.156.176.155"
-VPS_USER="root"
+VPS_IP="100.66.169.115"
+VPS_USER="ubuntu"
 VPS_PATH="/home/ubuntu/fengshui-website"
 
 echo "=== 部署趣味测试到VPS ==="

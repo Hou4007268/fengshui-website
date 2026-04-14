@@ -3,296 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>留言板 - 一宅一句</title>
-    <meta name="description" content="用户留言交流">
+    <title>客户留言板 | 一宅一句 - 真实用户评价</title>
+    <meta name="description" content="一宅一句客户留言板：查看真实用户评价和风水咨询反馈。免费发表留言，交流风水心得。">
+    <link rel="canonical" href="https://12zn.com/messages/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-        header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(0,0,0,0.3);
-        }
-        header h1 {
-            font-size: 1.5rem;
-            background: linear-gradient(90deg, #f093fb, #f5576c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        
-        .form-card {
-            background: rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .form-card h2 {
-            color: #f5576c;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        .form-group { margin-bottom: 15px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(0,0,0,0.3);
-            color: #fff;
-            font-size: 1rem;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #f5576c;
-        }
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .btn {
-            width: 100%;
-            background: linear-gradient(90deg, #f093fb, #f5576c);
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .btn:hover { opacity: 0.9; }
-        
-        .message-list h2 {
-            color: #f5576c;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .message-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 3px solid #f5576c;
-        }
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .message-name {
-            color: #f093fb;
-            font-weight: 500;
-        }
-        .message-time {
-            color: #666;
-            font-size: 0.8rem;
-        }
-        .message-content {
-            color: #ddd;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-        .message-contact {
-            color: #888;
-            font-size: 0.85rem;
-        }
-        .reply {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(240,147,251,0.1);
-            border-radius: 8px;
-            border-left: 3px solid #f093fb;
-        }
-        .reply-label {
-            color: #f093fb;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-        }
-        .reply-text {
-            color: #ccc;
-            line-height: 1.5;
-        }
-        
-        .empty {
-            text-align: center;
-            color: #666;
-            padding: 40px;
-        }
-        
-        .toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9);
-            color: #fff;
-            padding: 20px 40px;
-            border-radius: 12px;
-            display: none;
-            z-index: 1000;
-        }
-        
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-        }
-        nav a {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.8rem;
-        }
-        nav a.active { color: #f5576c; }
+        .msg-page { max-width: 720px; margin: 0 auto; padding: 0 24px 48px; }
+        .msg-form { background: var(--white); border: 1px solid var(--border-soft); border-radius: 14px; padding: 24px; margin-bottom: 32px; }
+        .msg-form h3 { font-family: 'Noto Serif SC', serif; font-size: 1rem; color: var(--ink); margin-bottom: 16px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text); margin-bottom: 6px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-soft); border-radius: 8px; font-size: 0.9rem; font-family: inherit; color: var(--text); background: var(--white); transition: border-color .2s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .btn-submit { display: inline-block; padding: 12px 28px; background: var(--gold); color: #fff; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .2s; }
+        .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(166,138,62,0.25); }
+        .msg-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .msg-list-header h3 { font-family: 'Noto Serif SC', serif; font-size: 1rem; color: var(--ink); }
+        .msg-count { font-size: 0.82rem; color: var(--text-secondary); }
+        .msg-card { background: var(--white); border: 1px solid var(--border-soft); border-radius: 14px; padding: 20px; margin-bottom: 12px; }
+        .msg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .msg-name { font-weight: 600; color: var(--ink); font-size: 0.9rem; }
+        .msg-time { font-size: 0.78rem; color: var(--text-light); }
+        .msg-content { font-size: 0.9rem; color: var(--text); line-height: 1.8; }
+        .msg-reply { margin-top: 12px; padding: 12px 16px; background: #faf6ec; border-radius: 10px; border-left: 3px solid var(--gold); }
+        .msg-reply-label { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+        .msg-reply-text { font-size: 0.88rem; color: var(--text); line-height: 1.8; }
+        .msg-empty { text-align: center; padding: 40px; color: var(--text-secondary); font-size: 0.9rem; }
+        .load-more { display: block; text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--gold); text-decoration: none; cursor: pointer; background: none; border: none; font-family: inherit; }
+        .load-more:hover { text-decoration: underline; }
     </style>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
 </head>
 <body>
-    <header>
-        <h1>🏮 留言板</h1>
-    </header>
-    
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../index.html">服务</a>
+                <a href="../test/">测试</a>
+                <a href="../blog/">文章</a>
+                <a href="../services/pricing.html">报价</a>
+                <a href="../services/cases.html">案例</a>
+                <a href="../services/faq.html">FAQ</a>
+                <a href="../en/">EN</a>
+                <a href="../services/zhenren.html" class="topbar-cta">预约咨询</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        <div class="form-card">
-            <h2>💬 我要留言</h2>
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            客户留言板
+        </div>
+    </div>
+    <section class="service-hero">
+        <div class="service-icon">💬</div>
+        <h1>客户留言板</h1>
+        <p class="service-tagline">真实用户评价，交流风水心得</p>
+    </section>
+    <div class="msg-page">
+        <div class="msg-form">
+            <h3>发表留言</h3>
             <div class="form-group">
-                <label>昵称</label>
-                <input type="text" id="name" placeholder="请输入昵称">
+                <label>昵称 *</label>
+                <input type="text" id="msg-name" placeholder="你的昵称" maxlength="20">
             </div>
             <div class="form-group">
-                <label>留言内容</label>
-                <textarea id="content" placeholder="请输入您的留言..."></textarea>
+                <label>留言内容 *</label>
+                <textarea id="msg-content" placeholder="写下你的问题或感想..." maxlength="500"></textarea>
             </div>
             <div class="form-group">
                 <label>联系方式（选填）</label>
-                <input type="text" id="contact" placeholder="微信或电话">
+                <input type="text" id="msg-contact" placeholder="微信号/QQ/手机号">
             </div>
-            <button class="btn" onclick="submitMessage()">提交留言</button>
+            <button class="btn-submit" onclick="submitMsg()">发表留言</button>
         </div>
-        
-        <div class="message-list">
-            <h2>📋 全部留言 <span id="count">(0)</span></h2>
-            <div id="messages">
-                <div class="empty">暂无留言，快来抢沙发~</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="toast" id="toast">提交成功！</div>
-    
-    <nav>
-        <a href="/">🏠 首页</a>
-        <a href="/fortune/">🔮 运势</a>
-        <a href="/messages/" class="active">💬 留言</a>
-        <a href="/login.html">👤 我的</a>
-    </nav>
 
+        <div class="msg-list-header">
+            <h3>全部留言</h3>
+            <span class="msg-count" id="msg-count"></span>
+        </div>
+        <div id="msg-list"></div>
+        <button class="load-more" id="load-more" onclick="loadMore()" style="display:none;">加载更多</button>
+    </div>
+
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>想获得专业解答？</h2>
+            <p class="wechat-sub">扫码添加微信，一对一详细沟通</p>
+            <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+    </footer>
+
+    <script src="../js/shared.js?v=20260417"></script>
     <script>
-        var messages = JSON.parse(localStorage.getItem('fengshui_messages') || '[]');
-        
-        // Demo messages if empty
-        if (messages.length === 0) {
-            messages = [
-                {name: "风水小白", content: "老师说的财位布局真的管用！我家客厅东南角放了植物，这周工作顺利多了！", time: "2026-02-15 14:30", contact: "", reply: "👍 恭喜！财位旺运，继续保持"},
-                {name: "小明", content: "请问大门正对阳台怎么化解？", time: "2026-02-14 09:20", contact: "wx: xm123", reply: "建议放玄关柜或屏风阻隔"},
-                {name: "紫微星", content: "关注很久了，确实是真实案例，不是网上那些骗人的。", time: "2026-02-13 18:45", contact: "", reply: "谢谢支持！只讲见过的事"},
-                {name: "财源滚滚", content: "去年找老师看的店铺，今年生意明显好转，谢谢老师！", time: "2026-02-12 10:15", contact: "", reply: "恭喜发财！继续保持"},
-                {name: "迷茫的打工人", content: "工作一直不顺，想问一下事业方向，老师能帮忙看看吗？", time: "2026-02-11 16:40", contact: "wx: ml123", reply: "可以预约详细分析"},
-                {name: "新房主", content: "刚买了新房，想请老师帮忙看看风水布局，收费怎么算？", time: "2026-02-10 11:20", contact: "wx: newhouse", reply: "详情可加微信了解"},
-                {name: "传统文化爱好者", content: "文章写得真好，风水确实有道理，支持！", time: "2026-02-09 08:30", contact: "", reply: "感谢支持！"},
-                {name: "周易研究者", content: "老师讲的内容很专业，不是那种坑蒙拐骗的，赞！", time: "2026-02-08 19:50", contact: "", reply: "共同学习！"},
-                {name: "换了新工作", content: "听老师建议调整了办公室座位，这几天心情好多了！", time: "2026-02-07 14:00", contact: "", reply: "👍 好的开始"},
-                {name: "孩子妈", content: "想给孩子起个好名字，老师有什么建议吗？", time: "2026-02-06 09:30", contact: "wx: mom88", reply: "可预约起名服务"}
-            ];
-        }
-        
-        function renderMessages() {
-            var html = '';
-            if (messages.length === 0) {
-                html = '<div class="empty">暂无留言，快来抢沙发~</div>';
-            } else {
-                for (var i = 0; i < messages.length; i++) {
-                    var m = messages[i];
-                    html += '<div class="message-card">';
-                    html += '<div class="message-header">';
-                    html += '<span class="message-name">' + m.name + '</span>';
-                    html += '<span class="message-time">' + m.time + '</span>';
-                    html += '</div>';
-                    html += '<div class="message-content">' + m.content + '</div>';
-                    if (m.contact) {
-                        html += '<div class="message-contact">联系方式: ' + m.contact + '</div>';
-                    }
-                    if (m.reply) {
-                        html += '<div class="reply">';
-                        html += '<div class="reply-label">✏️ 博主回复:</div>';
-                        html += '<div class="reply-text">' + m.reply + '</div>';
-                        html += '</div>';
-                    }
-                    html += '</div>';
+    var msgOffset = 0;
+    var msgLimit = 20;
+
+    function loadMessages(reset) {
+        if (reset) msgOffset = 0;
+        fetch('/api/messages?offset=' + msgOffset + '&limit=' + msgLimit)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                var list = document.getElementById('msg-list');
+                if (reset) list.innerHTML = '';
+                var msgs = data.messages || [];
+                if (msgs.length === 0 && msgOffset === 0) {
+                    list.innerHTML = '<div class="msg-empty">暂无留言，快来抢沙发~</div>';
+                    return;
                 }
+                for (var i = 0; i < msgs.length; i++) {
+                    var m = msgs[i];
+                    var card = document.createElement('div');
+                    card.className = 'msg-card';
+                    var html = '<div class="msg-header"><span class="msg-name">' + esc(m.name || '匿名') + '</span><span class="msg-time">' + fmtTime(m.created_at) + '</span></div>';
+                    html += '<div class="msg-content">' + esc(m.content || '') + '</div>';
+                    if (m.reply) {
+                        html += '<div class="msg-reply"><div class="msg-reply-label">✏️ 博主回复</div><div class="msg-reply-text">' + esc(m.reply) + '</div></div>';
+                    }
+                    card.innerHTML = html;
+                    list.appendChild(card);
+                }
+                msgOffset += msgs.length;
+                document.getElementById('msg-count').textContent = '共 ' + (data.total || msgOffset) + ' 条';
+                document.getElementById('load-more').style.display = msgs.length >= msgLimit ? 'block' : 'none';
+            })
+            .catch(function() {
+                if (reset) document.getElementById('msg-list').innerHTML = '<div class="msg-empty">加载失败，请刷新重试</div>';
+            });
+    }
+
+    function loadMore() { loadMessages(false); }
+
+    function submitMsg() {
+        var name = document.getElementById('msg-name').value.trim();
+        var content = document.getElementById('msg-content').value.trim();
+        var contact = document.getElementById('msg-contact').value.trim();
+        if (!name || !content) { alert('请填写昵称和留言内容'); return; }
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name: name, content: content, contact: contact})
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                document.getElementById('msg-name').value = '';
+                document.getElementById('msg-content').value = '';
+                document.getElementById('msg-contact').value = '';
+                loadMessages(true);
+                alert('留言成功！');
+            } else {
+                alert('提交失败：' + (data.error || '请重试'));
             }
-            document.getElementById('messages').innerHTML = html;
-            document.getElementById('count').textContent = '(' + messages.length + ')';
-        }
-        
-        function submitMessage() {
-            var name = document.getElementById('name').value.trim();
-            var content = document.getElementById('content').value.trim();
-            var contact = document.getElementById('contact').value.trim();
-            
-            if (!name || !content) {
-                alert('请填写昵称和留言内容');
-                return;
-            }
-            
-            var msg = {
-                name: name,
-                content: content,
-                contact: contact,
-                time: new Date().toLocaleString('zh-CN'),
-                reply: ''
-            };
-            
-            messages.unshift(msg);
-            localStorage.setItem('fengshui_messages', JSON.stringify(messages));
-            
-            document.getElementById('name').value = '';
-            document.getElementById('content').value = '';
-            document.getElementById('contact').value = '';
-            
-            var toast = document.getElementById('toast');
-            toast.style.display = 'block';
-            setTimeout(function() {
-                toast.style.display = 'none';
-            }, 2000);
-            
-            renderMessages();
-        }
-        
-        renderMessages();
+        })
+        .catch(function() { alert('网络错误，请重试'); });
+    }
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function fmtTime(t) {
+        if (!t) return '';
+        var d = new Date(t);
+        return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0') + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+    }
+
+    loadMessages(true);
     </script>
 </body>
 </html>
