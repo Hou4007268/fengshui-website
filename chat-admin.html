@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>张师傅 - 客户消息</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #f6f2eb;
+    --gold: #a68a3e;
+    --gold-light: #d4c098;
+    --red: #b5452a;
+    --white: #fff;
+    --text: #333;
+    --text-light: #888;
+    --border: #e5e0d5;
+}
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; }
+
+/* Login */
+.login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+.login-card { background: var(--white); border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 360px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center; }
+.login-card h1 { font-size: 1.4rem; color: var(--gold); margin-bottom: 8px; }
+.login-card p { color: var(--text-light); font-size: 0.85rem; margin-bottom: 24px; }
+.login-card input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+.login-card input:focus { border-color: var(--gold); }
+.login-card button { width: 100%; margin-top: 16px; padding: 12px; background: var(--gold); color: #fff; border: none; border-radius: 10px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+.login-card button:hover { background: #8f7534; }
+.login-error { color: var(--red); font-size: 0.8rem; margin-top: 10px; min-height: 20px; }
+
+/* Main App */
+.app { display: none; flex-direction: column; height: 100vh; }
+.app.active { display: flex; }
+
+/* Top bar */
+.topbar { background: var(--white); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.topbar h2 { font-size: 1.1rem; color: var(--text); }
+.topbar .badge { background: var(--red); color: #fff; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+.topbar .logout { font-size: 0.8rem; color: var(--text-light); cursor: pointer; padding: 6px 12px; border-radius: 6px; }
+.topbar .logout:hover { background: #f0ebe3; }
+
+/* Session list */
+.session-list { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.session-item { display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+.session-item:hover, .session-item:active { background: #f0ebe3; }
+.session-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--white); flex-shrink: 0; margin-right: 12px; }
+.session-info { flex: 1; min-width: 0; }
+.session-name { font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.session-time { font-size: 0.7rem; color: var(--text-light); margin-left: auto; flex-shrink: 0; }
+.session-preview { font-size: 0.8rem; color: var(--text-light); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.session-unread { background: var(--red); color: #fff; font-size: 0.65rem; min-width: 18px; height: 18px; border-radius: 9px; display: flex; align-items: center; justify-content: center; padding: 0 5px; flex-shrink: 0; margin-left: 8px; }
+
+/* Chat view */
+.chat-view { display: none; flex-direction: column; height: 100vh; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 100; }
+.chat-view.active { display: flex; }
+.chat-header { background: var(--white); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; flex-shrink: 0; }
+.chat-back { font-size: 1.4rem; cursor: pointer; padding: 4px 8px; margin-right: 8px; color: var(--gold); }
+.chat-header-info { flex: 1; }
+.chat-header-name { font-size: 1rem; font-weight: 500; }
+.chat-header-sub { font-size: 0.75rem; color: var(--text-light); }
+
+.messages { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 78%; padding: 10px 14px; border-radius: 14px; font-size: 0.9rem; line-height: 1.5; word-break: break-word; }
+.msg.user { align-self: flex-start; background: var(--white); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.msg.master { align-self: flex-end; background: var(--gold); color: #fff; border-bottom-right-radius: 4px; }
+.msg .msg-time { font-size: 0.65rem; opacity: 0.6; margin-top: 4px; text-align: right; }
+.msg.user .msg-time { color: var(--text-light); }
+.msg.system { align-self: center; background: transparent; color: var(--text-light); font-size: 0.78rem; max-width: 90%; text-align: center; padding: 4px; }
+.msg img { max-width: 100%; border-radius: 8px; margin-top: 4px; }
+
+.chat-input-bar { background: var(--white); border-top: 1px solid var(--border); padding: 10px 12px; display: flex; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+.chat-input-bar textarea { flex: 1; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 0.9rem; resize: none; outline: none; font-family: inherit; max-height: 100px; line-height: 1.4; }
+.chat-input-bar textarea:focus { border-color: var(--gold); }
+.send-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); border: none; color: #fff; font-size: 1.2rem; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.send-btn:disabled { background: #ccc; }
+
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-light); font-size: 0.9rem; }
+.empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+
+/* Loading */
+.loading { text-align: center; padding: 20px; color: var(--text-light); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-card">
+        <h1>🏠 一宅一句</h1>
+        <p>张师傅消息管理后台</p>
+        <input type="password" id="pwdInput" placeholder="请输入管理密码" onkeydown="if(event.key==='Enter')doLogin()">
+        <button onclick="doLogin()">登录</button>
+        <div class="login-error" id="loginError"></div>
+    </div>
+</div>
+
+<!-- Main App -->
+<div class="app" id="app">
+    <div class="topbar">
+        <h2>客户消息 <span class="badge" id="totalBadge" style="display:none">0</span></h2>
+        <span class="logout" onclick="doLogout()">退出</span>
+    </div>
+    <div class="session-list" id="sessionList">
+        <div class="loading">加载中...</div>
+    </div>
+</div>
+
+<!-- Chat View -->
+<div class="chat-view" id="chatView">
+    <div class="chat-header">
+        <span class="chat-back" onclick="closeChat()">←</span>
+        <div class="chat-header-info">
+            <div class="chat-header-name" id="chatName"></div>
+            <div class="chat-header-sub" id="chatSub"></div>
+        </div>
+    </div>
+    <div class="messages" id="messageList"></div>
+    <div class="chat-input-bar">
+        <textarea id="msgInput" rows="1" placeholder="输入回复..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendReply()">↑</button>
+    </div>
+</div>
+
+<script>
+const API = 'https://12zn.com/api/app/chat';
+let PASSWORD = '';
+let currentSession = '';
+let refreshTimer = null;
+
+// ===== Auth =====
+function doLogin() {
+    const pwd = document.getElementById('pwdInput').value.trim();
+    if (!pwd) return;
+    PASSWORD = pwd;
+    fetch(API + '/admin/sessions?password=' + encodeURIComponent(pwd))
+        .then(r => r.json())
+        .then(d => {
+            if (!d.success) {
+                document.getElementById('loginError').textContent = d.error || '密码错误';
+                return;
+            }
+            localStorage.setItem('chat_admin_pwd', pwd);
+            showApp(d.data);
+        })
+        .catch(() => {
+            document.getElementById('loginError').textContent = '网络错误';
+        });
+}
+
+function doLogout() {
+    localStorage.removeItem('chat_admin_pwd');
+    PASSWORD = '';
+    clearInterval(refreshTimer);
+    document.getElementById('app').classList.remove('active');
+    document.getElementById('loginScreen').style.display = 'flex';
+}
+
+// Auto-login
+(function() {
+    const saved = localStorage.getItem('chat_admin_pwd');
+    if (saved) {
+        PASSWORD = saved;
+        fetch(API + '/admin/sessions?password=' + encodeURIComponent(saved))
+            .then(r => r.json())
+            .then(d => {
+                if (d.success) showApp(d.data);
+                else { localStorage.removeItem('chat_admin_pwd'); }
+            })
+            .catch(() => {});
+    }
+})();
+
+// ===== Session List =====
+function showApp(sessions) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').classList.add('active');
+    renderSessions(sessions);
+    refreshTimer = setInterval(refreshSessions, 8000);
+}
+
+function refreshSessions() {
+    fetch(API + '/admin/sessions?password=' + encodeURIComponent(PASSWORD))
+        .then(r => r.json())
+        .then(d => { if (d.success) renderSessions(d.data); })
+        .catch(() => {});
+}
+
+function renderSessions(sessions) {
+    const list = document.getElementById('sessionList');
+    const totalUnread = sessions.reduce((s, x) => s + (x.unread_count || 0), 0);
+    const badge = document.getElementById('totalBadge');
+    if (totalUnread > 0) { badge.textContent = totalUnread; badge.style.display = 'inline'; }
+    else badge.style.display = 'none';
+
+    if (!sessions.length) {
+        list.innerHTML = '<div class="empty-state"><div class="icon">📭</div>暂无客户消息</div>';
+        return;
+    }
+
+    list.innerHTML = sessions.map(s => {
+        const time = formatTime(s.updated_at);
+        const initial = (s.user_name || '用').charAt(0);
+        const unread = s.unread_count > 0 ? `<span class="session-unread">${s.unread_count}</span>` : '';
+        return `<div class="session-item" onclick="openChat('${s.id}','${esc(s.user_name)}')">
+            <div class="session-avatar">${initial}</div>
+            <div class="session-info">
+                <div class="session-name">${esc(s.user_name || '用户')} <span class="session-time">${time}</span></div>
+                <div class="session-preview">${esc(s.last_message || '暂无消息')}</div>
+            </div>
+            ${unread}
+        </div>`;
+    }).join('');
+}
+
+// ===== Chat View =====
+function openChat(sessionId, userName) {
+    currentSession = sessionId;
+    document.getElementById('chatName').textContent = userName || '客户';
+    document.getElementById('chatView').classList.add('active');
+    loadMessages();
+    markRead();
+}
+
+function closeChat() {
+    currentSession = '';
+    document.getElementById('chatView').classList.remove('active');
+    refreshSessions();
+}
+
+function loadMessages() {
+    if (!currentSession) return;
+    fetch(API + '/messages?session_id=' + encodeURIComponent(currentSession) + '&limit=100')
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) renderMessages(d.data);
+        })
+        .catch(() => {});
+}
+
+function renderMessages(msgs) {
+    const list = document.getElementById('messageList');
+    list.innerHTML = msgs.map(m => {
+        const cls = m.sender === 'master' ? 'master' : (m.sender === 'system' ? 'system' : 'user');
+        const time = new Date(m.created_at).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        let content = esc(m.content || '');
+        if (m.msg_type === 'image') {
+            content = `<img src="${esc(m.content)}" onclick="window.open(this.src)" loading="lazy">`;
+        } else if (m.msg_type === 'voice') {
+            content = `🎤 语音消息 (${m.duration || 0}秒)`;
+        }
+        return `<div class="msg ${cls}">${content}<div class="msg-time">${time}</div></div>`;
+    }).join('');
+    list.scrollTop = list.scrollHeight;
+}
+
+function markRead() {
+    fetch(API + '/read', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: currentSession })
+    }).catch(() => {});
+}
+
+// ===== Send Reply =====
+function sendReply() {
+    const input = document.getElementById('msgInput');
+    const text = input.value.trim();
+    if (!text || !currentSession) return;
+
+    const btn = document.getElementById('sendBtn');
+    btn.disabled = true;
+    input.value = '';
+    autoResize(input);
+
+    fetch(API + '/admin/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: currentSession, content: text, password: PASSWORD })
+    })
+    .then(r => r.json())
+    .then(d => {
+        btn.disabled = false;
+        if (d.success) loadMessages();
+        else alert(d.error || '发送失败');
+    })
+    .catch(() => {
+        btn.disabled = false;
+        alert('网络错误');
+    });
+}
+
+function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendReply();
+    }
+}
+
+function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+// ===== Utils =====
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function formatTime(iso) {
+    const d = new Date(iso);
+    const now = new Date();
+    const diff = now - d;
+    if (diff < 60000) return '刚刚';
+    if (diff < 3600000) return Math.floor(diff/60000) + '分钟前';
+    if (diff < 86400000) return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }) + ' ' +
+           d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+}
+</script>
+</body>
+</html>
