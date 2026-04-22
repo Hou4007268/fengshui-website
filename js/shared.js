@@ -229,6 +229,36 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 })();
 
+
+// 登录态导航同步（未登录显示登录，已登录显示个人中心/Profile）
+(function(){
+    function syncAuthNav(){
+        var nav = document.querySelector('.topbar-nav');
+        if(!nav) return;
+        var link = nav.querySelector('a[href="/login.html"],a[href="login.html"],a[href="../login.html"]');
+        if(!link) return;
+
+        var token = '';
+        try { token = localStorage.getItem('yzj_token') || ''; } catch(e) {}
+
+        var isEnPage = location.pathname.indexOf('/en/') === 0 || location.pathname === '/en';
+
+        if(token){
+            link.setAttribute('href', '/profile.html');
+            link.textContent = isEnPage ? 'Profile' : '个人中心';
+        } else {
+            link.setAttribute('href', '/login.html');
+            link.textContent = isEnPage ? 'Login' : '登录';
+        }
+    }
+
+    if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', syncAuthNav);
+    } else {
+        syncAuthNav();
+    }
+})();
+
 // 一键返回顶部
 (function(){
     var btn = document.createElement("div");

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>账号设置 | 一宅一句</title>
+  <meta name="description" content="自动清理、密码重置与兑换码入口。" />
+  <link rel="canonical" href="https://12zn.com/settings.html" />
+  <meta property="og:title" content="账号设置 | 一宅一句" />
+  <meta property="og:description" content="自动清理、密码重置与兑换码入口。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://12zn.com/images/hero-fengshui.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="css/shared.css?v=20260422-sync" />
+  <style>
+    .simple-card{max-width:840px;margin:24px auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px}
+    .simple-card h1{font-size:1.6rem;margin:0 0 12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:768px){.grid2{grid-template-columns:1fr}}
+    label{font-size:.9rem;color:var(--muted)}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;margin-top:6px}
+    button{padding:10px 18px;border:none;border-radius:10px;background:var(--gold);color:#fff;cursor:pointer}
+    .muted{color:var(--muted);font-size:.9rem}
+    .result{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;white-space:pre-wrap;display:none}
+    .actions a{margin-right:12px;font-size:.9rem}
+  </style>
+</head>
+<body>
+<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="index.html">🏯 一宅一句</a><div class="topbar-nav"><a href="services/all.html">服务</a><a href="test/">测试</a><a href="blog/">文章</a><a href="services/pricing.html">报价</a><a href="services/cases.html">案例</a><a href="services/faq.html">FAQ</a><a href="en/">EN</a><a class="topbar-cta" href="services/pricing.html">预约咨询</a></div></div></div></nav>
+
+<main class="container"><section class="simple-card">
+<h1>账号设置</h1>
+<div class="grid2"><div><label>自动清理聊天记录</label><div style="margin-top:8px"><button id="toggle">切换周期</button> <span id="days" class="muted"></span></div></div>
+<div><label>版本</label><div style="margin-top:8px">Web v2026.04.22</div></div></div>
+<div class="actions" style="margin-top:14px">
+<a href="/redeem.html">兑换码</a>
+<a href="/login.html?mode=reset">修改密码</a>
+<a href="javascript:void(0)" id="clearChat">清空聊天缓存</a>
+</div>
+</section></main>
+<script>
+(function(){
+  var key='yzj_auto_clear_days';
+  function txt(v){ return v==0?'永久':v+'天'; }
+  var v=parseInt(localStorage.getItem(key)||'0',10);
+  var days=document.getElementById('days');
+  function render(){ days.textContent=txt(v); }
+  render();
+  document.getElementById('toggle').onclick=function(){ v=(v===7?30:(v===30?0:7)); localStorage.setItem(key,String(v)); render(); };
+  document.getElementById('clearChat').onclick=function(){ localStorage.removeItem('yzj_chat_messages'); alert('聊天缓存已清理'); };
+})();
+</script>
+
+<script src="js/shared.js?v=20260422-sync"></script>
+</body>
+</html>

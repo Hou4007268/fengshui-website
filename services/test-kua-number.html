@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>八宅命卦测试 | 一宅一句</title>
+  <meta name="description" content="输入出生年和性别，计算命卦与四吉方位。" />
+  <link rel="canonical" href="https://12zn.com/services/test-kua-number.html" />
+  <meta property="og:title" content="八宅命卦测试 | 一宅一句" />
+  <meta property="og:description" content="输入出生年和性别，计算命卦与四吉方位。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://12zn.com/images/hero-fengshui.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="../css/shared.css?v=20260422-sync" />
+  <style>
+    .simple-card{max-width:840px;margin:24px auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px}
+    .simple-card h1{font-size:1.6rem;margin:0 0 12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:768px){.grid2{grid-template-columns:1fr}}
+    label{font-size:.9rem;color:var(--muted)}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;margin-top:6px}
+    button{padding:10px 18px;border:none;border-radius:10px;background:var(--gold);color:#fff;cursor:pointer}
+    .muted{color:var(--muted);font-size:.9rem}
+    .result{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;white-space:pre-wrap;display:none}
+    .actions a{margin-right:12px;font-size:.9rem}
+  </style>
+</head>
+<body>
+<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="../index.html">🏯 一宅一句</a><div class="topbar-nav"><a href="../services/all.html">服务</a><a href="../test/">测试</a><a href="../blog/">文章</a><a href="../services/pricing.html">报价</a><a href="../services/cases.html">案例</a><a href="../services/faq.html">FAQ</a><a href="../en/">EN</a><a class="topbar-cta" href="../services/pricing.html">预约咨询</a></div></div></div></nav>
+<main class="container"><section class="simple-card"><h1>八宅命卦测试</h1><p class="muted">输入出生年和性别，计算命卦与四吉方位。</p><div class="grid2"><div><label>出生年份</label><input id="y" type="number" min="1930" max="2026" placeholder="例如 1996"></div><div><label>性别</label><select id="g"><option value="m">男</option><option value="f">女</option></select></div></div><div style="margin-top:12px"><button id="go">计算命卦</button></div><div id="result" class="result"></div><p class="muted" style="margin-top:10px">本文仅供参考，风水文化传统讲究信则有不信则无。</p></section></main><script>(function(){var r=document.getElementById('result');function sum(n){return String(n).split('').reduce((a,b)=>a+parseInt(b,10),0)}document.getElementById('go').onclick=function(){var y=parseInt(document.getElementById('y').value||'0',10);if(!y){alert('请输入出生年份');return;}var g=document.getElementById('g').value;var s=sum(y%100);while(s>9)s=sum(s);var kua=(g==='m')?(11-s):(s+4);while(kua>9)kua=sum(kua);if(kua===5)kua=(g==='m'?2:8);var good={1:'北、东南、东、南',2:'东北、西、西北、西南',3:'南、北、东南、东',4:'北、南、东、东南',6:'西北、西南、东北、西',7:'西、西北、西南、东北',8:'西南、西北、西、东北',9:'东、东南、南、北'};r.style.display='block';r.textContent='你的命卦数：'+kua+'
+四吉方：'+(good[kua]||'请咨询师傅')+'
+
+建议：床头、书桌和常坐方位优先朝向四吉方。';};})();</script>
+<script src="../js/shared.js?v=20260422-sync"></script>
+</body>
+</html>

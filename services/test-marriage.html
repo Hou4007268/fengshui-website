@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>八字合婚测试 | 一宅一句</title>
+  <meta name="description" content="输入双方生日，查看关系匹配度与相处建议。" />
+  <link rel="canonical" href="https://12zn.com/services/test-marriage.html" />
+  <meta property="og:title" content="八字合婚测试 | 一宅一句" />
+  <meta property="og:description" content="输入双方生日，查看关系匹配度与相处建议。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://12zn.com/images/hero-fengshui.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="../css/shared.css?v=20260422-sync" />
+  <style>
+    .simple-card{max-width:840px;margin:24px auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px}
+    .simple-card h1{font-size:1.6rem;margin:0 0 12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:768px){.grid2{grid-template-columns:1fr}}
+    label{font-size:.9rem;color:var(--muted)}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;margin-top:6px}
+    button{padding:10px 18px;border:none;border-radius:10px;background:var(--gold);color:#fff;cursor:pointer}
+    .muted{color:var(--muted);font-size:.9rem}
+    .result{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;white-space:pre-wrap;display:none}
+    .actions a{margin-right:12px;font-size:.9rem}
+  </style>
+</head>
+<body>
+<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="../index.html">🏯 一宅一句</a><div class="topbar-nav"><a href="../services/all.html">服务</a><a href="../test/">测试</a><a href="../blog/">文章</a><a href="../services/pricing.html">报价</a><a href="../services/cases.html">案例</a><a href="../services/faq.html">FAQ</a><a href="../en/">EN</a><a class="topbar-cta" href="../services/pricing.html">预约咨询</a></div></div></div></nav>
+<main class="container"><section class="simple-card"><h1>八字合婚测试</h1><p class="muted">输入双方生日，查看关系匹配度与相处建议。</p><div class="grid2"><div><label>你出生日期</label><input id="d1" type="date"></div><div><label>TA出生日期</label><input id="d2" type="date"></div></div><div style="margin-top:12px"><button id="go">开始合婚</button></div><div id="result" class="result"></div><p class="muted" style="margin-top:10px">本文仅供参考，风水文化传统讲究信则有不信则无。</p></section></main><script>(function(){var r=document.getElementById('result');document.getElementById('go').onclick=function(){var d1=document.getElementById('d1').value,d2=document.getElementById('d2').value;if(!d1||!d2){alert('请完整输入双方生日');return;}var a=(new Date(d1).getTime()/86400000|0)%100,b=(new Date(d2).getTime()/86400000|0)%100;var score=Math.max(55,100-Math.abs(a-b));var lv=score>=85?'上吉':(score>=70?'中吉':'平');r.style.display='block';r.textContent='合婚匹配度：'+score+'分（'+lv+'）
+
+解读：
+1) 价值观：'+(score>75?'较一致':'需要多沟通')+'
+2) 情绪互动：'+(score>80?'互补明显':'建议增强表达')+'
+3) 财务协同：'+(score>72?'可共同规划':'建议设定预算规则')+'
+
+师傅建议：合婚看缘分也看经营，结论仅作参考。';};})();</script>
+<script src="../js/shared.js?v=20260422-sync"></script>
+</body>
+</html>

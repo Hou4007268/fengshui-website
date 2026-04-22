@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人中心 | 一宅一句</title>
+  <meta name="description" content="账号信息、会员状态、我的记录与设置。" />
+  <link rel="canonical" href="https://12zn.com/profile.html" />
+  <meta property="og:title" content="个人中心 | 一宅一句" />
+  <meta property="og:description" content="账号信息、会员状态、我的记录与设置。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://12zn.com/images/hero-fengshui.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="css/shared.css?v=20260422-sync" />
+  <style>
+    .simple-card{max-width:840px;margin:24px auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px}
+    .simple-card h1{font-size:1.6rem;margin:0 0 12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:768px){.grid2{grid-template-columns:1fr}}
+    label{font-size:.9rem;color:var(--muted)}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;margin-top:6px}
+    button{padding:10px 18px;border:none;border-radius:10px;background:var(--gold);color:#fff;cursor:pointer}
+    .muted{color:var(--muted);font-size:.9rem}
+    .result{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;white-space:pre-wrap;display:none}
+    .actions a{margin-right:12px;font-size:.9rem}
+  </style>
+</head>
+<body>
+<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="index.html">🏯 一宅一句</a><div class="topbar-nav"><a href="services/all.html">服务</a><a href="test/">测试</a><a href="blog/">文章</a><a href="services/pricing.html">报价</a><a href="services/cases.html">案例</a><a href="services/faq.html">FAQ</a><a href="en/">EN</a><a class="topbar-cta" href="services/pricing.html">预约咨询</a></div></div></div></nav>
+
+<main class="container"><section class="simple-card">
+<h1>个人中心</h1><p class="muted">查看账号信息、会员状态与常用入口。</p>
+<div class="grid2"><div><label>手机号</label><div id="phone" style="margin-top:8px">-</div></div><div><label>邮箱</label><div id="email" style="margin-top:8px">-</div></div></div>
+<div class="grid2" style="margin-top:10px"><div><label>会员类型</label><div id="member" style="margin-top:8px">普通用户</div></div><div><label>到期时间</label><div id="expires" style="margin-top:8px">-</div></div></div>
+<div class="actions" style="margin-top:16px">
+  <a href="/my-tests.html">我的测试记录</a>
+  <a href="/my-consults.html">我的咨询记录</a>
+  <a href="/settings.html">账号设置</a>
+  <a href="/redeem.html">兑换码</a>
+  <a href="/member-benefits.html">会员权益</a>
+</div>
+<div style="margin-top:14px"><button id="logout" style="background:#a87d2e">退出登录</button></div>
+<div class="result" id="msg"></div>
+</section></main>
+<script>
+(function(){
+  var token=localStorage.getItem('yzj_token')||'';
+  if(!token){ location.href='/login.html'; return; }
+  var p=localStorage.getItem('yzj_phone')||'-';
+  if(/^\d{11}$/.test(p)) p=p.slice(0,3)+'****'+p.slice(7);
+  document.getElementById('phone').textContent=p;
+  document.getElementById('email').textContent=localStorage.getItem('yzj_email')||'-';
+  document.getElementById('member').textContent=localStorage.getItem('yzj_member_type')||'普通用户';
+  document.getElementById('expires').textContent=localStorage.getItem('yzj_member_expires')||'-';
+  document.getElementById('logout').onclick=function(){
+    ['yzj_token','yzj_user_id','yzj_phone','yzj_member_type','yzj_member_expires','yzj_email'].forEach(function(k){localStorage.removeItem(k)});
+    location.href='/login.html';
+  }
+})();
+</script>
+
+<script src="js/shared.js?v=20260423-auth"></script>
+</body>
+</html>
