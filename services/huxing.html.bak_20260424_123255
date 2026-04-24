@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>姻缘感情风水咨询 | 一宅一句 - 单身找对象·感情问题·婚姻调理</title>
-    <meta name="description" content="一宅一句姻缘感情咨询：单身找对象、感情问题分析、婚姻调理。专业风水师帮你改善感情运势，找到幸福。">
-    <meta name="keywords" content="姻缘风水,感情风水,桃花运,婚姻风水,感情咨询,风水师,一宅一句">
-    <link rel="canonical" href="https://12zn.com/services/yinyuan.html">
+    <title>户型风水分析 | 一宅一句 - 户型图分析·阳宅风水·买房风水</title>
+    <meta name="description" content="一宅一句户型风水分析：发送户型图即可获得详细风水分析报告。阳宅风水、买房选房、格局优化，专业风水师为你把关。">
+    <meta name="keywords" content="户型风水,阳宅风水,买房风水,户型分析,房屋风水,风水格局,一宅一句">
+    <link rel="canonical" href="https://12zn.com/services/huxing.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="姻缘感情风水咨询 | 一宅一句 - 单身找对象·感情问题·婚姻调理">
-    <meta property="og:description" content="一宅一句姻缘感情咨询：单身找对象、感情问题分析、婚姻调理。专业风水师帮你改善感情运势，找到幸福。">
-    <meta property="og:url" content="https://12zn.com/services/yinyuan.html">
+    <meta property="og:title" content="户型风水分析 | 一宅一句 - 户型图分析·阳宅风水·买房风水">
+    <meta property="og:description" content="一宅一句户型风水分析：发送户型图即可获得详细风水分析报告。阳宅风水、买房选房、格局优化，专业风水师为你把关。">
+    <meta property="og:url" content="https://12zn.com/services/huxing.html">
     <meta property="og:site_name" content="一宅一句">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/shared.css?v=20260415">
-    <meta property="og:image" content="https://12zn.com/images/og/yinyuan.jpg">
+    <meta property="og:image" content="https://12zn.com/images/og/huxing.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yizhaiyiju">
-    <meta name="twitter:image" content="https://12zn.com/images/og/yinyuan.jpg">
+    <meta name="twitter:image" content="https://12zn.com/images/og/huxing.jpg">
     <script type=application/ld+json>
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Service",
-      "@id": "https://12zn.com/services/yinyuan.html#service",
-      "name": "姻缘风水咨询",
-      "description": "一宅一句姻缘风水咨询：卧室风水、桃花位布局、感情化解。风水师傅帮您催旺姻缘。",
+      "@id": "https://12zn.com/services/huxing.html#service",
+      "name": "户型风水分析",
+      "description": "一宅一句户型风水分析：上传户型图，风水师傅专业分析户型优劣，给出优化建议。48小时交付。",
       "provider": {
         "@type": "Organization",
         "@id": "https://12zn.com/#organization",
@@ -42,33 +42,33 @@
       },
       "availableChannel": {
         "@type": "ServiceChannel",
-        "serviceUrl": "https://12zn.com/services/yinyuan.html"
+        "serviceUrl": "https://12zn.com/services/huxing.html"
       },
       "offers": {
         "@type": "Offer",
-        "price": "99",
+        "price": "199",
         "priceCurrency": "CNY",
         "availability": "https://schema.org/InStock"
       }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://12zn.com/services/yinyuan.html#faq",
+      "@id": "https://12zn.com/services/huxing.html#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "风水真的能影响姻缘吗？",
+          "name": "户型图怎么提交？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "卧室风水、床位朝向、桃花位布局确实会影响居住者的感情运势，合理调整可以催旺姻缘。"
+            "text": "在服务页面直接上传户型图照片，支持JPG/PNG/PDF格式，师傅会在48小时内完成分析。"
           }
         },
         {
           "@type": "Question",
-          "name": "单身和有对象的风水调整一样吗？",
+          "name": "租房也需要看户型风水吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "不一样。单身侧重催桃花，有对象侧重稳定感情、化解矛盾，布局方法不同。"
+            "text": "需要。住的时间越长，风水影响越大。租房更要看户型，避免住进风水差的房子。"
           }
         }
       ]
@@ -91,8 +91,8 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "姻缘风水咨询",
-          "item": "https://12zn.com/services/yinyuan.html"
+          "name": "户型风水分析",
+          "item": "https://12zn.com/services/huxing.html"
         }
       ]
     }
@@ -100,7 +100,7 @@
 }
 </script>
 </head>
-<body class="service-detail-page">
+<body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">
@@ -123,15 +123,15 @@
         <div class="breadcrumb">
             <a href="../index.html">首页</a><span>›</span>
             <a href="../index.html">服务</a><span>›</span>
-            姻缘感情咨询
+            户型/阳宅分析
         </div>
     </div>
 
     <!-- 服务 Hero -->
     <section class="service-hero">
-        <div class="service-icon">缘</div>
-        <h1>姻缘感情咨询</h1>
-        <p class="service-tagline">单身找对象 / 感情问题 / 婚姻调理 / 分手挽回</p>
+        <div class="service-icon">图</div>
+        <h1>户型/阳宅分析</h1>
+        <p class="service-tagline">发送户型图，详细分析风水格局，找出问题与解决方案</p>
     </section>
 
     <!-- 详细介绍 -->
@@ -142,20 +142,20 @@
             </div>
             <div class="service-features">
                 <div class="service-feature-item">
-                    <h4>桃花运分析</h4>
-                    <p>通过八字命理精确分析您的桃花运旺衰时段，找出最佳的脱单时机和方向。同时从风水角度定位桃花位，通过简单的居家布局调整催旺桃花运，让真爱更快来到您身边。</p>
+                    <h4>户型格局分析</h4>
+                    <p>对您的户型图进行全面的风水格局分析，评估房屋形状是否方正、缺角情况、房间分布是否合理、动线设计是否流畅等。每一个格局特征都会详细解读其对居住者运势的具体影响。</p>
                 </div>
                 <div class="service-feature-item">
-                    <h4>感情问题化解</h4>
-                    <p>恋爱中遇到矛盾和困惑？感情忽冷忽热？第三者介入？我们从命理相合度和风水环境两个角度分析问题根源，给出针对性的化解方法，帮助您修复感情裂痕，重建信任与默契。</p>
+                    <h4>方位吉凶判断</h4>
+                    <p>根据房屋坐向和居住者命理，精确判断八方吉凶。哪个方位旺事业、哪个方位利健康、哪个方位要注意化解，都会在分析报告中一一标注清楚，让您对自家风水了然于心。</p>
                 </div>
                 <div class="service-feature-item">
-                    <h4>婚姻调理</h4>
-                    <p>婚姻生活中的摩擦和矛盾往往与居住环境的风水有密切关系。卧室布局不当、厨房方位冲煞、家居颜色不协调等都会影响夫妻感情。我们会全面诊断并提供调理方案，让家庭重归和睦。</p>
+                    <h4>财位桃花位定位</h4>
+                    <p>精准定位您家中的财位、桃花位、文昌位等吉位，并给出相应的激活方法。告诉您在这些位置应该摆放什么、避免什么，让家中的每一个吉位都发挥最大的正面作用。</p>
                 </div>
                 <div class="service-feature-item">
-                    <h4>合婚分析</h4>
-                    <p>准备步入婚姻殿堂？合婚分析帮您了解双方的命理匹配度，找出可能存在的冲克因素，并提前给出化解方案。同时为您择选最佳的结婚吉日，让婚姻从一开始就拥有最好的风水助力。</p>
+                    <h4>化煞建议</h4>
+                    <p>识别户型中存在的各种煞气，如穿堂煞、反弓煞、天斩煞、尖角煞等，并给出具体的化解方法。无论是利用家具遮挡、摆放化煞物品还是调整空间布局，都会给出详细的操作指南。</p>
                 </div>
             </div>
         </div>
@@ -170,23 +170,23 @@
             <div class="process">
                 <div class="process-step">
                     <div class="process-num">一</div>
-                    <div class="process-title">描述感情状况</div>
-                    <div class="process-desc">告诉我们您当前的感情状态和遇到的具体问题，提供双方的出生信息（如有），让我们全面了解您的情况。</div>
+                    <div class="process-title">上传户型图</div>
+                    <div class="process-desc">通过微信发送您的户型图（开发商提供的或手绘均可），同时标注大门朝向和楼层信息，方便精准分析。</div>
                 </div>
                 <div class="process-step">
                     <div class="process-num">二</div>
-                    <div class="process-title">命理分析</div>
-                    <div class="process-desc">根据您提供的信息，进行八字命理分析，评估感情运势、桃花运走向、双方匹配度等关键指标。</div>
+                    <div class="process-title">AI识别分析</div>
+                    <div class="process-desc">AI系统自动识别户型结构，结合方位学原理进行初步的风水格局分析，快速生成基础评估报告。</div>
                 </div>
                 <div class="process-step">
                     <div class="process-num">三</div>
-                    <div class="process-title">问题诊断</div>
-                    <div class="process-desc">结合命理分析和风水环境评估，精确找出影响感情的核心问题，明确是命理因素、风水因素还是二者共同作用。</div>
+                    <div class="process-title">出具报告</div>
+                    <div class="process-desc">在AI分析基础上，风水师进行人工复核和深度解读，出具完整的户型风水分析报告，标注每个区域的吉凶和建议。</div>
                 </div>
                 <div class="process-step">
                     <div class="process-num">四</div>
                     <div class="process-title">化解方案</div>
-                    <div class="process-desc">提供具体可行的化解方案，包括居家风水调整、桃花位布局、行为建议、择日指导等，让感情运势逐步好转。</div>
+                    <div class="process-desc">针对报告中发现的风水问题，提供详细的化解方案，包括家具调整、摆件推荐、颜色建议等具体可执行的操作指南。</div>
                 </div>
             </div>
         </div>
@@ -202,20 +202,20 @@
                 <div class="service-price-item">
                     <h4>AI快速分析</h4>
                     <div class="price">免费</div>
-                    <p>AI智能快速分析感情运势，了解桃花方向。</p>
+                    <p>AI智能快速分析户型主要风水问题，给出整体评分和改善方向。</p>
                     <button onclick="document.getElementById('ai-chat-widget').style.display='block';document.getElementById('chat-float-btn').style.display='none'" style="display:inline-block;margin-top:12px;padding:8px 20px;border:1px solid var(--gold);border-radius:8px;font-size:0.82rem;color:var(--gold);cursor:pointer;font-family:inherit;background:var(--white);">免费AI分析 →</button>
                 </div>
                 <div class="service-price-item">
-                    <h4>AI深度分析</h4>
+                    <h4>AI详细报告</h4>
                     <div class="price">¥99</div>
-                    <p>AI详细分析姻缘走势、正缘特征、感情问题根源，给出改善建议。</p>
+                    <p>全面深度的户型风水分析报告，包含八方吉凶标注、财位桃花位定位、煞气识别与化解、各房间布局建议和家具摆放指南。</p>
                     <button onclick="openPayModal('ai_deep')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥99（AI生成）</button>
                 </div>
                 <div class="service-price-item">
-                    <h4>真人深度咨询</h4>
+                    <h4>师傅分析</h4>
                     <div class="price">¥999</div>
-                    <p>资深风水师一对一分析感情问题，结合双方命理给出调理方案。</p>
-                    <button onclick="openPayModal('consult_99')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥999</button>
+                    <p>师傅一对一深度分析，结合居住者命理给出个性化布局方案，包含详细书面报告和后续跟踪指导。</p>
+                    <button onclick="openPayModal('consult_299')" style="display:inline-block;margin-top:12px;padding:8px 20px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-size:0.82rem;cursor:pointer;font-family:inherit;">立即支付 ¥999</button>
                 </div>
             </div>
         </div>
@@ -229,20 +229,24 @@
             </div>
             <div class="faq-list">
                 <div class="faq-item">
-                    <div class="faq-q">咨询内容会被保密吗？</div>
-                    <div class="faq-a"><p>绝对保密。我们深知感情问题涉及个人隐私，所有的咨询内容和个人信息都严格保密，不会以任何形式泄露给第三方。咨询师签署有保密协议，您可以安心倾诉。</p></div>
+                    <div class="faq-q">户型图需要什么格式？</div>
+                    <div class="faq-a"><p>我们接受各种格式的户型图：开发商提供的标准户型图、房产证附图、手机拍摄的纸质户型图、甚至手绘的简易户型图都可以。关键是要标注清楚大门的朝向（东南西北），以及各房间的大致用途。</p></div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">感情分析真的准确吗？</div>
-                    <div class="faq-a"><p>命理分析有其科学的理论体系，我们的风水师拥有多年实战经验，分析准确率有口皆碑。但我们也坦诚地说，感情是双方共同经营的，风水分析能帮您看清格局、找到方向，但幸福仍需双方共同努力。</p></div>
+                    <div class="faq-q">分析有多详细？</div>
+                    <div class="faq-a"><p>免费的AI快速分析会给出整体评分和主要问题；详细报告则会逐一分析每个房间的风水状况，标注吉凶方位，定位财位等吉位，识别煞气并给出化解方案，通常报告在3000-5000字；师傅分析则更加深入，会结合居住者命理进行个性化解读。</p></div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">单身和已婚都可以咨询吗？</div>
-                    <div class="faq-a"><p>当然可以。无论您是单身想脱单、恋爱中遇到问题、还是已婚需要调理夫妻关系，我们都有对应的分析方案。不同状态的重点不同，我们会针对性地提供最适合您的建议。</p></div>
+                    <div class="faq-q">如何拍出好的户型图照片？</div>
+                    <div class="faq-a"><p>如果您手边有纸质户型图，请在光线充足的地方平放拍摄，确保图片清晰、不变形、四边完整。如果是在售楼处拍摄，建议正面拍摄展板上的户型图，避免侧拍导致透视变形。手绘图请用直线标注墙体，注明各房间名称和大门位置。</p></div>
                 </div>
                 <div class="faq-item">
-                    <div class="faq-q">合婚分析需要对方的配合吗？</div>
-                    <div class="faq-a"><p>合婚分析只需要双方的出生信息即可，不需要对方到场或知情。如果您还不方便告知对方，可以在了解结果后再做决定。当然，如果双方都参与咨询，效果会更好。</p></div>
+                    <div class="faq-q">买房前可以先分析户型风水吗？</div>
+                    <div class="faq-a"><p>非常建议买房前先做户型风水分析！这是最划算的风水投资。在选房阶段就排除风水格局有严重问题的户型，比入住后再花大价钱改造要明智得多。您可以同时提交多个备选户型，我们会给出对比分析和推荐。</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">楼层高度会影响分析结果吗？</div>
+                    <div class="faq-a"><p>会的。楼层高度影响采光、通风和气场，是风水分析的重要参考因素。高层和低层在气场特征上有明显差异，不同楼层适合不同命格的人居住。建议您在提交户型图时一并告知楼层信息，我们会纳入综合分析。</p></div>
                 </div>
             </div>
         </div>
@@ -251,7 +255,7 @@
     <!-- 微信 CTA -->
     <section class="wechat-section">
         <div class="wechat-inner">
-            <h2>开始您的姻缘感情咨询之旅</h2>
+            <h2>开始您的户型/阳宅分析之旅</h2>
             <p class="wechat-sub">扫码添加微信，获得专属分析报告</p>
             <img class="wechat-qr" src="../images/wechat-qr.jpg" alt="微信二维码">
             <p class="wechat-hint">长按识别二维码 · 添加微信</p>

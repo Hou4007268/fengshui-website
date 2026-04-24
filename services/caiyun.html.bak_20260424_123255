@@ -100,7 +100,7 @@
 }
 </script>
 </head>
-<body class="service-detail-page">
+<body>
     <!-- Sticky 导航 -->
     <nav class="topbar" id="topbar">
         <div class="topbar-inner">

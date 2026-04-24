@@ -873,11 +873,6 @@ body::before{
 }
 
 /* === 服务详情页专用 === */
-/* 13项服务详情页背景与站点统一 */
-.service-detail-page .service-hero{
-    background:var(--parchment);
-}
-
 .service-hero{
     text-align:center;
     padding:60px 24px 48px;
