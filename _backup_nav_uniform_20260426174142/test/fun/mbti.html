@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBTI人格测试 - 一宅一句</title>
+    <meta name="description" content="免费SBTI人格测试，输入姓名即可生成专属MBTI人格类型，探索你的性格和潜能。">
+    <link rel="canonical" href="https://12zn.com/test/fun/sbti.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SBTI人格测试 - 一宅一句">
+    <meta property="og:description" content="免费SBTI人格测试，探索你的MBTI类型和隐藏潜能">
+    <meta property="og:url" content="https://12zn.com/test/fun/sbti.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shared.css?v=20260415">
+    <style>
+        .test-page-hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            background: var(--white);
+            position: relative;
+        }
+        .test-page-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 180px;
+            background: radial-gradient(ellipse, rgba(166,138,62,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .test-page-hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ink);
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+        .test-page-hero .hero-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        .test-page-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .test-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        .test-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        .test-input-group {
+            margin: 30px 0;
+            text-align: left;
+        }
+        .test-input-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .test-input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .test-input-group input:focus {
+            border-color: var(--gold);
+        }
+        .test-input-group input::placeholder {
+            color: var(--text-light);
+        }
+        .btn-test {
+            background: var(--ink);
+            border: none;
+            color: var(--parchment);
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .btn-test:hover {
+            opacity: 0.85;
+        }
+        .test-tips {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .test-result {
+            display: none;
+        }
+        .test-result-active {
+            display: block;
+        }
+        .result-mbti {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 20px 0;
+        }
+        .result-name-emoji {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        .result-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            text-align: left;
+            background: var(--parchment);
+            padding: 24px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .result-time {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--gold);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            color: var(--ink);
+        }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"MBTI人格测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../../index.html">系统服务</a>
+                <a href="../">测试</a>
+                <a href="../../blog/">文章</a>
+                <a href="../../services/pricing.html">报价</a>
+                <a href="../../services/cases.html">案例</a>
+                <a href="../../services/faq.html">FAQ</a>
+                <a href="../../en/">EN</a>
+                <a href="../../services/zhenren.html" class="topbar-cta">预约咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="test-page-hero">
+        <h1>🎭 SBTI人格测试</h1>
+        <p class="hero-desc">
+            输入你的姓名，系统将根据姓名生成专属MBTI人格类型<br>
+            探索你的MBTI类型和隐藏潜能
+        </p>
+    </section>
+
+    <!-- 测试内容 -->
+    <div class="test-page-content">
+        <a href="../index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="test-card">
+            <!-- 表单填写区域 -->
+            <div class="test-form" id="formBox">
+                <div class="test-icon">🎭</div>
+                
+                <div class="test-input-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn-test" onclick="submitTest()">开始测试</button>
+                <div class="test-tips">每个姓名仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="test-result" id="resultBox">
+                <div class="test-icon" id="icon">🎭</div>
+                <div class="result-mbti" id="result">---</div>
+                <div class="result-name-emoji" id="nameEmoji"></div>
+                <div class="result-desc" id="desc"></div>
+                <div class="result-time">测试时间：<span id="testTime"></span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA -->
+<section style="max-width:640px;margin:0 auto;padding:0 24px 32px;">
+    <div style="background:var(--white);border:1px solid var(--border-soft);border-radius:14px;padding:24px;">
+        <h3 style="font-family:Noto Serif SC,serif;font-size:1rem;color:var(--ink);margin-bottom:16px;">更多趣味测试</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+            <a href="../" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🔮 全部测试</a>
+            <a href="mbti.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎭 MBTI测试</a>
+            <a href="animal.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🐾 动物人格</a>
+            <a href="dream-career.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">💼 职业梦想</a>
+            <a href="superpower.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">⚡ 超能力</a>
+            <a href="all-in-one.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎁 综合测试</a>
+        </div>
+    </div>
+</section>
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>想要更精准的性格分析？</h2>
+            <p class="wechat-sub">扫码添加微信，获得一对一专属指导</p>
+            <img class="wechat-qr" src="../../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/yizhaiyiju" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../../js/shared.js?v=20260417"></script>
+    <script>
+        const mbtiTypes = [
+            { type: "INFP", name: "调停者", desc: "理想主义、富有同情心，喜欢探索可能性和创新。内心世界丰富，重视个人价值观。", emoji: "🌸" },
+            { type: "INFJ", name: "提倡者", desc: "理想主义、有洞察力，天生擅长理解他人。富有创造力，看重意义和价值。", emoji: "🦉" },
+            { type: "INTP", name: "逻辑学家", desc: "思想者、善于分析，喜欢理论探索。独立思考，对知识有强烈渴望。", emoji: "🧠" },
+            { type: "INTJ", name: "建筑师", desc: "战略思维、独立性强，善于规划。追求知识和效率，有远见卓识。", emoji: "🏗️" },
+            { type: "ISFP", name: "探险家", desc: "灵活、艺术感强，善于发现美。安静友好，注重实际体验。", emoji: "🎨" },
+            { type: "ISFJ", name: "守卫者", desc: "忠诚、细心，善于照顾他人。传统价值观，实际可靠。", emoji: "🛡️" },
+            { type: "ISTP", name: "鉴赏家", desc: "实用主义、善于动手，喜欢探索原理。冷静观察，分析能力强。", emoji: "🔧" },
+            { type: "ISTJ", name: "物流师", desc: "可靠、传统，注重责任。善于组织，讲究逻辑和事实。", emoji: "📊" },
+            { type: "ENFP", name: "竞选者", desc: "热情、创意，善于激励他人。喜欢新想法，富有感染力。", emoji: "🔥" },
+            { type: "ENFJ", name: "主人公", desc: "领导者魅力、善于沟通，天生能激励他人。重视人际关系。", emoji: "⭐" },
+            { type: "ENTP", name: "辩论家", desc: "聪明、好奇，喜欢挑战和辩论。善于发现问题，思维敏捷。", emoji: "💡" },
+            { type: "ENTJ", name: "指挥官", desc: "果断、有领导力，善于制定战略。目标导向，决策能力强。", emoji: "👑" },
+            { type: "ESFP", name: "表演者", desc: "热情、活泼，善于娱乐他人。喜欢行动，享受当下。", emoji: "🎉" },
+            { type: "ESFJ", name: "执政官", desc: "关怀、传统，善于照顾他人。喜欢帮助别人，重视和谐。", emoji: "🤝" },
+            { type: "ESTP", name: "企业家", desc: "大胆、实际，喜欢冒险和挑战。善于把握机会，行动派。", emoji: "🚀" },
+            { type: "ESTJ", name: "总经理", desc: "传统、组织能力强，善于管理。注重效率和结果。", emoji: "📈" }
+        ];
+        
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            const hash = getHash(name);
+            const result = mbtiTypes[hash % mbtiTypes.length];
+            
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').classList.add('test-result-active');
+            
+            document.getElementById('icon').textContent = result.emoji;
+            document.getElementById('result').textContent = result.type;
+            document.getElementById('nameEmoji').innerHTML = `<strong>${result.name}</strong> · ${result.emoji}`;
+            document.getElementById('desc').textContent = result.desc;
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            localStorage.setItem('mbti_test_done', name);
+        }
+        
+        window.onload = function() {
+            const done = localStorage.getItem('mbti_test_done');
+            if (done) {
+                const hash = getHash(done);
+                const result = mbtiTypes[hash % mbtiTypes.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').classList.add('test-result-active');
+                document.getElementById('icon').textContent = result.emoji;
+                document.getElementById('result').textContent = result.type;
+                document.getElementById('nameEmoji').innerHTML = `<strong>${result.name}</strong> · ${result.emoji}`;
+                document.getElementById('desc').textContent = result.desc;
+            }
+        }
+    </script>
+</body>
+</html>

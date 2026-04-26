@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五行属性测试 | 一宅一句 - 测测你是金木水火土哪种属性</title>
+    <meta name="description" content="一宅一句五行属性测试：8道趣味题，揭秘你的五行性格。金木水火土，你属于哪一种？免费测试，快来发现！">
+    <meta name="keywords" content="五行测试,五行属性,金木水火土,五行性格,五行查询,免费测试">
+    <link rel="canonical" href="https://12zn.com/services/test-wuxing.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="五行属性测试 | 一宅一句 - 测测你是金木水火土哪种属性">
+    <meta property="og:description" content="一宅一句五行属性测试：8道趣味题，揭秘你的五行性格。金木水火土，你属于哪一种？免费测试，快来发现！">
+    <meta property="og:url" content="https://12zn.com/services/test-wuxing.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test-common.css?v=20260414">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <style>
+        /* === 五行测试专用样式 === */
+        .test-container {
+  max-width: 640px; margin: 0 auto; padding: 0 24px;
+}
+
+.result-hero::before {
+  content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 400px; height: 160px; background: radial-gradient(ellipse, rgba(166,138,62,0.08) 0%, transparent 70%); pointer-events: none;
+}
+
+.result-element-icon {
+  width: 96px; height: 96px; margin: 0 auto 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 2.8rem; font-weight: 700; position: relative; animation: resultPop 0.6s ease;
+}
+
+/* 相生相克 */
+        .wuxing-relation {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.relation-card {
+  background: var(--white); border: 1px solid var(--border-soft); border-radius: 12px; padding: 20px; text-align: center;
+}
+
+.relation-card h4 {
+  font-family: 'Noto Serif SC', serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 8px;
+}
+
+.relation-card .relation-element {
+  font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px;
+}
+
+.relation-card p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;
+}
+
+.relation-sheng h4 {
+  color: var(--bamboo);
+}
+
+.relation-sheng .relation-element {
+  color: var(--bamboo);
+}
+
+.relation-ke h4 {
+  color: var(--vermilion);
+}
+
+.relation-ke .relation-element {
+  color: var(--vermilion);
+}
+
+/* 幸运信息 */
+        .lucky-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.start-icon-item {
+  width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 1.3rem; font-weight: 700; animation: floatIcon 3s ease-in-out infinite;
+}
+
+.start-icon-item:nth-child(1) {
+  background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0s;
+}
+
+.start-icon-item:nth-child(2) {
+  background: rgba(107,123,94,0.12); color: #6b7b5e; animation-delay: 0.3s;
+}
+
+.start-icon-item:nth-child(3) {
+  background: rgba(70,130,180,0.12); color: #4682b4; animation-delay: 0.6s;
+}
+
+.start-icon-item:nth-child(4) {
+  background: rgba(181,69,42,0.12); color: #b5452a; animation-delay: 0.9s;
+}
+
+.start-icon-item:nth-child(5) {
+  background: rgba(160,130,80,0.12); color: #a08250; animation-delay: 1.2s;
+}
+
+.wuxing-relation {
+  grid-template-columns: 1fr;
+}
+
+.wuxing-dist {
+  margin-bottom: 12px;
+}
+
+.dist-row {
+  display: flex; align-items: center; margin-bottom: 6px;
+}
+
+.dist-label {
+  width: 24px; font-size: 0.82rem; font-weight: 500; color: var(--ink);
+}
+
+.dist-bar-wrap {
+  flex: 1; height: 18px; background: #f5f0e8; border-radius: 9px; overflow: hidden; margin: 0 8px;
+}
+
+.dist-bar {
+  height: 100%; border-radius: 9px; transition: width 0.6s ease;
+}
+
+.dist-score {
+  width: 20px; font-size: 0.75rem; color: var(--text-light); text-align: right;
+}
+
+.dist-bar-金 {
+  background: linear-gradient(90deg, #d4af37, #b8942e);
+}
+
+.dist-bar-木 {
+  background: linear-gradient(90deg, #8fbc6b, #6b7b5e);
+}
+
+.dist-bar-水 {
+  background: linear-gradient(90deg, #6db3d4, #4682b4);
+}
+
+.dist-bar-火 {
+  background: linear-gradient(90deg, #d4725a, #b5452a);
+}
+
+.dist-bar-土 {
+  background: linear-gradient(90deg, #c4a265, #a08250);
+}
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"五行属性测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <button class="topbar-cta" onclick="window.location.href='/services/zhenren.html'" aria-label="预约风水咨询服务">预约咨询</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html">系统服务</a><span>›</span>
+            五行属性测试
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="service-hero">
+        <div class="service-icon">五</div>
+        <h1>五行属性测试</h1>
+        <p class="service-tagline">8道趣味问答，探索你的五行属性与性格密码</p>
+    </section>
+
+    <!-- 测试主体 -->
+    <div class="section">
+        <div class="test-container">
+
+            <!-- 开始页面 -->
+            <div id="start-screen" class="start-screen">
+                <div class="start-icons">
+                    <div class="start-icon-item">金</div>
+                    <div class="start-icon-item">木</div>
+                    <div class="start-icon-item">水</div>
+                    <div class="start-icon-item">火</div>
+                    <div class="start-icon-item">土</div>
+                </div>
+                <div class="start-title">你属于哪种五行属性？</div>
+                <p class="start-desc">
+                    金木水火土，万物之本。每个人都有自己的五行属性，它影响着你的性格、运势与人生方向。<br>
+                    回答8个简单的问题，发现你的五行密码。
+                </p>
+                <button class="btn-start" onclick="startTest()">开始测试</button>
+            </div>
+
+            <!-- 答题区域 -->
+            <div id="quiz-screen" style="display:none;">
+                <div class="progress-wrap">
+                    <div class="progress-info">
+                        <span class="progress-text">测试进度</span>
+                        <span class="progress-num" id="progress-num">1 / 8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+                    </div>
+                </div>
+                <div id="question-area"></div>
+            </div>
+
+            <!-- 分析中 -->
+            <div id="analyzing-screen" class="analyzing-screen">
+                <div class="analyzing-icon"></div>
+                <div class="analyzing-text">分析中...</div>
+                <p class="analyzing-sub">正在结合五行理论解读你的性格密码</p>
+            </div>
+
+            <!-- 结果页面 -->
+            <div id="result-screen" class="result-screen"></div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <!-- 微信弹窗 -->
+    <div class="lead-popup" id="lead-popup">
+        <div class="lead-box">
+            <h3>添加微信咨询</h3>
+            <p class="lead-hint">扫码添加微信，获取专属五行分析</p>
+            <img src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="qr-hint">长按识别二维码 · 添加微信</p>
+            <div class="lead-close" onclick="document.getElementById('lead-popup').classList.remove('active')">暂不需要</div>
+        </div>
+    </div>
+
+    <!-- 支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:12px;color:var(--bamboo);">支付成功</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;">感谢支持！请添加微信获取详细报告。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/shared.js?v=20260417"></script>
+    <script>
+    (function() {
+        // ========== 题目数据 ==========
+        const questions = [
+            {
+                q: '你最喜欢的季节是？',
+                options: [
+                    { text: '秋天 —— 天高气爽，喜欢清朗的感觉', element: '金' },
+                    { text: '春天 —— 万物复苏，充满希望和生机', element: '木' },
+                    { text: '冬天 —— 安静内敛，适合思考和沉淀', element: '水' },
+                    { text: '夏天 —— 热情奔放，享受阳光和活力', element: '火' },
+                    { text: '换季时节 —— 温和过渡，享受稳定', element: '土' }
+                ]
+            },
+            {
+                q: '遇到困难时，你通常会怎么做？',
+                options: [
+                    { text: '冷静分析，果断做出决策', element: '金' },
+                    { text: '积极想办法，不断尝试新方案', element: '木' },
+                    { text: '先退一步观察，找到最佳时机再行动', element: '水' },
+                    { text: '充满斗志，迎难而上直到解决', element: '火' },
+                    { text: '稳住心态，踏踏实实一步步来', element: '土' }
+                ]
+            },
+            {
+                q: '朋友们通常怎么评价你？',
+                options: [
+                    { text: '做事干脆利落，很有原则', element: '金' },
+                    { text: '有创意有想法，充满正能量', element: '木' },
+                    { text: '聪明灵活，懂得变通', element: '水' },
+                    { text: '热情开朗，自带感染力', element: '火' },
+                    { text: '靠谱踏实，值得信赖', element: '土' }
+                ]
+            },
+            {
+                q: '你最向往的生活方式是？',
+                options: [
+                    { text: '精致有序，追求品质和效率', element: '金' },
+                    { text: '自由探索，不断学习成长', element: '木' },
+                    { text: '随性自在，跟着感觉走', element: '水' },
+                    { text: '丰富多彩，每天都充满激情', element: '火' },
+                    { text: '安稳温馨，有家人朋友相伴', element: '土' }
+                ]
+            },
+            {
+                q: '你最喜欢的颜色系是？',
+                options: [
+                    { text: '白色、银色、金属色系', element: '金' },
+                    { text: '绿色、翠色、自然色系', element: '木' },
+                    { text: '蓝色、黑色、深色系', element: '水' },
+                    { text: '红色、橙色、暖色系', element: '火' },
+                    { text: '黄色、棕色、大地色系', element: '土' }
+                ]
+            },
+            {
+                q: '周末最想做的事情是？',
+                options: [
+                    { text: '整理房间，或者去逛精品店', element: '金' },
+                    { text: '户外徒步，或者参加兴趣课程', element: '木' },
+                    { text: '窝在家里看书追剧，享受独处', element: '水' },
+                    { text: '约朋友聚会，参加各种活动', element: '火' },
+                    { text: '陪家人做饭聊天，享受天伦之乐', element: '土' }
+                ]
+            },
+            {
+                q: '在团队中，你更像哪种角色？',
+                options: [
+                    { text: '决策者 —— 擅长判断和拍板', element: '金' },
+                    { text: '开拓者 —— 提出新想法和方向', element: '木' },
+                    { text: '智囊团 —— 善于分析和出谋划策', element: '水' },
+                    { text: '鼓舞者 —— 带动气氛激励团队', element: '火' },
+                    { text: '协调者 —— 稳定团队化解矛盾', element: '土' }
+                ]
+            },
+            {
+                q: '你最看重的人生价值是？',
+                options: [
+                    { text: '正义公平，坚守自己的底线', element: '金' },
+                    { text: '成长进步，不断突破和超越', element: '木' },
+                    { text: '智慧通达，看透事物的本质', element: '水' },
+                    { text: '热爱生活，活出精彩和温度', element: '火' },
+                    { text: '厚德载物，做一个可靠的人', element: '土' }
+                ]
+            }
+        ];
+
+        // ========== 五行结果数据 ==========
+        const elementData = {
+            '金': {
+                icon: '金',
+                color: '#b8942e',
+                bgColor: 'rgba(212,175,55,0.1)',
+                borderColor: 'rgba(212,175,55,0.3)',
+                name: '金行人',
+                subtitle: '刚毅果断 · 义薄云天',
+                desc: '你是典型的金行人，性格刚毅果敢，做事雷厉风行，有很强的原则性和正义感。你追求完美和秩序，善于做出判断和决策，是天生的领导者。不过要注意，过于刚强可能显得不够圆融，适当柔和一些会让你更加受人喜爱。',
+                sheng: { element: '水', desc: '金生水：你的果断和智慧能激发水行人的灵感，你们在一起能碰撞出精彩的火花。' },
+                ke: { element: '木', desc: '金克木：你的原则性可能会压制木行人的自由天性，相处时需要多一些包容。' },
+                luckyDir: '西方、西北方',
+                luckyColor: '白色、金色、银色',
+                tips: '建议在家中西方摆放金属材质的装饰品，佩戴白色或金色系饰品增强运势。办公桌宜面向西方，书房可多用白色系布置。秋季是你的旺季，适合做重要决策。'
+            },
+            '木': {
+                icon: '木',
+                color: '#6b7b5e',
+                bgColor: 'rgba(107,123,94,0.1)',
+                borderColor: 'rgba(107,123,94,0.3)',
+                name: '木行人',
+                subtitle: '生机勃发 · 仁心仁术',
+                desc: '你是充满生命力的木行人，性格积极向上，富有创造力和开拓精神。你像春天的树木一样不断向上生长，乐观进取，有很强的同理心和包容力。你追求自由和成长，不喜欢被束缚。需要注意的是，有时候你的理想主义可能让你忽略现实的限制。',
+                sheng: { element: '火', desc: '木生火：你的创造力和正能量能点燃火行人的热情，你们在一起能量满满。' },
+                ke: { element: '土', desc: '木克土：你的强势成长有时会让土行人感到不安，相处时需要给对方足够的安全感。' },
+                luckyDir: '东方、东南方',
+                luckyColor: '绿色、青色、翠色',
+                tips: '建议在家中东方多摆放绿色植物，增添生机。卧室可用浅绿色系床品，书桌宜面朝东方。春季是你的黄金时期，适合开始新项目、新计划。平时多亲近自然，有助于补充能量。'
+            },
+            '水': {
+                icon: '水',
+                color: '#4682b4',
+                bgColor: 'rgba(70,130,180,0.1)',
+                borderColor: 'rgba(70,130,180,0.3)',
+                name: '水行人',
+                subtitle: '智慧深邃 · 上善若水',
+                desc: '你是智慧通达的水行人，思维敏捷、灵活善变，有着非凡的洞察力和适应能力。你像水一样能屈能伸，善于从不同角度看问题，直觉很准。你内心丰富而深沉，看似随和实则很有主见。需要注意的是，有时候你过于多变可能让别人觉得难以捉摸。',
+                sheng: { element: '木', desc: '水生木：你的智慧和支持能帮助木行人茁壮成长，你们在一起互相滋养。' },
+                ke: { element: '火', desc: '水克火：你的冷静理性可能会浇灭火行人的热情，相处时需要多给予鼓励。' },
+                luckyDir: '北方、西北方',
+                luckyColor: '蓝色、黑色、深灰色',
+                tips: '建议在家中北方放置小型水景或鱼缸，有助于催旺运势。房间可多用蓝色系装饰。冬季是你的旺季，适合深入思考和做重要规划。日常可多饮水、多亲近水景，保持内心的宁静与流动。'
+            },
+            '火': {
+                icon: '火',
+                color: '#b5452a',
+                bgColor: 'rgba(181,69,42,0.1)',
+                borderColor: 'rgba(181,69,42,0.3)',
+                name: '火行人',
+                subtitle: '热情似火 · 光明磊落',
+                desc: '你是热情洋溢的火行人，性格开朗大方，自带感染力和号召力。你像太阳一样温暖照亮周围的人，做事有激情、有魄力，敢想敢做。你表达能力很强，善于社交，是人群中最亮眼的存在。需要注意的是，有时候你的急性子可能让你做出冲动的决定。',
+                sheng: { element: '土', desc: '火生土：你的热情和能量能温暖土行人的内心，你们在一起能建立深厚的信任。' },
+                ke: { element: '金', desc: '火克金：你的强烈个性可能会让金行人感到压力，相处时需要适当收敛锋芒。' },
+                luckyDir: '南方、东南方',
+                luckyColor: '红色、橙色、紫色',
+                tips: '建议在家中南方悬挂红色系装饰画或摆件，增强个人魅力和事业运。客厅宜明亮通透，多用暖色灯光。夏季是你的旺季，适合拓展社交和推进项目。但要注意休息，避免能量消耗过度。'
+            },
+            '土': {
+                icon: '土',
+                color: '#a08250',
+                bgColor: 'rgba(160,130,80,0.1)',
+                borderColor: 'rgba(160,130,80,0.3)',
+                name: '土行人',
+                subtitle: '厚德载物 · 稳如泰山',
+                desc: '你是踏实稳重的土行人，性格宽厚包容，是朋友和家人眼中最可靠的存在。你像大地一样承载和滋养万物，做事有耐心、有毅力，一步一个脚印。你重视家庭和感情，乐于助人，是天生的和事佬。需要注意的是，有时候你的过度包容可能让自己承受太多压力。',
+                sheng: { element: '金', desc: '土生金：你的包容和滋养能帮助金行人变得更加出色，你们在一起非常默契。' },
+                ke: { element: '水', desc: '土克水：你的稳定有时会限制水行人的灵活性，相处时需要给对方更多自由空间。' },
+                luckyDir: '中央、东北方、西南方',
+                luckyColor: '黄色、棕色、米色',
+                tips: '建议在家中客厅摆放陶瓷花瓶或黄色系装饰品，增强稳定运和贵人运。书房和卧室宜用大地色系布置。每个季节的换季时节是你的旺期。平时可多接触土地，如种花养草，有助于补充能量。'
+            }
+        };
+
+        // ========== 状态变量 ==========
+        let currentQ = 0;
+        let scores = { '金': 0, '木': 0, '水': 0, '火': 0, '土': 0 };
+
+        // ========== 开始测试 ==========
+        window.startTest = function() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            currentQ = 0;
+            scores = { '金': 0, '木': 0, '水': 0, '火': 0, '土': 0 };
+            renderQuestion();
+        };
+
+        // ========== 渲染问题 ==========
+        function renderQuestion() {
+            const q = questions[currentQ];
+            const area = document.getElementById('question-area');
+            // 打乱选项顺序
+            const shuffled = q.options.slice().sort(function() { return Math.random() - 0.5; });
+
+            let html = '<div class="question-card">';
+            html += '<div class="question-title">' + q.q + '</div>';
+            html += '<div class="options-list">';
+            shuffled.forEach(function(opt) {
+                html += '<button class="option-btn" onclick="selectOption(\'' + opt.element + '\')">' + opt.text + '</button>';
+            });
+            html += '</div></div>';
+            area.innerHTML = html;
+
+            // 更新进度
+            document.getElementById('progress-num').textContent = (currentQ + 1) + ' / 8';
+            document.getElementById('progress-fill').style.width = ((currentQ + 1) / 8 * 100) + '%';
+        }
+
+        // ========== 选择选项 ==========
+        window.selectOption = function(element) {
+            scores[element]++;
+            currentQ++;
+
+            if (currentQ < questions.length) {
+                renderQuestion();
+            } else {
+                showAnalyzing();
+            }
+        };
+
+        // ========== 分析中动画 ==========
+        function showAnalyzing() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            var screen = document.getElementById('analyzing-screen');
+            screen.classList.add('active');
+
+            setTimeout(function() {
+                screen.classList.remove('active');
+                showResult();
+            }, 2000);
+        }
+
+        // ========== 计算结果 ==========
+        function getDominantElement() {
+            let max = 0;
+            let dominant = '金';
+            var elements = ['金', '木', '水', '火', '土'];
+            for (var i = 0; i < elements.length; i++) {
+                var el = elements[i];
+                if (scores[el] > max) {
+                    max = scores[el];
+                    dominant = el;
+                }
+            }
+            return dominant;
+        }
+
+        // ========== 显示结果 ==========
+        function showResult() {
+            var dominant = getDominantElement();
+            var data = elementData[dominant];
+            var screen = document.getElementById('result-screen');
+
+            var html = '';
+
+            // 主元素卡片
+            html += '<div class="result-hero">';
+            html += '<div class="result-element-icon" style="background:' + data.bgColor + ';color:' + data.color + ';border:2px solid ' + data.borderColor + ';">' + data.icon + '</div>';
+            html += '<div class="result-element-name">你的五行属性：' + data.name + '</div>';
+            html += '<div class="result-element-sub">' + data.subtitle + '</div>';
+            html += '</div>';
+
+            // 五行分布条
+            var totalScore = 0;
+            var elOrder = ['金', '木', '水', '火', '土'];
+            for (var i = 0; i < elOrder.length; i++) totalScore += scores[elOrder[i]];
+            if (totalScore === 0) totalScore = 1;
+
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9733;</span> 五行分布</h3>';
+            html += '<div class="wuxing-dist">';
+            for (var i = 0; i < elOrder.length; i++) {
+                var el = elOrder[i];
+                var pct = Math.round(scores[el] / totalScore * 100);
+                html += '<div class="dist-row">';
+                html += '<div class="dist-label">' + el + '</div>';
+                html += '<div class="dist-bar-wrap"><div class="dist-bar dist-bar-' + el + '" style="width:' + pct + '%"></div></div>';
+                html += '<div class="dist-score">' + scores[el] + '</div>';
+                html += '</div>';
+            }
+            html += '</div>';
+
+            // 最弱元素 + 补运建议
+            var minScore = 999, weakest = '';
+            for (var i = 0; i < elOrder.length; i++) {
+                if (scores[elOrder[i]] < minScore) { minScore = scores[elOrder[i]]; weakest = elOrder[i]; }
+            }
+            if (weakest && weakest !== dominant) {
+                var supplementTips = {
+                    '金': '建议多穿白色/银色系、佩戴金属饰品、办公桌朝西方、秋季多做重要决策。',
+                    '木': '建议多穿绿色系、亲近自然种绿植、办公桌朝东方、春季多开启新计划。',
+                    '水': '建议多穿蓝色/黑色系、家中北方放水景、多亲近水源、冬季适合深度思考。',
+                    '火': '建议多穿红色/暖色系、保持家中南方明亮、多社交、夏季适合拓展人脉。',
+                    '土': '建议多穿黄色/棕色系、用陶瓷装饰、多接触土地、换季时节多行动。'
+                };
+                html += '<p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);">';
+                html += '五行中<strong>' + weakest + '</strong>相对较弱。' + (supplementTips[weakest] || '');
+                html += '</p>';
+            }
+            html += '</div>';
+
+            // 性格描述
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9733;</span> 性格解读</h3>';
+            html += '<p>' + data.desc + '</p>';
+            html += '</div>';
+
+            // 相生相克
+            html += '<div class="wuxing-relation">';
+            html += '<div class="relation-card relation-sheng">';
+            html += '<h4>相生</h4>';
+            html += '<div class="relation-element">' + data.sheng.element + '</div>';
+            html += '<p>' + data.sheng.desc + '</p>';
+            html += '</div>';
+            html += '<div class="relation-card relation-ke">';
+            html += '<h4>相克</h4>';
+            html += '<div class="relation-element">' + data.ke.element + '</div>';
+            html += '<p>' + data.ke.desc + '</p>';
+            html += '</div>';
+            html += '</div>';
+
+            // 幸运信息
+            html += '<div class="lucky-grid">';
+            html += '<div class="lucky-item"><div class="lucky-label">幸运方位</div><div class="lucky-value">' + data.luckyDir + '</div></div>';
+            html += '<div class="lucky-item"><div class="lucky-label">幸运颜色</div><div class="lucky-value">' + data.luckyColor + '</div></div>';
+            html += '</div>';
+
+            // 风水建议
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9776;</span> 风水建议</h3>';
+            html += '<p>' + data.tips + '</p>';
+            html += '</div>';
+
+            // CTA
+            html += '<div class="result-cta">';
+            html += '<h3>想了解你的完整五行命理？</h3>';
+            html += '<div class="result-cta-btns">';
+            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥99</button>';
+            html += '<button class="btn-cta-wechat" onclick="document.getElementById(\'lead-popup\').classList.add(\'active\')">添加微信咨询</button>';
+            html += '</div>';
+            html += '</div>';
+
+            // 重新测试
+            html += '
+            <!-- 分享按钮 -->
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+
+            <!-- 你可能还想测 -->
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+
+<div class="restart-wrap">';
+            html += '<button class="btn-restart" onclick="restartTest()">重新测试</button>';
+            html += '</div>';
+
+            screen.innerHTML = html;
+            screen.classList.add('active');
+
+            // 滚动到结果顶部
+            screen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ========== 重新测试 ==========
+        window.restartTest = function() {
+            document.getElementById('result-screen').classList.remove('active');
+            document.getElementById('result-screen').innerHTML = '';
+            document.getElementById('start-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // ========== 支付弹窗兼容（如果主页没有加载支付脚本） ==========
+        if (typeof window.openPayModal === 'undefined') {
+            window.openPayModal = function(productId) {
+                var modal = document.getElementById('modal-pay');
+                if (modal) {
+                    modal.classList.add('active');
+                    var selectDiv = document.getElementById('pay-step-select');
+                    if (selectDiv) {
+                        var list = document.getElementById('pay-product-list');
+                        if (list) {
+                            list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:0.88rem;">' +
+                                '<p style="margin-bottom:12px;">请添加微信获取支付链接</p>' +
+                                '<button class="btn" style="max-width:200px;margin:0 auto;" onclick="document.getElementById(\'modal-pay\').classList.remove(\'active\');document.getElementById(\'lead-popup\').classList.add(\'active\');">添加微信</button>' +
+                                '</div>';
+                        }
+                    }
+                }
+            };
+        }
+        if (typeof window.closePayModal === 'undefined') {
+            window.closePayModal = function() {
+                var modal = document.getElementById('modal-pay');
+                if (modal) modal.classList.remove('active');
+            };
+        }
+
+    })();
+    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"五行属性测试是什么？","acceptedAnswer":{"@type":"Answer","text":"通过8道趣味题，分析你的金木水火土五行属性倾向，了解哪种元素对你影响最大。"}},{"@type":"Question","name":"五行属性和生辰八字有关系吗？","acceptedAnswer":{"@type":"Answer","text":"有关系但不完全相同。生辰八字的五行基于出生时间的天干地支推算，本测试通过性格表现趣味推断五行倾向。"}}]}</script><script>
+var TESTS_DATA = [{"file": "test-yunshi.html", "icon": "🔮", "title": "今日运势速测"}, {"file": "test-wuxing.html", "icon": "🌊", "title": "五行属性测试"}, {"file": "test-fengshui.html", "icon": "🏠", "title": "家居风水评分"}, {"file": "test-xingming.html", "icon": "✍️", "title": "姓名吉凶测试"}, {"file": "test-taohua.html", "icon": "🌸", "title": "桃花运测试"}, {"file": "test-ta-aini.html", "icon": "💕", "title": "Ta是否爱你"}, {"file": "test-caishang.html", "icon": "💰", "title": "财商测试"}, {"file": "test-xinli.html", "icon": "🧠", "title": "心理年龄测试"}, {"file": "test-mianxiang.html", "icon": "👤", "title": "面相气质测试"}, {"file": "test-qianshi.html", "icon": "🌙", "title": "前世今生测试"}, {"file": "test-lucky.html", "icon": "🍀", "title": "幸运色测试"}, {"file": "test-ziwei.html", "icon": "⭐", "title": "紫微斗数排盘"}];
+</script>
+
+<script>
+// 分享功能
+window.shareResult = function() {
+    var title = document.title.replace(/\s*\|.*$/, '');
+    var resultEl = document.querySelector('.result-hero') || document.querySelector('.result-element-name');
+    var resultText = resultEl ? resultEl.textContent.trim() : '';
+    var text = '我在一宅一句测了「' + title + '」\n' + resultText + '\n\n👉 你也来测测：' + window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            var tip = document.getElementById('share-tip');
+            tip.style.display = 'inline';
+            setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+        });
+    } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var tip = document.getElementById('share-tip');
+        tip.style.display = 'inline';
+        setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+    }
+};
+
+// 相关测试推荐
+(function(){
+    var allTests = TESTS_DATA;
+    var currentFile = window.location.pathname.split('/').pop();
+    var related = allTests.filter(function(t){ return t.file !== currentFile; });
+    // Shuffle and pick 4
+    related.sort(function(){ return Math.random() - 0.5; });
+    var picks = related.slice(0, 4);
+    var container = document.getElementById('related-tests');
+    if (!container) return;
+    var html = '';
+    for (var i = 0; i < picks.length; i++) {
+        html += '<a href="' + picks[i].file + '" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">' + picks[i].icon + ' ' + picks[i].title + '</a>';
+    }
+    container.innerHTML = html;
+})();
+</script>
+
+</body>
+</html>

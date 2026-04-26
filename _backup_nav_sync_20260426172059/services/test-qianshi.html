@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前世今生测试 | 一宅一句 - 探索你的前世记忆</title>
+    <meta name="description" content="一宅一句前世今生测试：8道趣味题，揭秘你的前世身份。文人雅士、武将英豪、商贾巨富……你的前世是谁？免费测试，快来探索！">
+    <meta name="keywords" content="前世今生测试,前世测试,前世身份,轮回测试,前世记忆,免费测试">
+    <link rel="canonical" href="https://12zn.com/services/test-qianshi.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="前世今生测试 | 一宅一句 - 探索你的前世记忆">
+    <meta property="og:description" content="一宅一句前世今生测试：8道趣味题，揭秘你的前世身份。文人雅士、武将英豪、商贾巨富……你的前世是谁？免费测试，快来探索！">
+    <meta property="og:url" content="https://12zn.com/services/test-qianshi.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test-common.css?v=20260414">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <style>
+        /* === 前世今生测试专用样式 === */
+        .test-container {
+  max-width: 640px; margin: 0 auto; padding: 0 24px;
+}
+
+.result-hero::before {
+  content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 400px; height: 160px; background: radial-gradient(ellipse, rgba(166,138,62,0.08) 0%, transparent 70%); pointer-events: none;
+}
+
+.result-element-icon {
+  width: 96px; height: 96px; margin: 0 auto 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 2.8rem; font-weight: 700; position: relative; animation: resultPop 0.6s ease;
+}
+
+/* 前世今生对照 */
+        .pastlife-relation {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.relation-card {
+  background: var(--white); border: 1px solid var(--border-soft); border-radius: 12px; padding: 20px; text-align: center;
+}
+
+.relation-card h4 {
+  font-family: 'Noto Serif SC', serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 8px;
+}
+
+.relation-card .relation-element {
+  font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px;
+}
+
+.relation-card p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;
+}
+
+.relation-personality h4 {
+  color: var(--bamboo);
+}
+
+.relation-personality .relation-element {
+  color: var(--bamboo);
+}
+
+.relation-lucky h4 {
+  color: var(--gold);
+}
+
+.relation-lucky .relation-element {
+  color: var(--gold);
+}
+
+/* 幸运信息 */
+        .lucky-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.start-icon-item {
+  width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 1.3rem; font-weight: 700; animation: floatIcon 3s ease-in-out infinite;
+}
+
+.start-icon-item:nth-child(1) {
+  background: rgba(107,123,94,0.12); color: #6b7b5e; animation-delay: 0s;
+}
+
+.start-icon-item:nth-child(2) {
+  background: rgba(181,69,42,0.12); color: #b5452a; animation-delay: 0.3s;
+}
+
+.start-icon-item:nth-child(3) {
+  background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0.6s;
+}
+
+.start-icon-item:nth-child(4) {
+  background: rgba(128,90,160,0.12); color: #805aa0; animation-delay: 0.9s;
+}
+
+.start-icon-item:nth-child(5) {
+  background: rgba(180,50,50,0.12); color: #b43232; animation-delay: 1.2s;
+}
+
+.pastlife-relation {
+  grid-template-columns: 1fr;
+}
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"前世今生测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class=topbar-nav>
+                <a href=../index.html>服务</a>
+                <a href=../test/>测试</a>
+                <a href=../blog/>文章</a>
+                <a href=../services/pricing.html>报价</a>
+                <a href=../services/cases.html>案例</a>
+                <a href=../services/faq.html>FAQ</a>
+                <a href=../en/>EN</a>
+                <a href=../services/zhenren.html class=topbar-cta>预约咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html">趣味测试</a><span>›</span>
+            前世今生测试
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="service-hero">
+        <div class="service-icon">轮</div>
+        <h1>前世今生测试</h1>
+        <p class="service-tagline">8道趣味问答，探索你灵魂深处的前世记忆</p>
+    </section>
+
+    <!-- 测试主体 -->
+    <div class="section">
+        <div class="test-container">
+
+            <!-- 开始页面 -->
+            <div id="start-screen" class="start-screen">
+                <div class="start-icons">
+                    <div class="start-icon-item">文</div>
+                    <div class="start-icon-item">武</div>
+                    <div class="start-icon-item">商</div>
+                    <div class="start-icon-item">修</div>
+                    <div class="start-icon-item">皇</div>
+                </div>
+                <div class="start-title">你的前世究竟是谁？</div>
+                <p class="start-desc">
+                    每个人的灵魂都带着前世的印记。你莫名喜欢的事物、反复出现的梦境、与生俱来的天赋……都可能是前世记忆的碎片。<br>
+                    回答8个问题，揭开你前世的神秘身份。
+                </p>
+                <button class="btn-start" onclick="startTest()">开始探索</button>
+            </div>
+
+            <!-- 答题区域 -->
+            <div id="quiz-screen" style="display:none;">
+                <div class="progress-wrap">
+                    <div class="progress-info">
+                        <span class="progress-text">测试进度</span>
+                        <span class="progress-num" id="progress-num">1 / 8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+                    </div>
+                </div>
+                <div id="question-area"></div>
+            </div>
+
+            <!-- 分析中 -->
+            <div id="analyzing-screen" class="analyzing-screen">
+                <div class="analyzing-icon"></div>
+                <div class="analyzing-text">回溯中...</div>
+                <p class="analyzing-sub">正在穿越时空，解读你灵魂深处的前世记忆</p>
+            </div>
+
+            <!-- 结果页面 -->
+            <div id="result-screen" class="result-screen"></div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <!-- 微信弹窗 -->
+    <div class="lead-popup" id="lead-popup">
+        <div class="lead-box">
+            <h3>添加微信咨询</h3>
+            <p class="lead-hint">扫码添加微信，获取专属前世今生详解</p>
+            <img src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="qr-hint">长按识别二维码 · 添加微信</p>
+            <div class="lead-close" onclick="document.getElementById('lead-popup').classList.remove('active')">暂不需要</div>
+        </div>
+    </div>
+
+    <!-- 支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:12px;color:var(--bamboo);">支付成功</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;">感谢支持！请添加微信获取详细报告。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/shared.js?v=20260417"></script>
+    <script>
+    (function() {
+        // ========== 题目数据 ==========
+        const questions = [
+            {
+                q: '你是否经常做一个反复出现的梦？梦里的场景最接近？',
+                options: [
+                    { text: '烟雨楼阁，手执书卷，窗外落花流水', type: 'scholar' },
+                    { text: '金戈铁马，战场厮杀，热血沸腾', type: 'warrior' },
+                    { text: '繁华闹市，商铺林立，人来人往', type: 'merchant' },
+                    { text: '深山古寺，青灯古佛，云雾缭绕', type: 'monk' },
+                    { text: '宫殿华堂，锦衣玉食，侍从成群', type: 'royal' }
+                ]
+            },
+            {
+                q: '你天生对哪种事物有说不清的亲切感？',
+                options: [
+                    { text: '古诗词、书法字画，看到就觉得很亲切', type: 'scholar' },
+                    { text: '刀剑兵器、武术功夫，天生就很感兴趣', type: 'warrior' },
+                    { text: '数字、账目、商业谈判，天生敏感', type: 'merchant' },
+                    { text: '寺庙禅院、冥想打坐，内心莫名平静', type: 'monk' },
+                    { text: '华贵饰品、精美瓷器，有天然鉴赏力', type: 'royal' }
+                ]
+            },
+            {
+                q: '你有一种莫名的恐惧或不安感吗？最接近哪个？',
+                options: [
+                    { text: '害怕被误解、被冤枉，对不公正的事特别愤慨', type: 'scholar' },
+                    { text: '对背叛极度敏感，很难完全信任别人', type: 'warrior' },
+                    { text: '对贫穷有深深的不安感，总想多存些积蓄', type: 'merchant' },
+                    { text: '害怕喧闹拥挤的环境，渴望独处和安静', type: 'monk' },
+                    { text: '对失去地位和尊严感到恐惧，很在意面子', type: 'royal' }
+                ]
+            },
+            {
+                q: '如果穿越回古代，你最想做的第一件事是？',
+                options: [
+                    { text: '找一间书斋，泡一壶好茶，铺纸研墨', type: 'scholar' },
+                    { text: '策马奔腾，仗剑走天涯，行侠仗义', type: 'warrior' },
+                    { text: '逛遍集市，了解物价行情，寻找商机', type: 'merchant' },
+                    { text: '寻访名山大川，拜师修行，参悟天道', type: 'monk' },
+                    { text: '穿上华服，品鉴美食，体验尊贵生活', type: 'royal' }
+                ]
+            },
+            {
+                q: '你与生俱来最突出的能力是？',
+                options: [
+                    { text: '文字表达能力很强，写文章或说话很有感染力', type: 'scholar' },
+                    { text: '正义感爆棚，遇到不公的事就想挺身而出', type: 'warrior' },
+                    { text: '天生会算计得失，做什么都能找到利益最大化的方式', type: 'merchant' },
+                    { text: '直觉极准，常常能预感到一些事情的发生', type: 'monk' },
+                    { text: '气场很强，天生有领导力，别人愿意听你的', type: 'royal' }
+                ]
+            },
+            {
+                q: '和朋友聚会时，你通常扮演什么角色？',
+                options: [
+                    { text: '话题制造者，分享有趣的见闻和知识', type: 'scholar' },
+                    { text: '保护者，有人受委屈就第一个站出来', type: 'warrior' },
+                    { text: '组织者，安排行程、选餐厅、算账都是你', type: 'merchant' },
+                    { text: '倾听者，大家有心事都愿意找你聊', type: 'monk' },
+                    { text: '核心人物，你在的地方就是焦点', type: 'royal' }
+                ]
+            },
+            {
+                q: '下面哪句话最能触动你内心？',
+                options: [
+                    { text: '人生自古谁无死，留取丹心照汗青', type: 'scholar' },
+                    { text: '醉卧沙场君莫笑，古来征战几人回', type: 'warrior' },
+                    { text: '天下熙熙皆为利来，天下攘攘皆为利往', type: 'merchant' },
+                    { text: '菩提本无树，明镜亦非台', type: 'monk' },
+                    { text: '普天之下莫非王土，率土之滨莫非王臣', type: 'royal' }
+                ]
+            },
+            {
+                q: '如果你拥有一件前世的遗物，你觉得最可能是？',
+                options: [
+                    { text: '一方古砚，墨香犹存，仿佛还残留着诗句', type: 'scholar' },
+                    { text: '一枚令牌，斑驳陈旧，握在手中有沉甸甸的分量', type: 'warrior' },
+                    { text: '一把算盘，珠子圆润，拨动时有种莫名的熟悉感', type: 'merchant' },
+                    { text: '一串佛珠，温润光滑，戴上就觉得心神安宁', type: 'monk' },
+                    { text: '一枚玉佩，雕工精美，散发着高贵的气息', type: 'royal' }
+                ]
+            }
+        ];
+
+        // ========== 前世结果数据 ==========
+        const resultData = {
+            'scholar': {
+                icon: '文',
+                color: '#6b7b5e',
+                bgColor: 'rgba(107,123,94,0.1)',
+                borderColor: 'rgba(107,123,94,0.3)',
+                name: '文人雅士',
+                subtitle: '笔墨风流 · 才情横溢',
+                story: '你的前世是一位饱读诗书的文人雅士。也许是某个朝代的才子词人，在烟雨江南的书斋里挥毫泼墨，写下传世篇章。你前世醉心于诗词歌赋，常与文人墨客聚于亭台楼阁之间，品茗论道，指点文章。你的才华曾经惊艳一方，留下的诗文在当时广为传颂。',
+                influence: '前世的文人气质深深刻印在你的灵魂中。今生的你天生对文字有感觉，表达能力出众，审美品味独特。你喜欢安静的环境，热爱阅读和思考，内心世界丰富而细腻。你可能会发现自己对古典文化有天然的亲近感，看到好的诗词字画会有莫名的感动。',
+                personality: '温文尔雅、感性细腻、追求完美',
+                luckyItem: '文房四宝、古典书籍',
+                luckyColor: '青色、墨绿色',
+                fengshui: '建议在家中设置一个安静的读书角，摆放绿植和文房用品。书房宜朝东方，有利于激发灵感和创造力。卧室可挂一幅水墨山水画，有助于安神定心。避免家中过于嘈杂，保持整洁雅致的氛围最能滋养你的灵魂。'
+            },
+            'warrior': {
+                icon: '武',
+                color: '#b5452a',
+                bgColor: 'rgba(181,69,42,0.1)',
+                borderColor: 'rgba(181,69,42,0.3)',
+                name: '武将英豪',
+                subtitle: '铁骨铮铮 · 义薄云天',
+                story: '你的前世是一位叱咤风云的武将英豪。也许是镇守边关的大将军，也许是行侠仗义的江湖豪客。你前世披甲执锐，驰骋沙场，保家卫国，用热血和忠诚书写了一段传奇。战场上的你英勇无畏，战场下的你重情重义，是将士们心中最可靠的主帅。',
+                influence: '前世的武将魂魄赋予了你非凡的勇气和正义感。今生的你性格刚毅果敢，遇到不公正的事情就忍不住要挺身而出。你体力充沛，行动力极强，做事雷厉风行。你可能对武术、军事、历史战争题材有天然的兴趣，看到兵器或铠甲会有莫名的亲切感。',
+                personality: '刚毅果敢、重情重义、嫉恶如仇',
+                luckyItem: '金属饰品、红绳护身符',
+                luckyColor: '红色、铁灰色',
+                fengshui: '建议在家中摆放一些金属材质的装饰品，象征坚毅和力量。大门宜朝南方，有助于增强气场和魄力。客厅可挂一幅骏马或雄鹰图，激发你的斗志和事业运。卧室避免摆放尖锐物品，以温和的暖色调布置，帮助前世战场的焦虑感得到平复。'
+            },
+            'merchant': {
+                icon: '商',
+                color: '#b8942e',
+                bgColor: 'rgba(212,175,55,0.1)',
+                borderColor: 'rgba(212,175,55,0.3)',
+                name: '商贾巨富',
+                subtitle: '财通四海 · 精明练达',
+                story: '你的前世是一位富甲一方的商贾巨富。也许是丝绸之路上的大商人，也许是京城里最有名的钱庄掌柜。你前世精于算计，眼光独到，从一个小摊贩做起，一步步建立了庞大的商业帝国。你乐善好施，修桥铺路，在当地享有极高的声望。',
+                influence: '前世的商人智慧深藏在你的基因里。今生的你天生对数字敏感，理财能力出众，总能发现别人看不到的商机。你做事务实高效，目标明确，有很强的执行力和规划能力。你可能会发现自己对财富积累有天然的追求，也很擅长人际交往和资源整合。',
+                personality: '精明务实、善于交际、目光长远',
+                luckyItem: '貔貅摆件、金色饰品',
+                luckyColor: '金色、棕色',
+                fengshui: '建议在家中财位（大门对角线位置）摆放貔貅或聚宝盆，有助于聚财旺运。客厅宜明亮宽敞，象征财路广开。书房可放一盆发财树，办公桌上摆放水晶球，增强事业运和财运。避免家中有漏水现象，在风水中水为财，漏水代表破财。'
+            },
+            'monk': {
+                icon: '修',
+                color: '#805aa0',
+                bgColor: 'rgba(128,90,160,0.1)',
+                borderColor: 'rgba(128,90,160,0.3)',
+                name: '修行者',
+                subtitle: '悟道参禅 · 超凡脱俗',
+                story: '你的前世是一位潜心修行的修道之人。也许是深山古寺中的得道高僧，也许是云游四方的道家真人。你前世远离红尘，在青灯古佛前参悟天道，历经数十年苦修，终于领悟了生命的真谛。你前世以慈悲为怀，普度众生，点化了无数迷途之人。',
+                influence: '前世的修行积累让你的灵魂格外通透。今生的你直觉极准，常常能感应到常人感受不到的东西。你性格平和淡然，不争不抢，对物质欲望较低，更追求精神层面的满足。你可能会发现自己对佛学、道学、冥想有天然的领悟力，独处时反而能获得更多能量。',
+                personality: '淡泊宁静、直觉敏锐、悲悯众生',
+                luckyItem: '檀木手串、水晶石',
+                luckyColor: '紫色、白色',
+                fengshui: '建议在家中设置一个安静的冥想角落，点一盏柔和的灯或一炷清香。卧室宜朝西方，有利于安神养心。家中可摆放一些天然水晶或檀木摆件，净化磁场。避免家中杂物堆积，保持清爽通透的格局。定期到大自然中走走，有助于恢复灵性能量。'
+            },
+            'royal': {
+                icon: '皇',
+                color: '#b43232',
+                bgColor: 'rgba(180,50,50,0.1)',
+                borderColor: 'rgba(180,50,50,0.3)',
+                name: '皇族贵人',
+                subtitle: '尊贵荣华 · 天生气度',
+                story: '你的前世是一位身份尊贵的皇室成员。也许是某个王朝的皇子公主，也许是权倾朝野的王公贵族。你前世从小锦衣玉食，接受最好的教育，精通琴棋书画，举止优雅高贵。你前世虽生于权力漩涡之中，却始终保持着高贵的品格和仁厚的心肠。',
+                influence: '前世的皇族气质至今仍在你身上闪耀。今生的你气场强大，天生就有领导力和威严感，走到哪里都容易成为焦点。你品味高雅，对生活品质有很高的要求，不愿意将就。你可能会发现自己对精致的事物有天然的鉴赏力，对礼仪规矩也有本能的重视。',
+                personality: '气度非凡、品味高雅、天生领袖',
+                luckyItem: '玉石饰品、龙凤纹物件',
+                luckyColor: '红色、金色',
+                fengshui: '建议家中装修以大气典雅为主，客厅可摆放一对玉如意或瑞兽摆件，增强贵人运。大门宜宽敞明亮，象征尊贵气度。卧室用丝质床品，颜色以暖金色或酒红色为宜。家中正中央位置保持整洁空旷，有助于稳固你的气场和运势。避免使用过于廉价的装饰品。'
+            }
+        };
+
+        // ========== 状态变量 ==========
+        let currentQ = 0;
+        let scores = { 'scholar': 0, 'warrior': 0, 'merchant': 0, 'monk': 0, 'royal': 0 };
+
+        // ========== 开始测试 ==========
+        window.startTest = function() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            currentQ = 0;
+            scores = { 'scholar': 0, 'warrior': 0, 'merchant': 0, 'monk': 0, 'royal': 0 };
+            renderQuestion();
+        };
+
+        // ========== 渲染问题 ==========
+        function renderQuestion() {
+            const q = questions[currentQ];
+            const area = document.getElementById('question-area');
+            // 打乱选项顺序
+            const shuffled = q.options.slice().sort(function() { return Math.random() - 0.5; });
+
+            let html = '<div class="question-card">';
+            html += '<div class="question-title">' + q.q + '</div>';
+            html += '<div class="options-list">';
+            shuffled.forEach(function(opt) {
+                html += '<button class="option-btn" onclick="selectOption(\'' + opt.type + '\')">' + opt.text + '</button>';
+            });
+            html += '</div></div>';
+            area.innerHTML = html;
+
+            // 更新进度
+            document.getElementById('progress-num').textContent = (currentQ + 1) + ' / 8';
+            document.getElementById('progress-fill').style.width = ((currentQ + 1) / 8 * 100) + '%';
+        }
+
+        // ========== 选择选项 ==========
+        window.selectOption = function(type) {
+            scores[type]++;
+            currentQ++;
+
+            if (currentQ < questions.length) {
+                renderQuestion();
+            } else {
+                showAnalyzing();
+            }
+        };
+
+        // ========== 分析中动画 ==========
+        function showAnalyzing() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            var screen = document.getElementById('analyzing-screen');
+            screen.classList.add('active');
+
+            setTimeout(function() {
+                screen.classList.remove('active');
+                showResult();
+            }, 2500);
+        }
+
+        // ========== 计算结果 ==========
+        function getDominantType() {
+            let max = 0;
+            let dominant = 'scholar';
+            var types = ['scholar', 'warrior', 'merchant', 'monk', 'royal'];
+            for (var i = 0; i < types.length; i++) {
+                var t = types[i];
+                if (scores[t] > max) {
+                    max = scores[t];
+                    dominant = t;
+                }
+            }
+            return dominant;
+        }
+
+        // ========== 显示结果 ==========
+        function showResult() {
+            var dominant = getDominantType();
+            var data = resultData[dominant];
+            var screen = document.getElementById('result-screen');
+
+            var html = '';
+
+            // 主元素卡片
+            html += '<div class="result-hero">';
+            html += '<div class="result-element-icon" style="background:' + data.bgColor + ';color:' + data.color + ';border:2px solid ' + data.borderColor + ';">' + data.icon + '</div>';
+            html += '<div class="result-element-name">你的前世身份：' + data.name + '</div>';
+            html += '<div class="result-element-sub">' + data.subtitle + '</div>';
+            html += '</div>';
+
+            // 前世故事
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9733;</span> 前世故事</h3>';
+            html += '<p>' + data.story + '</p>';
+            html += '</div>';
+
+            // 今生影响
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#10047;</span> 今生影响</h3>';
+            html += '<p>' + data.influence + '</p>';
+            html += '</div>';
+
+            // 性格与幸运物
+            html += '<div class="pastlife-relation">';
+            html += '<div class="relation-card relation-personality">';
+            html += '<h4>性格连结</h4>';
+            html += '<div class="relation-element" style="font-size:1rem;">' + data.personality + '</div>';
+            html += '<p>前世性格在今生的延续与投射</p>';
+            html += '</div>';
+            html += '<div class="relation-card relation-lucky">';
+            html += '<h4>前世遗物</h4>';
+            html += '<div class="relation-element" style="font-size:1rem;">' + data.luckyItem + '</div>';
+            html += '<p>佩戴或收藏可唤醒前世福缘</p>';
+            html += '</div>';
+            html += '</div>';
+
+            // 幸运信息
+            html += '<div class="lucky-grid">';
+            html += '<div class="lucky-item"><div class="lucky-label">幸运颜色</div><div class="lucky-value">' + data.luckyColor + '</div></div>';
+            html += '<div class="lucky-item"><div class="lucky-label">守护物品</div><div class="lucky-value">' + data.luckyItem + '</div></div>';
+            html += '</div>';
+
+            // 风水建议
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9776;</span> 风水建议</h3>';
+            html += '<p>' + data.fengshui + '</p>';
+            html += '</div>';
+
+            // CTA
+            html += '<div class="result-cta">';
+            html += '<h3>想深入了解你的前世今生？</h3>';
+            html += '<div class="result-cta-btns">';
+            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥99</button>';
+            html += '<button class="btn-cta-wechat" onclick="document.getElementById(\'lead-popup\').classList.add(\'active\')">添加微信咨询</button>';
+            html += '</div>';
+            html += '</div>';
+
+            // 重新测试
+            html += '
+            <!-- 分享按钮 -->
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+
+            <!-- 你可能还想测 -->
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+
+<div class="restart-wrap">';
+            html += '<button class="btn-restart" onclick="restartTest()">重新测试</button>';
+            html += '</div>';
+
+            screen.innerHTML = html;
+            screen.classList.add('active');
+
+            // 滚动到结果顶部
+            screen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ========== 重新测试 ==========
+        window.restartTest = function() {
+            document.getElementById('result-screen').classList.remove('active');
+            document.getElementById('result-screen').innerHTML = '';
+            document.getElementById('start-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // ========== 支付弹窗兼容（如果主页没有加载支付脚本） ==========
+        if (typeof window.openPayModal === 'undefined') {
+            window.openPayModal = function(productId) {
+                var modal = document.getElementById('modal-pay');
+                if (modal) {
+                    modal.classList.add('active');
+                    var selectDiv = document.getElementById('pay-step-select');
+                    if (selectDiv) {
+                        var list = document.getElementById('pay-product-list');
+                        if (list) {
+                            list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:0.88rem;">' +
+                                '<p style="margin-bottom:12px;">请添加微信获取支付链接</p>' +
+                                '<button class="btn" style="max-width:200px;margin:0 auto;" onclick="document.getElementById(\'modal-pay\').classList.remove(\'active\');document.getElementById(\'lead-popup\').classList.add(\'active\');">添加微信</button>' +
+                                '</div>';
+                        }
+                    }
+                }
+            };
+        }
+        if (typeof window.closePayModal === 'undefined') {
+            window.closePayModal = function() {
+                var modal = document.getElementById('modal-pay');
+                if (modal) modal.classList.remove('active');
+            };
+        }
+
+    })();
+    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"前世今生测试有什么依据？","acceptedAnswer":{"@type":"Answer","text":"基于传统命理学中的轮回因果观念，通过趣味问答探索你可能的前世身份和今生使命。"}},{"@type":"Question","name":"前世今生测试准吗？","acceptedAnswer":{"@type":"Answer","text":"趣味文化测试，没有科学依据，仅供娱乐和自我探索。"}}]}</script><script>
+var TESTS_DATA = [{"file": "test-yunshi.html", "icon": "🔮", "title": "今日运势速测"}, {"file": "test-wuxing.html", "icon": "🌊", "title": "五行属性测试"}, {"file": "test-fengshui.html", "icon": "🏠", "title": "家居风水评分"}, {"file": "test-xingming.html", "icon": "✍️", "title": "姓名吉凶测试"}, {"file": "test-taohua.html", "icon": "🌸", "title": "桃花运测试"}, {"file": "test-ta-aini.html", "icon": "💕", "title": "Ta是否爱你"}, {"file": "test-caishang.html", "icon": "💰", "title": "财商测试"}, {"file": "test-xinli.html", "icon": "🧠", "title": "心理年龄测试"}, {"file": "test-mianxiang.html", "icon": "👤", "title": "面相气质测试"}, {"file": "test-qianshi.html", "icon": "🌙", "title": "前世今生测试"}, {"file": "test-lucky.html", "icon": "🍀", "title": "幸运色测试"}, {"file": "test-ziwei.html", "icon": "⭐", "title": "紫微斗数排盘"}];
+</script>
+
+<script>
+// 分享功能
+window.shareResult = function() {
+    var title = document.title.replace(/\s*\|.*$/, '');
+    var resultEl = document.querySelector('.result-hero') || document.querySelector('.result-element-name');
+    var resultText = resultEl ? resultEl.textContent.trim() : '';
+    var text = '我在一宅一句测了「' + title + '」\n' + resultText + '\n\n👉 你也来测测：' + window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            var tip = document.getElementById('share-tip');
+            tip.style.display = 'inline';
+            setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+        });
+    } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var tip = document.getElementById('share-tip');
+        tip.style.display = 'inline';
+        setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+    }
+};
+
+// 相关测试推荐
+(function(){
+    var allTests = TESTS_DATA;
+    var currentFile = window.location.pathname.split('/').pop();
+    var related = allTests.filter(function(t){ return t.file !== currentFile; });
+    // Shuffle and pick 4
+    related.sort(function(){ return Math.random() - 0.5; });
+    var picks = related.slice(0, 4);
+    var container = document.getElementById('related-tests');
+    if (!container) return;
+    var html = '';
+    for (var i = 0; i < picks.length; i++) {
+        html += '<a href="' + picks[i].file + '" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">' + picks[i].icon + ' ' + picks[i].title + '</a>';
+    }
+    container.innerHTML = html;
+})();
+</script>
+
+</body>
+</html>

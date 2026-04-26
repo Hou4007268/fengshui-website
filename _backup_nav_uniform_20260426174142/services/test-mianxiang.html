@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面相气质测试 | 一宅一句 - 看面相知性格</title>
+    <meta name="description" content="一宅一句面相气质测试：8道趣味题，从面部特征解读你的气质类型。贵气、福气、才气、灵气、旺气，你属于哪一种？免费测试，快来发现！">
+    <meta name="keywords" content="面相测试,气质类型,面相分析,看面相,性格测试,面部特征,免费测试">
+    <link rel="canonical" href="https://12zn.com/services/test-mianxiang.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="面相气质测试 | 一宅一句 - 看面相知性格">
+    <meta property="og:description" content="一宅一句面相气质测试：8道趣味题，从面部特征解读你的气质类型。贵气、福气、才气、灵气、旺气，你属于哪一种？免费测试，快来发现！">
+    <meta property="og:url" content="https://12zn.com/services/test-mianxiang.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="test-common.css?v=20260414">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <style>
+        /* === 面相测试专用样式 === */
+        .test-container {
+  max-width: 640px; margin: 0 auto; padding: 0 24px;
+}
+
+.result-hero::before {
+  content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 400px; height: 160px; background: radial-gradient(ellipse, rgba(166,138,62,0.08) 0%, transparent 70%); pointer-events: none;
+}
+
+.result-element-icon {
+  width: 96px; height: 96px; margin: 0 auto 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 2.8rem; font-weight: 700; position: relative; animation: resultPop 0.6s ease;
+}
+
+/* 性格特质 */
+        .trait-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.trait-card {
+  background: var(--white); border: 1px solid var(--border-soft); border-radius: 12px; padding: 20px; text-align: center;
+}
+
+.trait-card h4 {
+  font-family: 'Noto Serif SC', serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 8px;
+}
+
+.trait-card .trait-value {
+  font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px;
+}
+
+.trait-card p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;
+}
+
+.trait-strength h4 {
+  color: var(--bamboo);
+}
+
+.trait-strength .trait-value {
+  color: var(--bamboo);
+}
+
+.trait-caution h4 {
+  color: var(--vermilion);
+}
+
+.trait-caution .trait-value {
+  color: var(--vermilion);
+}
+
+/* 幸运信息 */
+        .lucky-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+}
+
+.start-icon-item {
+  width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif SC', serif; font-size: 1.3rem; font-weight: 700; animation: floatIcon 3s ease-in-out infinite;
+}
+
+.start-icon-item:nth-child(1) {
+  background: rgba(212,175,55,0.12); color: #b8942e; animation-delay: 0s;
+}
+
+.start-icon-item:nth-child(2) {
+  background: rgba(181,69,42,0.12); color: #b5452a; animation-delay: 0.3s;
+}
+
+.start-icon-item:nth-child(3) {
+  background: rgba(70,130,180,0.12); color: #4682b4; animation-delay: 0.6s;
+}
+
+.start-icon-item:nth-child(4) {
+  background: rgba(138,100,168,0.12); color: #8a64a8; animation-delay: 0.9s;
+}
+
+.start-icon-item:nth-child(5) {
+  background: rgba(107,123,94,0.12); color: #6b7b5e; animation-delay: 1.2s;
+}
+
+.trait-grid {
+  grid-template-columns: 1fr;
+}
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"面相气质测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class=topbar-nav>
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <a href="/services/zhenren.html" class="topbar-cta">预约咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html">趣味测试</a><span>›</span>
+            面相气质测试
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="service-hero">
+        <div class="service-icon">相</div>
+        <h1>面相气质测试</h1>
+        <p class="service-tagline">8道趣味问答，从面部特征解读你的气质类型</p>
+    </section>
+
+    <!-- 测试主体 -->
+    <div class="section">
+        <div class="test-container">
+
+            <!-- 开始页面 -->
+            <div id="start-screen" class="start-screen">
+                <div class="start-icons">
+                    <div class="start-icon-item">贵</div>
+                    <div class="start-icon-item">福</div>
+                    <div class="start-icon-item">才</div>
+                    <div class="start-icon-item">灵</div>
+                    <div class="start-icon-item">旺</div>
+                </div>
+                <div class="start-title">你的面相透露了什么气质？</div>
+                <p class="start-desc">
+                    相由心生，面相蕴含性格密码。每个人的五官特征都对应着独特的气质类型，影响着你的性格、人际和运势。<br>
+                    回答8个关于面部特征的问题，发现你的气质类型。
+                </p>
+                <button class="btn-start" onclick="startTest()">开始测试</button>
+            </div>
+
+            <!-- 答题区域 -->
+            <div id="quiz-screen" style="display:none;">
+                <div class="progress-wrap">
+                    <div class="progress-info">
+                        <span class="progress-text">测试进度</span>
+                        <span class="progress-num" id="progress-num">1 / 8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+                    </div>
+                </div>
+                <div id="question-area"></div>
+            </div>
+
+            <!-- 分析中 -->
+            <div id="analyzing-screen" class="analyzing-screen">
+                <div class="analyzing-icon"></div>
+                <div class="analyzing-text">面相解析中...</div>
+                <p class="analyzing-sub">正在结合面相学理论解读你的气质类型</p>
+            </div>
+
+            <!-- 结果页面 -->
+            <div id="result-screen" class="result-screen"></div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <!-- 微信弹窗 -->
+    <div class="lead-popup" id="lead-popup">
+        <div class="lead-box">
+            <h3>添加微信咨询</h3>
+            <p class="lead-hint">扫码添加微信，获取专属面相分析</p>
+            <img src="../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="qr-hint">长按识别二维码 · 添加微信</p>
+            <div class="lead-close" onclick="document.getElementById('lead-popup').classList.remove('active')">暂不需要</div>
+        </div>
+    </div>
+
+    <!-- 支付弹窗 -->
+    <div class="modal" id="modal-pay">
+        <div class="modal-content" style="max-width:420px;text-align:center;">
+            <span class="modal-close" onclick="closePayModal()">×</span>
+            <div id="pay-step-select">
+                <h2 style="font-size:1.2rem;margin-bottom:16px;">选择服务</h2>
+                <div id="pay-product-list" style="text-align:left;"></div>
+            </div>
+            <div id="pay-step-qr" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:6px;">支付宝扫码支付</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px;" id="pay-order-info"></p>
+                <div id="pay-qr-container" style="display:flex;justify-content:center;margin:16px 0;">
+                    <img id="pay-qr-img" style="width:220px;height:220px;border-radius:8px;border:1px solid var(--border-soft);">
+                </div>
+                <p style="color:var(--gold);font-size:1.3rem;font-weight:600;margin:8px 0;" id="pay-amount-display"></p>
+                <p style="color:var(--text-secondary);font-size:0.82rem;">打开支付宝 → 扫一扫 → 完成支付</p>
+                <div id="pay-status-msg" style="margin-top:14px;padding:10px;border-radius:8px;font-size:0.85rem;display:none;"></div>
+            </div>
+            <div id="pay-step-success" style="display:none;">
+                <h2 style="font-size:1.2rem;margin-bottom:12px;color:var(--bamboo);">支付成功</h2>
+                <p style="color:var(--text-secondary);font-size:0.88rem;">感谢支持！请添加微信获取详细报告。</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/shared.js?v=20260417"></script>
+    <script>
+    (function() {
+        // ========== 题目数据 ==========
+        const questions = [
+            {
+                q: '你的脸型最接近哪种？',
+                options: [
+                    { text: '国字脸 —— 方正有棱角，轮廓分明', type: '贵气' },
+                    { text: '圆脸 —— 饱满圆润，亲和感强', type: '福气' },
+                    { text: '瓜子脸 —— 线条精致，下巴尖细', type: '才气' },
+                    { text: '鹅蛋脸 —— 椭圆匀称，柔和端庄', type: '灵气' },
+                    { text: '长脸 —— 面部修长，五官立体', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的眼睛特征最符合哪种描述？',
+                options: [
+                    { text: '眼神深邃有力，目光坚定沉稳', type: '贵气' },
+                    { text: '眼睛圆大有神，笑起来弯弯的', type: '福气' },
+                    { text: '眼型细长灵动，眼角微微上挑', type: '才气' },
+                    { text: '眼睛清澈明亮，似乎能看透人心', type: '灵气' },
+                    { text: '眼神炯炯有光，充满活力和自信', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的鼻子最接近哪种类型？',
+                options: [
+                    { text: '鼻梁挺直高耸，鼻头有肉而不大', type: '贵气' },
+                    { text: '鼻头圆润饱满，鼻翼丰厚有福相', type: '福气' },
+                    { text: '鼻梁秀挺，鼻型精巧细致', type: '才气' },
+                    { text: '鼻梁适中，鼻尖微翘，灵巧可爱', type: '灵气' },
+                    { text: '鼻梁宽厚有力，鼻孔不外露', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的嘴唇特征最符合哪项？',
+                options: [
+                    { text: '唇形端正，嘴角略微上扬，不怒自威', type: '贵气' },
+                    { text: '嘴唇丰厚润泽，笑容和蔼可亲', type: '福气' },
+                    { text: '唇型小巧精致，唇线清晰分明', type: '才气' },
+                    { text: '唇色红润自然，嘴角总带笑意', type: '灵气' },
+                    { text: '嘴巴大小适中，说话有力声音洪亮', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的眉毛最接近哪种形态？',
+                options: [
+                    { text: '眉毛浓密有型，眉骨高耸分明', type: '贵气' },
+                    { text: '眉毛弯弯如月，眉头宽眉尾细', type: '福气' },
+                    { text: '眉毛细长飘逸，眉峰高且清秀', type: '才气' },
+                    { text: '眉毛自然柔顺，弯度优美', type: '灵气' },
+                    { text: '眉毛粗犷浓黑，英气十足', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的额头特征最接近哪种？',
+                options: [
+                    { text: '额头宽阔方正，饱满有光泽', type: '贵气' },
+                    { text: '额头圆润丰满，发际线整齐', type: '福气' },
+                    { text: '额头高而平整，显得聪慧清秀', type: '才气' },
+                    { text: '额头光洁无纹，肤色均匀通透', type: '灵气' },
+                    { text: '额头宽广隆起，气势磅礴', type: '旺气' }
+                ]
+            },
+            {
+                q: '你的耳朵特征最符合哪项？',
+                options: [
+                    { text: '耳朵轮廓分明，耳垂厚实下垂', type: '贵气' },
+                    { text: '耳朵圆厚饱满，耳垂大而柔软', type: '福气' },
+                    { text: '耳朵小巧精致，紧贴头部', type: '才气' },
+                    { text: '耳朵形状匀称，颜色白净通透', type: '灵气' },
+                    { text: '耳朵大而有力，耳廓外张', type: '旺气' }
+                ]
+            },
+            {
+                q: '别人对你的第一印象通常是？',
+                options: [
+                    { text: '气场强大，看起来很有地位和威严', type: '贵气' },
+                    { text: '亲切温暖，让人觉得好相处有亲和力', type: '福气' },
+                    { text: '斯文秀气，给人聪明博学的感觉', type: '才气' },
+                    { text: '灵动飘逸，有一种独特的气质和魅力', type: '灵气' },
+                    { text: '精力充沛，看起来很有干劲和魄力', type: '旺气' }
+                ]
+            }
+        ];
+
+        // ========== 气质类型结果数据 ==========
+        const typeData = {
+            '贵气': {
+                icon: '贵',
+                color: '#b8942e',
+                bgColor: 'rgba(212,175,55,0.1)',
+                borderColor: 'rgba(212,175,55,0.3)',
+                name: '贵气型',
+                subtitle: '天生威仪 · 气宇轩昂',
+                desc: '你的面相呈现出天生的贵气，五官端正大气，气场强大而稳重。你的面部轮廓方正有力，眉宇间透着沉稳与自信，是天生的领导者。贵气型的人通常胸怀宽广、格局高远，做事果断有魄力，能够在关键时刻做出正确的判断。你的气质让人自然而然地信服和尊重。',
+                traits: { strength: '领导力', strengthDesc: '天生具备统领全局的气场，善于做决策，能服众望。', caution: '亲和力', cautionDesc: '过于威严可能让人产生距离感，适当展现温和一面更受欢迎。' },
+                career: '适合从事管理层、企业家、政务官员、高管顾问等需要决策力和领导力的工作。你的气场会让你在任何团队中自然成为核心人物。',
+                luckyColor: '金色、紫色',
+                luckyNum: '1、6、8',
+                tips: '居家风水建议：客厅宜宽敞明亮，可摆放铜器或水晶摆件增强贵人运。办公桌宜面向大门方向，背后靠实墙，象征有靠山。卧室宜用暖金色系床品，增添贵气。日常可多穿深色正装，佩戴金属质感的饰品，强化自身的贵气气场。'
+            },
+            '福气': {
+                icon: '福',
+                color: '#b5452a',
+                bgColor: 'rgba(181,69,42,0.1)',
+                borderColor: 'rgba(181,69,42,0.3)',
+                name: '福气型',
+                subtitle: '福星高照 · 笑口常开',
+                desc: '你的面相饱含福气，面部圆润饱满，笑容亲和温暖。你的五官分布匀称，鼻头丰厚，耳垂饱满，这些都是传统面相学中的"有福之相"。福气型的人性格乐观豁达，人缘极好，总能遇到贵人相助。你天生自带好运，无论遇到什么困难，最终都能化险为夷、逢凶化吉。',
+                traits: { strength: '人缘运', strengthDesc: '亲和力极强，走到哪里都受人欢迎，贵人运旺盛。', caution: '进取心', cautionDesc: '过于安逸可能影响进步，适当给自己一些压力和目标更好。' },
+                career: '适合从事服务业、餐饮业、教育培训、人力资源、公关传媒等需要与人打交道的工作。你的亲和力是最大的职场优势，客户和同事都会喜欢你。',
+                luckyColor: '红色、橙色',
+                luckyNum: '2、5、8',
+                tips: '居家风水建议：家中入口处宜摆放绿色植物或福字装饰，招财纳福。厨房宜保持整洁明亮，灶台方向朝吉位。客厅可摆放圆形物品或笑佛摆件，增强福运。日常穿着可多用暖色调，佩戴玉器或翡翠，与你的福气相辅相成。饮食上多吃圆形食物，如汤圆、饺子，象征圆满。'
+            },
+            '才气': {
+                icon: '才',
+                color: '#4682b4',
+                bgColor: 'rgba(70,130,180,0.1)',
+                borderColor: 'rgba(70,130,180,0.3)',
+                name: '才气型',
+                subtitle: '才华横溢 · 思维敏捷',
+                desc: '你的面相透露出过人的才气，五官精致秀美，额头宽阔明亮。你的面部线条清晰，眼神灵动聪慧，给人一种"一点就通"的聪明感。才气型的人思维敏捷、学习能力强，善于发现问题的本质，有独到的见解和创意。你天生对知识有渴望，在学术或艺术领域往往有出色的表现。',
+                traits: { strength: '智慧力', strengthDesc: '思维敏锐，分析力强，在专业领域容易出类拔萃。', caution: '执行力', cautionDesc: '想法多但有时缺乏行动力，需要把想法落地才能真正成功。' },
+                career: '适合从事科研学术、文学创作、设计策划、技术开发、金融分析等需要脑力和创造力的工作。你的智慧是最大的武器，选择高知领域发展前途无限。',
+                luckyColor: '蓝色、白色',
+                luckyNum: '3、7、9',
+                tips: '居家风水建议：书房是你最重要的空间，宜设在家中文昌位（东南方），书桌面朝窗户，光线充足。书房可摆放文昌塔或毛笔架，增强学业事业运。卧室宜安静素雅，用浅蓝色或米白色系装饰。日常可多穿蓝白色系服装，佩戴水晶饰品，提升思维清晰度。'
+            },
+            '灵气': {
+                icon: '灵',
+                color: '#8a64a8',
+                bgColor: 'rgba(138,100,168,0.1)',
+                borderColor: 'rgba(138,100,168,0.3)',
+                name: '灵气型',
+                subtitle: '灵秀脱俗 · 直觉敏锐',
+                desc: '你的面相散发着独特的灵气，五官匀称和谐，整体气质飘逸脱俗。你的眼睛清澈明亮，面部肤色通透自然，给人一种"仙气"的感觉。灵气型的人直觉非常敏锐，感知力强，往往能察觉到别人忽略的细微之处。你内心丰富而深邃，对美和艺术有天然的鉴赏力，是人群中最有独特魅力的存在。',
+                traits: { strength: '感知力', strengthDesc: '直觉准确，洞察力强，能敏锐捕捉到环境和人心的变化。', caution: '抗压力', cautionDesc: '内心敏感可能容易受外界影响，需要学会自我调节和保护。' },
+                career: '适合从事心理咨询、艺术创作、音乐表演、瑜伽疗愈、命理风水、美学设计等需要感知力和审美力的工作。你的灵性是独一无二的天赋，在身心灵领域能大放异彩。',
+                luckyColor: '紫色、银白色',
+                luckyNum: '4、7、9',
+                tips: '居家风水建议：卧室是你补充灵气的重要空间，宜选择安静的位置，窗帘用浅紫色或银白色。可在房间摆放薰衣草、白水晶等净化能量的物品。客厅宜通风良好，摆放鲜花保持空间的清新。日常可多穿淡雅色系服装，佩戴月光石或紫水晶，增强直觉和灵感。冥想和亲近自然是你最好的充电方式。'
+            },
+            '旺气': {
+                icon: '旺',
+                color: '#6b7b5e',
+                bgColor: 'rgba(107,123,94,0.1)',
+                borderColor: 'rgba(107,123,94,0.3)',
+                name: '旺气型',
+                subtitle: '精力旺盛 · 财运亨通',
+                desc: '你的面相洋溢着旺盛的气场，五官大气有力，整体给人精力充沛的感觉。你的面部骨骼突出，眉毛浓密，鼻梁宽厚，这些特征在面相学中主旺财旺运。旺气型的人行动力强、魄力十足，做事雷厉风行、敢于冒险。你天生具备赚钱的头脑和执行力，事业心强，总能把握住机会实现财富积累。',
+                traits: { strength: '行动力', strengthDesc: '执行力超强，说到做到，在事业和财运方面表现突出。', caution: '耐心度', cautionDesc: '做事太急可能忽略细节，适当放慢节奏反而事半功倍。' },
+                career: '适合从事创业经商、销售贸易、房地产投资、体育竞技、项目管理等需要魄力和行动力的工作。你的旺盛精力是最大的资本，选择实干型领域更容易成功致富。',
+                luckyColor: '绿色、棕色',
+                luckyNum: '3、6、8',
+                tips: '居家风水建议：大门宜宽敞明亮，进门处摆放招财树或貔貅，增强财运。客厅财位（进门对角线位置）可摆放聚宝盆或金蟾。办公桌宜面朝门口方向，象征迎接机会。卧室宜用大地色系装饰，稳固气场。日常可多穿绿色或棕色系服装，佩戴黄金或碧玉饰品，助旺财运和事业运。'
+            }
+        };
+
+        // ========== 状态变量 ==========
+        let currentQ = 0;
+        let scores = { '贵气': 0, '福气': 0, '才气': 0, '灵气': 0, '旺气': 0 };
+
+        // ========== 开始测试 ==========
+        window.startTest = function() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            currentQ = 0;
+            scores = { '贵气': 0, '福气': 0, '才气': 0, '灵气': 0, '旺气': 0 };
+            renderQuestion();
+        };
+
+        // ========== 渲染问题 ==========
+        function renderQuestion() {
+            const q = questions[currentQ];
+            const area = document.getElementById('question-area');
+            // 打乱选项顺序
+            const shuffled = q.options.slice().sort(function() { return Math.random() - 0.5; });
+
+            let html = '<div class="question-card">';
+            html += '<div class="question-title">' + q.q + '</div>';
+            html += '<div class="options-list">';
+            shuffled.forEach(function(opt) {
+                html += '<button class="option-btn" onclick="selectOption(\'' + opt.type + '\')">' + opt.text + '</button>';
+            });
+            html += '</div></div>';
+            area.innerHTML = html;
+
+            // 更新进度
+            document.getElementById('progress-num').textContent = (currentQ + 1) + ' / 8';
+            document.getElementById('progress-fill').style.width = ((currentQ + 1) / 8 * 100) + '%';
+        }
+
+        // ========== 选择选项 ==========
+        window.selectOption = function(type) {
+            scores[type]++;
+            currentQ++;
+
+            if (currentQ < questions.length) {
+                renderQuestion();
+            } else {
+                showAnalyzing();
+            }
+        };
+
+        // ========== 分析中动画 ==========
+        function showAnalyzing() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            var screen = document.getElementById('analyzing-screen');
+            screen.classList.add('active');
+
+            setTimeout(function() {
+                screen.classList.remove('active');
+                showResult();
+            }, 2000);
+        }
+
+        // ========== 计算结果 ==========
+        function getDominantType() {
+            let max = 0;
+            let dominant = '贵气';
+            var types = ['贵气', '福气', '才气', '灵气', '旺气'];
+            for (var i = 0; i < types.length; i++) {
+                var t = types[i];
+                if (scores[t] > max) {
+                    max = scores[t];
+                    dominant = t;
+                }
+            }
+            return dominant;
+        }
+
+        // ========== 显示结果 ==========
+        function showResult() {
+            var dominant = getDominantType();
+            var data = typeData[dominant];
+            var screen = document.getElementById('result-screen');
+
+            var html = '';
+
+            // 主气质卡片
+            html += '<div class="result-hero">';
+            html += '<div class="result-element-icon" style="background:' + data.bgColor + ';color:' + data.color + ';border:2px solid ' + data.borderColor + ';">' + data.icon + '</div>';
+            html += '<div class="result-element-name">你的气质类型：' + data.name + '</div>';
+            html += '<div class="result-element-sub">' + data.subtitle + '</div>';
+            html += '</div>';
+
+            // 面相解读
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9733;</span> 面相解读</h3>';
+            html += '<p>' + data.desc + '</p>';
+            html += '</div>';
+
+            // 性格特质
+            html += '<div class="trait-grid">';
+            html += '<div class="trait-card trait-strength">';
+            html += '<h4>核心优势</h4>';
+            html += '<div class="trait-value">' + data.traits.strength + '</div>';
+            html += '<p>' + data.traits.strengthDesc + '</p>';
+            html += '</div>';
+            html += '<div class="trait-card trait-caution">';
+            html += '<h4>注意事项</h4>';
+            html += '<div class="trait-value">' + data.traits.caution + '</div>';
+            html += '<p>' + data.traits.cautionDesc + '</p>';
+            html += '</div>';
+            html += '</div>';
+
+            // 事业建议
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9758;</span> 事业方向</h3>';
+            html += '<p>' + data.career + '</p>';
+            html += '</div>';
+
+            // 幸运信息
+            html += '<div class="lucky-grid">';
+            html += '<div class="lucky-item"><div class="lucky-label">幸运颜色</div><div class="lucky-value">' + data.luckyColor + '</div></div>';
+            html += '<div class="lucky-item"><div class="lucky-label">幸运数字</div><div class="lucky-value">' + data.luckyNum + '</div></div>';
+            html += '</div>';
+
+            // 风水建议
+            html += '<div class="result-detail-card">';
+            html += '<h3><span class="detail-icon">&#9776;</span> 风水建议</h3>';
+            html += '<p>' + data.tips + '</p>';
+            html += '</div>';
+
+            // CTA
+            html += '<div class="result-cta">';
+            html += '<h3>想了解你的完整面相运势？</h3>';
+            html += '<div class="result-cta-btns">';
+            html += '<button class="btn-cta-pay" onclick="openPayModal(\'ai_deep\')">获取详细分析 ¥99</button>';
+            html += '<button class="btn-cta-wechat" onclick="document.getElementById(\'lead-popup\').classList.add(\'active\')">添加微信咨询</button>';
+            html += '</div>';
+            html += '</div>';
+
+            // 重新测试
+            html += '
+            <!-- 分享按钮 -->
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+
+            <!-- 你可能还想测 -->
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+
+<div class="restart-wrap">';
+            html += '<button class="btn-restart" onclick="restartTest()">重新测试</button>';
+            html += '</div>';
+
+            screen.innerHTML = html;
+            screen.classList.add('active');
+
+            // 滚动到结果顶部
+            screen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ========== 重新测试 ==========
+        window.restartTest = function() {
+            document.getElementById('result-screen').classList.remove('active');
+            document.getElementById('result-screen').innerHTML = '';
+            document.getElementById('start-screen').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // ========== 支付弹窗兼容（如果主页没有加载支付脚本） ==========
+        if (typeof window.openPayModal === 'undefined') {
+            window.openPayModal = function(productId) {
+                var modal = document.getElementById('modal-pay');
+                if (modal) {
+                    modal.classList.add('active');
+                    var selectDiv = document.getElementById('pay-step-select');
+                    if (selectDiv) {
+                        var list = document.getElementById('pay-product-list');
+                        if (list) {
+                            list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary);font-size:0.88rem;">' +
+                                '<p style="margin-bottom:12px;">请添加微信获取支付链接</p>' +
+                                '<button class="btn" style="max-width:200px;margin:0 auto;" onclick="document.getElementById(\'modal-pay\').classList.remove(\'active\');document.getElementById(\'lead-popup\').classList.add(\'active\');">添加微信</button>' +
+                                '</div>';
+                        }
+                    }
+                }
+            };
+        }
+        if (typeof window.closePayModal === 'undefined') {
+            window.closePayModal = function() {
+                var modal = document.getElementById('modal-pay');
+                if (modal) modal.classList.remove('active');
+            };
+        }
+
+    })();
+    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"面相气质测试怎么玩？","acceptedAnswer":{"@type":"Answer","text":"回答8道关于面部特征和气质表现的趣味问题，系统会根据传统面相学理论分析你的性格类型和气场特质。"}},{"@type":"Question","name":"面相学有科学依据吗？","acceptedAnswer":{"@type":"Answer","text":"面相学是传统文化的一部分，现代科学尚未证实其准确性。测试结果仅供娱乐参考。"}}]}</script><script>
+var TESTS_DATA = [{"file": "test-yunshi.html", "icon": "🔮", "title": "今日运势速测"}, {"file": "test-wuxing.html", "icon": "🌊", "title": "五行属性测试"}, {"file": "test-fengshui.html", "icon": "🏠", "title": "家居风水评分"}, {"file": "test-xingming.html", "icon": "✍️", "title": "姓名吉凶测试"}, {"file": "test-taohua.html", "icon": "🌸", "title": "桃花运测试"}, {"file": "test-ta-aini.html", "icon": "💕", "title": "Ta是否爱你"}, {"file": "test-caishang.html", "icon": "💰", "title": "财商测试"}, {"file": "test-xinli.html", "icon": "🧠", "title": "心理年龄测试"}, {"file": "test-mianxiang.html", "icon": "👤", "title": "面相气质测试"}, {"file": "test-qianshi.html", "icon": "🌙", "title": "前世今生测试"}, {"file": "test-lucky.html", "icon": "🍀", "title": "幸运色测试"}, {"file": "test-ziwei.html", "icon": "⭐", "title": "紫微斗数排盘"}];
+</script>
+
+<script>
+// 分享功能
+window.shareResult = function() {
+    var title = document.title.replace(/\s*\|.*$/, '');
+    var resultEl = document.querySelector('.result-hero') || document.querySelector('.result-element-name');
+    var resultText = resultEl ? resultEl.textContent.trim() : '';
+    var text = '我在一宅一句测了「' + title + '」\n' + resultText + '\n\n👉 你也来测测：' + window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            var tip = document.getElementById('share-tip');
+            tip.style.display = 'inline';
+            setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+        });
+    } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var tip = document.getElementById('share-tip');
+        tip.style.display = 'inline';
+        setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+    }
+};
+
+// 相关测试推荐
+(function(){
+    var allTests = TESTS_DATA;
+    var currentFile = window.location.pathname.split('/').pop();
+    var related = allTests.filter(function(t){ return t.file !== currentFile; });
+    // Shuffle and pick 4
+    related.sort(function(){ return Math.random() - 0.5; });
+    var picks = related.slice(0, 4);
+    var container = document.getElementById('related-tests');
+    if (!container) return;
+    var html = '';
+    for (var i = 0; i < picks.length; i++) {
+        html += '<a href="' + picks[i].file + '" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">' + picks[i].icon + ' ' + picks[i].title + '</a>';
+    }
+    container.innerHTML = html;
+})();
+</script>
+
+</body>
+</html>

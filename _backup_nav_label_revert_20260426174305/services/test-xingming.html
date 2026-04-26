@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姓名吉凶测试 | 一宅一句 - 免费测姓名五格数理</title>
+    <meta name="description" content="一宅一句姓名吉凶测试：输入姓名，AI分析五格数理吉凶、五行属性、性格事业婚姻运势。免费测试！">
+    <meta name="keywords" content="姓名测试,姓名吉凶,五格数理,姓名分析,名字测试,免费姓名测试">
+    <link rel="canonical" href="https://12zn.com/services/test-xingming.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="姓名吉凶测试 | 一宅一句 - 免费测姓名五格数理">
+    <meta property="og:description" content="一宅一句姓名吉凶测试：输入姓名，AI分析五格数理吉凶、五行属性、性格事业婚姻运势。免费测试！">
+    <meta property="og:url" content="https://12zn.com/services/test-xingming.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <style>
+        /* === 测试页面专属样式 === */
+        .test-container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 输入区域 */
+        .test-form {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 36px 32px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+        }
+        .test-form h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem;
+            color: var(--ink);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--ink-light);
+            margin-bottom: 8px;
+        }
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1.05rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--cream);
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+        }
+        .form-group input[type="text"]:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-bg);
+        }
+        .form-group input[type="text"]::placeholder {
+            color: var(--text-light);
+        }
+
+        /* 性别选择 */
+        .gender-group {
+            display: flex;
+            gap: 16px;
+        }
+        .gender-option {
+            flex: 1;
+            position: relative;
+        }
+        .gender-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .gender-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--cream);
+            transition: all 0.25s;
+            margin-bottom: 0;
+        }
+        .gender-option input[type="radio"]:checked + label {
+            border-color: var(--gold);
+            background: var(--gold-bg);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* 开始按钮 */
+        .btn-start {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--gold), #c4a24e);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+        .btn-start:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(166, 138, 62, 0.3);
+        }
+        .btn-start:active {
+            transform: translateY(0);
+        }
+        .btn-start:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 加载动画 */
+        .loading-section {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .loading-section.active {
+            display: block;
+        }
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-soft);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem;
+            color: var(--ink-light);
+        }
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0%   { content: ''; }
+            25%  { content: '.'; }
+            50%  { content: '..'; }
+            75%  { content: '...'; }
+            100% { content: ''; }
+        }
+
+        /* 结果区域 */
+        .result-section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+        .result-section.active {
+            display: block;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 姓名展示卡 */
+        .name-card {
+            background: linear-gradient(135deg, #3d3530 0%, #2c2420 100%);
+            border-radius: 16px;
+            padding: 36px 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .name-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(196, 170, 92, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .name-card .nc-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+            letter-spacing: 4px;
+        }
+        .name-card .nc-name {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 12px;
+            text-shadow: 0 2px 12px rgba(196, 170, 92, 0.3);
+            margin-bottom: 12px;
+        }
+        .name-card .nc-gender {
+            font-size: 0.85rem;
+            color: var(--gold-soft);
+            letter-spacing: 2px;
+        }
+
+        /* 综合评分 */
+        .score-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 28px 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .score-card h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+        .score-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+        .score-number span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .score-bar-wrap {
+            flex: 1;
+        }
+        .score-bar-bg {
+            width: 100%;
+            height: 14px;
+            background: var(--parchment-deep);
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 7px;
+            background: linear-gradient(90deg, #c4a24e, #e8c84a, #c4a24e);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease infinite;
+            transition: width 1s ease;
+            width: 0;
+        }
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .score-verdict {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+
+        /* 五格分析表格 */
+        .wuge-table-wrap {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        .wuge-table-wrap h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 16px;
+        }
+        .wuge-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        .wuge-table thead th {
+            background: var(--ink);
+            color: var(--cream);
+            padding: 10px 12px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        .wuge-table thead th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+        .wuge-table thead th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+        .wuge-table tbody tr:nth-child(even) {
+            background: var(--cream);
+        }
+        .wuge-table tbody tr:nth-child(odd) {
+            background: var(--white);
+        }
+        .wuge-table tbody tr {
+            transition: background 0.2s;
+        }
+        .wuge-table tbody tr:hover {
+            background: var(--gold-bg);
+        }
+        .wuge-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-soft);
+            color: var(--text);
+        }
+        .wuge-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .wuge-table td:first-child {
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .rating-ji {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .rating-xiong {
+            color: var(--vermilion);
+            font-weight: 600;
+        }
+        .rating-banji {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* 详细分析卡 */
+        .analysis-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .analysis-card h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .analysis-card h4 .icon {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            align-items: center;
+            justify-content: center;
+            background: var(--gold-bg);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--gold);
+        }
+        .analysis-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .analysis-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .analysis-item .ai-label {
+            font-weight: 600;
+            color: var(--ink-light);
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+        }
+        .analysis-item .ai-content {
+            color: var(--text);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* 五行标签 */
+        .wuxing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .wuxing-jin  { background: #f5f5f0; color: #8d8d8d; border: 1px solid #d4d4d4; }
+        .wuxing-mu   { background: #edf5ed; color: #4a7c4a; border: 1px solid #b8d4b8; }
+        .wuxing-shui { background: #e8eef5; color: #3a5a8c; border: 1px solid #a8c0d8; }
+        .wuxing-huo  { background: #f5eae8; color: #b5452a; border: 1px solid #d8a8a0; }
+        .wuxing-tu   { background: #f5f0e5; color: #8c7030; border: 1px solid #d4c490; }
+
+        /* 建议卡 */
+        .suggestion-list {
+            list-style: none;
+            padding: 0;
+        }
+        .suggestion-list li {
+            padding: 10px 0 10px 24px;
+            position: relative;
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .suggestion-list li::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 17px;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        /* CTA 区域 */
+        .cta-section {
+            background: linear-gradient(135deg, var(--cream), var(--parchment-deep));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            margin-top: 32px;
+            margin-bottom: 40px;
+        }
+        .cta-section h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+        .cta-section p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            border: none;
+            font-family: inherit;
+        }
+        .cta-btn--primary {
+            background: linear-gradient(135deg, var(--gold), #c4a24e);
+            color: #fff;
+        }
+        .cta-btn--primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(166, 138, 62, 0.3);
+        }
+        .cta-btn--secondary {
+            background: var(--white);
+            color: var(--gold);
+            border: 1.5px solid var(--gold);
+        }
+        .cta-btn--secondary:hover {
+            background: var(--gold-bg);
+        }
+
+        /* 重新测试按钮 */
+        .btn-retry {
+            display: block;
+            margin: 0 auto 40px;
+            padding: 10px 32px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .btn-retry:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* 响应式 */
+        @media (max-width: 520px) {
+            .test-form {
+                padding: 24px 20px;
+            }
+            .name-card .nc-name {
+                font-size: 2rem;
+                letter-spacing: 8px;
+            }
+            .score-display {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .score-number {
+                font-size: 2.4rem;
+            }
+            .wuge-table {
+                font-size: 0.82rem;
+            }
+            .wuge-table td, .wuge-table thead th {
+                padding: 8px 6px;
+            }
+            .cta-buttons {
+                flex-direction: column;
+            }
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"姓名测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <button class="topbar-cta" onclick="window.location.href='/services/zhenren.html'" aria-label="预约风水咨询服务">预约咨询</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html">系统服务</a><span>›</span>
+            姓名吉凶测试
+        </div>
+    </div>
+
+    <!-- 服务 Hero -->
+    <section class="service-hero">
+        <div class="service-icon">名</div>
+        <h1>姓名吉凶测试</h1>
+        <p class="service-tagline">五格数理 / 五行属性 / 吉凶评分 / 运势暗示</p>
+    </section>
+
+    <!-- 主内容 -->
+    <div class="section">
+        <div class="test-container">
+
+            <!-- 输入表单 -->
+            <div class="test-form" id="testForm">
+                <h3>输入姓名，测算吉凶</h3>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" id="inputName" placeholder="请输入您的姓名（2-4个字）" maxlength="6" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <div class="gender-group">
+                        <div class="gender-option">
+                            <input type="radio" name="gender" id="genderM" value="男" checked>
+                            <label for="genderM">男</label>
+                        </div>
+                        <div class="gender-option">
+                            <input type="radio" name="gender" id="genderF" value="女">
+                            <label for="genderF">女</label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-start" id="btnStart" onclick="startAnalysis()">开始测名</button>
+            </div>
+
+            <!-- 加载动画 -->
+            <div class="loading-section" id="loadingSection">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">正在分析姓名<span class="loading-dots"></span></div>
+            </div>
+
+            <!-- 结果展示 -->
+            <div class="result-section" id="resultSection">
+                <!-- 姓名展示 -->
+                <div class="name-card">
+                    <div class="nc-label">姓 名 测 算 结 果</div>
+                    <div class="nc-name" id="resultName"></div>
+                    <div class="nc-gender" id="resultGender"></div>
+                </div>
+
+                <!-- 综合评分 -->
+                <div class="score-card">
+                    <h4>综合评分</h4>
+                    <div class="score-display">
+                        <div class="score-number"><span id="scoreValue">0</span><span> / 100</span></div>
+                        <div class="score-bar-wrap">
+                            <div class="score-bar-bg">
+                                <div class="score-bar-fill" id="scoreBar"></div>
+                            </div>
+                            <div class="score-verdict" id="scoreVerdict"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 五格分析 -->
+                <div class="wuge-table-wrap">
+                    <h4>五格数理分析</h4>
+                    <table class="wuge-table">
+                        <thead>
+                            <tr>
+                                <th>格局</th>
+                                <th>数理</th>
+                                <th>评分</th>
+                                <th>吉凶</th>
+                                <th>含义</th>
+                            </tr>
+                        </thead>
+                        <tbody id="wugeBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- 五行属性 -->
+                <div class="analysis-card">
+                    <h4><span class="icon">行</span>五行属性</h4>
+                    <div id="wuxingResult"></div>
+                </div>
+
+                <!-- 性格暗示 -->
+                <div class="analysis-card">
+                    <h4><span class="icon">性</span>性格暗示</h4>
+                    <div class="analysis-item">
+                        <div class="ai-content" id="personalityResult"></div>
+                    </div>
+                </div>
+
+                <!-- 事业运 -->
+                <div class="analysis-card">
+                    <h4><span class="icon">业</span>事业运</h4>
+                    <div class="analysis-item">
+                        <div class="ai-content" id="careerResult"></div>
+                    </div>
+                </div>
+
+                <!-- 感情运 -->
+                <div class="analysis-card">
+                    <h4><span class="icon">情</span>感情运</h4>
+                    <div class="analysis-item">
+                        <div class="ai-content" id="loveResult"></div>
+                    </div>
+                </div>
+
+                <!-- 改善建议 -->
+                <div class="analysis-card">
+                    <h4><span class="icon">策</span>改善建议</h4>
+                    <ul class="suggestion-list" id="suggestionResult"></ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="cta-section">
+                    <h3>想获取专业的起名/改名服务？</h3>
+                    <p>资深命理师结合八字五行，为您量身定制好名</p>
+                    <div class="cta-buttons">
+                        <button class="cta-btn cta-btn--primary" onclick="openPayModal('consult_199')">专业起名 ¥499</button>
+                        <button class="cta-btn cta-btn--secondary" onclick="window.location.href='../index.html#contact'">添加微信咨询</button>
+                    </div>
+                </div>
+
+                <!-- 重测 -->
+                
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+<button class="btn-retry" onclick="resetTest()">重新测试其他姓名</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js?v=20260417"></script>
+    <script>
+    /* === 姓名吉凶测试算法 === */
+
+    // 如果主页的 openPayModal 不可用，提供回退
+    if (typeof openPayModal === 'undefined') {
+        function openPayModal(id) {
+            alert('请前往首页完成支付，或添加微信咨询。');
+            window.location.href = '../index.html';
+        }
+    }
+
+    // 工具：基于字符串生成稳定的伪随机数 (0~1)
+    function seedRandom(str, salt) {
+        var hash = 0;
+        var s = str + (salt || '');
+        for (var i = 0; i < s.length; i++) {
+            hash = ((hash << 5) - hash) + s.charCodeAt(i);
+            hash = hash & hash; // 转为32位整数
+        }
+        return Math.abs(hash % 10000) / 10000;
+    }
+
+    // 工具：基于字符串和种子生成范围内整数
+    function seedInt(str, salt, min, max) {
+        return Math.floor(seedRandom(str, salt) * (max - min + 1)) + min;
+    }
+
+    // 计算模拟笔画数（基于 charCode）
+    function getStrokes(ch) {
+        var code = ch.charCodeAt(0);
+        // 模拟笔画：对汉字 charCode 做映射，范围 1~30
+        return (code % 28) + 1;
+    }
+
+    // 五格计算
+    function calcWuge(name) {
+        var strokes = [];
+        for (var i = 0; i < name.length; i++) {
+            strokes.push(getStrokes(name[i]));
+        }
+
+        var tiange, dige, renge, zongge, waige;
+
+        if (name.length === 2) {
+            // 两字姓名
+            tiange = strokes[0] + 1;
+            renge = strokes[0] + strokes[1];
+            dige  = strokes[1] + 1;
+            zongge = strokes[0] + strokes[1];
+            waige = 2;
+        } else if (name.length === 3) {
+            // 三字姓名（最常见）
+            tiange = strokes[0] + 1;
+            renge = strokes[0] + strokes[1];
+            dige  = strokes[1] + strokes[2];
+            zongge = strokes[0] + strokes[1] + strokes[2];
+            waige = strokes[0] + strokes[2];
+        } else if (name.length >= 4) {
+            // 四字或以上
+            tiange = strokes[0] + strokes[1];
+            renge = strokes[1] + strokes[2];
+            dige  = strokes[2] + strokes[3 % strokes.length];
+            zongge = 0;
+            for (var j = 0; j < strokes.length; j++) zongge += strokes[j];
+            waige = strokes[0] + strokes[strokes.length - 1];
+        } else {
+            // 单字（不太正常但也处理）
+            tiange = strokes[0] + 1;
+            renge = strokes[0];
+            dige  = 1;
+            zongge = strokes[0] + 1;
+            waige = 2;
+        }
+
+        return {
+            tiange: tiange,
+            renge: renge,
+            dige: dige,
+            zongge: zongge,
+            waige: waige,
+            strokes: strokes
+        };
+    }
+
+    // 数理评分：基于数理值给出评分和吉凶
+    function rateNumber(n) {
+        // 传统姓名学中的吉数和凶数（简化版）
+        var jiNumbers  = [1,3,5,6,7,8,11,13,15,16,17,18,21,23,24,25,29,31,32,33,35,37,39,41,45,47,48,52,57,61,63,65,67,68];
+        var xiongNumbers = [2,4,9,10,12,14,19,20,22,26,28,34,36,40,42,43,44,46,49,50,53,54,58,59,60,62,64,66];
+
+        var mod = ((n - 1) % 81) + 1; // 取81数理循环
+        var isJi = jiNumbers.indexOf(mod) !== -1;
+        var isXiong = xiongNumbers.indexOf(mod) !== -1;
+
+        var score;
+        if (isJi) {
+            score = 70 + (mod * 7 % 26); // 70-95
+        } else if (isXiong) {
+            score = 50 + (mod * 3 % 20); // 50-69
+        } else {
+            score = 60 + (mod * 5 % 22); // 60-81（半吉）
+        }
+
+        var rating, ratingClass;
+        if (score >= 75) {
+            rating = '吉';
+            ratingClass = 'rating-ji';
+        } else if (score < 60) {
+            rating = '凶';
+            ratingClass = 'rating-xiong';
+        } else {
+            rating = '半吉';
+            ratingClass = 'rating-banji';
+        }
+
+        return { score: score, rating: rating, ratingClass: ratingClass, shuli: mod };
+    }
+
+    // 数理含义
+    function getShuliMeaning(shuli) {
+        var meanings = {
+            1: '万物起始，富贵荣华',
+            2: '混沌未定，进退保守',
+            3: '万物成形，智慧超群',
+            4: '万物枯萎，谨慎处事',
+            5: '福禄长寿，阴阳和合',
+            6: '天德地祥，安稳吉庆',
+            7: '刚毅果断，精力充沛',
+            8: '坚刚志强，意志坚定',
+            9: '兴尽凶始，穷乏困苦',
+            10: '万事终局，回归原点',
+            11: '旱苗逢雨，挽回家运',
+            12: '薄弱无力，孤立无援',
+            13: '智略超群，博学多才',
+            14: '沉浮不定，多难磨练',
+            15: '福寿双全，立身兴家',
+            16: '贵人得助，天乙贵人',
+            17: '突破万难，刚柔兼备',
+            18: '权威显达，铁石心智',
+            19: '多难风云，需防隐患',
+            20: '屋下藏金，非业破运',
+            21: '光风霁月，独立权威',
+            22: '秋草逢霜，忧愁感叹',
+            23: '旭日东升，昌隆至极',
+            24: '锦绣前程，余庆丰盈',
+            25: '资性英敏，刚毅果断',
+            26: '变怪之谜，英雄豪杰',
+            27: '欲望过盛，半吉半凶',
+            28: '四海漂泊，豪杰气概',
+            29: '智谋兼备，成就大业',
+            30: '沉浮不定，绝处逢生',
+            31: '智勇得志，可享清福',
+            32: '侥幸多望，贵人相助',
+            33: '旭日升天，名显四方',
+            34: '破家之身，辛苦磨难',
+            35: '温和平静，优雅发展',
+            36: '风浪不息，侠义心肠',
+            37: '权威显达，独立自强',
+            38: '磨铁成针，文艺之才',
+            39: '富贵荣华，德泽四方',
+            40: '退安守吉，智谋胆力',
+            41: '纯阳独秀，德高望重',
+            42: '寒蝉在柳，十艺九不成',
+            43: '雨夜花落，薄弱散漫',
+            44: '暗藏杀机，破坏之兆',
+            45: '新生泰和，顺风扬帆',
+            46: '浪里行船，须防暗礁',
+            47: '有贵人助，花开之象',
+            48: '智谋兼备，德量隆盛',
+            49: '吉凶难分，转祸为福',
+            50: '小舟入海，吉凶参半',
+            51: '盛衰交加，一成一败',
+            52: '卓识达人，有先见之明',
+            53: '内外不和，障碍重重',
+            54: '多难悲运，难得安宁',
+            55: '外美内苦，尚可发展',
+            56: '浪里行船，历尽艰辛',
+            57: '寒雪青松，最后繁荣',
+            58: '晚行遇月，先苦后甜',
+            59: '寒蝉悲风，意志不坚',
+            60: '无谋之人，暗黑无光',
+            61: '名利双收，牡丹芙蓉',
+            62: '衰败之相，忧愁困苦',
+            63: '万宝集门，天降幸运',
+            64: '骨肉分离，孤独悲愁',
+            65: '富贵至极，鹤立凤鸣',
+            66: '内外不和，失败困穷',
+            67: '独营事业，通达畅利',
+            68: '顺风吹帆，智慧明达'
+        };
+        return meanings[shuli] || '蕴含深意，待人发掘';
+    }
+
+    // 五行属性
+    function getWuxing(name) {
+        var sum = 0;
+        for (var i = 0; i < name.length; i++) {
+            sum += name.charCodeAt(i);
+        }
+        var elements = [
+            { name: '金', cls: 'wuxing-jin',  desc: '性格刚毅果敢，做事雷厉风行，有领导气质' },
+            { name: '木', cls: 'wuxing-mu',   desc: '性情仁慈宽厚，富有创造力，善于成长突破' },
+            { name: '水', cls: 'wuxing-shui', desc: '头脑聪慧灵活，应变能力强，善于沟通交际' },
+            { name: '火', cls: 'wuxing-huo',  desc: '热情奔放，行动力强，具有感染力和号召力' },
+            { name: '土', cls: 'wuxing-tu',   desc: '稳重踏实，诚信可靠，有极强的包容力和耐心' }
+        ];
+        return elements[sum % 5];
+    }
+
+    // 性格暗示
+    function getPersonality(name, gender) {
+        var idx = seedInt(name, 'personality', 0, 5);
+        var traits_m = [
+            '此名暗示主人具有坚韧不拔的意志和远大的抱负。性格中带有沉稳大气的特质，做事有条不紊，善于在复杂局面中把握关键。内心刚强而外表温和，容易获得他人的信任与尊重。',
+            '姓名数理显示主人聪明机敏，思维活跃，具有出色的分析判断能力。性格开朗豁达，为人正直仗义，在社交场合中往往是受欢迎的中心人物。善于学习新事物，适应能力强。',
+            '此名格局透露出主人具有深邃的思想和独特的见解。内心丰富，情感细腻，对艺术和美有天然的感受力。性格中有理想主义的成分，追求完美但不固执，懂得灵活变通。',
+            '姓名五格暗示主人天生具有领导才能，气场强大且稳定。做事果断有魄力，同时不失细心周到。性格坦荡磊落，重情重义，身边常有贵人相助，事业上有开拓进取之势。',
+            '此名数理显示主人性格温厚包容，待人以诚。有着极强的责任心和使命感，做事踏踏实实，不求浮华。虽看似低调，实则蕴含深厚的潜力，属于大器晚成之格。',
+            '姓名格局暗示主人智慧聪颖，反应敏捷。具有很强的直觉力和洞察力，善于发现机会并把握时机。性格中有冒险精神，但不鲁莽，懂得审时度势。创新能力出众，适合开拓性事业。'
+        ];
+        var traits_f = [
+            '此名暗示主人气质优雅，温柔知性。内心坚强而不失柔美，处事细腻周到。具有天然的亲和力，善于协调人际关系。在事业和生活中都能展现出独特的个人魅力和出色的平衡能力。',
+            '姓名数理显示主人聪慧大方，见识广博。性格中既有果断利落的一面，也有温婉体贴的一面。善于经营人际关系，在团队中往往是不可或缺的核心人物。直觉敏锐，有良好的审美品味。',
+            '此名格局透露出主人具有独立自主的精神和出色的表达能力。内心丰富，感情细腻，对生活有独到的见解和品味。性格真诚率直，不喜虚伪做作，在朋友中颇受信赖。',
+            '姓名五格暗示主人天生丽质，内外兼修。做事认真负责，追求完美但不苛刻。有着强烈的进取心和上进意识，在事业上不让须眉。同时也懂得生活情趣，善于营造温馨和谐的氛围。',
+            '此名数理显示主人心地善良，通情达理。具有极强的同理心和包容力，善于倾听和理解他人。性格稳重大方，不骄不躁，做事有始有终。有着深厚的内在修养和独特的人格魅力。',
+            '姓名格局暗示主人灵动活泼，才思敏捷。具有艺术天赋和创造力，对美好事物有着天然的敏感度。性格开朗乐观，笑容感染力强。善于在平凡生活中发现美好，传递正能量。'
+        ];
+        return gender === '女' ? traits_f[idx] : traits_m[idx];
+    }
+
+    // 事业运
+    function getCareer(name, gender) {
+        var idx = seedInt(name, 'career', 0, 7);
+        var careers = [
+            '事业上宜稳中求进，中年后有望迎来发展黄金期，适合从事管理、策划类工作，贵人运较旺。',
+            '才华横溢，适合创意类、技术类领域发展。把握住今明两年的机会，事业可上一个新台阶。',
+            '天生适合与人打交道的行业，销售、公关、教育等领域都能发挥所长。团队合作中更能体现价值。',
+            '事业运势整体向上，名中暗含「进取」之象。适合自主创业或在大平台中独当一面，领导力是最大优势。',
+            '文昌星照命，学术研究、文化传媒、医疗健康等行业尤为有利。持续学习深耕，必有厚积薄发之日。',
+            '财星入命宫，商业嗅觉敏锐，适合经商或投资理财领域。建议稳健为主，避免过度冒进。',
+            '事业上属于大器晚成之格，前期积累很重要。建议扎实修炼内功，三十五岁后将迎来事业收获期。',
+            '名格暗示适合创新型事业，互联网、科技、设计等新兴领域是不错的方向。保持开放心态，机遇自来。'
+        ];
+        return careers[idx];
+    }
+
+    // 感情运
+    function getLove(name, gender) {
+        var idx = seedInt(name, 'love', 0, 7);
+        var loves_m = [
+            '感情运势平稳，桃花运在28-32岁期间最旺。与性格互补、温柔体贴的另一半最为般配，婚后家庭和睦美满。',
+            '姓名暗示主人重感情、讲义气，容易吸引志趣相投之人。感情中宜主动表达，真诚相待方能收获良缘。',
+            '感情中属于慢热型，一旦确定就会全心投入。建议不要过于理想化，多些包容和理解，幸福自然水到渠成。',
+            '桃花运不错，但需注意分辨真情。与五行属木或属水的异性最为相合，感情发展顺畅。',
+            '感情运暗示晚婚更吉，不宜操之过急。适合找一位事业心同样强的伴侣，互相扶持、共同成长。',
+            '姓名格局显示感情真挚深沉，一旦爱上便是一生。与家人关系亲密，重视家庭和谐，婚后生活温馨幸福。',
+            '感情中有贵人相助之象，可能通过朋友或长辈介绍认识良缘。保持真诚与耐心，美好姻缘已在路上。',
+            '桃花运旺盛，异性缘好。建议在感情中保持理性和专一，认定了就好好珍惜，忠诚是幸福的基石。'
+        ];
+        var loves_f = [
+            '感情运势温和，适合寻找成熟稳重的另一半。姓名暗示婚后夫妻同心，家庭生活幸福美满，子女运亦佳。',
+            '桃花运在25-30岁期间最旺，魅力出众易受异性关注。建议理性择偶，选择人品和上进心兼备的伴侣。',
+            '感情中直觉敏锐，懂得识人。与性格阳光、有责任感的另一半最为般配，互相欣赏中感情日渐深厚。',
+            '姓名格局暗示感情丰富细腻，对爱情有美好的期待。建议适度降低理想化标准，真实的幸福就在身边。',
+            '感情运稳健，不会有太大波折。适合找一位踏实可靠、顾家有担当的伴侣，共同经营平凡而温馨的生活。',
+            '姓名暗示主人在感情中善于付出，也值得被善待。贵人运好，有望通过社交圈认识命中注定的那个人。',
+            '感情运显示婚姻美满之象，特别是与五行属火或属土的异性较为相合。婚后夫唱妇随，琴瑟和鸣。',
+            '桃花正缘较旺，但不宜过早坠入爱河。建议先立业再成家，事业有成时感情自然水到渠成。'
+        ];
+        return gender === '女' ? loves_f[idx] : loves_m[idx];
+    }
+
+    // 改善建议
+    function getSuggestions(name, wuxing) {
+        var idx = seedInt(name, 'suggest', 0, 4);
+        var base = [];
+        // 根据五行给出方位和颜色建议
+        var wuxingTips = {
+            '金': { color: '白色、银色、金色', direction: '西方', complement: '土', avoid: '火' },
+            '木': { color: '绿色、青色、翠色', direction: '东方', complement: '水', avoid: '金' },
+            '水': { color: '黑色、蓝色、深灰', direction: '北方', complement: '金', avoid: '土' },
+            '火': { color: '红色、紫色、橙色', direction: '南方', complement: '木', avoid: '水' },
+            '土': { color: '黄色、棕色、米色', direction: '中央或西南', complement: '火', avoid: '木' }
+        };
+        var tips = wuxingTips[wuxing.name];
+
+        base.push('日常穿着或办公环境中多使用' + tips.color + '系，可增强姓名五行「' + wuxing.name + '」的能量场，有助于提升整体运势。');
+        base.push('居住或办公宜选择偏' + tips.direction + '的位置，与姓名五行相呼应，能更好地聚气纳福。');
+
+        var extraTips = [
+            '可在书房或客厅摆放与「' + tips.complement + '」属性相关的装饰品，五行相生有助于弥补姓名格局中的不足之处。',
+            '建议佩戴与「' + wuxing.name + '」五行相合的饰品，如有疑问可咨询专业命理师进行详细分析。',
+            '姓名的能量需要与个人的言行举止相辅相成。建议多培养宽厚包容的心态，心境平和则运势自然顺畅。',
+            '注意避免长期处于「' + tips.avoid + '」属性较强的环境中，防止五行相克影响运势。可通过佩戴吉祥物化解。',
+            '每日清晨面朝' + tips.direction + '方静坐冥想片刻，有助于激活姓名中蕴含的正面能量，提升精气神。'
+        ];
+
+        base.push(extraTips[idx]);
+        return base;
+    }
+
+    // 综合评分
+    function calcTotalScore(wugeRatings) {
+        var weights = { tiange: 0.10, renge: 0.35, dige: 0.25, zongge: 0.20, waige: 0.10 };
+        var total = 0;
+        total += wugeRatings.tiange.score * weights.tiange;
+        total += wugeRatings.renge.score * weights.renge;
+        total += wugeRatings.dige.score * weights.dige;
+        total += wugeRatings.zongge.score * weights.zongge;
+        total += wugeRatings.waige.score * weights.waige;
+
+        // 适度拉高分数，确保结果偏正面
+        total = Math.round(total * 0.85 + 15);
+        if (total > 98) total = 98;
+        if (total < 55) total = 55;
+        return total;
+    }
+
+    // 评分评语
+    function getVerdict(score) {
+        if (score >= 90) return '大吉 - 此名甚佳，五格俱旺';
+        if (score >= 80) return '吉 - 姓名格局优良，运势亨通';
+        if (score >= 70) return '中吉 - 格局尚可，小有不足';
+        if (score >= 60) return '平 - 中规中矩，可酌情调整';
+        return '需改善 - 建议咨询专业命理师';
+    }
+
+    /* === 主流程 === */
+    function startAnalysis() {
+        var name = document.getElementById('inputName').value.trim();
+        var gender = document.querySelector('input[name="gender"]:checked').value;
+
+        // 校验
+        if (!name) {
+            shakeInput();
+            return;
+        }
+        if (name.length < 2) {
+            alert('请输入完整的姓名（至少2个字）');
+            return;
+        }
+        // 检查是否包含非中文字符
+        if (!/^[\u4e00-\u9fff]{2,6}$/.test(name)) {
+            alert('请输入2-6个中文汉字');
+            return;
+        }
+
+        // 隐藏表单，显示加载
+        document.getElementById('testForm').style.display = 'none';
+        document.getElementById('loadingSection').classList.add('active');
+        document.getElementById('resultSection').classList.remove('active');
+
+        // 2秒后显示结果
+        setTimeout(function() {
+            showResult(name, gender);
+        }, 2000);
+    }
+
+    function shakeInput() {
+        var input = document.getElementById('inputName');
+        input.style.borderColor = 'var(--vermilion)';
+        input.style.animation = 'shake 0.4s ease';
+        input.focus();
+        setTimeout(function() {
+            input.style.borderColor = '';
+            input.style.animation = '';
+        }, 500);
+    }
+
+    function showResult(name, gender) {
+        // 隐藏加载
+        document.getElementById('loadingSection').classList.remove('active');
+
+        // 计算五格
+        var wuge = calcWuge(name);
+        var ratings = {
+            tiange: rateNumber(wuge.tiange),
+            renge: rateNumber(wuge.renge),
+            dige: rateNumber(wuge.dige),
+            zongge: rateNumber(wuge.zongge),
+            waige: rateNumber(wuge.waige)
+        };
+
+        // 综合评分
+        var totalScore = calcTotalScore(ratings);
+
+        // 姓名展示
+        document.getElementById('resultName').textContent = name;
+        document.getElementById('resultGender').textContent = gender === '男' ? '乾造 · 男' : '坤造 · 女';
+
+        // 评分
+        document.getElementById('scoreValue').textContent = totalScore;
+        document.getElementById('scoreVerdict').textContent = getVerdict(totalScore);
+
+        // 分数条动画
+        var bar = document.getElementById('scoreBar');
+        bar.style.width = '0%';
+        setTimeout(function() {
+            bar.style.width = totalScore + '%';
+        }, 100);
+
+        // 五格表格
+        var wugeLabels = [
+            { key: 'tiange', name: '天格', desc: '先天运（祖运）' },
+            { key: 'renge',  name: '人格', desc: '主运（性格核心）' },
+            { key: 'dige',   name: '地格', desc: '前运（36岁前）' },
+            { key: 'zongge', name: '总格', desc: '后运（36岁后）' },
+            { key: 'waige',  name: '外格', desc: '副运（社交运）' }
+        ];
+        var tbody = document.getElementById('wugeBody');
+        tbody.innerHTML = '';
+        wugeLabels.forEach(function(item) {
+            var r = ratings[item.key];
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td>' + item.name + '<div style="font-size:0.75rem;color:var(--text-light);font-weight:400;margin-top:2px;">' + item.desc + '</div></td>' +
+                '<td>' + r.shuli + '</td>' +
+                '<td>' + r.score + '</td>' +
+                '<td><span class="' + r.ratingClass + '">' + r.rating + '</span></td>' +
+                '<td style="font-size:0.8rem;text-align:left;color:var(--text-secondary);">' + getShuliMeaning(r.shuli) + '</td>';
+            tbody.appendChild(tr);
+        });
+
+        // 五行属性
+        var wuxing = getWuxing(name);
+        document.getElementById('wuxingResult').innerHTML =
+            '<div class="wuxing-badge ' + wuxing.cls + '">' + wuxing.name + '</div>' +
+            '<p style="margin-top:10px;font-size:0.92rem;color:var(--text);line-height:1.7;">' + wuxing.desc + '</p>';
+
+        // 性格暗示
+        document.getElementById('personalityResult').textContent = getPersonality(name, gender);
+
+        // 事业运
+        document.getElementById('careerResult').textContent = getCareer(name, gender);
+
+        // 感情运
+        document.getElementById('loveResult').textContent = getLove(name, gender);
+
+        // 改善建议
+        var suggestions = getSuggestions(name, wuxing);
+        var sugList = document.getElementById('suggestionResult');
+        sugList.innerHTML = '';
+        suggestions.forEach(function(s) {
+            var li = document.createElement('li');
+            li.textContent = s;
+            sugList.appendChild(li);
+        });
+
+        // 显示结果
+        document.getElementById('resultSection').classList.add('active');
+
+        // 滚动到结果顶部
+        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function resetTest() {
+        document.getElementById('resultSection').classList.remove('active');
+        document.getElementById('testForm').style.display = 'block';
+        document.getElementById('inputName').value = '';
+        document.getElementById('inputName').focus();
+        document.getElementById('testForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // 回车触发
+    document.getElementById('inputName').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            startAnalysis();
+        }
+    });
+
+    // 抖动动画
+    var shakeStyle = document.createElement('style');
+    shakeStyle.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }';
+    document.head.appendChild(shakeStyle);
+    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"姓名测试怎么测？","acceptedAnswer":{"@type":"Answer","text":"输入姓名和出生日期，系统会根据姓名学中的五格剖象法和生辰八字五行理论分析你的性格特质和运势倾向。"}},{"@type":"Question","name":"名字会影响运势吗？","acceptedAnswer":{"@type":"Answer","text":"在传统文化中名字被认为蕴含能量，现代观点更倾向于通过心理暗示影响个人发展。"}}]}</script><script>
+var TESTS_DATA = [
+{"file":"test-yunshi.html","icon":"🔮","title":"今日运势速测"},
+{"file":"test-wuxing.html","icon":"🌊","title":"五行属性测试"},
+{"file":"test-fengshui.html","icon":"🏠","title":"家居风水评分"},
+{"file":"test-xingming.html","icon":"✍️","title":"姓名吉凶测试"},
+{"file":"test-taohua.html","icon":"🌸","title":"桃花运测试"},
+{"file":"test-ta-aini.html","icon":"💕","title":"Ta是否爱你"},
+{"file":"test-caishang.html","icon":"💰","title":"财商测试"},
+{"file":"test-xinli.html","icon":"🧠","title":"心理年龄测试"},
+{"file":"test-mianxiang.html","icon":"👤","title":"面相气质测试"},
+{"file":"test-qianshi.html","icon":"🌙","title":"前世今生测试"},
+{"file":"test-lucky.html","icon":"🍀","title":"幸运色测试"},
+{"file":"test-ziwei.html","icon":"⭐","title":"紫微斗数排盘"}
+];
+window.shareResult=function(){
+var t=document.title.replace(/\s*\|.*$/,'');
+var r=document.querySelector('.result-hero');
+var rt=r?r.textContent.trim():'';
+var txt='我在一宅一句测了「'+t+'」\n'+rt+'\n\n你也来测测：'+window.location.href;
+if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)})}
+else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);var s=document.getElementById('share-tip');s.style.display='inline';setTimeout(function(){s.style.display='none'},2000)}
+};
+(function(){
+var c=document.getElementById('related-tests');if(!c)return;
+var cf=window.location.pathname.split('/').pop();
+var r=TESTS_DATA.filter(function(t){return t.file!==cf});
+r.sort(function(){return Math.random()-0.5});
+var p=r.slice(0,4);var h='';
+for(var i=0;i<p.length;i++)h+='<a href="'+p[i].file+'" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">'+p[i].icon+' '+p[i].title+'</a>';
+c.innerHTML=h;
+})();
+</script>
+</body>
+</html>

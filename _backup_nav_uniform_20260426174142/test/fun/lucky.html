@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日幸运测试 - 一宅一句</title>
+    <meta name="description" content="免费幸运色测试，输入姓名即可生成今日幸运颜色、数字和食物">
+    <link rel="canonical" href="https://12zn.com/test/fun/lucky.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="今日幸运测试 - 一宅一句">
+    <meta property="og:description" content="免费幸运测试，发现你的今日幸运元素">
+    <meta property="og:url" content="https://12zn.com/test/fun/lucky.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shared.css?v=20260415">
+    <style>
+        .test-page-hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            background: var(--white);
+            position: relative;
+        }
+        .test-page-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 180px;
+            background: radial-gradient(ellipse, rgba(166,138,62,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .test-page-hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--ink);
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+        .test-page-hero .hero-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        .test-page-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .test-card {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        .test-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        .test-input-group {
+            margin: 30px 0;
+            text-align: left;
+        }
+        .test-input-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .test-input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--cream);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .test-input-group input:focus {
+            border-color: var(--gold);
+        }
+        .test-input-group input::placeholder {
+            color: var(--text-light);
+        }
+        .btn-test {
+            background: var(--ink);
+            border: none;
+            color: var(--parchment);
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .btn-test:hover {
+            opacity: 0.85;
+        }
+        .test-tips {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .test-result {
+            display: none;
+        }
+        .test-result-active {
+            display: block;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .result-item {
+            background: var(--parchment);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .result-item .icon { font-size: 2rem; margin-bottom: 10px; }
+        .result-item .label { color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 5px; }
+        .result-item .value { font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+        
+        .result-item:nth-child(1) .value { color: var(--vermilion); }
+        .result-item:nth-child(2) .value { color: var(--gold); }
+        .result-item:nth-child(3) .value { color: var(--bamboo); }
+        
+        .result-time {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--gold);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            color: var(--ink);
+        }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"幸运色测试"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../../index.html" class="topbar-brand">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="../../index.html">系统服务</a>
+                <a href="../">测试</a>
+                <a href="../../blog/">文章</a>
+                <a href="../../services/pricing.html">报价</a>
+                <a href="../../services/cases.html">案例</a>
+                <a href="../../services/faq.html">FAQ</a>
+                <a href="../../en/">EN</a>
+                <a href="../../services/zhenren.html" class="topbar-cta">预约咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="test-page-hero">
+        <h1>🍀 今日幸运测试</h1>
+        <p class="hero-desc">
+            输入你的姓名，系统将根据姓名生成今日幸运颜色、数字和食物<br>
+            测测你的今日运势
+        </p>
+    </section>
+
+    <!-- 测试内容 -->
+    <div class="test-page-content">
+        <a href="../index.html" class="back-link">← 返回测试中心</a>
+        
+        <div class="test-card">
+            <!-- 表单填写区域 -->
+            <div class="test-form" id="formBox">
+                <div class="test-icon">🍀</div>
+                
+                <div class="test-input-group">
+                    <label>你的姓名</label>
+                    <input type="text" id="nameInput" placeholder="请输入姓名" maxlength="20">
+                </div>
+                
+                <button class="btn-test" onclick="submitTest()">查询今日运势</button>
+                <div class="test-tips">每个姓名每天仅有一次测试结果</div>
+            </div>
+            
+            <!-- 结果展示区域 -->
+            <div class="test-result" id="resultBox">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">幸运颜色</div>
+                        <div class="value" id="color">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🎲</div>
+                        <div class="label">幸运数字</div>
+                        <div class="value" id="number">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="icon">🍜</div>
+                        <div class="label">幸运食物</div>
+                        <div class="value" id="food">-</div>
+                    </div>
+                </div>
+                <div class="result-time">测试时间：<span id="testTime"></span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA -->
+<section style="max-width:640px;margin:0 auto;padding:0 24px 32px;">
+    <div style="background:var(--white);border:1px solid var(--border-soft);border-radius:14px;padding:24px;">
+        <h3 style="font-family:Noto Serif SC,serif;font-size:1rem;color:var(--ink);margin-bottom:16px;">更多趣味测试</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+            <a href="../" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🔮 全部测试</a>
+            <a href="mbti.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎭 MBTI测试</a>
+            <a href="animal.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🐾 动物人格</a>
+            <a href="dream-career.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">💼 职业梦想</a>
+            <a href="superpower.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">⚡ 超能力</a>
+            <a href="all-in-one.html" style="display:block;padding:12px;border:1px solid var(--border-soft);border-radius:10px;text-decoration:none;color:var(--ink);font-size:0.85rem;text-align:center;">🎁 综合测试</a>
+        </div>
+    </div>
+</section>
+    <section class="wechat-section">
+        <div class="wechat-inner">
+            <h2>想要更精准的性格分析？</h2>
+            <p class="wechat-sub">扫码添加微信，获得一对一专属指导</p>
+            <img class="wechat-qr" src="../../images/wechat-qr.jpg" alt="微信二维码">
+            <p class="wechat-hint">长按识别二维码 · 添加微信</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="https://x.com/yizhaiyiju" target="_blank">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="../../js/shared.js?v=20260417"></script>
+    <script>
+        const colors = ["红色", "橙色", "黄色", "绿色", "青色", "蓝色", "紫色", "粉色", "白色", "黑色"];
+        const foods = ["火锅", "烧烤", "寿司", "披萨", "炸鸡", "拉面", "粤菜", "川菜", "日料", "泰餐"];
+        
+        function getHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        }
+        
+        function submitTest() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert('请输入姓名');
+                return;
+            }
+            
+            const today = new Date().getDate();
+            const hash = getHash(name) + today;
+            
+            document.getElementById('color').textContent = colors[hash % colors.length];
+            document.getElementById('number').textContent = ((hash * 7) % 99) + 1;
+            document.getElementById('food').textContent = foods[hash % foods.length];
+            
+            document.getElementById('formBox').style.display = 'none';
+            document.getElementById('resultBox').classList.add('test-result-active');
+            document.getElementById('testTime').textContent = new Date().toLocaleString('zh-CN');
+            
+            localStorage.setItem('lucky_test_done', name + '_' + today);
+        }
+        
+        window.onload = function() {
+            const today = new Date().getDate();
+            const done = localStorage.getItem('lucky_test_done');
+            if (done && done.endsWith('_' + today)) {
+                const name = done.replace('_' + today, '');
+                const hash = getHash(name) + today;
+                
+                document.getElementById('color').textContent = colors[hash % colors.length];
+                document.getElementById('number').textContent = ((hash * 7) % 99) + 1;
+                document.getElementById('food').textContent = foods[hash % foods.length];
+                
+                document.getElementById('formBox').style.display = 'none';
+                document.getElementById('resultBox').classList.add('test-result-active');
+            }
+        }
+    </script>
+</body>
+</html>

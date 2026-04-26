@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家居风水评分 | 一宅一句 - 免费给你家风水打分</title>
+    <meta name="description" content="一宅一句家居风水评分：6道题，AI给你家风水打个分！检测门口、客厅、卧室、厨房、卫生间风水问题。免费测试！">
+    <meta name="keywords" content="家居风水,风水评分,风水测试,家居风水禁忌,风水打分,免费风水测试">
+    <link rel="canonical" href="https://12zn.com/services/test-fengshui.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="家居风水评分 | 一宅一句 - 免费给你家风水打分">
+    <meta property="og:description" content="一宅一句家居风水评分：6道题，AI给你家风水打个分！检测门口、客厅、卧室、厨房、卫生间风水问题。免费测试！">
+    <meta property="og:url" content="https://12zn.com/services/test-fengshui.html">
+    <meta property="og:site_name" content="一宅一句">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/shared.css?v=20260415">
+    <style>
+        /* === 测试页专用样式 === */
+        .test-hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            background: var(--white);
+            position: relative;
+        }
+        .test-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; left: 50%; transform: translateX(-50%);
+            width: 500px; height: 180px;
+            background: radial-gradient(ellipse, rgba(166,138,62,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .test-hero .test-icon {
+            width: 64px; height: 64px; border-radius: 12px;
+            background: var(--gold-bg); border: 1px solid var(--border-soft);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.6rem; color: var(--gold); font-weight: 600;
+            margin: 0 auto 20px;
+        }
+        .test-hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem; font-weight: 400;
+            color: var(--ink); letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        .test-hero .test-tagline {
+            font-size: 0.9rem; color: var(--text-secondary);
+            max-width: 500px; margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* 进度条 */
+        .progress-bar-wrap {
+            max-width: 600px; margin: 0 auto 32px;
+            padding: 0 24px;
+        }
+        .progress-bar-outer {
+            height: 6px; background: var(--parchment-deep);
+            border-radius: 3px; overflow: hidden;
+        }
+        .progress-bar-inner {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+            border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+        .progress-text {
+            text-align: center; margin-top: 8px;
+            font-size: 0.8rem; color: var(--text-light);
+        }
+
+        /* 问题卡片 */
+        .question-card {
+            max-width: 600px; margin: 0 auto 24px;
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-sm);
+            display: none;
+            animation: fadeSlideIn 0.4s ease forwards;
+        }
+        .question-card.active {
+            display: block;
+        }
+        .question-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 0.78rem; color: var(--gold);
+            font-weight: 600; letter-spacing: 0.1em;
+            margin-bottom: 10px;
+        }
+        .question-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem; color: var(--ink);
+            font-weight: 500; margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .options-grid {
+            display: grid; gap: 10px;
+        }
+        .options-grid.cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+        .options-grid.cols-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .option-btn {
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--cream);
+            color: var(--text);
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        .option-btn:hover {
+            border-color: var(--gold-soft);
+            background: var(--gold-bg);
+            color: var(--gold);
+        }
+        .option-btn.selected {
+            border-color: var(--gold);
+            background: var(--gold-bg);
+            color: var(--gold);
+            font-weight: 500;
+            box-shadow: 0 0 0 1px var(--gold);
+        }
+
+        /* 多选提示 */
+        .multi-hint {
+            font-size: 0.78rem; color: var(--text-light);
+            margin-bottom: 14px;
+        }
+
+        /* 下一题按钮 */
+        .btn-next-wrap {
+            text-align: center; margin-top: 20px;
+        }
+        .btn-next {
+            padding: 10px 36px;
+            background: var(--ink); color: var(--parchment);
+            border: none; border-radius: 8px;
+            font-size: 0.88rem; font-weight: 500;
+            cursor: pointer; transition: opacity 0.2s;
+            font-family: inherit;
+        }
+        .btn-next:hover { opacity: 0.85; }
+        .btn-next:disabled {
+            opacity: 0.4; cursor: not-allowed;
+        }
+
+        /* 分析中动画 */
+        .analyzing-section {
+            display: none;
+            text-align: center;
+            padding: 60px 24px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .analyzing-section.active { display: block; }
+        .analyzing-spinner {
+            width: 48px; height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+        .analyzing-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem; color: var(--ink);
+            letter-spacing: 0.1em;
+        }
+        .analyzing-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+        }
+
+        /* 结果区 */
+        .result-section {
+            display: none;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 24px 40px;
+            animation: fadeSlideIn 0.5s ease forwards;
+        }
+        .result-section.active { display: block; }
+
+        /* 总分环形 */
+        .score-circle-wrap {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .score-circle {
+            position: relative;
+            width: 180px; height: 180px;
+            margin: 0 auto 16px;
+        }
+        .score-circle svg {
+            width: 100%; height: 100%;
+            transform: rotate(-90deg);
+        }
+        .score-circle-bg {
+            fill: none;
+            stroke: var(--parchment-deep);
+            stroke-width: 10;
+        }
+        .score-circle-fill {
+            fill: none;
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 471;
+            stroke-dashoffset: 471;
+            transition: stroke-dashoffset 1.5s ease, stroke 0.5s ease;
+        }
+        .score-value {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .score-num {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.8rem; font-weight: 700;
+            line-height: 1;
+        }
+        .score-label {
+            font-size: 0.82rem; color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        .score-rating {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem; font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        /* 分类得分 */
+        .category-scores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .category-item {
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 16px 12px;
+            text-align: center;
+        }
+        .category-name {
+            font-size: 0.82rem; color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .category-score {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.2rem; font-weight: 700;
+        }
+        .category-max {
+            font-size: 0.75rem; color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* 建议列表 */
+        .tips-section {
+            margin-bottom: 32px;
+        }
+        .tips-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.05rem; color: var(--ink);
+            font-weight: 500; margin-bottom: 16px;
+            letter-spacing: 0.05em;
+        }
+        .tips-title::after {
+            content: ''; display: block;
+            width: 28px; height: 2px;
+            background: var(--gold);
+            margin-top: 10px;
+        }
+        .tip-item {
+            display: flex; gap: 12px;
+            padding: 14px 16px;
+            background: var(--white);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        .tip-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .tip-text {
+            font-size: 0.88rem;
+            color: var(--text);
+        }
+
+        /* CTA 区 */
+        .result-cta {
+            background: var(--ink);
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            color: var(--parchment);
+        }
+        .result-cta h3 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.1rem; font-weight: 400;
+            margin-bottom: 6px;
+            letter-spacing: 0.08em;
+            color: var(--parchment);
+        }
+        .result-cta .cta-sub {
+            font-size: 0.82rem; color: #b8b0a5;
+            margin-bottom: 20px;
+        }
+        .cta-buttons {
+            display: flex; gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-cta-primary {
+            padding: 11px 24px;
+            background: var(--gold); color: var(--white);
+            border: none; border-radius: 8px;
+            font-size: 0.88rem; font-weight: 500;
+            cursor: pointer; transition: opacity 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+        }
+        .btn-cta-primary:hover { opacity: 0.85; }
+        .btn-cta-outline {
+            padding: 11px 24px;
+            background: transparent;
+            color: var(--parchment);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 8px;
+            font-size: 0.88rem; font-weight: 500;
+            cursor: pointer; transition: all 0.2s;
+            font-family: inherit;
+            text-decoration: none;
+        }
+        .btn-cta-outline:hover {
+            border-color: var(--gold-soft);
+            color: var(--gold-soft);
+        }
+
+        /* 重新测试 */
+        .restart-wrap {
+            text-align: center; margin-top: 24px;
+        }
+        .btn-restart {
+            font-size: 0.82rem; color: var(--text-light);
+            background: none; border: none;
+            cursor: pointer; transition: color 0.2s;
+            font-family: inherit;
+            text-decoration: underline;
+        }
+        .btn-restart:hover { color: var(--gold); }
+
+        /* 颜色变量 */
+        .score-gold { color: var(--gold); }
+        .score-good { color: #6b8e5e; }
+        .score-warn { color: #c48520; }
+        .score-bad { color: var(--vermilion); }
+        .stroke-gold { stroke: var(--gold); }
+        .stroke-good { stroke: #6b8e5e; }
+        .stroke-warn { stroke: #c48520; }
+        .stroke-bad { stroke: var(--vermilion); }
+
+        @media(max-width: 768px) {
+            .options-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+            .category-scores { grid-template-columns: repeat(2, 1fr); }
+            .test-hero h1 { font-size: 1.4rem; }
+            .score-circle { width: 150px; height: 150px; }
+            .score-num { font-size: 2.2rem; }
+        }
+        @media(max-width: 480px) {
+            .options-grid.cols-2 { grid-template-columns: 1fr; }
+            .category-scores { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"趣味测试","item":"https://12zn.com/test/"},{"@type":"ListItem","position":3,"name":"家居风水评分"}]}</script>
+    <meta property="og:image" content="https://12zn.com/images/og/homepage.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yizhaiyiju">
+    <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+</head>
+<body>
+    <!-- Sticky 导航 -->
+    <nav class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <a href="../index.html" class="topbar-brand">一宅一句</a>
+            <div class=topbar-nav>
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <a href="/services/zhenren.html" class="topbar-cta">预约咨询</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 面包屑 -->
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a><span>›</span>
+            <a href="../index.html">系统服务</a><span>›</span>
+            家居风水评分
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="test-hero">
+        <div class="test-icon">测</div>
+        <h1>家居风水评分</h1>
+        <p class="test-tagline">回答 6 道题，快速测评你家风水格局，获取专业评分与改善建议</p>
+    </section>
+
+    <!-- 主内容区 -->
+    <div class="section" id="test-area">
+        <div class="container">
+
+            <!-- 进度条 -->
+            <div class="progress-bar-wrap" id="progress-wrap">
+                <div class="progress-bar-outer">
+                    <div class="progress-bar-inner" id="progress-bar"></div>
+                </div>
+                <div class="progress-text" id="progress-text">第 1 / 6 题</div>
+            </div>
+
+            <!-- 问题1: 房屋朝向 -->
+            <div class="question-card active" id="q1">
+                <div class="question-number">问题一</div>
+                <div class="question-title">您的房屋大门朝向哪个方位？</div>
+                <div class="options-grid cols-4">
+                    <button class="option-btn" onclick="selectSingle(1, this, '东')">东</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '南')">南</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '西')">西</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '北')">北</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '东南')">东南</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '西南')">西南</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '东北')">东北</button>
+                    <button class="option-btn" onclick="selectSingle(1, this, '西北')">西北</button>
+                </div>
+            </div>
+
+            <!-- 问题2: 入户门正对 -->
+            <div class="question-card" id="q2">
+                <div class="question-number">问题二</div>
+                <div class="question-title">打开入户门，正对的是什么？</div>
+                <div class="options-grid cols-2">
+                    <button class="option-btn" onclick="selectSingle(2, this, '墙壁')">墙壁（玄关）</button>
+                    <button class="option-btn" onclick="selectSingle(2, this, '卧室')">卧室门</button>
+                    <button class="option-btn" onclick="selectSingle(2, this, '阳台')">阳台 / 窗户</button>
+                    <button class="option-btn" onclick="selectSingle(2, this, '厨房')">厨房</button>
+                    <button class="option-btn" onclick="selectSingle(2, this, '卫生间')">卫生间</button>
+                </div>
+            </div>
+
+            <!-- 问题3: 楼层 -->
+            <div class="question-card" id="q3">
+                <div class="question-number">问题三</div>
+                <div class="question-title">您住在哪个楼层范围？</div>
+                <div class="options-grid cols-2">
+                    <button class="option-btn" onclick="selectSingle(3, this, '低')">低层（1-3层）</button>
+                    <button class="option-btn" onclick="selectSingle(3, this, '中低')">中低层（4-8层）</button>
+                    <button class="option-btn" onclick="selectSingle(3, this, '中高')">中高层（9-15层）</button>
+                    <button class="option-btn" onclick="selectSingle(3, this, '高')">高层（16层及以上）</button>
+                </div>
+            </div>
+
+            <!-- 问题4: 床头朝向 -->
+            <div class="question-card" id="q4">
+                <div class="question-number">问题四</div>
+                <div class="question-title">您的卧室床头朝向哪个方位？</div>
+                <div class="options-grid cols-2">
+                    <button class="option-btn" onclick="selectSingle(4, this, '东')">东</button>
+                    <button class="option-btn" onclick="selectSingle(4, this, '南')">南</button>
+                    <button class="option-btn" onclick="selectSingle(4, this, '西')">西</button>
+                    <button class="option-btn" onclick="selectSingle(4, this, '北')">北</button>
+                    <button class="option-btn" onclick="selectSingle(4, this, '其他')">其他 / 不确定</button>
+                </div>
+            </div>
+
+            <!-- 问题5: 多选煞气 -->
+            <div class="question-card" id="q5">
+                <div class="question-number">问题五</div>
+                <div class="question-title">您家中是否存在以下问题？（可多选）</div>
+                <p class="multi-hint">选择所有符合的选项，也可选"以上都没有"</p>
+                <div class="options-grid cols-2">
+                    <button class="option-btn" onclick="selectMulti(5, this, '门对门')">两扇门正对（门对门）</button>
+                    <button class="option-btn" onclick="selectMulti(5, this, '横梁压顶')">横梁压在沙发/床上方</button>
+                    <button class="option-btn" onclick="selectMulti(5, this, '镜子对床')">镜子正对床铺</button>
+                    <button class="option-btn" onclick="selectMulti(5, this, '厕所在中心')">卫生间在房屋中心</button>
+                    <button class="option-btn" onclick="selectMulti(5, this, '都没有')">以上都没有</button>
+                </div>
+                <div class="btn-next-wrap">
+                    <button class="btn-next" id="btn-q5-next" onclick="goNext(5)" disabled>下一题</button>
+                </div>
+            </div>
+
+            <!-- 问题6: 采光通风 -->
+            <div class="question-card" id="q6">
+                <div class="question-number">问题六</div>
+                <div class="question-title">您家的采光和通风情况如何？</div>
+                <div class="options-grid cols-2">
+                    <button class="option-btn" onclick="selectSingle(6, this, '非常好')">非常好（全天阳光充足）</button>
+                    <button class="option-btn" onclick="selectSingle(6, this, '较好')">较好（大部分时间明亮）</button>
+                    <button class="option-btn" onclick="selectSingle(6, this, '一般')">一般（部分房间较暗）</button>
+                    <button class="option-btn" onclick="selectSingle(6, this, '较差')">较差（整体阴暗不通风）</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 分析中 -->
+    <div class="analyzing-section" id="analyzing">
+        <div class="analyzing-spinner"></div>
+        <div class="analyzing-text">正在分析您的家居风水<span class="analyzing-dots"></span></div>
+        <p style="font-size:0.82rem; color:var(--text-light); margin-top:12px;">综合八方位学、形势派、理气派进行评估</p>
+    </div>
+
+    <!-- 结果区 -->
+    <div class="result-section" id="result-section">
+        <!-- 总分 -->
+        <div class="score-circle-wrap">
+            <div class="score-circle">
+                <svg viewBox="0 0 160 160">
+                    <circle class="score-circle-bg" cx="80" cy="80" r="75"></circle>
+                    <circle class="score-circle-fill" id="score-ring" cx="80" cy="80" r="75"></circle>
+                </svg>
+                <div class="score-value">
+                    <div class="score-num" id="score-num">0</div>
+                    <div class="score-label">综合评分</div>
+                </div>
+            </div>
+            <div class="score-rating" id="score-rating"></div>
+        </div>
+
+        <!-- 分类得分 -->
+        <div class="category-scores" id="category-scores"></div>
+
+        <!-- 风水建议 -->
+        <div class="tips-section">
+            <div class="tips-title">风水改善建议</div>
+            <div id="tips-list"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="result-cta">
+            <h3>想获取专业的户型风水分析？</h3>
+            <p class="cta-sub">结合户型图与命理，提供完整的风水分析报告和化解方案</p>
+            <div class="cta-buttons">
+                <button class="btn-cta-primary" onclick="goToPay()">AI深度分析 ¥99</button>
+                <button onclick="document.getElementById('ai-chat-widget').style.display='block';document.getElementById('chat-float-btn').style.display='none'" class="btn-cta-outline" style="cursor:pointer;font-family:inherit;">免费AI初步分析 →</button>
+            </div>
+        </div>
+
+        <!-- 重新测试 -->
+        
+            <!-- 分享按钮 -->
+            <div style="text-align:center;margin:20px 0;">
+                <button onclick="shareResult()" style="display:inline-block;padding:10px 28px;border:1px solid var(--gold);border-radius:8px;font-size:0.85rem;color:var(--gold);cursor:pointer;background:var(--white);font-family:inherit;">📋 复制测试结果</button>
+                <span id="share-tip" style="display:none;font-size:0.78rem;color:#4caf50;margin-left:8px;">已复制！</span>
+            </div>
+
+            <!-- 你可能还想测 -->
+            <div style="margin-top:24px;padding:20px;background:rgba(166,138,62,0.04);border-radius:12px;">
+                <h3 style="font-size:0.95rem;color:var(--ink);margin-bottom:12px;">你可能还想测</h3>
+                <div id="related-tests" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+            </div>
+
+<div class="restart-wrap">
+            <button class="btn-restart" onclick="restartTest()">重新测试</button>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="site-footer">
+        <p class="footer-brand">一宅一句</p>
+        <p>科学风水 · 真实案例 · 专业服务</p>
+        <div class="footer-links">
+            <a href="../index.html">首页</a>
+            <span class="sep">·</span>
+            <a href="../index.html">全部服务</a>
+            <span class="sep">·</span>
+            <a href="../privacy.html">隐私政策</a>
+                <span class="sep">·</span>
+                <a href="../terms.html">服务条款</a>
+        </div>
+    </footer>
+
+    <script src="../js/shared.js?v=20260417"></script>
+    <script>
+    (function() {
+        // === 答案存储 ===
+        var answers = {};
+        var multiAnswers = {}; // 多选题答案
+
+        // === 单选 ===
+        window.selectSingle = function(qNum, btn, val) {
+            answers[qNum] = val;
+            // 清除同题其他选中
+            var card = document.getElementById('q' + qNum);
+            card.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+            btn.classList.add('selected');
+            // 非多选题自动跳转
+            if (qNum !== 5) {
+                setTimeout(function() { goNext(qNum); }, 300);
+            }
+        };
+
+        // === 多选 ===
+        window.selectMulti = function(qNum, btn, val) {
+            if (!multiAnswers[qNum]) multiAnswers[qNum] = [];
+            // "都没有"互斥
+            if (val === '都没有') {
+                multiAnswers[qNum] = ['都没有'];
+                var card = document.getElementById('q' + qNum);
+                card.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+                btn.classList.add('selected');
+            } else {
+                // 取消"都没有"
+                var noneIdx = multiAnswers[qNum].indexOf('都没有');
+                if (noneIdx > -1) {
+                    multiAnswers[qNum].splice(noneIdx, 1);
+                    var card = document.getElementById('q' + qNum);
+                    card.querySelectorAll('.option-btn').forEach(function(b) {
+                        if (b.textContent.indexOf('都没有') > -1) b.classList.remove('selected');
+                    });
+                }
+                var idx = multiAnswers[qNum].indexOf(val);
+                if (idx > -1) {
+                    multiAnswers[qNum].splice(idx, 1);
+                    btn.classList.remove('selected');
+                } else {
+                    multiAnswers[qNum].push(val);
+                    btn.classList.add('selected');
+                }
+            }
+            answers[qNum] = multiAnswers[qNum].slice();
+            // 启用下一题按钮
+            var nextBtn = document.getElementById('btn-q5-next');
+            if (nextBtn) nextBtn.disabled = (multiAnswers[qNum].length === 0);
+        };
+
+        // === 跳转 ===
+        window.goNext = function(current) {
+            var totalQ = 6;
+            document.getElementById('q' + current).classList.remove('active');
+
+            if (current < totalQ) {
+                var next = current + 1;
+                document.getElementById('q' + next).classList.add('active');
+                // 更新进度
+                var pct = Math.round((next / totalQ) * 100);
+                document.getElementById('progress-bar').style.width = pct + '%';
+                document.getElementById('progress-text').textContent = '第 ' + next + ' / ' + totalQ + ' 题';
+                // 滚动到顶部
+                window.scrollTo({ top: document.getElementById('test-area').offsetTop - 60, behavior: 'smooth' });
+            } else {
+                // 全部答完
+                startAnalyzing();
+            }
+        };
+
+        // === 分析动画 ===
+        function startAnalyzing() {
+            document.getElementById('progress-wrap').style.display = 'none';
+            document.getElementById('test-area').style.display = 'none';
+            document.getElementById('analyzing').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(function() {
+                document.getElementById('analyzing').classList.remove('active');
+                calculateAndShowResult();
+            }, 2000);
+        }
+
+        // === 计算评分 ===
+        function calculateAndShowResult() {
+            var scores = {
+                direction: 0,    // 朝向 /20
+                layout: 0,       // 格局 /20
+                floor: 0,        // 楼层 /15
+                bedroom: 0,      // 卧室 /15
+                sha: 0,          // 煞气 /15
+                light: 0         // 采光 /15
+            };
+
+            // Q1: 朝向 (max 20)
+            var dirScores = {
+                '南': 20, '东南': 18, '东': 16, '西南': 14,
+                '北': 10, '西北': 12, '东北': 11, '西': 9
+            };
+            scores.direction = dirScores[answers[1]] || 12;
+
+            // Q2: 格局-入户门正对 (max 20)
+            var layoutScores = {
+                '墙壁': 20, '卧室': 12, '阳台': 8, '厨房': 10, '卫生间': 5
+            };
+            scores.layout = layoutScores[answers[2]] || 10;
+
+            // Q3: 楼层 (max 15)
+            var floorScores = {
+                '中低': 15, '中高': 13, '低': 10, '高': 11
+            };
+            scores.floor = floorScores[answers[3]] || 10;
+
+            // Q4: 床头朝向 (max 15)
+            var bedScores = {
+                '南': 15, '东': 13, '北': 11, '西': 8, '其他': 7
+            };
+            scores.bedroom = bedScores[answers[4]] || 9;
+
+            // Q5: 煞气 (max 15) - 问题越多分越低
+            var shaList = answers[5] || ['都没有'];
+            if (shaList.indexOf('都没有') > -1) {
+                scores.sha = 15;
+            } else {
+                var shaDeductions = {
+                    '门对门': 3,
+                    '横梁压顶': 4,
+                    '镜子对床': 3,
+                    '厕所在中心': 5
+                };
+                var deduction = 0;
+                shaList.forEach(function(item) {
+                    deduction += (shaDeductions[item] || 0);
+                });
+                scores.sha = Math.max(0, 15 - deduction);
+            }
+
+            // Q6: 采光 (max 15)
+            var lightScores = {
+                '非常好': 15, '较好': 12, '一般': 8, '较差': 4
+            };
+            scores.light = lightScores[answers[6]] || 8;
+
+            // 总分
+            var total = scores.direction + scores.layout + scores.floor + scores.bedroom + scores.sha + scores.light;
+
+            // 评级
+            var rating, ratingClass;
+            if (total >= 90) { rating = '优秀'; ratingClass = 'score-gold'; }
+            else if (total >= 70) { rating = '良好'; ratingClass = 'score-good'; }
+            else if (total >= 50) { rating = '需改善'; ratingClass = 'score-warn'; }
+            else { rating = '需调理'; ratingClass = 'score-bad'; }
+
+            // 环形颜色
+            var strokeClass;
+            if (total >= 90) strokeClass = 'stroke-gold';
+            else if (total >= 70) strokeClass = 'stroke-good';
+            else if (total >= 50) strokeClass = 'stroke-warn';
+            else strokeClass = 'stroke-bad';
+
+            // 显示结果
+            showResult(total, rating, ratingClass, strokeClass, scores);
+
+            // 生成建议
+            generateTips(scores, answers);
+        }
+
+        // === 显示结果 ===
+        function showResult(total, rating, ratingClass, strokeClass, scores) {
+            var resultSection = document.getElementById('result-section');
+            resultSection.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 总分动画
+            var scoreNum = document.getElementById('score-num');
+            scoreNum.className = 'score-num ' + ratingClass;
+            animateNumber(scoreNum, 0, total, 1200);
+
+            // 环形动画
+            var ring = document.getElementById('score-ring');
+            ring.className = 'score-circle-fill ' + strokeClass;
+            var circumference = 2 * Math.PI * 75; // ~471
+            var offset = circumference - (total / 100) * circumference;
+            setTimeout(function() {
+                ring.style.strokeDashoffset = offset;
+            }, 100);
+
+            // 评级
+            var ratingEl = document.getElementById('score-rating');
+            ratingEl.textContent = '风水评级：' + rating;
+            ratingEl.className = 'score-rating ' + ratingClass;
+
+            // 分类得分
+            var categories = [
+                { name: '朝向', score: scores.direction, max: 20 },
+                { name: '格局', score: scores.layout, max: 20 },
+                { name: '楼层', score: scores.floor, max: 15 },
+                { name: '卧室', score: scores.bedroom, max: 15 },
+                { name: '煞气', score: scores.sha, max: 15 },
+                { name: '采光', score: scores.light, max: 15 }
+            ];
+            var catHtml = '';
+            categories.forEach(function(cat) {
+                var catClass;
+                var pct = cat.score / cat.max;
+                if (pct >= 0.85) catClass = 'score-gold';
+                else if (pct >= 0.65) catClass = 'score-good';
+                else if (pct >= 0.45) catClass = 'score-warn';
+                else catClass = 'score-bad';
+                catHtml += '<div class="category-item">' +
+                    '<div class="category-name">' + cat.name + '</div>' +
+                    '<div class="category-score ' + catClass + '">' + cat.score +
+                    '<span class="category-max"> / ' + cat.max + '</span></div></div>';
+            });
+            document.getElementById('category-scores').innerHTML = catHtml;
+        }
+
+        // 数字动画
+        function animateNumber(el, from, to, duration) {
+            var start = performance.now();
+            function step(now) {
+                var elapsed = now - start;
+                var progress = Math.min(elapsed / duration, 1);
+                // easeOutCubic
+                var ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(from + (to - from) * ease);
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        // === 生成建议 ===
+        function generateTips(scores, ans) {
+            var tips = [];
+
+            // 朝向建议
+            if (scores.direction <= 12) {
+                tips.push('您的房屋朝' + ans[1] + '，在传统风水中并非最佳朝向。建议在大门处摆放绿色植物或铜器，增强入户纳气效果。大门外可放置脚垫，颜色宜选土黄色或棕色，有助于稳固气场。');
+            } else if (scores.direction >= 18) {
+                tips.push('房屋朝' + ans[1] + '是非常好的朝向，阳气充足、纳气旺盛。建议保持大门区域整洁明亮，不要堆放杂物，让好运势顺畅进入。');
+            }
+
+            // 格局建议
+            if (ans[2] === '阳台') {
+                tips.push('入户门正对阳台形成"穿堂煞"，气场直冲而出，不利于聚财。建议在入户门和阳台之间设置屏风、玄关柜或摆放大叶绿植（如发财树、龟背竹），起到遮挡缓冲作用。');
+            } else if (ans[2] === '卫生间') {
+                tips.push('入户门正对卫生间在风水中为大忌，容易导致财运流失、健康受损。建议卫生间门常关并加装门帘（颜色宜用暖色），门口可摆放一盆宽叶绿植化解秽气。如条件允许，建议增设玄关隔断。');
+            } else if (ans[2] === '厨房') {
+                tips.push('入户门正对厨房，风水上称"开门见灶"，容易导致家人脾气急躁、钱财外流。建议在门与厨房之间增设隔断或珠帘，保持厨房门常关。');
+            } else if (ans[2] === '卧室') {
+                tips.push('入户门正对卧室门，外部气流直冲卧室，影响休息和隐私。建议卧室门口挂一道布帘或珠帘，也可在走廊摆放一面屏风进行遮挡。');
+            } else if (ans[2] === '墙壁') {
+                tips.push('入户门有玄关遮挡，格局非常好，形成了良好的气场缓冲区。建议在玄关处摆放一幅山水画或一盆绿植，进一步提升纳气效果。');
+            }
+
+            // 楼层建议
+            if (ans[3] === '低') {
+                tips.push('低楼层采光和通风相对较弱，湿气较重。建议室内多开窗通风，适当使用暖色调灯光，保持室内干燥明亮。可在客厅东南角摆放一盆高大绿植提升生气。');
+            } else if (ans[3] === '高') {
+                tips.push('高楼层虽然采光好，但风水上"高处不胜寒"，气场不够稳定。建议家中增加厚重感的家具和装饰，多用大地色系，可在客厅摆放石质摆件或陶瓷器增强"土"的稳定能量。');
+            }
+
+            // 卧室建议
+            if (scores.bedroom <= 8) {
+                tips.push('床头朝' + ans[4] + '在风水中并非理想方位，可能影响睡眠质量和个人运势。建议调整床头朝南或朝东，如无法移动，可在床头放置一对铜制或木质小摆件来稳定气场。床头忌靠窗户，宜紧贴实墙。');
+            } else if (scores.bedroom >= 14) {
+                tips.push('床头朝' + ans[4] + '是很好的方位选择，有利于睡眠和个人运势。建议保持床头区域整洁，不要悬挂重物或大型画框，可放置一盏柔和的床头灯增强安定感。');
+            }
+
+            // 煞气建议
+            var shaList = ans[5] || [];
+            if (shaList.indexOf('门对门') > -1) {
+                tips.push('家中两扇门正对（门对门）容易造成气场对冲，家人容易产生口角。建议在其中一扇门上悬挂五帝钱或布帘，也可在两门之间的走廊摆放绿植化解。');
+            }
+            if (shaList.indexOf('横梁压顶') > -1) {
+                tips.push('横梁压在沙发或床铺上方是风水大忌，容易造成精神压力大、运势受阻。建议用吊顶遮盖横梁，或在横梁下方悬挂葫芦化解。如无法改造，应将沙发或床移离横梁正下方。');
+            }
+            if (shaList.indexOf('镜子对床') > -1) {
+                tips.push('镜子正对床铺在风水中称"镜光煞"，容易导致失眠、精神恍惚。建议将镜子移位或在不使用时用布遮盖。梳妆台可改为侧对床铺的摆放方式。');
+            }
+            if (shaList.indexOf('厕所在中心') > -1) {
+                tips.push('卫生间位于房屋中心是严重的风水缺陷，中心属"太极"之位，被污水浊气占据会影响全家运势。建议卫生间保持良好通风，可在门口放置黄水晶球或铜葫芦化解，室内宜常开排风扇。');
+            }
+
+            // 采光建议
+            if (scores.light <= 8) {
+                tips.push('采光通风不足会导致阴气过重，影响家人健康和精神状态。建议多用暖白色照明，客厅可增加落地灯，阴暗角落放置一面小镜子反射光线。多开窗通风，窗帘选用浅色纱帘，白天尽量不遮挡自然光。');
+            }
+
+            // 如果建议太少，添加通用建议
+            if (tips.length < 3) {
+                tips.push('保持家居整洁有序是最基本的风水原则。定期清理不用的杂物，尤其是门口和阳台区域，让气场流通顺畅，好运自然来。');
+            }
+            if (tips.length < 3) {
+                tips.push('客厅是家中最重要的聚气之处，建议在客厅东南方位摆放一盆宽叶绿植（如发财树），有助于提升财运和家庭和谐。');
+            }
+
+            // 限制最多5条
+            tips = tips.slice(0, 5);
+
+            // 渲染
+            var html = '';
+            tips.forEach(function(tip) {
+                html += '<div class="tip-item">' +
+                    '<span class="tip-icon">\uD83D\uDCA1</span>' +
+                    '<div class="tip-text">' + tip + '</div></div>';
+            });
+            document.getElementById('tips-list').innerHTML = html;
+        }
+
+        // === CTA按钮 ===
+        window.goToPay = function() {
+            // 尝试调用主页的支付弹窗，如果不在主页则跳转
+            if (typeof openPayModal === 'function') {
+                openPayModal('consult_999');
+            } else {
+                window.location.href = '../index.html#pricing';
+            }
+        };
+
+        // === 重新测试 ===
+        window.restartTest = function() {
+            answers = {};
+            multiAnswers = {};
+            document.getElementById('result-section').classList.remove('active');
+            document.getElementById('test-area').style.display = '';
+            document.getElementById('progress-wrap').style.display = '';
+            document.getElementById('progress-bar').style.width = (100 / 6) + '%';
+            document.getElementById('progress-text').textContent = '第 1 / 6 题';
+            // 重置所有问题卡片
+            for (var i = 1; i <= 6; i++) {
+                var card = document.getElementById('q' + i);
+                card.classList.remove('active');
+                card.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
+            }
+            document.getElementById('q1').classList.add('active');
+            var nextBtn = document.getElementById('btn-q5-next');
+            if (nextBtn) nextBtn.disabled = true;
+            // 重置环形
+            document.getElementById('score-ring').style.strokeDashoffset = 471;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    })();
+    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"家居风水评分怎么测？","acceptedAnswer":{"@type":"Answer","text":"回答6道关于门口、客厅、卧室、厨房、卫生间等区域的问题，系统会根据传统风水理论自动评分，并指出需要改善的地方。"}},{"@type":"Question","name":"风水评分低怎么办？","acceptedAnswer":{"@type":"Answer","text":"评分低不代表家宅不宁，只是某些区域有改善空间。建议优先处理入户动线、卧室床位、厨房灶位等高影响区域。"}}]}</script><script>
+var TESTS_DATA = [{"file": "test-yunshi.html", "icon": "🔮", "title": "今日运势速测"}, {"file": "test-wuxing.html", "icon": "🌊", "title": "五行属性测试"}, {"file": "test-fengshui.html", "icon": "🏠", "title": "家居风水评分"}, {"file": "test-xingming.html", "icon": "✍️", "title": "姓名吉凶测试"}, {"file": "test-taohua.html", "icon": "🌸", "title": "桃花运测试"}, {"file": "test-ta-aini.html", "icon": "💕", "title": "Ta是否爱你"}, {"file": "test-caishang.html", "icon": "💰", "title": "财商测试"}, {"file": "test-xinli.html", "icon": "🧠", "title": "心理年龄测试"}, {"file": "test-mianxiang.html", "icon": "👤", "title": "面相气质测试"}, {"file": "test-qianshi.html", "icon": "🌙", "title": "前世今生测试"}, {"file": "test-lucky.html", "icon": "🍀", "title": "幸运色测试"}, {"file": "test-ziwei.html", "icon": "⭐", "title": "紫微斗数排盘"}];
+</script>
+
+<script>
+// 分享功能
+window.shareResult = function() {
+    var title = document.title.replace(/\s*\|.*$/, '');
+    var resultEl = document.querySelector('.result-hero') || document.querySelector('.result-element-name');
+    var resultText = resultEl ? resultEl.textContent.trim() : '';
+    var text = '我在一宅一句测了「' + title + '」\n' + resultText + '\n\n👉 你也来测测：' + window.location.href;
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            var tip = document.getElementById('share-tip');
+            tip.style.display = 'inline';
+            setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+        });
+    } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        var tip = document.getElementById('share-tip');
+        tip.style.display = 'inline';
+        setTimeout(function(){ tip.style.display = 'none'; }, 2000);
+    }
+};
+
+// 相关测试推荐
+(function(){
+    var allTests = TESTS_DATA;
+    var currentFile = window.location.pathname.split('/').pop();
+    var related = allTests.filter(function(t){ return t.file !== currentFile; });
+    // Shuffle and pick 4
+    related.sort(function(){ return Math.random() - 0.5; });
+    var picks = related.slice(0, 4);
+    var container = document.getElementById('related-tests');
+    if (!container) return;
+    var html = '';
+    for (var i = 0; i < picks.length; i++) {
+        html += '<a href="' + picks[i].file + '" style="display:inline-block;padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:8px;font-size:0.82rem;text-decoration:none;color:var(--ink);">' + picks[i].icon + ' ' + picks[i].title + '</a>';
+    }
+    container.innerHTML = html;
+})();
+</script>
+
+</body>
+</html>

@@ -26,7 +26,18 @@
   </style>
 </head>
 <body>
-<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="../index.html">🏯 一宅一句</a><div class="topbar-nav"><a href="../services/all.html">服务</a><a href="../test/">测试</a><a href="../blog/">文章</a><a href="../services/pricing.html">报价</a><a href="../services/cases.html">案例</a><a href="../services/faq.html">FAQ</a><a href="../en/">EN</a><a class="topbar-cta" href="../services/pricing.html">预约咨询</a></div></div></div></nav>
+<nav class="topbar"><div class="container"><div class="topbar-wrap"><a class="topbar-logo" href="../index.html">🏯 一宅一句</a><div class="topbar-nav">
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <button class="topbar-cta" onclick="window.location.href='/services/zhenren.html'" aria-label="预约风水咨询服务">预约咨询</button>
+            </div></div></div></nav>
 <main class="container"><section class="simple-card"><h1>玄空飞星测试</h1><p class="muted">输入房屋朝向与建成年份，快速查看九运参考。</p><div class="grid2"><div><label>房屋朝向</label><select id="dir"><option>坐北朝南</option><option>坐南朝北</option><option>坐东朝西</option><option>坐西朝东</option><option>东南朝西北</option><option>西北朝东南</option></select></div><div><label>房屋建成年份</label><input id="y" type="number" min="1950" max="2099" placeholder="例如 2018"></div></div><div style="margin-top:12px"><button id="go">查看飞星</button></div><div id="result" class="result"></div><p class="muted" style="margin-top:10px">本文仅供参考，风水文化传统讲究信则有不信则无。</p></section></main><script>(function(){var r=document.getElementById('result');document.getElementById('go').onclick=function(){var y=parseInt(document.getElementById('y').value||'0',10);if(!y){alert('请输入建成年份');return;}var dir=document.getElementById('dir').value;var period=y>=2024?9:(y>=2004?8:(y>=1984?7:6));var lucky=['正南','东南','正东','东北','正北','西南','正西','西北','中宫'][period%9];r.style.display='block';r.textContent='当前参考运：第'+period+'运
 房屋：'+dir+'
 旺位建议：'+lucky+'
