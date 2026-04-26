@@ -58,8 +58,31 @@
   ]
 }
 </script>
+
+<style id="legacy-topbar-style">
+.legacy-topbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 14px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:16px}
+.legacy-topbar a{color:#1f2937;text-decoration:none;font-size:14px}
+.legacy-topbar .brand{font-weight:700;margin-right:8px}
+.legacy-topbar .cta{margin-left:auto;padding:7px 12px;border:1px solid #b8964c;background:#fff;color:#b8964c;border-radius:999px;cursor:pointer}
+.legacy-topbar .cta:hover{background:#f8f4ea}
+@media (max-width:640px){.legacy-topbar .cta{margin-left:0}}
+</style>
 </head>
 <body style="background:#f5f5f5;padding:20px;font-family:sans-serif;max-width:800px;margin:0 auto;">
+<div class="legacy-topbar" id="legacy-topbar">
+  <a class="brand" href="/index.html">一宅一句</a>
+  <a href="/index.html">服务</a>
+  <a href="/test/">测试</a>
+  <a href="/blog/">文章</a>
+  <a href="/services/pricing.html">报价</a>
+  <a href="/services/cases.html">案例</a>
+  <a href="/services/faq.html">FAQ</a>
+  <a href="/yizhaiyiju-latest.apk">APP下载</a>
+  <a href="/login.html">个人中心</a>
+  <a href="/en/">EN</a>
+  <button class="cta" onclick="window.location.href='/services/zhenren.html'" aria-label="预约风水咨询服务">预约咨询</button>
+</div>
+
     <article style="background:white;padding:30px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);">
         <h1 style="color:#333;font-size:28px;margin-bottom:10px;">门对窗=穿堂风 | 财气进门就飞走</h1>
         <p style="color:#666;font-size:14px;margin-bottom:30px;">发布时间：2026-02-20 | 来源：一宅一句</p>

@@ -130,6 +130,9 @@
             margin-top: 15px;
             font-size: 0.9rem;
         }
+    
+        .nav-cta { margin-left: 10px; padding: 8px 14px; border: 1px solid #b8964c; border-radius: 999px; background: transparent; color: #b8964c; cursor: pointer; font-size: 0.9rem; }
+        .nav-cta:hover { background: rgba(184,150,76,0.15); }
     </style>
     <script>
     var _hmt = _hmt || [];
@@ -144,15 +147,29 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@yizhaiyiju">
     <meta name="twitter:image" content="https://12zn.com/images/og/homepage.jpg">
+    <link rel="stylesheet" href="/css/shared.css?v=20260414">
 </head>
 <body>
     <header>
         <h1>🏮 一宅一句 · 案例展示</h1>
     </header>
-    <nav class="nav">
-        <a href="/">返回首页</a>
-        <a href="/consult.html">在线咨询</a>
-    </nav>
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <a href="/index.html" class="topbar-logo">一宅一句</a>
+            <div class="topbar-nav">
+                <a href="/index.html">服务</a>
+                <a href="/test/">测试</a>
+                <a href="/blog/">文章</a>
+                <a href="/services/pricing.html">报价</a>
+                <a href="/services/cases.html">案例</a>
+                <a href="/services/faq.html">FAQ</a>
+                <a href="/yizhaiyiju-latest.apk">APP下载</a>
+                <a href="/login.html">个人中心</a>
+                <a href="/en/">EN</a>
+                <button class="topbar-cta" onclick="window.location.href='/services/zhenren.html'" aria-label="预约风水咨询服务">预约咨询</button>
+            </div>
+        </div>
+    </div>
     
     <div class="container">
         <div class="section-title">
