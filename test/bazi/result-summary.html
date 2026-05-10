@@ -1,0 +1,194 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12zn 八字结果摘要原型</title><style>
+* { box-sizing: border-box; }
+body { margin:0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:linear-gradient(180deg,#f7f1e8 0%,#fcfaf7 100%); color:#3c3126; }
+.container { max-width: 1080px; margin: 0 auto; padding: 32px 20px 80px; }
+.card { background:rgba(255,252,247,.92); border:1px solid #e8dcc8; border-radius:18px; box-shadow:0 14px 34px rgba(89,68,44,.08); }
+.grid { display:grid; gap:16px; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.badge { display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+.badge-high { background:#efe7da; color:#6f4e37; }
+.badge-medium { background:#f6ead7; color:#8b6a4d; }
+.badge-low { background:#f5dfd8; color:#8f4b3e; }
+.label { font-size:12px; color:#7b6a58; margin-bottom:6px; }
+.value { font-size:18px; font-weight:700; }
+.hero { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:20px; }
+.title { font-size:32px; font-weight:800; margin:0 0 8px; }
+.subtitle { color:#7b6a58; line-height:1.7; }
+.section { padding:20px; }
+.warning { border:1px solid #f59e0b; background:linear-gradient(135deg,#fff7ed,#fffbeb); color:#9a3412; border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(245,158,11,.12); } .summary-hero{display:grid;grid-template-columns:1.3fr .9fr;gap:16px;margin-top:16px} .metric{padding:18px;border-radius:16px;border:1px solid #e5e7eb;background:linear-gradient(180deg,#ffffff,#f9fafb)} .section-title{font-size:14px;color:#7b6a58;margin-bottom:8px;font-weight:700;letter-spacing:.02em} .spotlight{background:linear-gradient(135deg,#6f4e37,#8b6a4d);color:#fff;border-radius:20px;padding:22px;box-shadow:0 18px 40px rgba(111,78,55,.18)} .spotlight .small{color:#d1d5db}
+.cta-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+.btn { border:none; border-radius:12px; padding:12px 18px; font-weight:700; cursor:pointer; }
+.btn-primary { background:linear-gradient(135deg,#6f4e37,#8b6a4d); color:#fff; }
+.btn-secondary { background:#fffaf3; color:#5f4632; border:1px solid #dcc8ab; }
+.kv { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.pillar { background:#fff8f0; border:1px solid #eadfce; border-radius:14px; padding:14px; text-align:center; }
+.dayun-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}.dayun-card{background:linear-gradient(180deg,#fffaf3,#fff);border:1px solid #eadfce;border-radius:14px;padding:14px}.dayun-card .age{font-size:12px;color:#8b6a4d;margin-top:6px}.insight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.insight-card{background:#fffdf9;border:1px solid #eadfce;border-radius:14px;padding:16px}
+.small { font-size:13px; color:#7b6a58; }
+.hidden { display:none; }
+
+@media (max-width: 900px) { .grid-2,.kv,.summary-hero,.dayun-list,.insight-grid { grid-template-columns:1fr !important; } .hero { flex-direction:column; } }
+@media (max-width: 640px) {
+  .container { padding: 20px 14px 56px !important; }
+  .title { font-size: 26px !important; line-height: 1.2; }
+  .subtitle { font-size: 14px !important; }
+  .topnav { display:grid !important; grid-template-columns:1fr 1fr; gap:10px !important; }
+  .btn, .topnav .btn { width: 100%; min-height: 44px; text-align:center; }
+  .cta-row { display:grid !important; grid-template-columns:1fr; gap:10px !important; }
+  .value { font-size: 16px !important; }
+  .section { padding: 16px !important; }
+  .warning { padding: 14px !important; }
+  .spotlight { padding: 18px !important; }
+  input, select { font-size: 16px !important; }
+}
+
+</style></head><body><div class="container"><div class="topnav" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><a class="btn btn-secondary" href="index.html">体验首页</a><a class="btn btn-secondary" href="result-summary.html">命盘概览</a><a class="btn btn-secondary" href="supplement.html">完善资料</a><a class="btn btn-secondary" href="handoff.html">张师傅详解</a></div><div class="hero"><div><h1 class="title">八字结果摘要</h1><p class="subtitle">这里直接展示你当前能看到的基础结果。若资料不完整，再引导你完善资料或请张师傅进一步分析。</p></div><div><button class="btn btn-secondary" onclick="showCase('exact')">查看完整时间示例</button> <button class="btn btn-secondary" onclick="showCase('approx')">查看模糊时段示例</button></div></div><div id="warningBox" class="warning hidden"></div><div class="summary-hero"><div class="spotlight"><div class="section-title" style="color:#d1d5db">当前结果摘要</div><div id="profileBlock" class="value" style="font-size:24px"></div><div class="small" id="inputLabel" style="margin-top:8px"></div><div id="resultPreview" style="margin-top:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:16px"><div class="section-title" style="color:#f3e7d2">你当前能先看到的结果</div><div id="analysisSummary" style="font-size:15px;line-height:1.75;color:#fff"></div></div><div class="small" id="nextActionText" style="margin-top:12px"></div><div class="cta-row"><button id="primaryBtn" class="btn btn-primary" style="background:#fff;color:#111827"></button><button id="supplementBtn" class="btn btn-secondary" onclick="location.href='supplement.html'">完善出生资料</button><button id="secondaryBtn" class="btn btn-secondary" onclick="location.href='handoff.html'">请张师傅详解</button></div></div></div><div id="core-result" class="card section" style="margin-top:16px"><div class="label">基础结果</div><div style="font-size:16px;font-weight:700;margin-bottom:12px">完整基础解析</div><div id="fullAnalysis" class="small" style="font-size:14px;line-height:1.85;color:#5f4632;margin-bottom:16px"></div><div class="kv"><div class="pillar"><div class="small">识别时辰</div><div class="value" id="detected"></div></div><div class="pillar"><div class="small">候选时辰</div><div class="value" id="candidates"></div></div><div class="pillar"><div class="small">大运方向</div><div class="value" id="direction"></div></div><div class="pillar"><div class="small">起运</div><div class="value" id="qiyun"></div></div></div><div class="kv" style="margin-top:14px"><div class="pillar"><div class="small">年柱</div><div class="value" id="year"></div></div><div class="pillar"><div class="small">月柱</div><div class="value" id="month"></div></div><div class="pillar"><div class="small">日柱</div><div class="value" id="day"></div></div><div class="pillar"><div class="small">时柱</div><div class="value" id="hour"></div></div></div></div><div class="card section" style="margin-top:16px"><div class="label">基础解析预览</div><div id="analysisSummary" class="subtitle"></div></div></div><script>
+const samples = { exact: {"profile": {"name": "张三", "gender": "male", "birthPlace": "辽宁省丹东市", "calendarMode": "solar", "birthDate": "1990-05-15", "birthTimeText": "08:30"}, "inputCompletenessLabel": "exact_time", "confidenceLevel": "high", "warningSummary": [], "detectedShichen": "辰", "candidateShichen": ["辰"], "pillars": {"year": "庚午", "month": "辛巳", "day": "庚辰", "hour": "庚辰"}, "dayun": {"direction": "forward", "qiyunAge": {"years": 7, "months": 3, "days": 20, "forward": true, "rule": "lunar_python_yun", "confidence": "high"}}, "analysis": {"summary": null, "career": null, "wealth": null, "relationship": null, "health": null}, "nextAction": "show_result", "internal": {"hiddenStems": {"辰": ["戊", "乙", "癸"]}, "tenGods": {"戊": "偏印", "乙": "正财", "癸": "伤官"}, "dayunCycles": [{"index": 1, "pillar": "壬午", "start_age": 7, "end_age": 16, "rule": "month_pillar_step_sequence"}, {"index": 2, "pillar": "癸未", "start_age": 17, "end_age": 26, "rule": "month_pillar_step_sequence"}, {"index": 3, "pillar": "甲申", "start_age": 27, "end_age": 36, "rule": "month_pillar_step_sequence"}, {"index": 4, "pillar": "乙酉", "start_age": 37, "end_age": 46, "rule": "month_pillar_step_sequence"}, {"index": 5, "pillar": "丙戌", "start_age": 47, "end_age": 56, "rule": "month_pillar_step_sequence"}, {"index": 6, "pillar": "丁亥", "start_age": 57, "end_age": 66, "rule": "month_pillar_step_sequence"}, {"index": 7, "pillar": "戊子", "start_age": 67, "end_age": 76, "rule": "month_pillar_step_sequence"}, {"index": 8, "pillar": "己丑", "start_age": 77, "end_age": 86, "rule": "month_pillar_step_sequence"}], "fullWarnings": [], "recommendHumanReview": false, "normalizedInput": {"name": "张三", "former_names": [], "gender": "male", "calendar_mode": "solar", "solar_birth": "1990-05-15", "lunar_birth": null, "is_leap_month": null, "birth_time_text": "08:30", "birth_time_24h": "08:30", "birth_shichen": null, "birth_place": "辽宁省丹东市", "timezone": "Asia/Shanghai", "is_deceased": false, "death_year": null, "allow_approximation": true, "raw_user_input": "1990年5月15日早上8点半，男，辽宁丹东", "year_stem_hint": "庚", "day_stem_hint": "甲"}}}, approx: {"profile": {"name": "王五", "gender": "male", "birthPlace": "上海市", "calendarMode": "solar", "birthDate": "1988-10-02", "birthTimeText": "上午"}, "inputCompletenessLabel": "approx_time", "confidenceLevel": "medium", "warningSummary": ["出生时间为模糊描述：当前按候选时辰 辰,巳 做近似处理。"], "detectedShichen": "辰", "candidateShichen": ["辰", "巳"], "pillars": {"year": "戊辰", "month": "辛酉", "day": "庚寅", "hour": "壬午"}, "dayun": {"direction": "forward", "qiyunAge": {"years": 1, "months": 11, "days": 20, "forward": true, "rule": "lunar_python_yun", "confidence": "high"}}, "analysis": {"summary": "已完成基础规则层分析：当前识别时辰为辰时。 用户提供的是模糊时段，当前按候选时辰 辰,巳 做近似处理。 按五鼠遁元，结合日干提示，当前候选时柱为 壬午。 当前已展开的藏干十神包括：戊:偏印、乙:正财、癸:伤官。 按年干与性别规则，大运方向初判为：forward。 当前存在风险提示，说明结果仍需谨慎使用。", "career": "当前仅适合输出基础趋势，不宜做强断语。", "wealth": "可基于十神与后续完整命盘进一步展开。", "relationship": "若时辰不稳，婚恋细节判断需降级或转人工。", "health": "当前仅建议给出保守提醒，不做精细年份判断。"}, "nextAction": "handoff_to_master", "internal": {"hiddenStems": {"辰": ["戊", "乙", "癸"]}, "tenGods": {"戊": "偏印", "乙": "正财", "癸": "伤官"}, "dayunCycles": [{"index": 1, "pillar": "壬戌", "start_age": 1, "end_age": 10, "rule": "month_pillar_step_sequence"}, {"index": 2, "pillar": "癸亥", "start_age": 11, "end_age": 20, "rule": "month_pillar_step_sequence"}, {"index": 3, "pillar": "甲子", "start_age": 21, "end_age": 30, "rule": "month_pillar_step_sequence"}, {"index": 4, "pillar": "乙丑", "start_age": 31, "end_age": 40, "rule": "month_pillar_step_sequence"}, {"index": 5, "pillar": "丙寅", "start_age": 41, "end_age": 50, "rule": "month_pillar_step_sequence"}, {"index": 6, "pillar": "丁卯", "start_age": 51, "end_age": 60, "rule": "month_pillar_step_sequence"}, {"index": 7, "pillar": "戊辰", "start_age": 61, "end_age": 70, "rule": "month_pillar_step_sequence"}, {"index": 8, "pillar": "己巳", "start_age": 71, "end_age": 80, "rule": "month_pillar_step_sequence"}], "fullWarnings": ["出生时间为模糊描述：当前按候选时辰 辰,巳 做近似处理。"], "recommendHumanReview": true, "normalizedInput": {"name": "王五", "former_names": [], "gender": "male", "calendar_mode": "solar", "solar_birth": "1988-10-02", "lunar_birth": null, "is_leap_month": null, "birth_time_text": "上午", "birth_time_24h": null, "birth_shichen": null, "birth_place": "上海市", "timezone": "Asia/Shanghai", "is_deceased": false, "death_year": null, "allow_approximation": true, "raw_user_input": "1988年10月2日上午出生，男，上海", "year_stem_hint": "戊", "day_stem_hint": "丁"}}}, evening: {"profile": {"name": "孙七", "gender": "female", "birthPlace": "广州市", "calendarMode": "solar", "birthDate": "1995-08-19", "birthTimeText": "晚上"}, "inputCompletenessLabel": "approx_time", "confidenceLevel": "medium", "warningSummary": ["出生时间为模糊描述：当前按候选时辰 戌,亥 做近似处理。"], "detectedShichen": "戌", "candidateShichen": ["戌", "亥"], "pillars": {"year": "乙亥", "month": "甲申", "day": "壬午", "hour": "丙午"}, "dayun": {"direction": "forward", "qiyunAge": {"years": 3, "months": 8, "days": 20, "forward": false, "rule": "lunar_python_yun", "confidence": "high"}}, "analysis": {"summary": "已完成基础规则层分析：当前识别时辰为戌时。 用户提供的是模糊时段，当前按候选时辰 戌,亥 做近似处理。 按五鼠遁元，结合日干提示，当前候选时柱为 丙午。 当前已展开的藏干十神包括：戊:七杀、辛:正印、丁:正财。 按年干与性别规则，大运方向初判为：forward。 当前存在风险提示，说明结果仍需谨慎使用。", "career": "当前仅适合输出基础趋势，不宜做强断语。", "wealth": "可基于十神与后续完整命盘进一步展开。", "relationship": "若时辰不稳，婚恋细节判断需降级或转人工。", "health": "当前仅建议给出保守提醒，不做精细年份判断。"}, "nextAction": "handoff_to_master", "internal": {"hiddenStems": {"戌": ["戊", "辛", "丁"]}, "tenGods": {"戊": "七杀", "辛": "正印", "丁": "正财"}, "dayunCycles": [{"index": 1, "pillar": "乙酉", "start_age": 3, "end_age": 12, "rule": "month_pillar_step_sequence"}, {"index": 2, "pillar": "丙戌", "start_age": 13, "end_age": 22, "rule": "month_pillar_step_sequence"}, {"index": 3, "pillar": "丁亥", "start_age": 23, "end_age": 32, "rule": "month_pillar_step_sequence"}, {"index": 4, "pillar": "戊子", "start_age": 33, "end_age": 42, "rule": "month_pillar_step_sequence"}, {"index": 5, "pillar": "己丑", "start_age": 43, "end_age": 52, "rule": "month_pillar_step_sequence"}, {"index": 6, "pillar": "庚寅", "start_age": 53, "end_age": 62, "rule": "month_pillar_step_sequence"}, {"index": 7, "pillar": "辛卯", "start_age": 63, "end_age": 72, "rule": "month_pillar_step_sequence"}, {"index": 8, "pillar": "壬辰", "start_age": 73, "end_age": 82, "rule": "month_pillar_step_sequence"}], "fullWarnings": ["出生时间为模糊描述：当前按候选时辰 戌,亥 做近似处理。"], "recommendHumanReview": true, "normalizedInput": {"name": "孙七", "former_names": [], "gender": "female", "calendar_mode": "solar", "solar_birth": "1995-08-19", "lunar_birth": null, "is_leap_month": null, "birth_time_text": "晚上", "birth_time_24h": null, "birth_shichen": null, "birth_place": "广州市", "timezone": "Asia/Shanghai", "is_deceased": false, "death_year": null, "allow_approximation": true, "raw_user_input": "1995年8月19日晚上出生，女，广州", "year_stem_hint": "乙", "day_stem_hint": "丙"}}} };
+function setBadge(el, level) { const map={high:'高',medium:'中',low:'低'}; el.className = 'badge ' + (level === 'high' ? 'badge-high' : level === 'medium' ? 'badge-medium' : 'badge-low'); el.textContent = '判断把握：' + (map[level] || level); }
+function renderDayunList(cycles) {
+  const el = document.getElementById('dayunList');
+  if (!el) return;
+  if (!cycles || !cycles.length) { el.innerHTML = '<div class="small">当前还没有可展示的大运序列。</div>'; return; }
+  el.innerHTML = cycles.map(c => `<div class="dayun-card"><div class="label">第${c.index}步大运</div><div class="value">${c.pillar || '-'}</div><div class="age">约 ${c.start_age}-${c.end_age} 岁</div></div>`).join('');
+}
+
+function renderInsights(payload) {
+  const core = document.getElementById('insightCore');
+  const advice = document.getElementById('insightAdvice');
+  if (!core || !advice) return;
+  const pillars = payload.pillars || {};
+  const dayun = payload.dayun || {};
+  const shichen = payload.detectedShichen || '-';
+  const qiyun = dayun.qiyunAge || {};
+  const year = pillars.year || '-';
+  const month = pillars.month || '-';
+  const day = pillars.day || '-';
+  const hour = pillars.hour || '-';
+  core.textContent = `你当前这张命盘的基础骨架已经齐了：年柱${year}、月柱${month}、日柱${day}、时柱${hour}。出生时辰识别为${shichen}时，说明这一步已经能先看命盘结构、起运方向与人生节奏主线。`;
+  const qiyunText = qiyun.years != null ? `${qiyun.years}岁${qiyun.months || 0}月左右起运` : '起运时间仍需结合资料继续核实';
+  const directionText = dayun.direction === 'forward' ? '顺排' : dayun.direction === 'backward' ? '逆排' : '待确认';
+  advice.textContent = `当前最适合先把大运顺序和四柱结构看清：你属于${directionText}大运，约在${qiyunText}后进入第一步大运。若你接下来要判断婚恋、事业、财运或近几年关键转折，再进入张师傅详解会更稳。`;
+}
+
+function showCase(kind) {
+  const data = samples[kind];
+  document.getElementById('profileBlock').textContent = `${data.profile.birthDate} · ${data.profile.birthTimeText} · ${data.profile.birthPlace}`;
+  const inputLabelMap = { exact_time: '当前资料完整，可先查看基础结果', approx_time: '当前为模糊时段，建议结合补充资料谨慎参考', date_only: '当前仅有生日信息，建议先补充出生时间' };
+  document.getElementById('inputLabel').textContent = inputLabelMap[data.inputCompletenessLabel] || '当前资料已录入，可继续查看基础结果';
+  document.getElementById('detected').textContent = data.detectedShichen || '-';
+  document.getElementById('candidates').textContent = (data.candidateShichen || []).join(' / ') || '-';
+  const directionMap = { forward: '顺排', backward: '逆排' };
+  document.getElementById('direction').textContent = directionMap[data.dayun.direction] || '-';
+  const qa = data.dayun.qiyunAge || {};
+  document.getElementById('qiyun').textContent = qa.years != null ? `${qa.years}岁${qa.months||0}月` : '-';
+  document.getElementById('year').textContent = data.pillars.year || '-';
+  document.getElementById('month').textContent = data.pillars.month || '-';
+  document.getElementById('day').textContent = data.pillars.day || '-';
+  document.getElementById('hour').textContent = data.pillars.hour || '-';
+  const analysisSummaryMap = { exact: '当前命盘时辰识别较稳定，可先查看基础命盘结构、起运方向与四柱结果。若你要看婚恋、事业、财运等更细判断，再进入详解。', approx: '当前只适合先看近似结果。由于存在模糊时段与候选时辰，涉及婚恋、年份、关键转折的细判断，建议先完善资料或请张师傅进一步分析。' };
+  document.getElementById('analysisSummary').textContent = data.analysis.summary || analysisSummaryMap[kind] || '当前已生成基础结果，可继续查看。';
+  const fullAnalysisMap = { exact: '你当前的出生资料较完整，系统可以先给出稳定的基础命盘结构：识别时辰为辰时，大运方向为顺排，起运约在7岁3个月。当前这一步适合先看四柱结构、时辰识别与起运信息，再决定是否继续看更细的婚恋、事业与财运分析。', approx: '你当前看到的是基于模糊时段得出的近似基础结果。系统会先给出候选时辰与四柱结构，帮助你形成初步判断，但涉及婚恋、年份、重大转折等细节时，不建议直接把当前结果当成最终定论。' };
+  document.getElementById('fullAnalysis').textContent = fullAnalysisMap[kind] || '当前已生成基础解析，可继续查看。';
+  renderDayunList(data.internal?.dayunCycles || []);
+  renderInsights(data);
+  const box = document.getElementById('warningBox');
+  if ((data.warningSummary || []).length) { box.classList.remove('hidden'); box.innerHTML = '<strong>当前结果基于模糊时段近似判断</strong><br>' + data.warningSummary.join('<br>') + '<br><br>若你希望得到更稳妥的正式结论，建议补资料或转张师傅人工分析。'; } else { box.classList.add('hidden'); box.innerHTML=''; }
+  const next = data.nextAction;
+  const nextActionMap = { show_result: '当前资料较完整，可先查看基础结果。', show_result_with_warning: '当前结果含风险提示，建议结合提醒谨慎参考。', ask_for_more_info: '若想提高准确度，建议先补充出生资料。', handoff_to_master: '当前更适合请张师傅进一步分析。' };
+  document.getElementById('nextActionText').textContent = nextActionMap[next] || '你可以继续查看结果，或转人工进一步分析。';
+  const primaryBtn = document.getElementById('primaryBtn');
+  const secondaryBtn = document.getElementById('secondaryBtn');
+  const supplementBtn = document.getElementById('supplementBtn');
+  primaryBtn.onclick = null;
+  secondaryBtn.onclick = function(){ location.href='handoff.html'; };
+  if (next === 'show_result') { primaryBtn.textContent = '查看完整基础解析'; primaryBtn.onclick = function(){ location.hash='core-result'; }; supplementBtn.style.display = 'none'; }
+  else if (next === 'show_result_with_warning') { primaryBtn.textContent = '继续查看当前结果'; primaryBtn.onclick = function(){ location.hash='core-result'; }; supplementBtn.style.display = 'inline-block'; }
+  else if (next === 'ask_for_more_info') { primaryBtn.textContent = '先完善出生资料'; primaryBtn.onclick = function(){ location.href='supplement.html'; }; supplementBtn.style.display = 'inline-block'; }
+  else { primaryBtn.textContent = '请张师傅进一步详解'; primaryBtn.onclick = function(){ location.href='handoff.html'; }; supplementBtn.style.display = 'inline-block'; }
+}
+
+async function fetchLiveResultFromQuery() {
+  const q = new URLSearchParams(location.search);
+  if (!q.get('birthDate')) return;
+  const birthTime = q.get('birthTime') || '';
+  const mode = q.get('mode') === 'approx' ? 'approx' : 'exact';
+  const isExact24h = /^\d{1,2}:\d{2}$/.test(birthTime);
+  const payload = {
+    gender: q.get('gender') === 'female' ? 'female' : 'male',
+    calendar_mode: q.get('calendarMode') === 'lunar' ? 'lunar' : 'solar',
+    is_deceased: false,
+    allow_approximation: mode === 'approx',
+    solar_birth: q.get('birthDate'),
+    lunar_birth: null,
+    is_leap_month: null,
+    birth_time_text: birthTime || null,
+    birth_time_24h: isExact24h ? birthTime : null,
+    birth_shichen: null,
+    birth_place: q.get('birthPlace') || '',
+    timezone: 'Asia/Shanghai',
+    death_year: null,
+    name: '访客'
+  };
+  try {
+    const resp = await fetch('compute.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json();
+    if (!data.success || !data.result) return;
+    const r = data.result;
+    document.getElementById('profileBlock').textContent = `${payload.solar_birth} · ${birthTime || '未提供'} · ${payload.birth_place || '未提供'}`;
+    document.getElementById('detected').textContent = r.computed?.shichen?.branch || '-';
+    document.getElementById('candidates').textContent = (r.computed?.shichen?.candidates || [r.computed?.shichen?.branch]).filter(Boolean).join(' / ') || '-';
+    const directionMap = { forward: '顺排', backward: '逆排' };
+    document.getElementById('direction').textContent = directionMap[r.computed?.dayun_direction] || '-';
+    const qa = r.computed?.qiyun_age || {};
+    document.getElementById('qiyun').textContent = qa.years != null ? `${qa.years}岁${qa.months||0}月` : '-';
+    document.getElementById('year').textContent = r.pending_engine_fields?.year_pillar || '-';
+    document.getElementById('month').textContent = r.pending_engine_fields?.month_pillar || '-';
+    document.getElementById('day').textContent = r.pending_engine_fields?.day_pillar || '-';
+    document.getElementById('hour').textContent = r.pending_engine_fields?.hour_pillar?.label || '-';
+    document.getElementById('analysisSummary').textContent = (r.warnings && r.warnings.length)
+      ? `已按真实计算返回基础结果。当前提示：${r.warnings.join('；')}`
+      : '已按真实计算返回基础结果，可继续查看四柱、时辰与起运信息。';
+    document.getElementById('fullAnalysis').textContent = (r.warnings && r.warnings.length)
+      ? `本次结果来自真实计算接口。当前告警：${r.warnings.join('；')}`
+      : '本次结果来自真实计算接口，当前资料可先查看基础命盘结构、起运方向与四柱结果。';
+    document.getElementById('inputLabel').textContent = r.confidence === 'high' ? '当前资料完整，可先查看基础结果' : (mode === 'approx' ? '当前为模糊时段，建议结合补充资料谨慎参考' : '当前资料已录入，可继续查看基础结果');
+    renderDayunList(r.pending_engine_fields?.dayun_cycles || []);
+    renderInsights({
+      pillars: { year: r.pending_engine_fields?.year_pillar, month: r.pending_engine_fields?.month_pillar, day: r.pending_engine_fields?.day_pillar, hour: r.pending_engine_fields?.hour_pillar?.label },
+      dayun: { direction: r.computed?.dayun_direction, qiyunAge: r.computed?.qiyun_age },
+      detectedShichen: r.computed?.shichen?.branch
+    });
+    document.getElementById('nextActionText').textContent = r.confidence === 'high' ? '当前已拿到真实计算结果，可先查看基础结果。' : '当前已拿到真实计算结果，但建议结合提示谨慎参考。';
+    const box = document.getElementById('warningBox');
+    if (r.warnings && r.warnings.length) {
+      box.classList.remove('hidden');
+      box.innerHTML = '<strong>真实计算结果提示</strong><br>' + r.warnings.join('<br>');
+    } else {
+      box.classList.add('hidden');
+      box.innerHTML = '';
+    }
+  } catch (e) {
+    console.error('live compute failed', e);
+  }
+}
+
+function applyQueryOverrides(){
+  const q = new URLSearchParams(location.search);
+  const mode = q.get('mode') === 'approx' ? 'approx' : 'exact';
+  showCase(mode);
+  document.getElementById('analysisSummary').textContent = '正在调用真实计算接口，请稍候…';
+  const data = samples[mode];
+  const birthDate = q.get('birthDate');
+  const birthTime = q.get('birthTime');
+  const birthPlace = q.get('birthPlace');
+  if (birthDate) data.profile.birthDate = birthDate;
+  if (birthTime) data.profile.birthTimeText = birthTime;
+  if (birthPlace) data.profile.birthPlace = birthPlace;
+  document.getElementById('profileBlock').textContent = `${data.profile.birthDate} · ${data.profile.birthTimeText} · ${data.profile.birthPlace}`;
+}
+applyQueryOverrides();
+fetchLiveResultFromQuery();
+</script></body></html>
