@@ -3,7 +3,6 @@ header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
-
 $method = $_SERVER['REQUEST_METHOD'] ?? 'CLI';
 if ($method === 'OPTIONS') { http_response_code(204); exit; }
 if ($method !== 'POST' && $method !== 'CLI') {
@@ -11,7 +10,6 @@ if ($method !== 'POST' && $method !== 'CLI') {
   echo json_encode(['success' => false, 'error' => ['code' => 'METHOD_NOT_ALLOWED', 'message' => 'POST required']], JSON_UNESCAPED_UNICODE);
   exit;
 }
-
 $raw = file_get_contents('php://input');
 if ($method === 'CLI' && !$raw) {
   $raw = stream_get_contents(STDIN);
@@ -22,7 +20,6 @@ if (!is_array($payload)) {
   echo json_encode(['success' => false, 'error' => ['code' => 'INVALID_JSON', 'message' => 'Invalid JSON payload']], JSON_UNESCAPED_UNICODE);
   exit;
 }
-
 $required = ['gender', 'calendar_mode', 'is_deceased', 'allow_approximation'];
 $missing = [];
 foreach ($required as $k) {
@@ -33,47 +30,6 @@ if ($missing) {
   echo json_encode(['success' => false, 'error' => ['code' => 'INPUT_INVALID', 'message' => 'Missing required fields', 'extra' => ['missing_fields' => $missing]]], JSON_UNESCAPED_UNICODE);
   exit;
 }
-
-function bazi_cache_normalize($value) {
-  if (is_array($value)) {
-    $keys = array_keys($value);
-    $isAssoc = $keys !== range(0, count($value) - 1);
-    if ($isAssoc) {
-      ksort($value);
-    }
-    foreach ($value as $k => $v) {
-      $value[$k] = bazi_cache_normalize($v);
-    }
-    return $value;
-  }
-  if (is_bool($value) || $value === null || is_int($value) || is_float($value)) {
-    return $value;
-  }
-  return trim((string)$value);
-}
-
-$cacheVersion = 'bazi-cache-v1';
-$cacheTtl = 86400;
-$cacheDir = '/var/www/html/test/bazi/.cache';
-$normalized = bazi_cache_normalize($payload);
-$cacheKeySource = json_encode(['version' => $cacheVersion, 'payload' => $normalized], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-$cacheKey = hash('sha256', $cacheKeySource);
-$cacheFile = $cacheDir . '/' . $cacheKey . '.json';
-
-if (is_dir($cacheDir) && is_file($cacheFile) && (time() - filemtime($cacheFile) <= $cacheTtl)) {
-  $cachedText = file_get_contents($cacheFile);
-  $cached = json_decode($cachedText, true);
-  if (is_array($cached) && isset($cached['result'])) {
-    echo json_encode([
-      'success' => true,
-      'mode' => 'compute-basic',
-      'cache_hit' => true,
-      'result' => $cached['result'],
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
-  }
-}
-
 $base = '/opt/bazi-tool-web';
 $tmpIn = tempnam(sys_get_temp_dir(), 'bazi_in_');
 file_put_contents($tmpIn, json_encode($payload, JSON_UNESCAPED_UNICODE));
@@ -94,18 +50,4 @@ if (!is_array($result)) {
   echo json_encode(['success' => false, 'error' => ['code' => 'BAZI_BAD_OUTPUT', 'message' => 'CLI returned invalid JSON', 'extra' => ['output' => $jsonText]]], JSON_UNESCAPED_UNICODE);
   exit;
 }
-
-if (is_dir($cacheDir)) {
-  @file_put_contents($cacheFile, json_encode([
-    'cached_at' => gmdate('c'),
-    'cache_key' => $cacheKey,
-    'result' => $result,
-  ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-}
-
-echo json_encode([
-  'success' => true,
-  'mode' => 'compute-basic',
-  'cache_hit' => false,
-  'result' => $result,
-], JSON_UNESCAPED_UNICODE);
+echo json_encode(['success' => true, 'mode' => 'compute-basic', 'result' => $result], JSON_UNESCAPED_UNICODE);

@@ -31,7 +31,11 @@
         .addon-card .desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
         .addon-price { font-weight: 700; color: var(--gold); margin-bottom: 14px; }
         .btn-addon { display: inline-block; padding: 8px 20px; border: 1px solid var(--border-soft); border-radius: 8px; font-size: 0.82rem; color: var(--ink); text-decoration: none; }
-        @media (max-width: 600px) { .price-grid, .addon-grid { grid-template-columns: 1fr; } }
+        .bazi-intake { margin: -4px 0 40px; padding: 24px; border-radius: 16px; border: 1px solid rgba(201,169,97,.25); background: linear-gradient(135deg, #fdf9f0, #fff); text-align: center; }
+        .bazi-intake h2 { font-family: 'Noto Serif SC', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 8px; }
+        .bazi-intake p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.8; max-width: 580px; margin: 0 auto 16px; }
+        .bazi-intake-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        @media (max-width: 600px) { .price-grid, .addon-grid { grid-template-columns: 1fr; } .bazi-intake { padding: 20px 16px; } }
     </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://12zn.com/"},{"@type":"ListItem","position":2,"name":"服务报价"}]}
@@ -92,6 +96,15 @@
                 <a class="btn-price btn-price--outline" href="zhenren.html">预约咨询</a>
             </div>
         </div>
+
+        <section class="bazi-intake">
+            <h2>先做一轮八字预览，再决定要不要继续付费</h2>
+            <p>如果你现在还不确定该直接买 AI 报告还是预约张师傅，可以先做八字命理体验。先看命盘结构、事业/财运/感情/当前阶段预览，再决定下一步更稳。</p>
+            <div class="bazi-intake-actions">
+                <a class="btn-price btn-price--primary" href="/test/bazi/">先做八字预览</a>
+                <a class="btn-price btn-price--outline" href="zhenren.html">直接预约咨询</a>
+            </div>
+        </section>
 
         <div class="section-header"><h2>增值服务</h2><p>专项服务，深度解决</p></div>
         <div class="addon-grid">

@@ -1,6 +1,11 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12zn 八字输入页</title><style>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一宅一句 | 八字命理体验</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/shared.css?v=20260415">
+<style>
 * { box-sizing: border-box; }
-body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:linear-gradient(180deg,#f7f1e8 0%,#fcfaf7 100%); color:#3c3126; }
+body { margin:0; font-family:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--parchment); color:var(--text); }
 .container { max-width:1080px; margin:0 auto; padding:32px 20px 80px; }
 .card { background:rgba(255,252,247,.92); border:1px solid #e8dcc8; border-radius:18px; box-shadow:0 14px 34px rgba(89,68,44,.08); }
 .grid { display:grid; gap:16px; }
@@ -20,4 +25,34 @@ body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,
 input, select { width:100%; padding:12px; border:1px solid #d1d5db; border-radius:12px; }
 @media (max-width:900px){ .grid-2{grid-template-columns:1fr!important;} .hero{flex-direction:column;} }
 @media (max-width:640px){ .container{padding:20px 14px 56px!important;} .title{font-size:26px!important;line-height:1.2;} .subtitle{font-size:14px!important;} .topnav{display:grid!important;grid-template-columns:1fr 1fr;gap:10px!important;} .btn,.topnav .btn{width:100%;min-height:44px;text-align:center;} .cta-row{display:grid!important;grid-template-columns:1fr;gap:10px!important;} .section{padding:16px!important;} input,select{font-size:16px!important;} }
-</style></head><body><div class="container"><div class="topnav"><a class="btn btn-secondary" href="index.html">体验首页</a><a class="btn btn-secondary" href="result-summary.html">命盘概览</a><a class="btn btn-secondary" href="supplement.html">完善资料</a><a class="btn btn-secondary" href="handoff.html">张师傅详解</a></div><div class="hero"><div><h1 class="title">一宅一句 · 八字命盘体验</h1><p class="subtitle">现在这页已经不是演示静态页。你填写出生资料后，会真实带参跳到结果页，并按你的输入渲染基础结果。</p></div><span class="badge">真实可用最小链路</span></div><form class="card section" action="result-summary.html" method="get"><div class="grid grid-2"><div><div class="label">出生日期</div><input name="birthDate" value="1990-05-15" placeholder="例如 1990-05-15"></div><div><div class="label">出生时间</div><input name="birthTime" value="08:30" placeholder="例如 08:30 / 上午 / 晚上"></div><div><div class="label">出生地</div><input name="birthPlace" value="辽宁省丹东市" placeholder="例如 辽宁省丹东市"></div><div><div class="label">历法模式</div><select name="calendarMode"><option value="solar" selected>阳历</option><option value="lunar">农历</option></select></div><div><div class="label">性别</div><select name="gender"><option value="male" selected>男</option><option value="female">女</option></select></div><div><div class="label">结果模式</div><select name="mode"><option value="exact" selected>精确时间</option><option value="approx">模糊时段</option></select></div></div><div class="cta-row"><button class="btn btn-primary" type="submit">立即查看结果</button><a class="btn btn-secondary" href="supplement.html">先完善资料</a><a class="btn btn-secondary" href="consult.html">进入详解咨询入口</a></div></form></div></body></html>
+
+body { background:var(--parchment) !important; color:var(--text) !important; }
+.page-breadcrumb { max-width:1080px; margin:0 auto; padding:18px 24px 0; font-size:.82rem; color:var(--text-secondary); }
+.page-breadcrumb a { color:var(--text-secondary); text-decoration:none; }
+.page-breadcrumb a:hover { color:var(--gold); }
+.card { background:var(--white) !important; border:1px solid var(--border-soft) !important; box-shadow:var(--shadow-md) !important; }
+.btn-primary { background:var(--gold) !important; color:#fff !important; }
+.btn-secondary { background:var(--white) !important; color:var(--ink) !important; border:1px solid var(--border-soft) !important; }
+.badge { background:var(--gold-bg) !important; color:var(--gold) !important; }
+.hero { background:var(--white); border:1px solid var(--border-soft); border-radius:18px; padding:22px; box-shadow:var(--shadow-sm); }
+.title { font-family:'Noto Serif SC',serif; font-weight:600; color:var(--ink); }
+.subtitle,.small,.label { color:var(--text-secondary) !important; }
+\n</style></head><body><nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="/index.html" class="topbar-brand">一宅一句</a>
+    <div class="topbar-nav">
+      <a href="/index.html">服务</a>
+      <a href="/test/">测试</a>
+      <a href="/blog/">文章</a>
+      <a href="/services/pricing.html">报价</a>
+      <a href="/services/cases.html">案例</a>
+      <a href="/services/faq.html">FAQ</a>
+      <a href="/yizhaiyiju-latest.apk">APP下载</a>
+      <a href="/login.html">登录</a>
+      <a href="/en/">EN</a>
+      <a class="topbar-cta" href="/services/zhenren.html">预约咨询</a>
+    </div>
+  </div>
+</nav>
+<div class="page-breadcrumb"><a href="/index.html">首页</a> <span>›</span> <a href="/test/">测试</a> <span>›</span> 八字命理体验</div><div class="container"><div class="topnav"><a class="btn btn-secondary" href="index.html">体验首页</a><a class="btn btn-secondary" href="result-summary.html">命盘概览</a><a class="btn btn-secondary" href="supplement.html">完善资料</a><a class="btn btn-secondary" href="handoff.html">张师傅详解</a></div><div class="hero"><div><h1 class="title">一宅一句 · 八字命理体验</h1><p class="subtitle">填写你的出生资料后，系统会结合时间、地点与历法信息，为你生成八字基础结果，并帮助你先看事业、财运、感情与当前阶段重点。</p></div><span class="badge">八字命理参考</span></div><form class="card section" action="result-summary.html" method="get"><div class="grid grid-2"><div><div class="label">出生日期</div><input name="birthDate" value="1990-05-15" placeholder="例如 1990-05-15"></div><div><div class="label">出生时间</div><input name="birthTime" value="08:30" placeholder="例如 08:30 / 上午 / 晚上"></div><div><div class="label">出生地</div><input name="birthPlace" value="辽宁省丹东市" placeholder="例如 辽宁省丹东市"></div><div><div class="label">历法模式</div><select name="calendarMode"><option value="solar" selected>阳历</option><option value="lunar">农历</option></select></div><div><div class="label">性别</div><select name="gender"><option value="male" selected>男</option><option value="female">女</option></select></div><div><div class="label">结果模式</div><select name="mode"><option value="exact" selected>精确时间</option><option value="approx">模糊时段</option></select></div></div><div class="cta-row"><button class="btn btn-primary" type="submit">立即查看结果</button><a class="btn btn-secondary" id="indexSupplementBtn" href="supplement.html">资料不准？先完善资料</a><a class="btn btn-secondary" id="indexConsultBtn" href="consult.html">结果出来后，再看详解说明</a></div></form><script>(function(){const form=document.querySelector('form[action="result-summary.html"]');const supplementBtn=document.getElementById('indexSupplementBtn');const consultBtn=document.getElementById('indexConsultBtn');if(!form)return;function buildQuery(){const fd=new FormData(form);const bt=String(fd.get('birthTime')||'').trim();const next=new URLSearchParams();for(const [k,v] of fd.entries()){if(v!=null&&String(v)!=='')next.set(k,String(v));}if(/^\d{1,2}:\d{2}$/.test(bt)){next.set('mode','exact');}else if(bt){next.set('mode','approx');}return next.toString();}function wire(el,path){if(!el)return;el.addEventListener('click',function(e){e.preventDefault();const qs=buildQuery();location.href=path+(qs?'?'+qs:'');});}wire(supplementBtn,'supplement.html');wire(consultBtn,'consult.html');})();</script></div><script src="/js/shared.js"></script>
+</body></html>

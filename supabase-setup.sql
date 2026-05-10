@@ -124,6 +124,12 @@ CREATE TABLE IF NOT EXISTS public.messages (
     author_name VARCHAR(50) NOT NULL,
     content TEXT NOT NULL CHECK (char_length(content) <= 500),
     service_type VARCHAR(50),
+    lead_source VARCHAR(32),
+    birth_date VARCHAR(20),
+    birth_time VARCHAR(20),
+    birth_place VARCHAR(80),
+    gender VARCHAR(16),
+    concern_summary VARCHAR(200),
     ip_hash VARCHAR(20),
     is_visible BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

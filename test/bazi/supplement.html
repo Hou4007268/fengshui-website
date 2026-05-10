@@ -1,6 +1,11 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>12zn 补资料页原型</title><style>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一宅一句 | 完善出生资料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/shared.css?v=20260415">
+<style>
 * { box-sizing: border-box; }
-body { margin:0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:linear-gradient(180deg,#f7f1e8 0%,#fcfaf7 100%); color:#3c3126; }
+body { margin:0; font-family:"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:var(--parchment); color:var(--text); }
 .container { max-width: 1080px; margin: 0 auto; padding: 32px 20px 80px; }
 .card { background:rgba(255,252,247,.92); border:1px solid #e8dcc8; border-radius:18px; box-shadow:0 14px 34px rgba(89,68,44,.08); }
 .grid { display:grid; gap:16px; }
@@ -35,4 +40,34 @@ body { margin:0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto
   input, select { font-size: 16px !important; }
 }
 
-</style></head><body><div class="container"><div class="topnav" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><a class="btn btn-secondary" href="index.html">体验首页</a><a class="btn btn-secondary" href="result-summary.html">命盘概览</a><a class="btn btn-secondary" href="supplement.html">完善资料</a><a class="btn btn-secondary" href="handoff.html">张师傅详解</a></div><div class="hero"><div><h1 class="title">完善出生资料</h1><p class="subtitle">当系统识别为模糊时段、边界时辰或资料不完整时，先完善关键信息，再决定继续查看基础结果还是请张师傅进一步分析。</p></div><span class="badge badge-medium">提升判断稳定性</span></div><div class="warning"><strong>为什么建议先完善资料？</strong><br>当前结果可能受模糊时段、子时边界、历法模式不确定等因素影响。完善资料后，能明显提升判断稳定性。</div><div class="card section" style="margin-top:16px"><div class="grid grid-2"><div><div class="label">更具体的出生时间</div><input style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px" placeholder="例如 08:30 / 23:20"></div><div><div class="label">历法再确认</div><select style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px"><option>阳历</option><option>农历</option><option>不确定</option></select></div><div><div class="label">是否闰月</div><select style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px"><option>否</option><option>是</option><option>不确定</option></select></div><div><div class="label">关键人生节点（可选）</div><input style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px" placeholder="如结婚、搬家、重大病痛、事业转折"></div></div><div class="cta-row"><a class="btn btn-primary" href="result-summary.html">保存并继续查看</a><a class="btn btn-secondary" href="handoff.html">直接请张师傅详解</a><a class="btn btn-secondary" href="index.html">返回体验首页</a></div><div class="small" style="margin-top:14px">当前页只收最影响判断稳定性的少数信息，避免一开始让你填写过多内容。</div></div></div></body></html>
+
+body { background:var(--parchment) !important; color:var(--text) !important; }
+.page-breadcrumb { max-width:1080px; margin:0 auto; padding:18px 24px 0; font-size:.82rem; color:var(--text-secondary); }
+.page-breadcrumb a { color:var(--text-secondary); text-decoration:none; }
+.page-breadcrumb a:hover { color:var(--gold); }
+.card { background:var(--white) !important; border:1px solid var(--border-soft) !important; box-shadow:var(--shadow-md) !important; }
+.btn-primary { background:var(--gold) !important; color:#fff !important; }
+.btn-secondary { background:var(--white) !important; color:var(--ink) !important; border:1px solid var(--border-soft) !important; }
+.badge { background:var(--gold-bg) !important; color:var(--gold) !important; }
+.hero { background:var(--white); border:1px solid var(--border-soft); border-radius:18px; padding:22px; box-shadow:var(--shadow-sm); }
+.title { font-family:'Noto Serif SC',serif; font-weight:600; color:var(--ink); }
+.subtitle,.small,.label { color:var(--text-secondary) !important; }
+\n</style></head><body><nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="/index.html" class="topbar-brand">一宅一句</a>
+    <div class="topbar-nav">
+      <a href="/index.html">服务</a>
+      <a href="/test/">测试</a>
+      <a href="/blog/">文章</a>
+      <a href="/services/pricing.html">报价</a>
+      <a href="/services/cases.html">案例</a>
+      <a href="/services/faq.html">FAQ</a>
+      <a href="/yizhaiyiju-latest.apk">APP下载</a>
+      <a href="/login.html">登录</a>
+      <a href="/en/">EN</a>
+      <a class="topbar-cta" href="/services/zhenren.html">预约咨询</a>
+    </div>
+  </div>
+</nav>
+<div class="page-breadcrumb"><a href="/index.html">首页</a> <span>›</span> <a href="/test/">测试</a> <span>›</span> 八字命理体验</div><div class="container"><div class="topnav" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><a class="btn btn-secondary" href="index.html">体验首页</a><a class="btn btn-secondary" href="result-summary.html">命盘概览</a><a class="btn btn-secondary" id="supplementLink" href="supplement.html">完善资料</a><a class="btn btn-secondary" href="handoff.html">张师傅详解</a></div><div class="hero"><div><h1 class="title">完善出生资料</h1><p class="subtitle">当系统识别为模糊时段、边界时辰或资料不完整时，先完善关键信息，再决定继续查看基础结果还是请张师傅进一步分析。</p></div><span class="badge badge-medium">提升判断稳定性</span></div><div class="warning"><strong>为什么建议先完善资料？</strong><br>当前结果可能受模糊时段、子时边界、历法模式不确定等因素影响。完善资料后，能明显提升判断稳定性。</div><form class="card section" id="supplementForm" action="result-summary.html" method="get" style="margin-top:16px"><input type="hidden" name="birthDate"><input type="hidden" name="birthPlace"><input type="hidden" name="gender"><div class="grid grid-2"><div><div class="label">更具体的出生时间</div><input name="birthTime" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px" placeholder="例如 08:30 / 23:20 / 晚上"></div><div><div class="label">历法再确认</div><select name="calendarMode" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px"><option value="solar">阳历</option><option value="lunar">农历</option></select></div><div><div class="label">结果模式</div><select name="mode" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px"><option value="exact">精确时间</option><option value="approx">模糊时段</option></select></div><div><div class="label">关键人生节点（可选）</div><input id="lifeEventNote" style="width:100%;padding:12px;border:1px solid #d1d5db;border-radius:12px" placeholder="如结婚、搬家、重大病痛、事业转折"></div></div><div class="cta-row"><button class="btn btn-primary" type="submit">保存并继续查看</button><a class="btn btn-secondary" id="handoffLink" href="handoff.html">直接请张师傅详解</a><a class="btn btn-secondary" href="index.html">返回体验首页</a></div><div class="small" style="margin-top:14px">当前页会把出生日期、时间、地点、性别、历法和模式一起带回结果页；关键人生节点可帮助你自己梳理情况，当前会先以出生资料为主生成结果。</div></form><script>(function(){const q=new URLSearchParams(location.search);const form=document.getElementById("supplementForm");if(!form)return;const fields=["birthDate","birthPlace","gender","birthTime","calendarMode","mode"];for(const key of fields){const el=form.elements.namedItem(key);if(el&&q.get(key))el.value=q.get(key);}const handoff=document.getElementById("handoffLink");const supp=document.getElementById("supplementLink");if(handoff)handoff.href="handoff.html"+(q.toString()?"?"+q.toString():"");if(supp)supp.href="supplement.html"+(q.toString()?"?"+q.toString():"");form.addEventListener("submit",()=>{const fd=new FormData(form);const mode=String(fd.get("mode")||"");const bt=String(fd.get("birthTime")||"").trim();if(/^\d{1,2}:\d{2}$/.test(bt)){fd.set("mode","exact");}else if(bt){fd.set("mode",mode==="exact"?"approx":mode||"approx");}const next=new URLSearchParams();for(const [k,v] of fd.entries()){if(v!=null&&String(v)!=="")next.set(k,String(v));}form.action="result-summary.html?"+next.toString();form.method="get";});})();</script></div><script src="/js/shared.js"></script>
+</body></html>

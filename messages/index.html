@@ -72,7 +72,8 @@
     </section>
     <div class="msg-page">
         <div class="msg-form">
-            <h3>发表留言</h3>
+            <h3 id="form-title">发表留言</h3>
+            <div id="consult-source-tip" style="display:none;margin:0 0 16px;padding:12px 14px;background:#faf6ec;border:1px solid #eadfbe;border-radius:10px;color:#5f4b1f;font-size:0.88rem;line-height:1.8"></div>
             <div class="form-group">
                 <label>昵称 *</label>
                 <input type="text" id="msg-name" placeholder="你的昵称" maxlength="20">
@@ -149,11 +150,31 @@
 
     function loadMore() { loadMessages(false); }
 
+    function buildConsultContext() {
+        var q = new URLSearchParams(location.search);
+        var birthDate = q.get('birthDate') || '';
+        var birthTime = q.get('birthTime') || '';
+        var birthPlace = q.get('birthPlace') || '';
+        var gender = q.get('gender') || '';
+        var source = q.get('source') || '';
+        if (source !== 'bazi_consult' && !birthDate) return null;
+        return { source: source || 'bazi_consult', birthDate: birthDate, birthTime: birthTime, birthPlace: birthPlace, gender: gender };
+    }
+
     function submitMsg() {
         var name = document.getElementById('msg-name').value.trim();
         var content = document.getElementById('msg-content').value.trim();
         var contact = document.getElementById('msg-contact').value.trim();
+        var consultContext = buildConsultContext();
         if (!name || !content) { alert('请填写昵称和留言内容'); return; }
+        if (consultContext) {
+            content += '\n\n【八字咨询上下文】' + [
+                consultContext.birthDate || '未提供日期',
+                consultContext.birthTime || '未提供时间',
+                consultContext.birthPlace || '未提供地点',
+                consultContext.gender || '未提供性别'
+            ].join(' / ');
+        }
         fetch('/api/messages', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -175,6 +196,29 @@
     }
 
     function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function prefillConsultContext() {
+        var q = new URLSearchParams(location.search);
+        var birthDate = q.get('birthDate') || '';
+        var birthTime = q.get('birthTime') || '';
+        var birthPlace = q.get('birthPlace') || '';
+        var src = q.get('source') || '';
+        if (src !== 'bazi_consult' && !birthDate) return;
+        var title = document.getElementById('form-title');
+        var tip = document.getElementById('consult-source-tip');
+        var name = document.getElementById('msg-name');
+        var content = document.getElementById('msg-content');
+        var contact = document.getElementById('msg-contact');
+        if (title) title.textContent = '提交咨询需求';
+        if (tip) {
+            tip.style.display = 'block';
+            tip.innerHTML = '<strong>已从八字详解页进入</strong><br>当前资料：' + esc([birthDate || '未提供日期', birthTime || '未提供时间', birthPlace || '未提供地点'].join(' · ')) + '<br>提交后这份出生资料会一起进入留言内容，张师傅看到时不用你再从头复述。请在下方补充你最关心的问题、是否需要真人详解，以及方便联系你的微信/手机号。';
+        }
+        if (name && !name.value) name.value = '八字咨询用户';
+        if (content && !content.value) {
+            content.value = '我想继续做八字详解咨询。\n出生资料：' + [birthDate || '未提供日期', birthTime || '未提供时间', birthPlace || '未提供地点'].join(' / ') + '。\n我最想重点了解：';
+        }
+        if (contact) contact.placeholder = '请填写微信号/手机号，方便张师傅联系你';
+    }
     function fmtTime(t) {
         if (!t) return '';
         var d = new Date(t);
@@ -182,6 +226,7 @@
     }
 
     loadMessages(true);
+    prefillConsultContext();
     </script>
 </body>
 </html>

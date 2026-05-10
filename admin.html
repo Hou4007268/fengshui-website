@@ -94,6 +94,10 @@
         }
         
         .loading { text-align: center; padding: 40px; color: var(--text-muted); }
+        .lead-badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:700; margin-right:6px; }
+        .lead-badge-bazi { background:#efe7da; color:#6f4e37; }
+        .lead-meta { font-size:12px; color:#8b6a4d; line-height:1.6; margin-top:6px; white-space:pre-line; }
+        .lead-content { line-height:1.7; }
     </style>
     <script>
     var _hmt = _hmt || [];
@@ -245,22 +249,31 @@
                 return;
             }
 
-            let html = '<table><thead><tr><th>姓名</th><th>内容</th><th>服务类型</th><th>时间</th><th>状态</th><th>操作</th></tr></thead><tbody>';
+            let html = '<table><thead><tr><th>姓名</th><th>内容 / 线索标记</th><th>服务类型</th><th>时间</th><th>状态</th><th>操作</th></tr></thead><tbody>';
 
             messages.forEach(m => {
                 const time = new Date(m.created_at).toLocaleString('zh-CN');
                 const status = m.is_visible
                     ? '<span class="badge badge-paid">显示中</span>'
                     : '<span class="badge badge-free">已隐藏</span>';
-                const contentShort = m.content.length > 60 ? m.content.substring(0, 60) + '...' : m.content;
+                const isBaziLead = m.lead_source === 'bazi_consult' || (m.content || '').includes('【八字咨询上下文】') || (m.content || '').includes('我想继续做八字详解咨询');
+                const parts = String(m.content || '').split('【八字咨询上下文】');
+                const mainContent = parts[0].trim();
+                const legacyMeta = parts[1] ? parts[1].trim() : '';
+                const structuredMeta = [m.birth_date, m.birth_time, m.birth_place, m.gender].filter(Boolean).join(' / ');
+                const concernMeta = m.concern_summary ? `<div class="lead-meta">关注问题：${m.concern_summary}</div>` : '';
+                const rawMeta = structuredMeta || legacyMeta;
+                const contentShort = mainContent.length > 90 ? mainContent.substring(0, 90) + '...' : mainContent;
+                const metaHtml = rawMeta ? `<div class="lead-meta">八字资料：${rawMeta}</div>${concernMeta}` : concernMeta;
+                const badgeHtml = isBaziLead ? '<span class="lead-badge lead-badge-bazi">八字详解线索</span>' : '';
                 const toggleBtn = m.is_visible
                     ? `<button class="btn btn-danger" onclick="toggleMessage('${m.id}', false)">隐藏</button>`
                     : `<button class="btn btn-vip" onclick="toggleMessage('${m.id}', true)">显示</button>`;
 
                 html += `<tr>
                     <td>${m.author_name}</td>
-                    <td title="${m.content}">${contentShort}</td>
-                    <td>${m.service_type || '-'}</td>
+                    <td title="${m.content}"><div class="lead-content">${badgeHtml}${contentShort}</div>${metaHtml}</td>
+                    <td>${isBaziLead ? '八字详解咨询' : (m.service_type || '-')}</td>
                     <td>${time}</td>
                     <td>${status}</td>
                     <td class="actions">${toggleBtn}</td>
