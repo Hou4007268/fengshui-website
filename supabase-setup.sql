@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS public.messages (
     author_name VARCHAR(50) NOT NULL,
     content TEXT NOT NULL CHECK (char_length(content) <= 500),
     service_type VARCHAR(50),
+    contact VARCHAR(80),
     lead_source VARCHAR(32),
     birth_date VARCHAR(20),
     birth_time VARCHAR(20),

@@ -298,10 +298,5 @@
         }
         window.toggleMessage = toggleMessage;
     </script>
-<section class="contact-note" style="margin:24px 0;padding:16px;border:1px solid #ddd;border-radius:12px;">
-  <h2>联系邮箱</h2>
-  <p>如需删除账户，请联系：<a href="mailto:hou4007268@gmail.com">hou4007268@gmail.com</a></p>
-  <p>Google Play 删除账户页面：<a href="https://12zn.com/delete-account.html">https://12zn.com/delete-account.html</a></p>
-</section>
 </body>
 </html>

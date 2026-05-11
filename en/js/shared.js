@@ -154,7 +154,7 @@ async function submitMessage(){
         const res = await fetch('/api/messages', {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ author_name: name, content: content, service_type: serviceType })
+            body: JSON.stringify({ author_name: name, content: content, service_type: serviceType, contact: (document.getElementById('msg-contact') ? document.getElementById('msg-contact').value.trim() : '') })
         });
         const data = await res.json();
         if(data.success){
