@@ -34,51 +34,29 @@ if ($missing) {
   exit;
 }
 
-function norm_str($v) {
-  if ($v === null) return null;
-  $s = trim((string)$v);
-  return $s === '' ? null : $s;
-}
-function norm_bool($v) {
-  return (bool)$v;
-}
 function bazi_cache_normalize($value) {
   if (is_array($value)) {
     $keys = array_keys($value);
     $isAssoc = $keys !== range(0, count($value) - 1);
-    if ($isAssoc) ksort($value);
-    foreach ($value as $k => $v) $value[$k] = bazi_cache_normalize($v);
+    if ($isAssoc) {
+      ksort($value);
+    }
+    foreach ($value as $k => $v) {
+      $value[$k] = bazi_cache_normalize($v);
+    }
     return $value;
   }
-  if (is_bool($value) || $value === null || is_int($value) || is_float($value)) return $value;
+  if (is_bool($value) || $value === null || is_int($value) || is_float($value)) {
+    return $value;
+  }
   return trim((string)$value);
 }
-
-$normalizedPayload = [
-  'gender' => norm_str($payload['gender']) ?: 'male',
-  'calendar_mode' => norm_str($payload['calendar_mode']) ?: 'solar',
-  'is_deceased' => norm_bool($payload['is_deceased']),
-  'allow_approximation' => norm_bool($payload['allow_approximation']),
-  'birth_date' => norm_str($payload['birth_date']),
-  'birth_time_24h' => norm_str($payload['birth_time_24h'] ?? $payload['birth_time']),
-  'birth_time_text' => norm_str($payload['birth_time_text'] ?? $payload['birth_time']),
-  'birth_shichen' => norm_str($payload['birth_shichen'] ?? null),
-  'solar_birth' => norm_str($payload['solar_birth'] ?? $payload['birth_date']),
-  'lunar_birth' => norm_str($payload['lunar_birth'] ?? null),
-  'is_leap_month' => array_key_exists('is_leap_month', $payload) ? ($payload['is_leap_month'] === null ? null : norm_bool($payload['is_leap_month'])) : null,
-  'birth_place' => norm_str($payload['birth_place']),
-  'birth_place_display' => norm_str($payload['birth_place_display'] ?? $payload['birth_place']),
-  'birth_city' => norm_str($payload['birth_city'] ?? null),
-  'birth_province' => norm_str($payload['birth_province'] ?? null),
-  'location' => norm_str($payload['location'] ?? $payload['birth_place']),
-  'timezone' => norm_str($payload['timezone'] ?? null) ?: 'Asia/Shanghai',
-  'mode' => norm_str($payload['mode']) ?: 'exact',
-];
 
 $cacheVersion = 'bazi-cache-v1';
 $cacheTtl = 86400;
 $cacheDir = '/var/www/html/test/bazi/.cache';
-$cacheKeySource = json_encode(['version' => $cacheVersion, 'payload' => bazi_cache_normalize($normalizedPayload)], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$normalized = bazi_cache_normalize($payload);
+$cacheKeySource = json_encode(['version' => $cacheVersion, 'payload' => $normalized], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $cacheKey = hash('sha256', $cacheKeySource);
 $cacheFile = $cacheDir . '/' . $cacheKey . '.json';
 
@@ -86,14 +64,19 @@ if (is_dir($cacheDir) && is_file($cacheFile) && (time() - filemtime($cacheFile) 
   $cachedText = file_get_contents($cacheFile);
   $cached = json_decode($cachedText, true);
   if (is_array($cached) && isset($cached['result'])) {
-    echo json_encode(['success' => true, 'mode' => 'compute-basic', 'cache_hit' => true, 'result' => $cached['result']], JSON_UNESCAPED_UNICODE);
+    echo json_encode([
+      'success' => true,
+      'mode' => 'compute-basic',
+      'cache_hit' => true,
+      'result' => $cached['result'],
+    ], JSON_UNESCAPED_UNICODE);
     exit;
   }
 }
 
 $base = '/opt/bazi-tool-web';
 $tmpIn = tempnam(sys_get_temp_dir(), 'bazi_in_');
-file_put_contents($tmpIn, json_encode($normalizedPayload, JSON_UNESCAPED_UNICODE));
+file_put_contents($tmpIn, json_encode($payload, JSON_UNESCAPED_UNICODE));
 $cmd = 'bash -lc ' . escapeshellarg('cd ' . $base . ' && source ./bootstrap_env.sh >/dev/null 2>&1 && python3 ./bazi_cli.py --mode compute-basic --input ' . escapeshellarg($tmpIn));
 $output = [];
 $exit = 0;
@@ -101,12 +84,10 @@ exec($cmd . ' 2>&1', $output, $exit);
 @unlink($tmpIn);
 if ($exit !== 0) {
   http_response_code(500);
-  echo json_encode(['success' => false, 'error' => ['code' => 'BAZI_CLI_FAILED', 'message' => 'CLI execution failed', 'extra' => ['output' => implode("
-", $output)]]], JSON_UNESCAPED_UNICODE);
+  echo json_encode(['success' => false, 'error' => ['code' => 'BAZI_CLI_FAILED', 'message' => 'CLI execution failed', 'extra' => ['output' => implode("\n", $output)]]], JSON_UNESCAPED_UNICODE);
   exit;
 }
-$jsonText = implode("
-", $output);
+$jsonText = implode("\n", $output);
 $result = json_decode($jsonText, true);
 if (!is_array($result)) {
   http_response_code(500);
@@ -115,7 +96,16 @@ if (!is_array($result)) {
 }
 
 if (is_dir($cacheDir)) {
-  @file_put_contents($cacheFile, json_encode(['cached_at' => gmdate('c'), 'cache_key' => $cacheKey, 'result' => $result], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+  @file_put_contents($cacheFile, json_encode([
+    'cached_at' => gmdate('c'),
+    'cache_key' => $cacheKey,
+    'result' => $result,
+  ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 }
 
-echo json_encode(['success' => true, 'mode' => 'compute-basic', 'cache_hit' => false, 'result' => $result], JSON_UNESCAPED_UNICODE);
+echo json_encode([
+  'success' => true,
+  'mode' => 'compute-basic',
+  'cache_hit' => false,
+  'result' => $result,
+], JSON_UNESCAPED_UNICODE);

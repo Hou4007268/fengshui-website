@@ -162,24 +162,13 @@
     }
 
     function submitMsg() {
-        var authorName = document.getElementById('msg-name').value.trim();
-        var contentBase = document.getElementById('msg-content').value.trim();
+        var name = document.getElementById('msg-name').value.trim();
+        var content = document.getElementById('msg-content').value.trim();
         var contact = document.getElementById('msg-contact').value.trim();
         var consultContext = buildConsultContext();
-        if (!authorName || !contentBase) { alert('请填写昵称和留言内容'); return; }
-        var payload = {
-            author_name: authorName,
-            content: contentBase,
-            service_type: consultContext ? '真人咨询' : null,
-            language: 'zh'
-        };
+        if (!name || !content) { alert('请填写昵称和留言内容'); return; }
         if (consultContext) {
-            payload.source = 'bazi_consult';
-            payload.birthDate = consultContext.birthDate;
-            payload.birthTime = consultContext.birthTime;
-            payload.birthPlace = consultContext.birthPlace;
-            payload.gender = consultContext.gender;
-            payload.content = contentBase + '\n\n【八字咨询上下文】' + [
+            content += '\n\n【八字咨询上下文】' + [
                 consultContext.birthDate || '未提供日期',
                 consultContext.birthTime || '未提供时间',
                 consultContext.birthPlace || '未提供地点',
@@ -189,7 +178,7 @@
         fetch('/api/messages', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
+            body: JSON.stringify({name: name, content: content, contact: contact})
         })
         .then(function(r) { return r.json(); })
         .then(function(data) {

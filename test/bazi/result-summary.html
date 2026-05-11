@@ -87,9 +87,9 @@ body { background:var(--parchment) !important; color:var(--text) !important; }
   <div class="container">
     <div class="topnav">
       <a class="btn btn-secondary" href="index.html">体验首页</a>
-      <a class="btn btn-secondary" href="result-summary.html">命盘概览</a>
-      <a class="btn btn-secondary" href="supplement.html">完善资料</a>
-      <a class="btn btn-secondary" href="handoff.html">张师傅详解</a>
+      <a class="btn btn-secondary" id="navResultLink" href="result-summary.html">命盘概览</a>
+      <a class="btn btn-secondary" id="navSupplementLink" href="supplement.html">完善资料</a>
+      <a class="btn btn-secondary" id="navHandoffLink" href="handoff.html">张师傅详解</a>
     </div>
 
     <div class="hero">
@@ -384,6 +384,7 @@ async function fetchLiveResultFromQuery() {
     document.getElementById('month').textContent = r.pending_engine_fields?.month_pillar || '-';
     document.getElementById('day').textContent = r.pending_engine_fields?.day_pillar || '-';
     document.getElementById('hour').textContent = r.computed?.shichen?.source === 'time_text_approx' ? ((r.pending_engine_fields?.approx_hour_pillar_candidates || []).map(x => x.label).join(' / ') || '待核时') : (r.pending_engine_fields?.hour_pillar?.label || '-');
+    // Only replace summary after real response arrives; do not show a fake re-generation state on same-query revisits.
     document.getElementById('analysisSummary').textContent = (r.warnings && r.warnings.length)
       ? `已生成基础结果。当前提示：${r.warnings.join('；')}`
       : '先看基础骨架，再看事业、财运、感情和当前阶段重点。';
@@ -411,8 +412,25 @@ async function fetchLiveResultFromQuery() {
 function applyQueryOverrides() {
   const q = new URLSearchParams(location.search);
   const mode = q.get('mode') === 'approx' ? 'approx' : 'exact';
+  const qs = q.toString();
+  const navResultLink = document.getElementById('navResultLink');
+  const navSupplementLink = document.getElementById('navSupplementLink');
+  const navHandoffLink = document.getElementById('navHandoffLink');
+  if (navResultLink) navResultLink.href = 'result-summary.html' + (qs ? '?' + qs : '');
+  if (navSupplementLink) navSupplementLink.href = 'supplement.html' + (qs ? '?' + qs : '');
+  if (navHandoffLink) navHandoffLink.href = 'handoff.html' + (qs ? '?' + qs : '');
+  function forceQueryLink(el, path) {
+    if (!el) return;
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      const q2 = new URLSearchParams(location.search).toString();
+      location.href = path + (q2 ? '?' + q2 : '');
+    });
+  }
+  forceQueryLink(navResultLink, 'result-summary.html');
+  forceQueryLink(navSupplementLink, 'supplement.html');
+  forceQueryLink(navHandoffLink, 'handoff.html');
   showCase(mode);
-  document.getElementById('analysisSummary').textContent = '正在生成结果，请稍候…';
   const data = samples[mode];
   const birthDate = q.get('birthDate');
   const birthTime = q.get('birthTime');

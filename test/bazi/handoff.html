@@ -191,8 +191,8 @@ async function loadCurrentContext() {
   const birthTime = q.get('birthTime') || '';
   const birthPlace = q.get('birthPlace') || '';
   if (!birthDate) {
-    document.getElementById('profileBlock').textContent = '当前还没有带入命盘资料';
-    document.getElementById('summaryText').textContent = '请先回到命盘概览页生成当前结果，再进入张师傅详解。';
+    document.getElementById('profileBlock').textContent = '请先从命盘概览带入当前资料';
+    document.getElementById('summaryText').textContent = '当前页需要从命盘概览带着资料进入；请先生成当前结果，再继续查看张师傅详解。';
     return;
   }
   const mode = q.get('mode') === 'approx' ? 'approx' : 'exact';

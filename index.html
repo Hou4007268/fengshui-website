@@ -513,12 +513,23 @@
     
 <script>
 let chatHistory=[];
-function toggleAIChatWidget(){const w=document.getElementById(ai-chat-widget);const b=document.getElementById(chat-float-btn);if(!w.classList.contains(active)){w.classList.add(active);b.style.display=none;}else{w.classList.remove(active);b.style.display=flex;}}
-function quickAsk(q){document.getElementById(chat-input).value=q;sendChatMessage();}
-function appendChatText(container, role, text){const el=document.createElement(div);el.className=chat-msg + role;el.textContent=text||;container.appendChild(el);return el;}
-function appendChatHtml(container, role, html){const el=document.createElement(div);el.className=chat-msg + role;el.innerHTML=html;container.appendChild(el);return el;}
-let chatCount=parseInt(localStorage.getItem(aiChatCount)||0);
-function sendChatMessage(){const input=document.getElementById(chat-input);const msg=input.value.trim();if(!msg)return;const ms=document.getElementById(chat-messages-widget);appendChatText(ms, user, msg);input.value=;const thinkingEl=appendChatText(ms, bot, 思考中...);thinkingEl.id=chat-thinking;ms.scrollTop=ms.scrollHeight;chatHistory.push({role:user,content:msg});fetch(/api/chat,{method:POST,headers:{Content-Type:application/json},body:JSON.stringify({type:对话咨询,message:msg,history:chatHistory})}).then(r=>r.json()).then(data=>{const el=document.getElementById(chat-thinking);if(el)el.remove();const answer=data.answer||data.reply||抱歉，AI正在休息，请加微信详谈;appendChatText(ms, bot, answer);chatCount++;localStorage.setItem(aiChatCount,chatCount);chatHistory.push({role:assistant,content:answer});ms.scrollTop=ms.scrollHeight;}).catch(()=>{const el=document.getElementById(chat-thinking);if(el)el.remove();appendChatText(ms, bot, 网络问题，请稍后再试。);ms.scrollTop=ms.scrollHeight;});}
+function toggleAIChatWidget(){
+    const w = document.getElementById('ai-chat-widget');
+    const b = document.getElementById('chat-float-btn');
+    if(!w || !b) return;
+    if(!w.classList.contains('active')){
+        w.classList.add('active');
+        b.style.display='none';
+    }else{
+        w.classList.remove('active');
+        b.style.display='flex';
+    }
+}
+function quickAsk(q){document.getElementById('chat-input').value=q;sendChatMessage();}
+function appendChatText(container, role, text){const el=document.createElement('div');el.className='chat-msg ' + role;el.textContent=text||'';container.appendChild(el);return el;}
+function appendChatHtml(container, role, html){const el=document.createElement('div');el.className='chat-msg ' + role;el.innerHTML=html;container.appendChild(el);return el;}
+let chatCount=parseInt(localStorage.getItem('aiChatCount')||'0');
+function sendChatMessage(){const input=document.getElementById('chat-input');const msg=input.value.trim();if(!msg)return;const ms=document.getElementById('chat-messages-widget');appendChatText(ms, 'user', msg);input.value='';const thinkingEl=appendChatText(ms, 'bot', '思考中...');thinkingEl.id='chat-thinking';ms.scrollTop=ms.scrollHeight;chatHistory.push({role:'user',content:msg});fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'对话咨询',message:msg,history:chatHistory})}).then(r=>r.json()).then(data=>{const el=document.getElementById('chat-thinking');if(el)el.remove();const answer=data.answer||data.reply||'抱歉，AI正在休息，请加微信详谈';appendChatText(ms, 'bot', answer);chatCount++;localStorage.setItem('aiChatCount',chatCount);chatHistory.push({role:'assistant',content:answer});ms.scrollTop=ms.scrollHeight;}).catch(()=>{const el=document.getElementById('chat-thinking');if(el)el.remove();appendChatText(ms, 'bot', '网络问题，请稍后再试。');ms.scrollTop=ms.scrollHeight;});}
 </script>
 </body>
 </html>
